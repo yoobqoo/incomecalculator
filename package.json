@@ -1,0 +1,26 @@
+{
+  "name": "income-calculator",
+  "version": "1.0.0",
+  "description": "청약 소득분위 계산기 + 청약홈 API 연동",
+  "main": "api/index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site with serverless functions'",
+    "start": "node api/index.js"
+  },
+  "keywords": [
+    "apartment",
+    "subscription",
+    "income",
+    "calculator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "18.x"
+  }
+}
