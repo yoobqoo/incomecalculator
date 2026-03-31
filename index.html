@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>소득분위 계산기 | 청약 자격 판독기</title>
+    <meta name="description" content="2024년 최신 청약 소득 기준에 따른 소득분위 계산기. 맞벌이, 외벌이별 청약 가능 여부를 즉시 확인하세요.">
+    <style>
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+        :root { --blue: #3076FF; --bg: #F2F5F9; --card: #FFFFFF; --text: #191F29; --sub-text: #8B95A1; --border: #E5E8EB; }
+        * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; color: var(--text); }
+        .app-container { width: 100%; max-width: 480px; background: var(--card); border-radius: 32px; padding: 32px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        header h1 { font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.8px; }
+        header p { color: var(--sub-text); font-size: 15px; margin: 0 0 32px 0; line-height: 1.4; }
+        .select-wrap { margin-bottom: 24px; }
+        select { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--border); background: #F9FAFB; font-size: 16px; outline: none; }
+        .member-card { background: #F9FAFB; border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid #F2F4F6; }
+        .member-name { font-size: 15px; font-weight: 700; color: var(--blue); margin-bottom: 15px; display: block; }
+        .input-row { display: flex; gap: 12px; }
+        .input-group { flex: 1; }
+        .input-group label { display: block; font-size: 12px; color: var(--sub-text); margin-bottom: 6px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        input { width: 100%; padding: 12px 40px 12px 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 16px; outline: none; text-align: right; font-weight: 600; }
+        .unit-label { position: absolute; right: 12px; font-size: 13px; color: #4E5968; pointer-events: none; }
+        .btn-calc { width: 100%; padding: 18px; border-radius: 18px; border: none; background: var(--blue); color: white; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: 0 8px 20px rgba(48, 118, 255, 0.15); }
+        #result { display: none; margin-top: 32px; border-top: 2px dashed #F2F4F6; padding-top: 32px; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .res-header { text-align: center; margin-bottom: 24px; }
+        .res-percent { font-size: 38px; font-weight: 800; color: var(--blue); margin: 5px 0; }
+        .res-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #F9FAFB; border-radius: 16px; margin-bottom: 10px; }
+        .badge { padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+        .pass { background: #E8F2FF; color: var(--blue); }
+        .fail { background: #FEEEEE; color: #F04452; }
+        .tip-box { background: #FFF9E6; padding: 18px; border-radius: 18px; font-size: 13px; line-height: 1.6; color: #664D03; margin-top: 24px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <header>
+        <h1>소득분위 계산기</h1>
+        <p>내 소득으로 청약 가능 여부를<br>가구원별로 정확하게 판독합니다.</p>
+    </header>
+    <div class="select-wrap">
+        <label class="member-name" style="color:#4E5968; font-size:14px;">가구원 수 선택</label>
+        <select id="familyCount" onchange="generateMemberInputs()">
+            <option value="1">1인 가구</option>
+            <option value="2" selected>2인 가구</option>
+            <option value="3">3인 가구</option>
+            <option value="4">4인 가구</option>
+            <option value="5">5인 가구</option>
+        </select>
+    </div>
+    <div id="memberContainer"></div>
+    <button class="btn-calc" onclick="calculate()">내 소득분위 판독하기</button>
+    <div id="result">
+        <div class="res-header">
+            <span style="font-size:14px; color:var(--sub-text);">우리 집 소득 수준</span>
+            <div class="res-percent" id="resPercent">0%</div>
+            <div id="resTotal" style="font-size:14px; font-weight: 600; color: #4E5968;"></div>
+        </div>
+        <div id="resList"></div>
+        <div class="tip-box">
+            💡 <b>소득분위 계산기 팁</b><br>
+            성과급은 12로 나누어 월 평균에 자동 합산됩니다. 신생아 특례(2년 내 출산)는 소득 200%까지 가능하니 꼭 확인하세요!
+        </div>
+    </div>
+</div>
+<script>
+    const incomeStd = { '1': 3350847, '2': 5959606, '3': 7003509, '4': 8248467, '5': 8775071 };
+    function generateMemberInputs() {
+        const count = document.getElementById('familyCount').value;
+        const container = document.getElementById('memberContainer');
+        container.innerHTML = '';
+        for (let i = 1; i <= count; i++) {
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-card';
+            memberDiv.innerHTML = `<span class="member-name">구성원 ${i} ${i==1?'(본인)':''}</span><div class="input-row"><div class="input-group"><label>세전 월급</label><div class="input-wrapper"><input type="number" class="salary" value="0" onfocus="this.select()"><span class="unit-label">만원</span></div></div><div class="input-group"><label>연 성과급</label><div class="input-wrapper"><input type="number" class="bonus" value="0" onfocus="this.select()"><span class="unit-label">만원</span></div></div></div>`;
+            container.appendChild(memberDiv);
+        }
+    }
+    function calculate() {
+        const salaries = document.getElementsByClassName('salary');
+        const bonuses = document.getElementsByClassName('bonus');
+        const count = document.getElementById('familyCount').value;
+        let totalMonthly = 0; let activeEarners = 0;
+        for (let i = 0; i < salaries.length; i++) {
+            const s = parseFloat(salaries[i].value || 0); const b = parseFloat(bonuses[i].value || 0);
+            if(s > 0 || b > 0) activeEarners++;
+            totalMonthly += (s * 10000) + ((b * 10000) / 12);
+        }
+        if (totalMonthly === 0) return alert("소득을 입력해 주세요.");
+        const percent = Math.round((totalMonthly / incomeStd[count]) * 100);
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('resPercent').innerText = percent + '%';
+        document.getElementById('resTotal').innerText = `합산 월평균 약 ${(Math.round(totalMonthly/10000)).toLocaleString()}만원`;
+        const newlyLimit = activeEarners >= 2 ? 160 : 140;
+        let listHtml = makeResItem('신혼부부 특별공급', percent <= newlyLimit) + makeResItem('생애최초 특별공급', percent <= 160) + makeResItem('공공분양 일반공급', percent <= 100) + makeResItem('신생아 특례 (최신)', percent <= 200);
+        document.getElementById('resList').innerHTML = listHtml;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    function makeResItem(title, isPass) { return `<div class="res-item"><span style="font-size:15px; font-weight:600;">${title}</span><span class="badge ${isPass?'pass':'fail'}">${isPass?'신청 가능':'소득 초과'}</span></div>`; }
+    generateMemberInputs();
+</script>
+</body>
+</html>
