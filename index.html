@@ -66,8 +66,24 @@
             <option value="5">5인 가구</option>
         </select>
     </div>
+    <div class="select-wrap">
+        <label class="member-name" style="color:#4E5968; font-size:14px;">지역 선택</label>
+        <select id="regionFilter" onchange="updateRegionFilter()">
+            <option value="all">전체</option>
+            <option value="seoul">서울</option>
+            <option value="gyeonggi">경기</option>
+            <option value="other">이외</option>
+        </select>
+    </div>
     <div id="memberContainer"></div>
     <button class="btn-calc" onclick="calculate()">내 소득분위 판독하기</button>
+    <div id="hotAnnouncementsSection" class="announcement-section" style="display:none;">
+        <div style="margin-bottom: 16px;">
+            <span style="font-size: 15px; font-weight: 700; color: var(--text);">🔥 핫한 단지</span>
+            <span id="hotAnnouncementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
+        </div>
+        <div id="hotAnnouncementsList" class="announcement-list"></div>
+    </div>
     <div id="result">
         <div class="res-header">
             <span style="font-size:14px; color:var(--sub-text);">우리 집 소득 수준</span>
@@ -126,71 +142,6 @@
 
     let currentIncomePercent = 0;
 
-    async function fetchAnnouncements() {
-        if (!currentIncomePercent) {
-            alert('먼저 소득분위를 계산해주세요.');
-            return;
-        }
-
-        const announcementSection = document.getElementById('announcementSection');
-        const announcementList = document.getElementById('announcementList');
-
-        announcementList.innerHTML = '<div class="loading"><div class="spinner"></div><p>공고를 조회 중입니다...</p></div>';
-        announcementSection.style.display = 'block';
-
-        try {
-            // API 호출
-            const response = await fetch(`/api/proxy?page=1&perPage=20`);
-            const data = await response.json();
-
-            if (!data.success) {
-                announcementList.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--sub-text);">공고 조회에 실패했습니다. 잠시 후 다시 시도해주세요.</div>`;
-                return;
-            }
-
-            const announcements = data.announcements || [];
-            const totalCount = data.totalCount || 0;
-            document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${announcements.length}개 표시`;
-
-            if (announcements.length === 0) {
-                announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">현재 진행 중인 공고가 없습니다.</div>';
-                return;
-            }
-
-            // 공고를 사용자 소득에 맞춰 필터링
-            let htmlContent = '';
-            announcements.forEach(item => {
-                const canApply = currentIncomePercent <= item.incomePercent;
-                const statusClass = canApply ? 'status-ok' : 'status-ng';
-                const statusText = canApply ? '신청 가능' : '소득 초과';
-
-                // 날짜 포매팅
-                const formatDate = (dateStr) => {
-                    if (!dateStr) return '-';
-                    return dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
-                };
-
-                htmlContent += `
-                    <div class="announcement-item ${!canApply ? 'not-applicable' : ''}">
-                        <div class="announcement-title">${item.name} <span style="font-size: 12px; color: var(--sub-text);">${item.divisionName}</span></div>
-                        <div class="announcement-info">
-                            <div>📍 지역: ${item.region}</div>
-                            <div>📋 소득기준: ${item.incomePercent}% / 당신: ${currentIncomePercent}%</div>
-                            <div>📅 청약: ${formatDate(item.applicationStart)} ~ ${formatDate(item.applicationEnd)}</div>
-                        </div>
-                        <span class="announcement-status ${statusClass}">${statusText}</span>
-                    </div>
-                `;
-            });
-
-            announcementList.innerHTML = htmlContent;
-
-        } catch (error) {
-            console.error('Error fetching announcements:', error);
-            announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: #F04452;">⚠️ 조회 중 오류가 발생했습니다.<br><small>' + error.message + '</small></div>';
-        }
-    }
-
     // 기존 calculate 함수 수정 - currentIncomePercent 저장
     const originalCalculate = calculate;
     window.calculate = function() {
@@ -216,7 +167,169 @@
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     };
 
+    // 지역별 필터링 함수
+    function filterByRegion(announcements, selectedRegion) {
+        if (selectedRegion === "all") return announcements;
+        if (selectedRegion === "seoul") {
+            return announcements.filter(a => a.region === "서울");
+        }
+        if (selectedRegion === "gyeonggi") {
+            return announcements.filter(a => a.region === "경기");
+        }
+        if (selectedRegion === "other") {
+            return announcements.filter(a =>
+                a.region !== "서울" && a.region !== "경기"
+            );
+        }
+        return announcements;
+    }
+
+    // 핫한 지역 판단 함수
+    function isHotRegion(announcement) {
+        // 서울 전역
+        if (announcement.region === "서울") return true;
+        // 경기 내 특정 지역
+        const hotAreas = ["분당", "판교", "구리", "과천"];
+        return hotAreas.some(area => announcement.name.includes(area));
+    }
+
+    // 공고 카드 렌더링 함수
+    function formatAnnouncementItem(item, showIncomeStatus = false, currentIncome = 0) {
+        const formatDate = (dateStr) => {
+            if (!dateStr) return '-';
+            return dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
+        };
+
+        let infoHtml = `
+            <div>📍 지역: ${item.region}</div>
+            <div>📅 청약: ${formatDate(item.applicationStart)} ~ ${formatDate(item.applicationEnd)}</div>
+        `;
+
+        if (showIncomeStatus) {
+            const canApply = currentIncome <= item.incomePercent;
+            const statusClass = canApply ? 'status-ok' : 'status-ng';
+            const statusText = canApply ? '신청 가능' : '소득 초과';
+            infoHtml += `<div>📋 소득기준: ${item.incomePercent}% / 당신: ${currentIncome}%</div>`;
+
+            return `
+                <div class="announcement-item ${!canApply ? 'not-applicable' : ''}">
+                    <div class="announcement-title">${item.name} <span style="font-size: 12px; color: var(--sub-text);">${item.divisionName}</span></div>
+                    <div class="announcement-info">${infoHtml}</div>
+                    <span class="announcement-status ${statusClass}">${statusText}</span>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="announcement-item">
+                    <div class="announcement-title">${item.name} <span style="font-size: 12px; color: var(--sub-text);">${item.divisionName}</span></div>
+                    <div class="announcement-info">${infoHtml}</div>
+                </div>
+            `;
+        }
+    }
+
+    // 핫한 단지 자동 로드 함수
+    let hotAnnouncementsLoaded = false;
+    async function loadHotAnnouncements() {
+        if (hotAnnouncementsLoaded) return;
+
+        const hotSection = document.getElementById('hotAnnouncementsSection');
+        const hotList = document.getElementById('hotAnnouncementsList');
+
+        hotList.innerHTML = '<div class="loading"><div class="spinner"></div><p>인기 단지를 불러오는 중...</p></div>';
+        hotSection.style.display = 'block';
+
+        try {
+            const response = await fetch(`/api/proxy?page=1&perPage=50`);
+            const data = await response.json();
+
+            if (!data.success || !data.announcements || data.announcements.length === 0) {
+                hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">인기 단지 정보가 없습니다.</div>';
+                return;
+            }
+
+            // 핫한 지역 필터링 및 상위 5개만 선택
+            const hotAnnouncements = data.announcements
+                .filter(isHotRegion)
+                .slice(0, 5);
+
+            if (hotAnnouncements.length === 0) {
+                hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">인기 단지 정보가 없습니다.</div>';
+                return;
+            }
+
+            document.getElementById('hotAnnouncementCount').innerText = `현재 ${hotAnnouncements.length}개의 인기 단지`;
+            let htmlContent = '';
+            hotAnnouncements.forEach(item => {
+                htmlContent += formatAnnouncementItem(item, false);
+            });
+
+            hotList.innerHTML = htmlContent;
+            hotAnnouncementsLoaded = true;
+
+        } catch (error) {
+            console.error('Error loading hot announcements:', error);
+            hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: #F04452;">인기 단지 로드 실패</div>';
+        }
+    }
+
+    // 지역 필터 변경 함수
+    function updateRegionFilter() {
+        // 지역 필터는 fetchAnnouncements() 호출 시에만 사용됨
+    }
+
+    // fetchAnnouncements 수정 - 지역 필터 적용
+    const originalFetchAnnouncements = fetchAnnouncements;
+    window.fetchAnnouncements = async function() {
+        if (!currentIncomePercent) {
+            alert('먼저 소득분위를 계산해주세요.');
+            return;
+        }
+
+        const announcementSection = document.getElementById('announcementSection');
+        const announcementList = document.getElementById('announcementList');
+        const selectedRegion = document.getElementById('regionFilter').value;
+
+        announcementList.innerHTML = '<div class="loading"><div class="spinner"></div><p>공고를 조회 중입니다...</p></div>';
+        announcementSection.style.display = 'block';
+
+        try {
+            const response = await fetch(`/api/proxy?page=1&perPage=50`);
+            const data = await response.json();
+
+            if (!data.success) {
+                announcementList.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--sub-text);">공고 조회에 실패했습니다. 잠시 후 다시 시도해주세요.</div>`;
+                return;
+            }
+
+            let announcements = data.announcements || [];
+
+            // 지역 필터 적용
+            announcements = filterByRegion(announcements, selectedRegion);
+
+            const totalCount = data.totalCount || 0;
+            document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${announcements.length}개 표시`;
+
+            if (announcements.length === 0) {
+                announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">해당 지역의 공고가 없습니다.</div>';
+                return;
+            }
+
+            let htmlContent = '';
+            announcements.forEach(item => {
+                htmlContent += formatAnnouncementItem(item, true, currentIncomePercent);
+            });
+
+            announcementList.innerHTML = htmlContent;
+
+        } catch (error) {
+            console.error('Error fetching announcements:', error);
+            announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: #F04452;">⚠️ 조회 중 오류가 발생했습니다.<br><small>' + error.message + '</small></div>';
+        }
+    };
+
     generateMemberInputs();
+    loadHotAnnouncements();
 </script>
 </body>
-</html>// Force redeploy Tue Apr 14 15:51:11     2026
+</html>
