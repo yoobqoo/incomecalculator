@@ -56,6 +56,13 @@
         <h1>소득분위 계산기</h1>
         <p>내 소득으로 청약 가능 여부를<br>가구원별로 정확하게 판독합니다.</p>
     </header>
+    <div id="hotAnnouncementsSection" class="announcement-section">
+        <div style="margin-bottom: 16px;">
+            <span style="font-size: 15px; font-weight: 700; color: var(--text);">🔥 핫한 단지</span>
+            <span id="hotAnnouncementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
+        </div>
+        <div id="hotAnnouncementsList" class="announcement-list"></div>
+    </div>
     <div class="select-wrap">
         <label class="member-name" style="color:#4E5968; font-size:14px;">가구원 수 선택</label>
         <select id="familyCount" onchange="generateMemberInputs()">
@@ -66,24 +73,8 @@
             <option value="5">5인 가구</option>
         </select>
     </div>
-    <div class="select-wrap">
-        <label class="member-name" style="color:#4E5968; font-size:14px;">지역 선택</label>
-        <select id="regionFilter" onchange="updateRegionFilter()">
-            <option value="all">전체</option>
-            <option value="seoul">서울</option>
-            <option value="gyeonggi">경기</option>
-            <option value="other">이외</option>
-        </select>
-    </div>
     <div id="memberContainer"></div>
     <button class="btn-calc" onclick="calculate()">내 소득분위 판독하기</button>
-    <div id="hotAnnouncementsSection" class="announcement-section" style="display:none;">
-        <div style="margin-bottom: 16px;">
-            <span style="font-size: 15px; font-weight: 700; color: var(--text);">🔥 핫한 단지</span>
-            <span id="hotAnnouncementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
-        </div>
-        <div id="hotAnnouncementsList" class="announcement-list"></div>
-    </div>
     <div id="result">
         <div class="res-header">
             <span style="font-size:14px; color:var(--sub-text);">우리 집 소득 수준</span>
@@ -97,7 +88,16 @@
         </div>
         <button class="btn-search" onclick="fetchAnnouncements()">공개 중인 공고 보기</button>
         <div id="announcementSection" class="announcement-section" style="display:none;">
-            <div style="margin-bottom: 16px;">
+            <div class="select-wrap">
+                <label class="member-name" style="color:#4E5968; font-size:14px;">지역별 보기</label>
+                <select id="regionFilter" onchange="applyRegionFilter()">
+                    <option value="all">전체</option>
+                    <option value="seoul">서울</option>
+                    <option value="gyeonggi">경기</option>
+                    <option value="other">이외</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 16px; margin-top: 16px;">
                 <span style="font-size: 15px; font-weight: 700; color: var(--text);">현재 진행 중인 공고</span>
                 <span id="announcementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
             </div>
@@ -166,23 +166,6 @@
         document.getElementById('announcementSection').style.display = 'none';
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     };
-
-    // 지역별 필터링 함수
-    function filterByRegion(announcements, selectedRegion) {
-        if (selectedRegion === "all") return announcements;
-        if (selectedRegion === "seoul") {
-            return announcements.filter(a => a.region === "서울");
-        }
-        if (selectedRegion === "gyeonggi") {
-            return announcements.filter(a => a.region === "경기");
-        }
-        if (selectedRegion === "other") {
-            return announcements.filter(a =>
-                a.region !== "서울" && a.region !== "경기"
-            );
-        }
-        return announcements;
-    }
 
     // 핫한 지역 판단 함수
     function isHotRegion(announcement) {
@@ -273,13 +256,48 @@
         }
     }
 
-    // 지역 필터 변경 함수
-    function updateRegionFilter() {
-        // 지역 필터는 fetchAnnouncements() 호출 시에만 사용됨
+    // 전체 공고 저장 (필터링용)
+    let allAnnouncements = [];
+
+    // 지역별 필터링 함수
+    function filterByRegion(announcements, selectedRegion) {
+        if (selectedRegion === "all") return announcements;
+        if (selectedRegion === "seoul") {
+            return announcements.filter(a => a.region === "서울");
+        }
+        if (selectedRegion === "gyeonggi") {
+            return announcements.filter(a => a.region === "경기");
+        }
+        if (selectedRegion === "other") {
+            return announcements.filter(a => a.region !== "서울" && a.region !== "경기");
+        }
+        return announcements;
     }
 
-    // fetchAnnouncements 수정 - 지역 필터 적용
-    const originalFetchAnnouncements = fetchAnnouncements;
+    // 지역 필터 변경 시 재렌더링
+    function applyRegionFilter() {
+        const selectedRegion = document.getElementById('regionFilter').value;
+        const filtered = filterByRegion(allAnnouncements, selectedRegion);
+
+        const announcementList = document.getElementById('announcementList');
+        const totalCount = allAnnouncements.length;
+
+        document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${filtered.length}개 표시`;
+
+        if (filtered.length === 0) {
+            announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">해당 지역의 공고가 없습니다.</div>';
+            return;
+        }
+
+        let htmlContent = '';
+        filtered.forEach(item => {
+            htmlContent += formatAnnouncementItem(item, true, currentIncomePercent);
+        });
+
+        announcementList.innerHTML = htmlContent;
+    }
+
+    // fetchAnnouncements 함수
     window.fetchAnnouncements = async function() {
         if (!currentIncomePercent) {
             alert('먼저 소득분위를 계산해주세요.');
@@ -288,13 +306,14 @@
 
         const announcementSection = document.getElementById('announcementSection');
         const announcementList = document.getElementById('announcementList');
-        const selectedRegion = document.getElementById('regionFilter').value;
+        const regionFilter = document.getElementById('regionFilter');
 
         announcementList.innerHTML = '<div class="loading"><div class="spinner"></div><p>공고를 조회 중입니다...</p></div>';
         announcementSection.style.display = 'block';
+        regionFilter.value = 'all';
 
         try {
-            const response = await fetch(`/api/proxy?page=1&perPage=50`);
+            const response = await fetch(`/api/proxy?page=1&perPage=100`);
             const data = await response.json();
 
             if (!data.success) {
@@ -302,21 +321,18 @@
                 return;
             }
 
-            let announcements = data.announcements || [];
-
-            // 지역 필터 적용
-            announcements = filterByRegion(announcements, selectedRegion);
-
+            allAnnouncements = data.announcements || [];
             const totalCount = data.totalCount || 0;
-            document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${announcements.length}개 표시`;
 
-            if (announcements.length === 0) {
-                announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">해당 지역의 공고가 없습니다.</div>';
+            if (allAnnouncements.length === 0) {
+                announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">공고가 없습니다.</div>';
                 return;
             }
 
+            document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${allAnnouncements.length}개 표시`;
+
             let htmlContent = '';
-            announcements.forEach(item => {
+            allAnnouncements.forEach(item => {
                 htmlContent += formatAnnouncementItem(item, true, currentIncomePercent);
             });
 
