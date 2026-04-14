@@ -54,6 +54,8 @@ income-calculator/
 2. **소득 입력**: 각 구성원의 세전 월급과 연 성과급 입력
 3. **판독 버튼 클릭**: "내 소득분위 판독하기" 버튼 클릭
 4. **결과 확인**: 소득분위(%)와 청약 자격 여부 확인
+5. **공고 조회** (신기능): "공개 중인 공고 보기" 버튼으로 현재 진행 중인 분양공고 확인
+6. **자격 분석**: 당신의 소득분위와 공고별 소득기준 비교로 청약 가능 여부 즉시 확인
 
 ## 소득 기준 (2024년 기준)
 
@@ -65,19 +67,35 @@ income-calculator/
 | 4인      | 8,248,467원 |
 | 5인      | 8,775,071원 |
 
-## Phase 2: 청약홈 API 연동 (계획)
+## Phase 2: 청약홈 API 연동 ✅ (완료)
 
-향후 다음 기능들이 추가될 예정입니다:
+현재 다음 기능들이 구현되어 있습니다:
 
 - ✅ 사용자의 소득분위 자동 계산
-- ⏳ 청약홈 API를 통한 실시간 공고 정보 수집
-- ⏳ 사용자의 소득분위에 맞는 공고 자동 추천
-- ⏳ 공고별 상세 자격 요건 링크 제공
+- ✅ 국부동산원 API를 통한 실시간 공고 정보 수집
+- ✅ 사용자의 소득분위에 맞는 공고 자동 필터링
+- ✅ 공고별 청약 가능 여부 표시
 
 ### 구현 기술 스택 (Phase 2)
-- 백엔드: Node.js + Express
-- 배포: Vercel Serverless Functions
-- API: 공공데이터포털 '한국부동산원_청약홈 분양공고 조회 서비스'
+- 프론트엔드: HTML5 + Vanilla JavaScript
+- 백엔드: Node.js (Vercel Serverless Functions)
+- API: 국부동산원 odcloud.kr API
+  - Base URL: `https://api.odcloud.kr/api/15101046/v1/`
+  - 인증: Service Key 방식
+  - 응답 형식: JSON
+
+### Vercel 배포 설정
+
+Vercel에 배포 시 환경변수 설정이 필요합니다:
+
+```bash
+# Vercel CLI
+vercel env add APARTMENT_API_KEY
+
+# 또는 Vercel 대시보드 > Settings > Environment Variables
+# 변수명: APARTMENT_API_KEY
+# 값: 국부동산원에서 발급받은 API 키
+```
 
 ## 주의사항
 
@@ -96,4 +114,4 @@ MIT License
 
 ---
 
-**마지막 업데이트**: 2026년 3월 31일
+**마지막 업데이트**: 2026년 4월 14일

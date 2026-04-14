@@ -3,7 +3,14 @@
   "public": true,
   "buildCommand": "echo 'Static site, no build needed'",
   "outputDirectory": ".",
+  "env": {
+    "APARTMENT_API_KEY": "@apartment_api_key"
+  },
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
