@@ -9,9 +9,9 @@
 
 const axios = require('axios');
 
-// API 설정
+// API 설정 (한국부동산원_청약홈_APT 분양정보)
 const API_KEY = process.env.APARTMENT_API_KEY || '17c1015e63414c5f5f8ae48f2bda5b47079578dde490f420775cfd325449ce15';
-const BASE_URL = 'https://api.odcloud.kr/api/15101046/v1/uddi:cde19cd2-eff1-41f4-a57d-8fb85f0b0e19';
+const BASE_URL = 'https://api.odcloud.kr/api/15101046/v1/uddi:14a46595-03dd-47d3-a418-d64e52820598';
 
 /**
  * 청약홈 공고 조회
@@ -40,14 +40,15 @@ module.exports = async (req, res) => {
     }
 
     // 쿼리 파라미터
-    const { pageNo = 1, numOfRows = 20 } = req.query;
+    const { page = 1, perPage = 20 } = req.query;
 
     // odcloud.kr API 호출
     const response = await axios.get(BASE_URL, {
       params: {
         serviceKey: API_KEY,
-        pageNo,
-        numOfRows
+        page,
+        perPage,
+        returnType: 'JSON'
       },
       timeout: 8000,
       headers: {
@@ -59,19 +60,27 @@ module.exports = async (req, res) => {
     const data = response.data;
 
     // odcloud.kr API 응답 구조 처리
-    const announcements = (data.response?.[0]?.body?.items || []).map(item => ({
-      id: item.bsnsMgtSn,
-      name: item.bsnsMgtNm,
-      regionCode: item.sgguCd,
-      incomePercent: parseIncomePercent(item),
-      link: `https://www.apartmentdb.co.kr`
+    const announcements = (data.data || []).map(item => ({
+      id: item.주택관리번호,
+      name: item.주택명,
+      announcement: item.공고번호,
+      region: item.공급지역명,
+      divisionName: item.분양구분코드명,
+      recruitDate: item.모집공고일,
+      applicationStart: item.청약접수시작일,
+      applicationEnd: item.청약접수종료일,
+      specialApplicationStart: item.특별공급접수시작일,
+      specialApplicationEnd: item.특별공급접수종료일,
+      incomePercent: 160, // 기본값: 신혼부부/생애최초 기준
+      link: item.모집공고홈페이지주소 || 'https://www.apartmentdb.co.kr'
     }));
 
     res.status(200).json({
       success: true,
-      totalCount: data.response?.[0]?.body?.totalCount || 0,
-      pageNo: pageNo,
-      numOfRows: numOfRows,
+      totalCount: data.totalCount || 0,
+      page: page,
+      perPage: perPage,
+      currentCount: data.currentCount || 0,
       announcements: announcements,
       timestamp: new Date().toISOString()
     });
@@ -91,11 +100,3 @@ module.exports = async (req, res) => {
   }
 };
 
-/**
- * 공고에서 소득분위 추출
- */
-function parseIncomePercent(item) {
-  // 공고 데이터에서 소득 정보 추출 로직
-  // 기본값: 160% (신혼부부/생애최초 기준)
-  return 160;
-}
