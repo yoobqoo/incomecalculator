@@ -12,8 +12,10 @@
         * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; color: var(--text); }
         .app-container { width: 100%; max-width: 480px; background: var(--card); border-radius: 32px; padding: 32px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        header { display: flex; align-items: center; gap: 20px; justify-content: space-between; }
         header h1 { font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.8px; }
-        header p { color: var(--sub-text); font-size: 15px; margin: 0 0 32px 0; line-height: 1.4; }
+        header p { color: var(--sub-text); font-size: 15px; margin: 0; line-height: 1.4; }
+        header img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
         .select-wrap { margin-bottom: 24px; }
         select { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--border); background: #F9FAFB; font-size: 16px; outline: none; }
         .member-card { background: #F9FAFB; border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid #F2F4F6; }
@@ -48,13 +50,20 @@
         .loading { text-align: center; padding: 20px; color: var(--sub-text); }
         .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #E5E8EB; border-radius: 50%; border-top-color: var(--blue); animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        .region-buttons { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .region-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: #F9FAFB; color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .region-btn:hover { border-color: var(--blue); background: #F0F5FF; }
+        .region-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
     </style>
 </head>
 <body>
 <div class="app-container">
     <header>
-        <h1>소득분위 계산기</h1>
-        <p>내 소득으로 청약 가능 여부를<br>가구원별로 정확하게 판독합니다.</p>
+        <div>
+            <h1>소득분위 계산기</h1>
+            <p>내 소득으로 청약 가능 여부를<br>가구원별로 정확하게 판독합니다.</p>
+        </div>
+        <img src="https://i.imgur.com/GRs7KOr.png" alt="청약" onerror="this.style.display='none';">
     </header>
     <div id="hotAnnouncementsSection" class="announcement-section">
         <div style="margin-bottom: 16px;">
@@ -88,14 +97,14 @@
         </div>
         <button class="btn-search" onclick="fetchAnnouncements()">공개 중인 공고 보기</button>
         <div id="announcementSection" class="announcement-section" style="display:none;">
-            <div class="select-wrap">
-                <label class="member-name" style="color:#4E5968; font-size:14px;">지역별 보기</label>
-                <select id="regionFilter" onchange="applyRegionFilter()">
-                    <option value="all">전체</option>
-                    <option value="seoul">서울</option>
-                    <option value="gyeonggi">경기</option>
-                    <option value="other">이외</option>
-                </select>
+            <div style="margin-bottom: 16px;">
+                <label class="member-name" style="color:#4E5968; font-size:14px; margin-bottom: 10px;">지역별 보기</label>
+                <div class="region-buttons">
+                    <button class="region-btn active" data-region="all" onclick="selectRegion('all')">전체</button>
+                    <button class="region-btn" data-region="seoul" onclick="selectRegion('seoul')">서울</button>
+                    <button class="region-btn" data-region="gyeonggi" onclick="selectRegion('gyeonggi')">경기</button>
+                    <button class="region-btn" data-region="other" onclick="selectRegion('other')">이외</button>
+                </div>
             </div>
             <div style="margin-bottom: 16px; margin-top: 16px;">
                 <span style="font-size: 15px; font-weight: 700; color: var(--text);">현재 진행 중인 공고</span>
@@ -274,11 +283,18 @@
         return announcements;
     }
 
-    // 지역 필터 변경 시 재렌더링
-    function applyRegionFilter() {
-        const selectedRegion = document.getElementById('regionFilter').value;
-        const filtered = filterByRegion(allAnnouncements, selectedRegion);
+    // 지역 버튼 선택 함수
+    function selectRegion(region) {
+        // 모든 버튼 비활성화
+        document.querySelectorAll('.region-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
 
+        // 선택된 버튼 활성화
+        document.querySelector(`[data-region="${region}"]`).classList.add('active');
+
+        // 필터 적용
+        const filtered = filterByRegion(allAnnouncements, region);
         const announcementList = document.getElementById('announcementList');
         const totalCount = allAnnouncements.length;
 
@@ -297,6 +313,11 @@
         announcementList.innerHTML = htmlContent;
     }
 
+    // 지역 필터 변경 시 재렌더링 (호환성 유지)
+    function applyRegionFilter() {
+        // 이 함수는 이제 selectRegion()으로 대체됨
+    }
+
     // fetchAnnouncements 함수
     window.fetchAnnouncements = async function() {
         if (!currentIncomePercent) {
@@ -306,11 +327,10 @@
 
         const announcementSection = document.getElementById('announcementSection');
         const announcementList = document.getElementById('announcementList');
-        const regionFilter = document.getElementById('regionFilter');
 
         announcementList.innerHTML = '<div class="loading"><div class="spinner"></div><p>공고를 조회 중입니다...</p></div>';
         announcementSection.style.display = 'block';
-        regionFilter.value = 'all';
+        selectRegion('all');
 
         try {
             const response = await fetch(`/api/proxy?page=1&perPage=100`);
