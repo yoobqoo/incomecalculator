@@ -4,368 +4,484 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>소득분위 계산기 | 청약 자격 판독기</title>
-    <meta name="description" content="2024년 최신 청약 소득 기준에 따른 소득분위 계산기. 맞벌이, 외벌이별 청약 가능 여부를 즉시 확인하세요.">
+    <meta name="description" content="슬라이더 한 번으로 청약 소득분위 즉시 확인. 신혼부부·생애최초·공공분양 자격 판독.">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
-        :root { --blue: #3076FF; --bg: #F2F5F9; --card: #FFFFFF; --text: #191F29; --sub-text: #8B95A1; --border: #E5E8EB; }
-        * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; color: var(--text); }
-        .app-container { width: 100%; max-width: 480px; background: var(--card); border-radius: 32px; padding: 32px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
-        header { display: flex; align-items: center; gap: 20px; justify-content: space-between; }
-        header h1 { font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.8px; }
-        header p { color: var(--sub-text); font-size: 15px; margin: 0; line-height: 1.4; }
-        header img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
-        .select-wrap { margin-bottom: 24px; }
-        select { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--border); background: #F9FAFB; font-size: 16px; outline: none; }
-        .member-card { background: #F9FAFB; border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid #F2F4F6; }
-        .member-name { font-size: 15px; font-weight: 700; color: var(--blue); margin-bottom: 15px; display: block; }
-        .input-row { display: flex; gap: 12px; }
-        .input-group { flex: 1; }
-        .input-group label { display: block; font-size: 12px; color: var(--sub-text); margin-bottom: 6px; }
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        input { width: 100%; padding: 12px 40px 12px 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 16px; outline: none; text-align: right; font-weight: 600; }
-        .unit-label { position: absolute; right: 12px; font-size: 13px; color: #4E5968; pointer-events: none; }
-        .btn-calc { width: 100%; padding: 18px; border-radius: 18px; border: none; background: var(--blue); color: white; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: 0 8px 20px rgba(48, 118, 255, 0.15); }
-        #result { display: none; margin-top: 32px; border-top: 2px dashed #F2F4F6; padding-top: 32px; animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .res-header { text-align: center; margin-bottom: 24px; }
-        .res-percent { font-size: 38px; font-weight: 800; color: var(--blue); margin: 5px 0; }
-        .res-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #F9FAFB; border-radius: 16px; margin-bottom: 10px; }
-        .badge { padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; }
-        .pass { background: #E8F2FF; color: var(--blue); }
-        .fail { background: #FEEEEE; color: #F04452; }
-        .tip-box { background: #FFF9E6; padding: 18px; border-radius: 18px; font-size: 13px; line-height: 1.6; color: #664D03; margin-top: 24px; }
-        .announcement-section { margin-top: 32px; padding-top: 32px; border-top: 2px dashed #F2F4F6; }
-        .btn-search { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--blue); background: white; color: var(--blue); font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; }
-        .btn-search:hover { background: #F0F5FF; }
-        .announcement-list { margin-top: 24px; }
-        .announcement-item { background: #F9FAFB; border-radius: 16px; padding: 18px; margin-bottom: 12px; border-left: 4px solid var(--blue); }
-        .announcement-item.not-applicable { border-left-color: #F04452; opacity: 0.6; }
-        .announcement-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-        .announcement-info { font-size: 13px; color: var(--sub-text); line-height: 1.6; }
-        .announcement-status { display: inline-block; margin-top: 8px; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
-        .status-ok { background: #E8F2FF; color: var(--blue); }
-        .status-ng { background: #FEEEEE; color: #F04452; }
-        .loading { text-align: center; padding: 20px; color: var(--sub-text); }
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #E5E8EB; border-radius: 50%; border-top-color: var(--blue); animation: spin 1s linear infinite; }
+
+        :root {
+            --bg: #FAFAFA;
+            --surface: #FFFFFF;
+            --surface-2: #F5F5F7;
+            --text: #111113;
+            --text-2: #6E6E73;
+            --text-3: #AEAEB2;
+            --accent: #007AFF;
+            --success: #34C759;
+            --danger: #FF3B30;
+            --border: #F0F0F2;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+        }
+
+        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Helvetica Neue', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 420px; }
+
+        /* Hero greeting */
+        .hero { padding: 12px 4px 20px; }
+        .hero h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; margin: 0 0 6px; line-height: 1.25; }
+        .hero p { font-size: 15px; color: var(--text-2); margin: 0; letter-spacing: -0.2px; }
+
+        /* Card */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+            margin-bottom: 12px;
+        }
+        .label { font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 10px; letter-spacing: -0.2px; }
+        .caption { font-size: 12px; color: var(--text-3); letter-spacing: -0.1px; }
+
+        /* Result card */
+        .result-card .display { font-size: 56px; font-weight: 700; color: var(--text); letter-spacing: -2.5px; line-height: 1; margin: 2px 0 2px -2px; }
+        .result-card .display .percent-sign { font-size: 36px; color: var(--text-2); margin-left: 2px; letter-spacing: -1px; }
+        .result-card .amount { font-size: 15px; color: var(--text-2); font-weight: 500; margin-bottom: 20px; letter-spacing: -0.2px; }
+        .result-card .amount .dot { color: var(--text-3); margin: 0 6px; }
+        .eligibility-list { display: flex; flex-direction: column; }
+        .eligibility-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border); }
+        .eligibility-row .name { font-size: 15px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+        .eligibility-row .name small { color: var(--text-3); font-size: 12px; font-weight: 500; margin-left: 6px; letter-spacing: 0; }
+        .eligibility-row .mark { font-size: 14px; font-weight: 600; letter-spacing: -0.2px; }
+        .mark.ok { color: var(--success); }
+        .mark.ng { color: var(--text-3); }
+        .caveat { margin-top: 16px; padding: 12px 14px; background: var(--surface-2); border-radius: var(--radius-md); font-size: 12px; color: var(--text-2); line-height: 1.55; letter-spacing: -0.2px; }
+
+        /* Chips (family + region) */
+        .chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
+        .chip {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            letter-spacing: -0.2px;
+        }
+        .chip:hover { background: var(--surface-2); }
+        .chip.active { background: var(--text); color: white; border-color: var(--text); }
+
+        /* Slider */
+        .slider-wrapper { padding-top: 4px; }
+        .slider-amount { font-size: 26px; font-weight: 700; text-align: center; margin-bottom: 14px; letter-spacing: -1px; color: var(--text); }
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--surface-2) 0%, var(--surface-2) 100%);
+            border-radius: 999px;
+            outline: none;
+            margin: 10px 0 8px;
+            cursor: pointer;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 122, 255, 0.35);
+            transition: transform 0.1s ease;
+        }
+        .slider::-webkit-slider-thumb:active { transform: scale(1.1); }
+        .slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 122, 255, 0.35);
+        }
+        .slider-marks { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); margin-top: 8px; padding: 0 2px; font-weight: 500; letter-spacing: -0.1px; }
+        .hint { font-size: 12px; color: var(--text-3); margin-top: 14px; text-align: center; letter-spacing: -0.2px; }
+
+        /* Section header row */
+        .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; }
+        .section-head .label { margin: 0; }
+        .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); cursor: pointer; user-select: none; letter-spacing: -0.2px; }
+        .toggle input { margin: 0; accent-color: var(--accent); }
+
+        /* Announcement list */
+        .announcement-list { display: flex; flex-direction: column; gap: 10px; }
+        .announcement-item {
+            padding: 14px;
+            background: var(--surface-2);
+            border-radius: var(--radius-md);
+        }
+        .announcement-item.expired { opacity: 0.55; }
+        .announcement-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+        .announcement-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.3; letter-spacing: -0.3px; flex: 1; }
+        .announcement-title small { color: var(--text-3); font-size: 12px; font-weight: 500; margin-left: 4px; display: block; margin-top: 2px; letter-spacing: -0.1px; }
+        .announcement-meta { font-size: 12px; color: var(--text-2); line-height: 1.65; letter-spacing: -0.2px; }
+        .announcement-meta .line { margin-top: 2px; }
+
+        /* Badges */
+        .badge-group { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
+        .badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; letter-spacing: -0.1px; }
+        .badge.ongoing { background: rgba(52, 199, 89, 0.13); color: var(--success); }
+        .badge.upcoming { background: rgba(0, 122, 255, 0.12); color: var(--accent); }
+        .badge.expired { background: #EDEDEF; color: var(--text-3); }
+        .badge.analyzed { background: rgba(0, 122, 255, 0.12); color: var(--accent); }
+        .badge.estimated { background: var(--surface); color: var(--text-3); border: 1px solid var(--border); }
+
+        /* Loading/empty */
+        .loading, .empty { text-align: center; padding: 24px 12px; color: var(--text-3); font-size: 13px; letter-spacing: -0.2px; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-radius: 50%; border-top-color: var(--accent); animation: spin 0.8s linear infinite; margin-right: 6px; vertical-align: -2px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .region-buttons { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .region-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: #F9FAFB; color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-        .region-btn:hover { border-color: var(--blue); background: #F0F5FF; }
-        .region-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <header>
-        <div>
-            <h1>소득분위 계산기</h1>
-            <p>내 소득으로 청약 가능 여부를<br>가구원별로 정확하게 판독합니다.</p>
+<div class="container">
+
+    <!-- 1. Hero Greeting -->
+    <section class="hero">
+        <h1>안녕하세요 👋</h1>
+        <p>우리 집은 소득 몇 %?</p>
+    </section>
+
+    <!-- 2. Result Card (always visible, live updates) -->
+    <section class="card result-card">
+        <div class="label">우리 집 소득 분위</div>
+        <div class="display"><span id="resultPercent">100</span><span class="percent-sign">%</span></div>
+        <div class="amount"><span id="resultAmount">월 596만원</span><span class="dot">·</span><span>도시근로자 평균 대비</span></div>
+        <div class="eligibility-list" id="eligibilityList"></div>
+        <div class="caveat">⚠️ 일반 기준 추정값입니다. 공고마다 실제 소득·자산 기준이 다를 수 있어요.</div>
+    </section>
+
+    <!-- 3. Input Card -->
+    <section class="card">
+        <div class="label">가구원 수</div>
+        <div class="chip-row" id="familyChips" style="margin-bottom: 18px;">
+            <button type="button" class="chip" data-family="1">1인</button>
+            <button type="button" class="chip active" data-family="2">2인</button>
+            <button type="button" class="chip" data-family="3">3인</button>
+            <button type="button" class="chip" data-family="4">4인</button>
+            <button type="button" class="chip" data-family="5">5인</button>
         </div>
-        <img src="https://i.imgur.com/GRs7KOr.png" alt="청약" onerror="this.style.display='none';">
-    </header>
-    <div id="hotAnnouncementsSection" class="announcement-section">
-        <div style="margin-bottom: 16px;">
-            <span style="font-size: 15px; font-weight: 700; color: var(--text);">🔥 핫한 단지</span>
-            <span id="hotAnnouncementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
-        </div>
-        <div id="hotAnnouncementsList" class="announcement-list"></div>
-    </div>
-    <div class="select-wrap">
-        <label class="member-name" style="color:#4E5968; font-size:14px;">가구원 수 선택</label>
-        <select id="familyCount" onchange="generateMemberInputs()">
-            <option value="1">1인 가구</option>
-            <option value="2" selected>2인 가구</option>
-            <option value="3">3인 가구</option>
-            <option value="4">4인 가구</option>
-            <option value="5">5인 가구</option>
-        </select>
-    </div>
-    <div id="memberContainer"></div>
-    <button class="btn-calc" onclick="calculate()">내 소득분위 판독하기</button>
-    <div id="result">
-        <div class="res-header">
-            <span style="font-size:14px; color:var(--sub-text);">우리 집 소득 수준</span>
-            <div class="res-percent" id="resPercent">0%</div>
-            <div id="resTotal" style="font-size:14px; font-weight: 600; color: #4E5968;"></div>
-        </div>
-        <div id="resList"></div>
-        <div class="tip-box">
-            💡 <b>소득분위 계산기 팁</b><br>
-            성과급은 12로 나누어 월 평균에 자동 합산됩니다. 신생아 특례(2년 내 출산)는 소득 200%까지 가능하니 꼭 확인하세요!
-        </div>
-        <button class="btn-search" onclick="fetchAnnouncements()">공개 중인 공고 보기</button>
-        <div id="announcementSection" class="announcement-section" style="display:none;">
-            <div style="margin-bottom: 16px;">
-                <label class="member-name" style="color:#4E5968; font-size:14px; margin-bottom: 10px;">지역별 보기</label>
-                <div class="region-buttons">
-                    <button class="region-btn active" data-region="all" onclick="selectRegion('all')">전체</button>
-                    <button class="region-btn" data-region="seoul" onclick="selectRegion('seoul')">서울</button>
-                    <button class="region-btn" data-region="gyeonggi" onclick="selectRegion('gyeonggi')">경기</button>
-                    <button class="region-btn" data-region="other" onclick="selectRegion('other')">이외</button>
-                </div>
+        <div class="label">월 소득</div>
+        <div class="slider-wrapper">
+            <div class="slider-amount" id="sliderAmount">월 596만원</div>
+            <input type="range" class="slider" id="incomeSlider">
+            <div class="slider-marks">
+                <span>50%</span>
+                <span>평균 100%</span>
+                <span>250%</span>
             </div>
-            <div style="margin-bottom: 16px; margin-top: 16px;">
-                <span style="font-size: 15px; font-weight: 700; color: var(--text);">현재 진행 중인 공고</span>
-                <span id="announcementCount" style="display: block; font-size: 13px; color: var(--sub-text); margin-top: 4px;"></span>
-            </div>
-            <div id="announcementList" class="announcement-list"></div>
+            <div class="hint">💡 성과급 포함 연봉 ÷ 12 로 입력하세요</div>
         </div>
-    </div>
+    </section>
+
+    <!-- 4. Hot Announcements (moved below result) -->
+    <section class="card">
+        <div class="section-head">
+            <div class="label">🔥 핫한 단지</div>
+            <span class="caption" id="hotCount"></span>
+        </div>
+        <div id="hotList" class="announcement-list">
+            <div class="loading"><span class="spinner"></span>불러오는 중...</div>
+        </div>
+    </section>
+
+    <!-- 5. All Announcements -->
+    <section class="card">
+        <div class="section-head">
+            <div class="label">진행 중인 공고</div>
+            <label class="toggle"><input type="checkbox" id="showExpiredToggle"> 마감 포함</label>
+        </div>
+        <div class="chip-row" id="regionChips" style="margin-bottom: 12px;">
+            <button type="button" class="chip active" data-region="all">전체</button>
+            <button type="button" class="chip" data-region="seoul">서울</button>
+            <button type="button" class="chip" data-region="gyeonggi">경기</button>
+            <button type="button" class="chip" data-region="other">이외</button>
+        </div>
+        <div class="caption" id="allCount" style="margin-bottom: 10px;"></div>
+        <div id="allList" class="announcement-list">
+            <div class="loading"><span class="spinner"></span>불러오는 중...</div>
+        </div>
+    </section>
+
 </div>
+
 <script>
-    const incomeStd = { '1': 3350847, '2': 5959606, '3': 7003509, '4': 8248467, '5': 8775071 };
-    function generateMemberInputs() {
-        const count = document.getElementById('familyCount').value;
-        const container = document.getElementById('memberContainer');
-        container.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-            const memberDiv = document.createElement('div');
-            memberDiv.className = 'member-card';
-            memberDiv.innerHTML = `<span class="member-name">구성원 ${i} ${i==1?'(본인)':''}</span><div class="input-row"><div class="input-group"><label>세전 월급</label><div class="input-wrapper"><input type="number" class="salary" value="0" onfocus="this.select()"><span class="unit-label">만원</span></div></div><div class="input-group"><label>연 성과급</label><div class="input-wrapper"><input type="number" class="bonus" value="0" onfocus="this.select()"><span class="unit-label">만원</span></div></div></div>`;
-            container.appendChild(memberDiv);
-        }
-    }
-    function calculate() {
-        const salaries = document.getElementsByClassName('salary');
-        const bonuses = document.getElementsByClassName('bonus');
-        const count = document.getElementById('familyCount').value;
-        let totalMonthly = 0; let activeEarners = 0;
-        for (let i = 0; i < salaries.length; i++) {
-            const s = parseFloat(salaries[i].value || 0); const b = parseFloat(bonuses[i].value || 0);
-            if(s > 0 || b > 0) activeEarners++;
-            totalMonthly += (s * 10000) + ((b * 10000) / 12);
-        }
-        if (totalMonthly === 0) return alert("소득을 입력해 주세요.");
-        const percent = Math.round((totalMonthly / incomeStd[count]) * 100);
-        document.getElementById('result').style.display = 'block';
-        document.getElementById('resPercent').innerText = percent + '%';
-        document.getElementById('resTotal').innerText = `합산 월평균 약 ${(Math.round(totalMonthly/10000)).toLocaleString()}만원`;
-        const newlyLimit = activeEarners >= 2 ? 160 : 140;
-        let listHtml = makeResItem('신혼부부 특별공급', percent <= newlyLimit) + makeResItem('생애최초 특별공급', percent <= 160) + makeResItem('공공분양 일반공급', percent <= 100) + makeResItem('신생아 특례 (최신)', percent <= 200);
-        document.getElementById('resList').innerHTML = listHtml;
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-    function makeResItem(title, isPass) { return `<div class="res-item"><span style="font-size:15px; font-weight:600;">${title}</span><span class="badge ${isPass?'pass':'fail'}">${isPass?'신청 가능':'소득 초과'}</span></div>`; }
-
-    let currentIncomePercent = 0;
-
-    // 기존 calculate 함수 수정 - currentIncomePercent 저장
-    const originalCalculate = calculate;
-    window.calculate = function() {
-        const salaries = document.getElementsByClassName('salary');
-        const bonuses = document.getElementsByClassName('bonus');
-        const count = document.getElementById('familyCount').value;
-        let totalMonthly = 0; let activeEarners = 0;
-        for (let i = 0; i < salaries.length; i++) {
-            const s = parseFloat(salaries[i].value || 0); const b = parseFloat(bonuses[i].value || 0);
-            if(s > 0 || b > 0) activeEarners++;
-            totalMonthly += (s * 10000) + ((b * 10000) / 12);
-        }
-        if (totalMonthly === 0) return alert("소득을 입력해 주세요.");
-        const percent = Math.round((totalMonthly / incomeStd[count]) * 100);
-        currentIncomePercent = percent;
-        document.getElementById('result').style.display = 'block';
-        document.getElementById('resPercent').innerText = percent + '%';
-        document.getElementById('resTotal').innerText = `합산 월평균 약 ${(Math.round(totalMonthly/10000)).toLocaleString()}만원`;
-        const newlyLimit = activeEarners >= 2 ? 160 : 140;
-        let listHtml = makeResItem('신혼부부 특별공급', percent <= newlyLimit) + makeResItem('생애최초 특별공급', percent <= 160) + makeResItem('공공분양 일반공급', percent <= 100) + makeResItem('신생아 특례 (최신)', percent <= 200);
-        document.getElementById('resList').innerHTML = listHtml;
-        document.getElementById('announcementSection').style.display = 'none';
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    };
-
-    // 핫한 지역 판단 함수
-    function isHotRegion(announcement) {
-        // 서울 전역
-        if (announcement.region === "서울") return true;
-        // 경기 내 특정 지역
-        const hotAreas = ["분당", "판교", "구리", "과천"];
-        return hotAreas.some(area => announcement.name.includes(area));
-    }
-
-    // 공고 카드 렌더링 함수
-    function formatAnnouncementItem(item, showIncomeStatus = false, currentIncome = 0) {
-        const formatDate = (dateStr) => {
-            if (!dateStr) return '-';
-            return dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
-        };
-
-        let infoHtml = `
-            <div>📍 지역: ${item.region}</div>
-            <div>📅 청약: ${formatDate(item.applicationStart)} ~ ${formatDate(item.applicationEnd)}</div>
-        `;
-
-        if (showIncomeStatus) {
-            const canApply = currentIncome <= item.incomePercent;
-            const statusClass = canApply ? 'status-ok' : 'status-ng';
-            const statusText = canApply ? '신청 가능' : '소득 초과';
-            infoHtml += `<div>📋 소득기준: ${item.incomePercent}% / 당신: ${currentIncome}%</div>`;
-
-            return `
-                <div class="announcement-item ${!canApply ? 'not-applicable' : ''}">
-                    <div class="announcement-title">${item.name} <span style="font-size: 12px; color: var(--sub-text);">${item.divisionName}</span></div>
-                    <div class="announcement-info">${infoHtml}</div>
-                    <span class="announcement-status ${statusClass}">${statusText}</span>
-                </div>
-            `;
-        } else {
-            return `
-                <div class="announcement-item">
-                    <div class="announcement-title">${item.name} <span style="font-size: 12px; color: var(--sub-text);">${item.divisionName}</span></div>
-                    <div class="announcement-info">${infoHtml}</div>
-                </div>
-            `;
-        }
-    }
-
-    // 핫한 단지 자동 로드 함수
-    let hotAnnouncementsLoaded = false;
-    async function loadHotAnnouncements() {
-        if (hotAnnouncementsLoaded) return;
-
-        const hotSection = document.getElementById('hotAnnouncementsSection');
-        const hotList = document.getElementById('hotAnnouncementsList');
-
-        hotList.innerHTML = '<div class="loading"><div class="spinner"></div><p>인기 단지를 불러오는 중...</p></div>';
-        hotSection.style.display = 'block';
-
-        try {
-            const response = await fetch(`/api/proxy?page=1&perPage=50`);
-            const data = await response.json();
-
-            if (!data.success || !data.announcements || data.announcements.length === 0) {
-                hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">인기 단지 정보가 없습니다.</div>';
-                return;
-            }
-
-            // 핫한 지역 필터링 및 상위 5개만 선택
-            const hotAnnouncements = data.announcements
-                .filter(isHotRegion)
-                .slice(0, 5);
-
-            if (hotAnnouncements.length === 0) {
-                hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">인기 단지 정보가 없습니다.</div>';
-                return;
-            }
-
-            document.getElementById('hotAnnouncementCount').innerText = `현재 ${hotAnnouncements.length}개의 인기 단지`;
-            let htmlContent = '';
-            hotAnnouncements.forEach(item => {
-                htmlContent += formatAnnouncementItem(item, false);
-            });
-
-            hotList.innerHTML = htmlContent;
-            hotAnnouncementsLoaded = true;
-
-        } catch (error) {
-            console.error('Error loading hot announcements:', error);
-            hotList.innerHTML = '<div style="padding: 20px; text-align: center; color: #F04452;">인기 단지 로드 실패</div>';
-        }
-    }
-
-    // 전체 공고 저장 (필터링용)
+    // ---------- State ----------
+    // 2024년 도시근로자 월평균소득 (100% 기준)
+    const incomeStd = { 1: 3350847, 2: 5959606, 3: 7003509, 4: 8248467, 5: 8775071 };
+    let familyCount = 2;
+    let monthlyIncome = Math.round(incomeStd[2] / 10000); // 만원
+    let activeRegion = 'all';
+    let showExpired = false;
     let allAnnouncements = [];
+    let criteria = { announcements: {} };
 
-    // 지역별 필터링 함수
-    function filterByRegion(announcements, selectedRegion) {
-        if (selectedRegion === "all") return announcements;
-        if (selectedRegion === "seoul") {
-            return announcements.filter(a => a.region === "서울");
-        }
-        if (selectedRegion === "gyeonggi") {
-            return announcements.filter(a => a.region === "경기");
-        }
-        if (selectedRegion === "other") {
-            return announcements.filter(a => a.region !== "서울" && a.region !== "경기");
-        }
-        return announcements;
+    // ---------- Date utilities ----------
+    function parseYmd(s) {
+        if (!/^\d{8}$/.test(s || '')) return null;
+        const y = +s.slice(0, 4), m = +s.slice(4, 6) - 1, d = +s.slice(6, 8);
+        const dt = new Date(y, m, d);
+        return (dt.getFullYear() === y && dt.getMonth() === m && dt.getDate() === d) ? dt : null;
     }
 
-    // 지역 버튼 선택 함수
-    function selectRegion(region) {
-        // 모든 버튼 비활성화
-        document.querySelectorAll('.region-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
+    function fmtDate(s) {
+        const dt = parseYmd(s);
+        if (!dt) return '미정';
+        return `${dt.getFullYear()}.${String(dt.getMonth() + 1).padStart(2, '0')}.${String(dt.getDate()).padStart(2, '0')}`;
+    }
 
-        // 선택된 버튼 활성화
-        document.querySelector(`[data-region="${region}"]`).classList.add('active');
+    function statusFor(startStr, endStr) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const s = parseYmd(startStr), e = parseYmd(endStr);
+        if (!s || !e) return { label: '일정 미정', tone: 'expired', rank: 3 };
+        if (today < s) {
+            const d = Math.ceil((s - today) / 86400000);
+            return { label: `D-${d}`, tone: 'upcoming', rank: 1 };
+        }
+        if (today <= e) return { label: '청약중', tone: 'ongoing', rank: 0 };
+        return { label: '마감', tone: 'expired', rank: 2, expired: true };
+    }
 
-        // 필터 적용
-        const filtered = filterByRegion(allAnnouncements, region);
-        const announcementList = document.getElementById('announcementList');
-        const totalCount = allAnnouncements.length;
+    // ---------- Family chip ----------
+    function setFamily(n) {
+        familyCount = +n;
+        document.querySelectorAll('#familyChips .chip').forEach(c =>
+            c.classList.toggle('active', +c.dataset.family === familyCount));
+        setupSlider();
+        recompute();
+    }
 
-        document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${filtered.length}개 표시`;
+    // ---------- Slider ----------
+    function setupSlider() {
+        const base = Math.round(incomeStd[familyCount] / 10000);
+        const min = Math.round(base * 0.5);
+        const max = Math.round(base * 2.5);
+        const slider = document.getElementById('incomeSlider');
+        slider.min = min;
+        slider.max = max;
+        slider.step = 10;
+        // 가구원 변경 시 평균값으로 리셋 (더 직관적)
+        monthlyIncome = base;
+        slider.value = monthlyIncome;
+        updateSliderTrack(slider);
+    }
 
-        if (filtered.length === 0) {
-            announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">해당 지역의 공고가 없습니다.</div>';
+    function updateSliderTrack(slider) {
+        const min = +slider.min, max = +slider.max, val = +slider.value;
+        const pct = ((val - min) / (max - min)) * 100;
+        slider.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, var(--surface-2) ${pct}%, var(--surface-2) 100%)`;
+    }
+
+    function onSliderInput(e) {
+        monthlyIncome = +e.target.value;
+        updateSliderTrack(e.target);
+        recompute();
+    }
+
+    // ---------- Recompute (live) ----------
+    function recompute() {
+        const totalKrw = monthlyIncome * 10000;
+        const percent = Math.round((totalKrw / incomeStd[familyCount]) * 100);
+        document.getElementById('resultPercent').textContent = percent;
+        const amountText = `월 ${monthlyIncome.toLocaleString()}만원`;
+        document.getElementById('resultAmount').textContent = amountText;
+        document.getElementById('sliderAmount').textContent = amountText;
+
+        const rows = [
+            { name: '신혼부부 외벌이', sub: '140% 이하', limit: 140 },
+            { name: '신혼부부 맞벌이', sub: '160% 이하', limit: 160 },
+            { name: '생애최초 특별공급', sub: '160% 이하', limit: 160 },
+            { name: '공공분양 일반공급', sub: '100% 이하', limit: 100 },
+            { name: '신생아 특례', sub: '200% 이하', limit: 200 },
+        ];
+        const html = rows.map(r => {
+            const ok = percent <= r.limit;
+            return `<div class="eligibility-row">
+                <div class="name">${r.name}<small>${r.sub}</small></div>
+                <div class="mark ${ok ? 'ok' : 'ng'}">${ok ? '✓ 가능' : '초과'}</div>
+            </div>`;
+        }).join('');
+        document.getElementById('eligibilityList').innerHTML = html;
+    }
+
+    // ---------- Region ----------
+    function setRegion(r) {
+        activeRegion = r;
+        document.querySelectorAll('#regionChips .chip').forEach(c =>
+            c.classList.toggle('active', c.dataset.region === r));
+        renderAll();
+    }
+
+    function filterByRegion(list, region) {
+        if (region === 'all') return list;
+        if (region === 'seoul') return list.filter(a => a.region === '서울');
+        if (region === 'gyeonggi') return list.filter(a => a.region === '경기');
+        if (region === 'other') return list.filter(a => a.region !== '서울' && a.region !== '경기');
+        return list;
+    }
+
+    // ---------- Announcement rendering ----------
+    function announcementItem(item) {
+        const status = statusFor(item.applicationStart, item.applicationEnd);
+        const c = criteria.announcements?.[item.id];
+        const analyzedBadge = c
+            ? '<span class="badge analyzed">✓ 분석됨</span>'
+            : '<span class="badge estimated">일반 기준 추정</span>';
+        const statusBadge = `<span class="badge ${status.tone}">${status.label}</span>`;
+
+        let incomeLine;
+        if (c && c.incomeStandards) {
+            const parts = Object.entries(c.incomeStandards)
+                .slice(0, 3)
+                .map(([k, v]) => `${k.replace(/_/g, ' ')} ${v}%`);
+            incomeLine = `소득: ${parts.join(' · ')}`;
+        } else {
+            incomeLine = `추정: 신혼·생애최초 160% / 일반 100%`;
+        }
+
+        let assetLine = '';
+        if (c && c.assetStandards) {
+            const a = c.assetStandards;
+            const parts = [];
+            if (a.부동산_만원) parts.push(`부동산 ${a.부동산_만원.toLocaleString()}만`);
+            if (a.자동차_만원) parts.push(`차 ${a.자동차_만원.toLocaleString()}만`);
+            if (parts.length) assetLine = `<div class="line">자산: ${parts.join(' · ')}</div>`;
+        }
+
+        return `<div class="announcement-item ${status.expired ? 'expired' : ''}">
+            <div class="announcement-head">
+                <div class="announcement-title">${item.name || '제목 미정'}<small>${item.divisionName || ''}</small></div>
+                <div class="badge-group">${statusBadge}${analyzedBadge}</div>
+            </div>
+            <div class="announcement-meta">
+                <div>📍 ${item.region || '-'} &nbsp;·&nbsp; 📅 ${fmtDate(item.applicationStart)} ~ ${fmtDate(item.applicationEnd)}</div>
+                <div class="line">${incomeLine}</div>
+                ${assetLine}
+            </div>
+        </div>`;
+    }
+
+    function renderHot() {
+        const hotAreas = ['분당', '판교', '구리', '과천'];
+        const hot = allAnnouncements
+            .filter(a => !statusFor(a.applicationStart, a.applicationEnd).expired)
+            .filter(a => a.region === '서울' || hotAreas.some(h => (a.name || '').includes(h)))
+            .slice(0, 5);
+
+        const el = document.getElementById('hotList');
+        const count = document.getElementById('hotCount');
+        if (hot.length === 0) {
+            el.innerHTML = '<div class="empty">진행 중인 인기 단지가 없습니다.</div>';
+            count.textContent = '';
             return;
         }
+        count.textContent = `${hot.length}개`;
+        el.innerHTML = hot.map(announcementItem).join('');
+    }
 
-        let htmlContent = '';
-        filtered.forEach(item => {
-            htmlContent += formatAnnouncementItem(item, true, currentIncomePercent);
+    function renderAll() {
+        let list = allAnnouncements.slice();
+        if (!showExpired) {
+            list = list.filter(a => !statusFor(a.applicationStart, a.applicationEnd).expired);
+        }
+        list = filterByRegion(list, activeRegion);
+        // 정렬: 청약중 → D-n 오름차순 → 마감/미정
+        list.sort((a, b) => {
+            const sa = statusFor(a.applicationStart, a.applicationEnd);
+            const sb = statusFor(b.applicationStart, b.applicationEnd);
+            if (sa.rank !== sb.rank) return sa.rank - sb.rank;
+            const ea = parseYmd(a.applicationEnd), eb = parseYmd(b.applicationEnd);
+            if (ea && eb) return ea - eb;
+            return 0;
         });
 
-        announcementList.innerHTML = htmlContent;
-    }
-
-    // 지역 필터 변경 시 재렌더링 (호환성 유지)
-    function applyRegionFilter() {
-        // 이 함수는 이제 selectRegion()으로 대체됨
-    }
-
-    // fetchAnnouncements 함수
-    window.fetchAnnouncements = async function() {
-        if (!currentIncomePercent) {
-            alert('먼저 소득분위를 계산해주세요.');
+        const el = document.getElementById('allList');
+        const count = document.getElementById('allCount');
+        if (list.length === 0) {
+            el.innerHTML = '<div class="empty">조건에 맞는 공고가 없습니다.</div>';
+            count.textContent = '';
             return;
         }
+        count.textContent = `총 ${list.length}개`;
+        el.innerHTML = list.map(announcementItem).join('');
+    }
 
-        const announcementSection = document.getElementById('announcementSection');
-        const announcementList = document.getElementById('announcementList');
-
-        announcementList.innerHTML = '<div class="loading"><div class="spinner"></div><p>공고를 조회 중입니다...</p></div>';
-        announcementSection.style.display = 'block';
-        selectRegion('all');
-
+    // ---------- Data fetching ----------
+    async function fetchCriteria() {
         try {
-            const response = await fetch(`/api/proxy?page=1&perPage=100`);
-            const data = await response.json();
-
-            if (!data.success) {
-                announcementList.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--sub-text);">공고 조회에 실패했습니다. 잠시 후 다시 시도해주세요.</div>`;
-                return;
+            const res = await fetch('/data/criteria.json', { cache: 'no-cache' });
+            if (res.ok) {
+                criteria = await res.json();
             }
-
-            allAnnouncements = data.announcements || [];
-            const totalCount = data.totalCount || 0;
-
-            if (allAnnouncements.length === 0) {
-                announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--sub-text);">공고가 없습니다.</div>';
-                return;
-            }
-
-            document.getElementById('announcementCount').innerText = `총 ${totalCount}개 중 ${allAnnouncements.length}개 표시`;
-
-            let htmlContent = '';
-            allAnnouncements.forEach(item => {
-                htmlContent += formatAnnouncementItem(item, true, currentIncomePercent);
-            });
-
-            announcementList.innerHTML = htmlContent;
-
-        } catch (error) {
-            console.error('Error fetching announcements:', error);
-            announcementList.innerHTML = '<div style="padding: 20px; text-align: center; color: #F04452;">⚠️ 조회 중 오류가 발생했습니다.<br><small>' + error.message + '</small></div>';
+        } catch (e) {
+            console.warn('criteria.json not available yet', e);
         }
-    };
+    }
 
-    generateMemberInputs();
-    loadHotAnnouncements();
+    async function fetchAnnouncements() {
+        try {
+            const res = await fetch('/api/proxy?page=1&perPage=100');
+            const data = await res.json();
+            if (data.success && Array.isArray(data.announcements)) {
+                allAnnouncements = data.announcements;
+            } else {
+                throw new Error('Invalid response');
+            }
+        } catch (e) {
+            console.error('fetchAnnouncements error:', e);
+            document.getElementById('hotList').innerHTML = '<div class="empty">공고를 불러올 수 없습니다.</div>';
+            document.getElementById('allList').innerHTML = '<div class="empty">공고를 불러올 수 없습니다.</div>';
+        }
+    }
+
+    // ---------- Init ----------
+    async function init() {
+        // 가구원 chip
+        document.querySelectorAll('#familyChips .chip').forEach(c => {
+            c.addEventListener('click', () => setFamily(c.dataset.family));
+        });
+        // 지역 chip
+        document.querySelectorAll('#regionChips .chip').forEach(c => {
+            c.addEventListener('click', () => setRegion(c.dataset.region));
+        });
+        // 슬라이더
+        const slider = document.getElementById('incomeSlider');
+        slider.addEventListener('input', onSliderInput);
+        // 마감 포함 토글
+        document.getElementById('showExpiredToggle').addEventListener('change', e => {
+            showExpired = e.target.checked;
+            renderAll();
+        });
+
+        setupSlider();
+        recompute();
+
+        // 병렬 fetch (criteria + 공고)
+        await Promise.all([fetchCriteria(), fetchAnnouncements()]);
+        renderHot();
+        renderAll();
+    }
+
+    init();
 </script>
 </body>
 </html>

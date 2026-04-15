@@ -71,7 +71,7 @@ module.exports = async (req, res) => {
       applicationEnd: item.청약접수종료일,
       specialApplicationStart: item.특별공급접수시작일,
       specialApplicationEnd: item.특별공급접수종료일,
-      incomePercent: 160, // 기본값: 신혼부부/생애최초 기준
+      // incomePercent는 프론트에서 data/criteria.json 매칭 결과로 분기 처리 (공고별 실제 기준)
       link: item.모집공고홈페이지주소 || 'https://www.apartmentdb.co.kr'
     }));
 
