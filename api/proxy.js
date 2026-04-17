@@ -40,15 +40,17 @@ module.exports = async (req, res) => {
     }
 
     // 쿼리 파라미터
-    const { page = 1, perPage = 20 } = req.query;
+    const { page = 1, perPage = 200 } = req.query;
 
-    // odcloud.kr API 호출
+    // odcloud.kr API 호출 (최신 모집공고일 순 정렬)
     const response = await axios.get(BASE_URL, {
       params: {
         serviceKey: API_KEY,
         page,
         perPage,
-        returnType: 'JSON'
+        returnType: 'JSON',
+        'sortFields[0]': '모집공고일',
+        'sortDirections[0]': 'DESC',
       },
       timeout: 8000,
       headers: {
@@ -59,8 +61,23 @@ module.exports = async (req, res) => {
     // 응답 데이터 파싱
     const data = response.data;
 
+    // 서버 사이드 마감 필터: 60일 이상 지난 공고 제거
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const cutoff = new Date(today.getTime() - 60 * 86400000);
+
+    function parseDate8(s) {
+      if (!s || !/^\d{8}$/.test(s)) return null;
+      return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8));
+    }
+
     // odcloud.kr API 응답 구조 처리
-    const announcements = (data.data || []).map(item => ({
+    const announcements = (data.data || [])
+      .filter(item => {
+        const end = parseDate8(item.청약접수종료일);
+        return !end || end >= cutoff; // 날짜 없거나 60일 이내면 포함
+      })
+      .map(item => ({
       id: item.주택관리번호,
       name: item.주택명,
       announcement: item.공고번호,
@@ -73,7 +90,7 @@ module.exports = async (req, res) => {
       specialApplicationEnd: item.특별공급접수종료일,
       // incomePercent는 프론트에서 data/criteria.json 매칭 결과로 분기 처리 (공고별 실제 기준)
       link: item.모집공고홈페이지주소 || 'https://www.apartmentdb.co.kr'
-    }));
+      }));
 
     res.status(200).json({
       success: true,

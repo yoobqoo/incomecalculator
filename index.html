@@ -210,6 +210,10 @@
                 <button type="button" class="active" data-housing="private">민간</button>
                 <button type="button" data-housing="public">공공</button>
             </div>
+            <div class="seg" id="incomeSeg">
+                <button type="button" class="active" data-mode="monthly">월소득</button>
+                <button type="button" data-mode="annual">연봉</button>
+            </div>
         </div>
 
         <div class="slider-wrapper">
@@ -220,7 +224,7 @@
                 <span>평균 100%</span>
                 <span>250%</span>
             </div>
-            <div class="hint">성과급 포함 연봉 ÷ 12 로 입력하세요</div>
+            <div class="hint" id="sliderHint">성과급 포함 연봉 ÷ 12 로 입력하세요</div>
         </div>
     </section>
 
@@ -281,9 +285,10 @@
     };
 
     let familyCount = 2;
-    let monthlyIncome = Math.round(incomeStd[2] / 10000); // 만원
+    let monthlyIncome = Math.round(incomeStd[2] / 10000); // 만원 (항상 월 단위로 저장)
     let earners = 'dual';         // 'single' | 'dual'
     let housingType = 'private';  // 'private' | 'public'
+    let incomeMode = 'monthly';   // 'monthly' | 'annual'
     let activeRegion = 'all';
     let showExpired = false;
     let allAnnouncements = [];
@@ -325,18 +330,32 @@
         recompute();
     }
 
+    // ---------- Income mode toggle ----------
+    function setIncomeMode(v) {
+        incomeMode = v;
+        document.querySelectorAll('#incomeSeg button').forEach(b =>
+            b.classList.toggle('active', b.dataset.mode === v));
+        const hint = document.getElementById('sliderHint');
+        hint.textContent = v === 'annual'
+            ? '세전 연봉 기준 (성과급 포함)'
+            : '성과급 포함 연봉 ÷ 12 로 입력하세요';
+        setupSlider();
+        recompute();
+    }
+
     // ---------- Slider ----------
     function setupSlider() {
-        const base = Math.round(incomeStd[familyCount] / 10000);
-        const min = Math.round(base * 0.5);
-        const max = Math.round(base * 2.5);
+        const base = Math.round(incomeStd[familyCount] / 10000); // 월 만원
+        const unit = incomeMode === 'annual' ? 12 : 1;
+        const min  = Math.round(base * 0.5) * unit;
+        const max  = Math.round(base * 2.5) * unit;
+        const step = 10 * unit;
         const slider = document.getElementById('incomeSlider');
-        slider.min = min;
-        slider.max = max;
-        slider.step = 10;
-        // 가구원 변경 시 평균값으로 리셋 (더 직관적)
-        monthlyIncome = base;
-        slider.value = monthlyIncome;
+        slider.min  = min;
+        slider.max  = max;
+        slider.step = step;
+        monthlyIncome = base; // 평균으로 리셋 (월 단위 저장)
+        slider.value  = base * unit;
         updateSliderTrack(slider);
     }
 
@@ -347,7 +366,8 @@
     }
 
     function onSliderInput(e) {
-        monthlyIncome = +e.target.value;
+        const raw = +e.target.value;
+        monthlyIncome = incomeMode === 'annual' ? Math.round(raw / 12) : raw;
         updateSliderTrack(e.target);
         recompute();
     }
@@ -371,7 +391,9 @@
         const totalKrw = monthlyIncome * 10000;
         const percent = Math.round((totalKrw / incomeStd[familyCount]) * 100);
         document.getElementById('resultPercent').textContent = percent;
-        const amountText = `월 ${monthlyIncome.toLocaleString()}만원`;
+        const amountText = incomeMode === 'annual'
+            ? `연봉 ${(monthlyIncome * 12).toLocaleString()}만원`
+            : `월 ${monthlyIncome.toLocaleString()}만원`;
         document.getElementById('sliderAmount').textContent = amountText;
 
         const table = CRITERIA[housingType][earners];
@@ -553,6 +575,10 @@
         // 민간/공공 seg
         document.querySelectorAll('#housingSeg button').forEach(b => {
             b.addEventListener('click', () => setHousing(b.dataset.housing));
+        });
+        // 월소득/연봉 seg
+        document.querySelectorAll('#incomeSeg button').forEach(b => {
+            b.addEventListener('click', () => setIncomeMode(b.dataset.mode));
         });
         // 지역 chip
         document.querySelectorAll('#regionChips .chip').forEach(c => {
