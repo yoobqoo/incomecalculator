@@ -1,17 +1,27 @@
 /**
  * 청약홈 API 프록시
- * 국부동산원 odcloud.kr API를 통해 분양공고를 조회합니다.
+ * 한국부동산원_청약홈 분양정보 조회 서비스 (15098547) 실시간 API
  *
  * 설정:
  * 1. Vercel 환경변수에 APARTMENT_API_KEY 설정
- * 2. API 엔드포인트: GET /api/proxy?pageNo=1&numOfRows=20
+ * 2. API 엔드포인트: GET /api/proxy?page=1&perPage=200
  */
 
 const axios = require('axios');
 
-// API 설정 (한국부동산원_청약홈_APT 분양정보)
+// API 설정 (한국부동산원_청약홈 분양정보 조회 서비스 15098547)
 const API_KEY = process.env.APARTMENT_API_KEY || '17c1015e63414c5f5f8ae48f2bda5b47079578dde490f420775cfd325449ce15';
-const BASE_URL = 'https://api.odcloud.kr/api/15101046/v1/uddi:14a46595-03dd-47d3-a418-d64e52820598';
+const BASE_URL = 'https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail';
+
+/**
+ * 날짜 문자열 반환 (YYYY-MM-DD 포맷)
+ * @param {number} offsetDays - 오늘 기준 오프셋 (음수: 과거)
+ */
+function getDateStr(offsetDays = 0) {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  return d.toISOString().slice(0, 10); // YYYY-MM-DD
+}
 
 /**
  * 청약홈 공고 조회
@@ -40,73 +50,71 @@ module.exports = async (req, res) => {
     }
 
     // 쿼리 파라미터
-    const { page = 1, perPage = 200 } = req.query;
+    const page    = req.query.page    || 1;
+    const perPage = req.query.perPage || 200;
 
-    // odcloud.kr API 호출 (최신 모집공고일 순 정렬)
-    const response = await axios.get(BASE_URL, {
-      params: {
-        serviceKey: API_KEY,
-        page,
-        perPage,
-        returnType: 'JSON',
-        'sortFields[0]': '모집공고일',
-        'sortDirections[0]': 'DESC',
-      },
+    // URLSearchParams로 직접 URL 구성 (cond 파라미터 인코딩 보장)
+    const qs = new URLSearchParams();
+    qs.set('serviceKey',          API_KEY);
+    qs.set('page',                String(page));
+    qs.set('perPage',             String(perPage));
+    qs.set('returnType',          'JSON');
+    qs.set('cond[RCEPT_ENDDE::GTE]', getDateStr(-60));  // 60일 이내 마감 공고만
+    qs.set('sortFields[0]',       'RCRIT_PBLANC_DE');
+    qs.set('sortDirections[0]',   'DESC');              // 최신 공고 우선
+
+    const url = `${BASE_URL}?${qs.toString()}`;
+
+    // 실시간 청약홈 API 호출
+    const response = await axios.get(url, {
       timeout: 8000,
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     });
 
     // 응답 데이터 파싱
     const data = response.data;
 
-    // 서버 사이드 마감 필터: 60일 이상 지난 공고 제거
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const cutoff = new Date(today.getTime() - 60 * 86400000);
+    // 필드 매핑 (신 API 영문 코드 → 프론트 구조체)
+    const announcements = (data.data || []).map(item => {
+      const houseManageNo = item.HOUSE_MANAGE_NO;
+      const pblancNo      = item.PBLANC_NO;
 
-    function parseDate8(s) {
-      if (!s || !/^\d{8}$/.test(s)) return null;
-      return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8));
-    }
+      // 청약홈 공고 상세 딥링크
+      const link = item.HMPG_ADRES
+        || `https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=${houseManageNo}&pblancNo=${pblancNo}`;
 
-    // odcloud.kr API 응답 구조 처리
-    const announcements = (data.data || [])
-      .filter(item => {
-        const end = parseDate8(item.청약접수종료일);
-        return !end || end >= cutoff; // 날짜 없거나 60일 이내면 포함
-      })
-      .map(item => ({
-      id: item.주택관리번호,
-      name: item.주택명,
-      announcement: item.공고번호,
-      region: item.공급지역명,
-      divisionName: item.분양구분코드명,
-      recruitDate: item.모집공고일,
-      applicationStart: item.청약접수시작일,
-      applicationEnd: item.청약접수종료일,
-      specialApplicationStart: item.특별공급접수시작일,
-      specialApplicationEnd: item.특별공급접수종료일,
-      // incomePercent는 프론트에서 data/criteria.json 매칭 결과로 분기 처리 (공고별 실제 기준)
-      link: item.모집공고홈페이지주소 || 'https://www.apartmentdb.co.kr'
-      }));
+      return {
+        id:                    houseManageNo,
+        name:                  item.HOUSE_NM,
+        announcement:          pblancNo,
+        region:                item.SUBSCRPT_AREA_CODE_NM,
+        divisionName:          item.HOUSE_SECD_NM,
+        recruitDate:           item.RCRIT_PBLANC_DE,
+        applicationStart:      item.RCEPT_BGNDE,
+        applicationEnd:        item.RCEPT_ENDDE,
+        specialApplicationStart: item.SPSPLY_RCEPT_BGNDE,
+        specialApplicationEnd:   item.SPSPLY_RCEPT_ENDDE,
+        totalUnits:            item.TOT_SUPLY_HSHLDCO  || null,
+        isPublic:              item.PUBLIC_HOUSE_EARTH_AT === 'Y',
+        link,
+      };
+    });
 
     res.status(200).json({
-      success: true,
-      totalCount: data.totalCount || 0,
-      page: page,
-      perPage: perPage,
+      success:      true,
+      totalCount:   data.totalCount   || 0,
+      page:         page,
+      perPage:      perPage,
       currentCount: data.currentCount || 0,
-      announcements: announcements,
-      timestamp: new Date().toISOString()
+      announcements,
+      timestamp:    new Date().toISOString()
     });
 
   } catch (error) {
     console.error('API Proxy Error:', error.message);
 
     res.status(500).json({
-      error: 'API request failed',
+      error:   'API request failed',
       message: error.message,
       tips: [
         '1. API 키를 확인하세요',
@@ -116,4 +124,3 @@ module.exports = async (req, res) => {
     });
   }
 };
-

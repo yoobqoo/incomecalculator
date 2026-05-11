@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8D1NXGBRTR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8D1NXGBRTR');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>내집컷 | 청약 소득분위 계산기</title>
     <meta name="description" content="내집컷 — 슬라이더 한 번으로 청약 소득분위 즉시 확인. 신혼부부·생애최초·공공분양 자격 판독.">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <!-- Open Graph (카카오·슬랙·텔레그램 등 공유 썸네일) -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://income-calc-nine.vercel.app/">
+    <meta property="og:title"       content="내집컷">
+    <meta property="og:description" content="청약을 위한 소득분위 계산기">
+    <meta property="og:image"       content="https://income-calc-nine.vercel.app/og.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="내집컷">
+    <meta name="twitter:description" content="청약을 위한 소득분위 계산기">
+    <meta name="twitter:image"       content="https://income-calc-nine.vercel.app/og.png">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
@@ -175,6 +195,66 @@
         .badge.analyzed { background: rgba(0, 122, 255, 0.12); color: var(--accent); }
         .badge.estimated { background: var(--surface); color: var(--text-3); border: 1px solid var(--border); }
 
+        /* Slider top label + after-tax tag */
+        .slider-top-label { font-size: 12px; color: var(--text-2); text-align: center; margin-bottom: 4px; letter-spacing: -0.2px; }
+        .after-tax-tag { font-size: 11px; font-weight: 500; color: var(--text-3); margin-left: 4px; }
+
+        /* Bonus input row */
+        .bonus-row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; gap: 8px; }
+        .bonus-label { font-size: 13px; color: var(--text-2); white-space: nowrap; letter-spacing: -0.2px; }
+        .bonus-input-wrap { display: flex; align-items: center; gap: 6px; }
+        .bonus-input { width: 88px; text-align: right; font-size: 14px; font-weight: 500; font-family: inherit;
+                       border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px;
+                       background: var(--surface-2); color: var(--text); outline: none; }
+        .bonus-input:focus { border-color: var(--accent); background: var(--surface); }
+        .bonus-unit { font-size: 12px; color: var(--text-2); white-space: nowrap; }
+
+        /* Announcement card — new elements */
+        .type-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px;
+                    margin-left: 5px; vertical-align: middle; letter-spacing: -0.1px; }
+        .type-tag.public  { background: #E3F0FF; color: #0060C7; }
+        .type-tag.private { background: #F0F0F5; color: #636366; }
+        .meta-row { font-size: 12px; color: var(--text-2); margin-bottom: 4px; line-height: 1.5; letter-spacing: -0.2px; }
+        .eligibility-inline { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 4px; }
+        .elig-chip { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; white-space: nowrap; letter-spacing: -0.1px; }
+        .elig-chip.ok   { background: #E5F7ED; color: #1A7F3C; }
+        .elig-chip.over { background: #FFF0F0; color: #C0392B; }
+        .elig-chip.na   { background: var(--surface-2); color: var(--text-3); }
+
+        /* SEO content sections (FAQ + 소득기준표) */
+        .seo-section { padding: 20px; }
+        .seo-section h2 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 12px; letter-spacing: -0.3px; }
+        .seo-section p { font-size: 13px; color: var(--text-2); line-height: 1.65; margin: 8px 0 0; letter-spacing: -0.2px; }
+        .income-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .income-table th, .income-table td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--border); letter-spacing: -0.2px; }
+        .income-table th { font-weight: 600; color: var(--text-2); width: 90px; }
+        .income-table td { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
+        .income-table tr:last-child th, .income-table tr:last-child td { border-bottom: none; }
+
+        /* FAQ accordion */
+        .faq-list { display: flex; flex-direction: column; gap: 8px; }
+        .faq-item { background: var(--surface-2); border-radius: var(--radius-md); overflow: hidden; }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 13px 16px;
+            font-size: 14px; font-weight: 600; color: var(--text);
+            display: flex; justify-content: space-between; align-items: center; gap: 10px;
+            letter-spacing: -0.25px; -webkit-tap-highlight-color: transparent;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+'; font-size: 18px; font-weight: 400; color: var(--text-3);
+            transition: transform 0.2s ease; flex-shrink: 0;
+        }
+        .faq-item[open] summary::after { transform: rotate(45deg); color: var(--accent); }
+        .faq-item .faq-a { padding: 0 16px 14px; font-size: 13px; line-height: 1.7; color: var(--text-2); letter-spacing: -0.2px; }
+        .faq-item[open] summary { color: var(--accent); }
+
+        /* Screen-reader only (semantic SEO) */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+        /* h1 semantic — visually identical to brand-name */
+        h1.brand-name { font-size: 15px; font-weight: 600; letter-spacing: -0.4px; color: var(--text-2); line-height: 1.25; margin: 0; }
+
         /* Loading/empty */
         .loading, .empty { text-align: center; padding: 24px 12px; color: var(--text-3); font-size: 13px; letter-spacing: -0.2px; }
         .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-radius: 50%; border-top-color: var(--accent); animation: spin 0.8s linear infinite; margin-right: 6px; vertical-align: -2px; }
@@ -187,7 +267,7 @@
     <!-- 1. Brand header -->
     <header class="brand">
         <img src="/logo.svg" alt="내집컷 로고" class="brand-logo" />
-        <span class="brand-name">청약을 위한<br/>소득분위 계산기</span>
+        <h1 class="brand-name">청약을 위한<br/>소득분위 계산기</h1>
     </header>
 
     <!-- 2. Input Card (moved to top for above-the-fold) -->
@@ -206,10 +286,6 @@
                 <button type="button" data-earners="single">외벌이</button>
                 <button type="button" class="active" data-earners="dual">맞벌이</button>
             </div>
-            <div class="seg" id="housingSeg">
-                <button type="button" class="active" data-housing="private">민간</button>
-                <button type="button" data-housing="public">공공</button>
-            </div>
             <div class="seg" id="incomeSeg">
                 <button type="button" class="active" data-mode="monthly">월소득</button>
                 <button type="button" data-mode="annual">연봉</button>
@@ -217,19 +293,27 @@
         </div>
 
         <div class="slider-wrapper">
-            <div class="slider-amount" id="sliderAmount">월 596만원</div>
+            <div class="slider-top-label" id="sliderTopLabel">최근 통장에 들어온 금액</div>
+            <div class="slider-amount" id="sliderAmount">월 596만원<small class="after-tax-tag">세후</small></div>
             <input type="range" class="slider" id="incomeSlider">
             <div class="slider-marks">
                 <span>50%</span>
                 <span>평균 100%</span>
                 <span>250%</span>
             </div>
-            <div class="hint" id="sliderHint">성과급 포함 연봉 ÷ 12 로 입력하세요</div>
+            <div class="bonus-row">
+                <label class="bonus-label" for="bonusInput">성과급·상여금<small class="after-tax-tag">세후</small></label>
+                <div class="bonus-input-wrap">
+                    <input type="number" id="bonusInput" class="bonus-input" placeholder="0" min="0" step="10">
+                    <span class="bonus-unit">만원 / 연간</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 3. Result Card (compact, always visible) -->
     <section class="card result-card">
+        <h2 class="sr-only">내 청약 소득분위 결과</h2>
         <div class="display"><span id="resultPercent">100</span><span class="percent-sign">%</span></div>
         <div class="eligibility-list" id="eligibilityList"></div>
     </section>
@@ -263,6 +347,52 @@
         </div>
     </section>
 
+    <!-- 6. 도시근로자 월평균소득 기준표 (SEO) -->
+    <section class="card seo-section">
+        <h2>2024년 도시근로자 월평균소득 (100% 기준)</h2>
+        <table class="income-table">
+            <tbody>
+                <tr><th>1인 가구</th><td>3,350,847원</td></tr>
+                <tr><th>2인 가구</th><td>5,959,606원</td></tr>
+                <tr><th>3인 가구</th><td>7,004,509원</td></tr>
+                <tr><th>4인 가구</th><td>8,248,467원</td></tr>
+                <tr><th>5인 가구</th><td>8,775,071원</td></tr>
+            </tbody>
+        </table>
+        <p>청약 소득분위는 본인 가구의 월평균소득을 위 도시근로자 월평균소득으로 나눈 백분율입니다. 신혼부부 특별공급, 생애최초 특별공급, 신생아 특례, 공공분양은 각각 정해진 % 이하만 신청 가능합니다.</p>
+    </section>
+
+    <!-- 7. FAQ (SEO + 리치 스니펫) -->
+    <section class="card seo-section">
+        <h2>청약 소득기준 자주 묻는 질문</h2>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>신혼부부 특별공급 소득기준은 어떻게 되나요?</summary>
+                <div class="faq-a">신혼부부 특별공급은 도시근로자 월평균소득 대비 일정 비율 이하만 신청할 수 있습니다. 민간분양은 외벌이 140% · 맞벌이 160% 이하, 공공분양은 외벌이 130% · 맞벌이 200% 이하 기준이 적용됩니다. 자녀가 있는 경우 자녀 수에 따라 가구원 수가 늘어 기준 금액도 함께 상승합니다.</div>
+            </details>
+            <details class="faq-item">
+                <summary>생애최초 특별공급 소득기준은 얼마인가요?</summary>
+                <div class="faq-a">생애최초 특별공급은 민간분양과 공공분양 모두 외벌이 130% · 맞벌이 140% 이하 소득 기준이 적용됩니다. 청약통장 24회 이상 납입, 5년 이상 근로소득세 또는 사업소득세 납부, 무주택 세대주 등 추가 조건도 충족해야 합니다.</div>
+            </details>
+            <details class="faq-item">
+                <summary>청약 소득분위 100%는 어떻게 계산하나요?</summary>
+                <div class="faq-a">청약 소득분위 100%는 가구원 수별 도시근로자 월평균소득과 동일한 금액을 의미합니다. 예를 들어 3인 가구라면 월 약 700만원이 100%이고, 980만원이면 약 140%, 1,400만원이면 약 200%에 해당합니다. 본 계산기의 슬라이더로 즉시 확인하실 수 있습니다.</div>
+            </details>
+            <details class="faq-item">
+                <summary>신생아 특례 청약 소득기준은 어떻게 되나요?</summary>
+                <div class="faq-a">신생아 특별공급은 입주자 모집공고일 기준 2세 이하 자녀(태아 포함)가 있는 가구를 대상으로 합니다. 소득기준은 민간·공공 모두 맞벌이 200% 이하, 외벌이의 경우 민간 140% · 공공 150% 이하가 적용됩니다. 2024년 신설된 제도로 청년·신혼·생애최초 다음으로 별도 트랙으로 운영됩니다.</div>
+            </details>
+            <details class="faq-item">
+                <summary>공공분양과 민간분양의 소득기준은 어떻게 다른가요?</summary>
+                <div class="faq-a">민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급은 도시근로자 월평균소득의 100% 이하 (전용 60㎡ 이하)만 신청 가능합니다. 특별공급의 경우 신혼부부는 공공분양 기준(맞벌이 200%)이 민간(맞벌이 160%)보다 더 완화되어 있고, 생애최초와 신생아 특례는 양쪽 기준이 거의 동일합니다.</div>
+            </details>
+            <details class="faq-item">
+                <summary>청약 소득은 세전 기준인가요, 세후 기준인가요?</summary>
+                <div class="faq-a">공식 청약 자격 심사는 세전(원천징수영수증상 총급여) 기준 소득을 사용합니다. 다만 본 계산기는 사용자 편의를 위해 실수령액(세후) 기준으로 입력할 수 있게 설계되어 있으며, 매월 통장에 들어온 금액과 연간 성과급을 합산해 추정 소득분위를 보여드립니다. 정확한 자격 판정은 반드시 청약 공고문 원문을 확인해주세요.</div>
+            </details>
+        </div>
+    </section>
+
     <div class="footer-note">※ 2024.03 개편 기준 일반 소득요건입니다. 공고마다 실제 소득·자산 기준이 다를 수 있으니 공고문 원문을 확인하세요.</div>
 
 </div>
@@ -286,8 +416,9 @@
 
     let familyCount = 2;
     let monthlyIncome = Math.round(incomeStd[2] / 10000); // 만원 (항상 월 단위로 저장)
+    let bonusAnnual = 0;          // 만원, 연간 성과급 (세후)
+    let currentPercent = 100;     // 마지막으로 계산된 소득분위 % (카드 렌더링에 사용)
     let earners = 'dual';         // 'single' | 'dual'
-    let housingType = 'private';  // 'private' | 'public'
     let incomeMode = 'monthly';   // 'monthly' | 'annual'
     let activeRegion = 'all';
     let showExpired = false;
@@ -296,8 +427,10 @@
 
     // ---------- Date utilities ----------
     function parseYmd(s) {
-        if (!/^\d{8}$/.test(s || '')) return null;
-        const y = +s.slice(0, 4), m = +s.slice(4, 6) - 1, d = +s.slice(6, 8);
+        // YYYY-MM-DD 또는 YYYYMMDD 모두 처리
+        const clean = (s || '').replace(/-/g, '');
+        if (!/^\d{8}$/.test(clean)) return null;
+        const y = +clean.slice(0, 4), m = +clean.slice(4, 6) - 1, d = +clean.slice(6, 8);
         const dt = new Date(y, m, d);
         return (dt.getFullYear() === y && dt.getMonth() === m && dt.getDate() === d) ? dt : null;
     }
@@ -321,13 +454,22 @@
         return { label: '마감', tone: 'expired', rank: 2, expired: true };
     }
 
+    // ---------- Slider top label ----------
+    function updateSliderTopLabel() {
+        const base = incomeMode === 'annual' ? '계약 연봉' : '최근 통장에 들어온 금액';
+        const suffix = familyCount >= 2 ? ' (합산)' : '';
+        document.getElementById('sliderTopLabel').textContent = base + suffix;
+    }
+
     // ---------- Family chip ----------
     function setFamily(n) {
         familyCount = +n;
         document.querySelectorAll('#familyChips .chip').forEach(c =>
             c.classList.toggle('active', +c.dataset.family === familyCount));
+        updateSliderTopLabel();
         setupSlider();
         recompute();
+        if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
     }
 
     // ---------- Income mode toggle ----------
@@ -335,12 +477,10 @@
         incomeMode = v;
         document.querySelectorAll('#incomeSeg button').forEach(b =>
             b.classList.toggle('active', b.dataset.mode === v));
-        const hint = document.getElementById('sliderHint');
-        hint.textContent = v === 'annual'
-            ? '세전 연봉 기준 (성과급 포함)'
-            : '성과급 포함 연봉 ÷ 12 로 입력하세요';
+        updateSliderTopLabel();
         setupSlider();
         recompute();
+        if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
     }
 
     // ---------- Slider ----------
@@ -365,59 +505,66 @@
         slider.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, var(--surface-2) ${pct}%, var(--surface-2) 100%)`;
     }
 
+    let _renderTimer = null;
+    function _scheduleRender() {
+        clearTimeout(_renderTimer);
+        _renderTimer = setTimeout(() => {
+            if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
+        }, 120);
+    }
+
     function onSliderInput(e) {
         const raw = +e.target.value;
         monthlyIncome = incomeMode === 'annual' ? Math.round(raw / 12) : raw;
         updateSliderTrack(e.target);
         recompute();
+        _scheduleRender();
     }
 
-    // ---------- Toggles (earners · housingType) ----------
+    // ---------- Toggles (earners) ----------
     function setEarners(v) {
         earners = v;
         document.querySelectorAll('#earnersSeg button').forEach(b =>
             b.classList.toggle('active', b.dataset.earners === v));
         recompute();
-    }
-    function setHousing(v) {
-        housingType = v;
-        document.querySelectorAll('#housingSeg button').forEach(b =>
-            b.classList.toggle('active', b.dataset.housing === v));
-        recompute();
+        renderHot();
+        renderAll();
     }
 
     // ---------- Recompute (live) ----------
     function recompute() {
-        const totalKrw = monthlyIncome * 10000;
-        const percent = Math.round((totalKrw / incomeStd[familyCount]) * 100);
-        document.getElementById('resultPercent').textContent = percent;
+        // 성과급을 월 단위로 합산
+        const bonus월 = Math.round(bonusAnnual / 12);
+        const effective월 = monthlyIncome + bonus월;
+        const totalKrw = effective월 * 10000;
+        currentPercent = Math.round((totalKrw / incomeStd[familyCount]) * 100);
+        document.getElementById('resultPercent').textContent = currentPercent;
+
+        // 금액 표시 (세후 태그 포함)
         const amountText = incomeMode === 'annual'
             ? `연봉 ${(monthlyIncome * 12).toLocaleString()}만원`
             : `월 ${monthlyIncome.toLocaleString()}만원`;
-        document.getElementById('sliderAmount').textContent = amountText;
+        document.getElementById('sliderAmount').innerHTML =
+            `${amountText}<small class="after-tax-tag">세후</small>`;
 
-        const table = CRITERIA[housingType][earners];
+        // 결과 카드: 민간 기준 고정 (공공은 각 공고 카드에서 판단)
+        const table = CRITERIA['private'][earners];
         const earnersLabel = earners === 'dual' ? '맞벌이' : '외벌이';
         const rows = [
             { name: `신혼부부 ${earnersLabel}`, limit: table.신혼부부 },
             { name: `생애최초 ${earnersLabel}`, limit: table.생애최초 },
-            {
-                name: housingType === 'public' ? '일반공급' : '일반공급',
-                note: housingType === 'public' ? '전용 60m² 이하' : '소득기준 없음',
-                limit: table.일반공급,
-            },
+            { name: '일반공급', note: '소득기준 없음', limit: table.일반공급 },
             { name: `신생아 특례 ${earnersLabel}`, limit: table.신생아특례 },
         ];
 
         const html = rows.map(r => {
             if (r.limit === null) {
-                const subText = r.note || '해당없음';
                 return `<div class="eligibility-row na">
-                    <div class="name">${r.name}<small>${subText}</small></div>
+                    <div class="name">${r.name}<small>${r.note || '해당없음'}</small></div>
                     <div class="mark na">—</div>
                 </div>`;
             }
-            const ok = percent <= r.limit;
+            const ok = currentPercent <= r.limit;
             const sub = r.note ? `${r.limit}% 이하 · ${r.note}` : `${r.limit}% 이하`;
             return `<div class="eligibility-row">
                 <div class="name">${r.name}<small>${sub}</small></div>
@@ -444,46 +591,49 @@
     }
 
     // ---------- Announcement rendering ----------
+    function buildEligibilityInline(item) {
+        const type = item.isPublic ? 'public' : 'private';
+        const table = CRITERIA[type][earners];
+        const checks = [
+            { name: '신혼부부', limit: table.신혼부부 },
+            { name: '생애최초', limit: table.생애최초 },
+            { name: '신생아특례', limit: table.신생아특례 },
+            { name: '일반공급', limit: table.일반공급 },
+        ];
+        return checks.map(({ name, limit }) => {
+            if (limit === null) {
+                return `<span class="elig-chip na">${name} 제한없음</span>`;
+            }
+            const ok = currentPercent <= limit;
+            return `<span class="elig-chip ${ok ? 'ok' : 'over'}">${name} ${limit}% ${ok ? '✓' : '✗'}</span>`;
+        }).join('');
+    }
+
     function announcementItem(item) {
         const status = statusFor(item.applicationStart, item.applicationEnd);
-        const c = criteria.announcements?.[item.id];
-        const analyzedBadge = c
-            ? '<span class="badge analyzed">✓ 분석됨</span>'
-            : '<span class="badge estimated">일반 기준 추정</span>';
         const statusBadge = `<span class="badge ${status.tone}">${status.label}</span>`;
+        const typeLabel = item.isPublic ? '공공' : '민간';
+        const typeClass = item.isPublic ? 'public' : 'private';
 
-        let incomeLine;
-        if (c && c.incomeStandards) {
-            const parts = Object.entries(c.incomeStandards)
-                .slice(0, 3)
-                .map(([k, v]) => `${k.replace(/_/g, ' ')} ${v}%`);
-            incomeLine = `소득: ${parts.join(' · ')}`;
-        } else {
-            incomeLine = `추정: 신혼·생애최초 160% / 일반 100%`;
-        }
+        const unitsPart = item.totalUnits
+            ? ` &nbsp;·&nbsp; 총 ${Number(item.totalUnits).toLocaleString()}세대` : '';
+        const specialPart = item.specialApplicationStart ? ' &nbsp;·&nbsp; 특공 있음' : '';
 
-        let assetLine = '';
-        if (c && c.assetStandards) {
-            const a = c.assetStandards;
-            const parts = [];
-            if (a.부동산_만원) parts.push(`부동산 ${a.부동산_만원.toLocaleString()}만`);
-            if (a.자동차_만원) parts.push(`차 ${a.자동차_만원.toLocaleString()}만`);
-            if (parts.length) assetLine = `<div class="line">자산: ${parts.join(' · ')}</div>`;
-        }
-
-        // 원문 링크 우선순위: criteria.sourceUrl → API link (item.link) → apartmentdb fallback
-        const href = (c && c.sourceUrl) || item.link || 'https://www.apartmentdb.co.kr';
+        const href = item.link || 'https://www.apartmentdb.co.kr';
         const safeHref = href.replace(/"/g, '&quot;');
 
         return `<a class="announcement-item ${status.expired ? 'expired' : ''}" href="${safeHref}" target="_blank" rel="noopener">
             <div class="announcement-head">
-                <div class="announcement-title">${item.name || '제목 미정'}<small>${item.divisionName || ''}</small></div>
-                <div class="badge-group">${statusBadge}${analyzedBadge}</div>
+                <div class="announcement-title">
+                    ${item.name || '제목 미정'}
+                    <span class="type-tag ${typeClass}">${typeLabel}</span>
+                </div>
+                <div class="badge-group">${statusBadge}</div>
             </div>
             <div class="announcement-meta">
-                <div>📍 ${item.region || '-'} &nbsp;·&nbsp; 📅 ${fmtDate(item.applicationStart)} ~ ${fmtDate(item.applicationEnd)}</div>
-                <div class="line">${incomeLine}</div>
-                ${assetLine}
+                <div class="meta-row">📍 ${item.region || '-'}${unitsPart}${specialPart}</div>
+                <div class="meta-row">📅 ${fmtDate(item.applicationStart)} ~ ${fmtDate(item.applicationEnd)}</div>
+                <div class="eligibility-inline">${buildEligibilityInline(item)}</div>
                 <div class="announcement-arrow">공고문 보기 →</div>
             </div>
         </a>`;
@@ -572,10 +722,6 @@
         document.querySelectorAll('#earnersSeg button').forEach(b => {
             b.addEventListener('click', () => setEarners(b.dataset.earners));
         });
-        // 민간/공공 seg
-        document.querySelectorAll('#housingSeg button').forEach(b => {
-            b.addEventListener('click', () => setHousing(b.dataset.housing));
-        });
         // 월소득/연봉 seg
         document.querySelectorAll('#incomeSeg button').forEach(b => {
             b.addEventListener('click', () => setIncomeMode(b.dataset.mode));
@@ -587,12 +733,19 @@
         // 슬라이더
         const slider = document.getElementById('incomeSlider');
         slider.addEventListener('input', onSliderInput);
+        // 성과급 입력
+        document.getElementById('bonusInput').addEventListener('input', e => {
+            bonusAnnual = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+            recompute();
+            _scheduleRender();
+        });
         // 마감 포함 토글
         document.getElementById('showExpiredToggle').addEventListener('change', e => {
             showExpired = e.target.checked;
             renderAll();
         });
 
+        updateSliderTopLabel();
         setupSlider();
         recompute();
 
@@ -604,5 +757,84 @@
 
     init();
 </script>
+
+<!-- JSON-LD: WebApplication 스키마 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "내집컷",
+  "alternateName": "청약 소득분위 계산기",
+  "description": "슬라이더 한 번으로 청약 소득분위를 즉시 확인하세요. 신혼부부·생애최초·신생아 특례·공공분양 자격 판독.",
+  "url": "https://income-calc-nine.vercel.app/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "ko",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "KRW"
+  }
+}
+</script>
+
+<!-- JSON-LD: FAQPage 스키마 (리치 스니펫용) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "신혼부부 특별공급 소득기준은 어떻게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "신혼부부 특별공급은 도시근로자 월평균소득 대비 일정 비율 이하만 신청할 수 있습니다. 민간분양은 외벌이 140% · 맞벌이 160% 이하, 공공분양은 외벌이 130% · 맞벌이 200% 이하 기준이 적용됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "생애최초 특별공급 소득기준은 얼마인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "생애최초 특별공급은 민간분양과 공공분양 모두 외벌이 130% · 맞벌이 140% 이하 소득 기준이 적용됩니다. 청약통장 24회 이상 납입, 5년 이상 근로소득세 또는 사업소득세 납부, 무주택 세대주 등 추가 조건도 충족해야 합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "청약 소득분위 100%는 어떻게 계산하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "청약 소득분위 100%는 가구원 수별 도시근로자 월평균소득과 동일한 금액입니다. 3인 가구라면 월 약 700만원이 100%이고, 980만원이면 140%, 1,400만원이면 200%에 해당합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "신생아 특례 청약 소득기준은 어떻게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "신생아 특별공급은 모집공고일 기준 2세 이하 자녀(태아 포함)가 있는 가구가 대상입니다. 소득기준은 민간·공공 모두 맞벌이 200% 이하, 외벌이는 민간 140% · 공공 150% 이하가 적용됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "공공분양과 민간분양의 소득기준은 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급은 도시근로자 월평균소득 100% 이하 (전용 60㎡ 이하)만 신청 가능합니다. 신혼부부는 공공분양 기준이 민간보다 더 완화되어 있고, 생애최초와 신생아 특례는 양쪽 기준이 거의 동일합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "청약 소득은 세전 기준인가요, 세후 기준인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "공식 청약 자격 심사는 세전(원천징수영수증상 총급여) 기준입니다. 본 계산기는 사용자 편의를 위해 실수령액(세후) 기준으로 입력하도록 설계되어 매월 통장에 들어온 금액과 연간 성과급을 합산해 추정 소득분위를 보여드립니다."
+      }
+    }
+  ]
+}
+</script>
+
 </body>
 </html>
