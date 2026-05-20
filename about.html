@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8D1NXGBRTR"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8D1NXGBRTR');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소개 | 내집컷 - 청약 소득분위 계산기</title>
+    <meta name="description" content="내집컷을 만든 이유와 운영자 소개. 청약 특공을 준비하면서 매번 소득분위 계산이 귀찮았던 한 사람의 사이드 프로젝트.">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link rel="canonical" href="https://homecut.kr/about.html">
+    <style>
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+        :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --border:#F0F0F2; }
+        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; }
+        body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 720px; }
+        .brand { display: flex; align-items: center; gap: 10px; padding: 4px 4px 14px; text-decoration: none; }
+        .brand-logo { width: 56px; height: 56px; }
+        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.25; }
+        .crumbs { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
+        .crumbs a { color: var(--text-3); text-decoration: none; }
+        article { background: var(--surface); border-radius: 20px; padding: 28px 24px; border: 1px solid var(--border); }
+        h1 { font-size: 26px; margin: 0 0 16px; letter-spacing: -0.5px; }
+        h2 { font-size: 18px; margin: 28px 0 10px; padding-top: 6px; border-top: 1px solid var(--border); }
+        h2:first-of-type { border-top: none; padding-top: 0; }
+        p { font-size: 15px; line-height: 1.75; color: var(--text); letter-spacing: -0.2px; }
+        ul { padding-left: 22px; }
+        li { font-size: 14px; line-height: 1.7; margin-bottom: 5px; }
+        b { font-weight: 600; }
+        .contact-card { background: var(--surface-2); padding: 16px 18px; border-radius: 12px; margin-top: 16px; font-size: 14px; }
+        .contact-card b { color: var(--text); }
+        .cta { display: block; text-align: center; background: var(--accent); color: white; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 600; margin: 24px 0 4px; font-size: 14px; }
+        footer { margin-top: 24px; text-align: center; font-size: 12px; color: var(--text-3); }
+        footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/" class="brand">
+        <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
+        <span class="brand-name">내집컷<br/>청약 소득분위 계산기</span>
+    </a>
+    <div class="crumbs"><a href="/">홈</a> &rsaquo; 소개</div>
+    <article>
+        <h1>내집컷을 만든 이유</h1>
+
+        <p>청약 특별공급에 신청하려고 알아보다가, <b>매번 소득분위 계산하는 게 너무 귀찮았습니다.</b></p>
+
+        <p>맞벌이인지 외벌이인지, 가구원수는 몇 명인지, 거기에 따라 적용되는 % 기준이 또 달라지고, 본인 세전 연봉을 어디서 떼야 하는지조차 헷갈리고요. 매번 청약 공고가 뜰 때마다 같은 계산을 반복하는 게 시간 낭비라고 느꼈습니다.</p>
+
+        <p>그래서 <b>월급통장에 들어오는 금액(세후) 하나만 입력하면, 내가 어느 분위에 속하고 어떤 특공이 가능한지 즉시 보여주는 계산기</b>를 만들었습니다.</p>
+
+        <h2>기획 단계의 갈등</h2>
+        <p>만들기 전에 아내랑 좀 싸웠습니다.</p>
+        <ul>
+            <li><b>아내</b>: "세전·세후 다르고, 1인 가구 가산률에 성과급까지 넣어야 진짜 맞는 결과가 나오지!"</li>
+            <li><b>저</b>: "복잡하게 할 거면 그냥 청약홈에서 보겠지. 대략적인 바운더리 체크만 빠르게 되면 충분해."</li>
+        </ul>
+        <p>결론은 둘 다 반영했습니다. 가산률·세전 환산·성과급 입력은 모두 들어가 있고, 동시에 슬라이더 한 번 만지면 결과가 즉시 나오는 단순함도 유지했습니다. 90%는 아내가 이긴 셈입니다.</p>
+
+        <h2>이런 분께 추천합니다</h2>
+        <ul>
+            <li>청약 특공 자격이 될지 빠르게 감 잡고 싶은 분</li>
+            <li>본인 세전 연봉이 정확히 얼마인지 모르겠는 분 (대부분 그렇습니다)</li>
+            <li>현재 진행 중인 청약 공고를 한눈에 보고 싶은 분</li>
+            <li>맞벌이 가구 합산 소득이 어디까지 가능한지 확인하고 싶은 분</li>
+        </ul>
+
+        <h2>이렇게 만들었습니다</h2>
+        <ul>
+            <li><b>실시간 청약 공고</b>: 한국부동산원 청약홈 공식 API 연동, 마감 60일 지난 공고 자동 숨김</li>
+            <li><b>세후 → 세전 환산</b>: 한국 직장인 평균 공제율을 4구간으로 적용 (월소득 구간별 ×1.16~×1.28)</li>
+            <li><b>가구원수 가산</b>: 1인 +20%p, 2인 +10%p 자동 적용</li>
+            <li><b>공공·민간 자동 분류</b>: 각 단지마다 [공공]/[민간] 태그 + 본인 소득 기준 자격 ✓ ✗ 즉시 표시</li>
+            <li><b>모바일 우선 디자인</b>: 핸드폰으로도 한 손에 결과 확인</li>
+        </ul>
+
+        <h2>운영자</h2>
+        <div class="contact-card">
+            <b>운영자</b>: unspired<br/>
+            <b>이메일</b>: unspired100@gmail.com<br/>
+            <b>사이트</b>: <a href="https://homecut.kr" style="color:var(--accent);">homecut.kr</a><br/>
+            <br/>
+            서비스 개선 제안·오류 신고·제휴 문의 모두 환영합니다.
+        </div>
+
+        <h2>면책</h2>
+        <p>본 사이트의 계산 결과는 참고용 추정치입니다. 정확한 청약 자격 판정은 청약홈 또는 LH청약플러스의 모집공고문 원문과 본인 원천징수영수증을 기준으로 확인해 주세요. 자세한 내용은 <a href="/terms.html" style="color:var(--accent);">이용약관</a>을 참고하시기 바랍니다.</p>
+
+        <a href="/" class="cta">계산기 사용하러 가기 →</a>
+    </article>
+    <footer>
+        <a href="/">홈</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+    </footer>
+</div>
+</body>
+</html>
