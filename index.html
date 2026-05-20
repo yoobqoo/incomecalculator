@@ -85,6 +85,21 @@
         .mark.na { color: var(--text-3); font-weight: 500; }
         .footer-note { padding: 6px 4px 0; font-size: 11px; color: var(--text-3); line-height: 1.55; letter-spacing: -0.1px; }
 
+        /* 공고 더보기/접기 버튼 */
+        .expand-btn {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            width: 100%; margin-top: 10px; padding: 12px;
+            background: var(--surface-2); border: 1px solid var(--border);
+            border-radius: var(--radius-md); color: var(--text);
+            font-size: 13px; font-weight: 600; letter-spacing: -0.2px;
+            font-family: inherit; cursor: pointer;
+            transition: background 0.12s ease, color 0.12s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .expand-btn:hover { background: #EFEFF2; color: var(--accent); }
+        .expand-btn .chev { font-size: 10px; color: var(--text-2); }
+        .expand-btn.collapse { color: var(--text-2); }
+
         /* Guide grid section */
         .guide-grid { display: grid; gap: 8px; }
         .guide-grid a {
@@ -537,6 +552,8 @@
     let showExpired = false;
     let allAnnouncements = [];
     let criteria = { announcements: {} };
+    let allExpanded = false;          // 진행 중인 공고 펼침 상태
+    const ALL_PREVIEW_COUNT = 5;      // 기본 노출 개수
 
     // ---------- Date utilities ----------
     function parseYmd(s) {
@@ -717,6 +734,7 @@
         activeRegion = r;
         document.querySelectorAll('#regionChips .chip').forEach(c =>
             c.classList.toggle('active', c.dataset.region === r));
+        allExpanded = false;   // 지역 변경 시 펼침 상태 리셋
         renderAll();
     }
 
@@ -820,7 +838,33 @@
             return;
         }
         count.textContent = `총 ${list.length}개`;
-        el.innerHTML = list.map(announcementItem).join('');
+
+        // 5개 초과 시 미펼침 상태면 잘라서 보여주고 [더보기] 버튼 추가
+        const isCollapsed = !allExpanded && list.length > ALL_PREVIEW_COUNT;
+        const displayList = isCollapsed ? list.slice(0, ALL_PREVIEW_COUNT) : list;
+        const cardsHtml = displayList.map(announcementItem).join('');
+
+        let toggleHtml = '';
+        if (list.length > ALL_PREVIEW_COUNT) {
+            const remaining = list.length - ALL_PREVIEW_COUNT;
+            toggleHtml = isCollapsed
+                ? `<button type="button" class="expand-btn" id="expandBtn">+${remaining}개 더 보기 <span class="chev">▾</span></button>`
+                : `<button type="button" class="expand-btn collapse" id="expandBtn">접기 <span class="chev">▴</span></button>`;
+        }
+        el.innerHTML = cardsHtml + toggleHtml;
+
+        // 버튼 이벤트 바인딩
+        const btn = document.getElementById('expandBtn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                allExpanded = !allExpanded;
+                renderAll();
+                // 접을 때는 목록 상단으로 스크롤
+                if (!allExpanded) {
+                    document.getElementById('allList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
     }
 
     // ---------- Data fetching ----------
@@ -881,6 +925,7 @@
         // 마감 포함 토글
         document.getElementById('showExpiredToggle').addEventListener('change', e => {
             showExpired = e.target.checked;
+            allExpanded = false;   // 마감 포함 토글 시 펼침 리셋
             renderAll();
         });
 
