@@ -4,6 +4,8 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5180948563619303"
          crossorigin="anonymous"></script>
+    <!-- Kakao AdFit -->
+    <script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8D1NXGBRTR"></script>
     <script>
@@ -84,6 +86,9 @@
         .mark.ng { color: var(--text-3); }
         .mark.na { color: var(--text-3); font-weight: 500; }
         .footer-note { padding: 6px 4px 0; font-size: 11px; color: var(--text-3); line-height: 1.55; letter-spacing: -0.1px; }
+
+        /* 광고 영역 (Kakao AdFit) */
+        .adfit-wrap { display: flex; justify-content: center; margin: 12px 0; }
 
         /* 공고 더보기/접기 버튼 */
         .expand-btn {
@@ -379,6 +384,14 @@
             </div>
         </div>
     </section>
+
+    <!-- AdFit 320x100 -->
+    <div class="adfit-wrap">
+        <ins class="kakao_ad_area" style="display:none;"
+            data-ad-unit="DAN-5q28PSfTUe4aAPPK"
+            data-ad-width="320"
+            data-ad-height="100"></ins>
+    </div>
 
     <!-- 4. 인기 청약 (moved below result) -->
     <section class="card">
