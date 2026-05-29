@@ -260,6 +260,16 @@
         .elig-chip.over { background: #FFF0F0; color: #C0392B; }
         .elig-chip.na   { background: var(--surface-2); color: var(--text-3); }
 
+        /* 구성원 태그 */
+        .member-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .member-tag {
+            display: inline-flex; align-items: center; padding: 4px 10px;
+            border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: -0.1px;
+        }
+        .member-tag.self   { background: #E3F0FF; color: #0060C7; }
+        .member-tag.spouse { background: #FFE9D6; color: #BF5700; }
+        .member-input-section { margin-top: 14px; }
+
         /* 소득 유형 가이드 카드 */
         .type-row { gap: 6px; }
         .type-guide {
@@ -362,22 +372,10 @@
         <h1 class="brand-name">청약을 위한<br/>소득분위 계산기</h1>
     </header>
 
-    <!-- 2. Input Card — 소득 유형 선택 + 세전 연봉 직접 입력 -->
+    <!-- 2. 가구 구성 -->
     <section class="card">
-        <div class="label">소득 유형</div>
-        <div class="chip-row type-row" id="incomeTypeChips" style="margin-bottom: 12px;">
-            <button type="button" class="chip" data-type="employee">회사원</button>
-            <button type="button" class="chip" data-type="business">사업자</button>
-            <button type="button" class="chip" data-type="freelancer">프리랜서</button>
-            <button type="button" class="chip" data-type="mixed">복합 소득</button>
-            <button type="button" class="chip" data-type="unemployed">무직</button>
-        </div>
-
-        <!-- 유형별 서류 가이드 (선택 시 표시) -->
-        <div class="type-guide" id="typeGuide" style="display:none;"></div>
-
-        <div class="label" style="margin-top: 18px;">가구원 수</div>
-        <div class="chip-row" id="familyChips" style="margin-bottom: 12px;">
+        <div class="label">가구원 수</div>
+        <div class="chip-row" id="familyChips" style="margin-bottom: 14px;">
             <button type="button" class="chip" data-family="1">1인</button>
             <button type="button" class="chip active" data-family="2">2인</button>
             <button type="button" class="chip" data-family="3">3인</button>
@@ -385,21 +383,58 @@
             <button type="button" class="chip" data-family="5">5인</button>
         </div>
 
-        <div class="toggle-groups">
+        <div class="label">구분</div>
+        <div class="toggle-groups" style="margin-bottom: 0;">
             <div class="seg" id="earnersSeg">
-                <button type="button" data-earners="single">외벌이</button>
+                <button type="button" data-earners="single">1인 또는 외벌이</button>
                 <button type="button" class="active" data-earners="dual">맞벌이</button>
             </div>
         </div>
+    </section>
 
-        <!-- 세전 연봉 직접 입력 -->
-        <div class="gross-input-section">
-            <label class="label" for="grossInput">세전 연봉 (가구 합산)</label>
+    <!-- 3. 본인 소득 -->
+    <section class="card">
+        <div class="member-head">
+            <span class="member-tag self">본인</span>
+            <span class="label" style="margin: 0;">소득 유형</span>
+        </div>
+        <div class="chip-row type-row" id="selfTypeChips" style="margin-bottom: 12px;">
+            <button type="button" class="chip" data-type="employee">회사원</button>
+            <button type="button" class="chip" data-type="business">사업자</button>
+            <button type="button" class="chip" data-type="freelancer">프리랜서</button>
+            <button type="button" class="chip" data-type="unemployed">무직</button>
+        </div>
+        <div class="type-guide" id="selfGuide" style="display:none;"></div>
+        <div class="member-input-section" id="selfInputSection" style="display:none;">
+            <label class="label" for="selfInput" id="selfInputLabel">금액</label>
             <div class="gross-input-wrap">
-                <input type="number" id="grossInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                <input type="number" id="selfInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
                 <span class="gross-unit">만원 / 연</span>
             </div>
-            <div class="gross-hint" id="grossHint">먼저 소득 유형을 선택하세요</div>
+            <div class="gross-hint" id="selfHint"></div>
+        </div>
+    </section>
+
+    <!-- 4. 배우자 소득 (맞벌이 + 2인 이상일 때만 표시) -->
+    <section class="card" id="spouseCard" style="display:none;">
+        <div class="member-head">
+            <span class="member-tag spouse">배우자</span>
+            <span class="label" style="margin: 0;">소득 유형</span>
+        </div>
+        <div class="chip-row type-row" id="spouseTypeChips" style="margin-bottom: 12px;">
+            <button type="button" class="chip" data-type="employee">회사원</button>
+            <button type="button" class="chip" data-type="business">사업자</button>
+            <button type="button" class="chip" data-type="freelancer">프리랜서</button>
+            <button type="button" class="chip" data-type="unemployed">무직</button>
+        </div>
+        <div class="type-guide" id="spouseGuide" style="display:none;"></div>
+        <div class="member-input-section" id="spouseInputSection" style="display:none;">
+            <label class="label" for="spouseInput" id="spouseInputLabel">금액</label>
+            <div class="gross-input-wrap">
+                <input type="number" id="spouseInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                <span class="gross-unit">만원 / 연</span>
+            </div>
+            <div class="gross-hint" id="spouseHint"></div>
         </div>
     </section>
 
@@ -557,58 +592,57 @@
     //  사용자가 직접 정확한 세전 연봉을 입력하므로 환산 없이 비교.)
 
     // ---------- 소득 유형별 서류 가이드 ----------
+    // 각 유형: 어떤 서류의 어느 칸을 입력해야 하는지 명확하게 안내
     const TYPE_GUIDES = {
         employee: {
-            title: '회사원 — 원천징수영수증',
+            title: '회사원 — 근로소득',
             rows: [
-                ['서류', '원천징수영수증 (근로소득)'],
-                ['어디서', '홈택스 또는 회사 인사팀'],
-                ['확인 칸', '16번 "총급여" = 청약 세전 연봉'],
-                ['1년 미만', '(총급여 ÷ 근무월수) × 12 환산'],
+                ['서류 ①', '원천징수영수증 (회사 발급 또는 홈택스)'],
+                ['→ 확인 칸', '<b>16번 "총급여"</b>'],
+                ['서류 ②', '소득금액증명원 (홈택스 → 민원증명)'],
+                ['→ 확인 칸', '<b>"근로소득금액"</b> 또는 "총급여액"'],
+                ['1년 미만 근무', '(총급여 ÷ 근무월수) × 12 환산해 입력'],
             ],
-            hint: '원천징수영수증 16번 칸의 "총급여"를 입력하세요',
+            inputLabel: '총급여 (세전, 연)',
+            hint: '원천징수영수증 16번 칸 또는 소득금액증명원 "총급여액"을 입력',
             link: { href: '/guide/income-check.html', text: '회사원 자세한 가이드 →' },
         },
         business: {
-            title: '사업자 — 종합소득세 신고서',
+            title: '사업자 — 종합소득',
             rows: [
-                ['서류', '종합소득세 신고서 사본'],
-                ['어디서', '홈택스 → 신고/납부 → 종합소득세'],
-                ['확인 칸', '"종합소득금액" 또는 "사업소득금액"'],
-                ['미신고 시', '작년 신고분 사용'],
+                ['서류 ①', '종합소득세 신고서 (홈택스 → 신고/납부 → 종합소득세)'],
+                ['→ 확인 칸', '<b>"종합소득금액"</b>'],
+                ['서류 ②', '소득금액증명원 (홈택스 → 민원증명)'],
+                ['→ 확인 칸', '<b>"종합소득금액"</b> 또는 "사업소득금액"'],
+                ['미신고 시', '작년 5월 신고분 사용'],
             ],
-            hint: '종합소득세 신고서의 "종합소득금액"을 입력하세요',
+            inputLabel: '종합소득금액 (연)',
+            hint: '종합소득세 신고서 또는 소득금액증명원의 "종합소득금액"을 입력',
             link: { href: '/guide/business.html', text: '사업자 자세한 가이드 →' },
         },
         freelancer: {
-            title: '프리랜서 — 원천징수 + 종합소득세',
+            title: '프리랜서 — 사업소득(3.3%)',
             rows: [
-                ['서류', '종합소득세 신고서 + 원천징수영수증'],
-                ['확인 칸', '종합소득세 신고서의 "사업소득금액"'],
-                ['5월 신고 전', '작년분 + 올해 받은 금액 합산'],
-                ['3.3% 받은 곳', '연말까지 합산해서 신고'],
+                ['서류 ①', '종합소득세 신고서 (5월 신고)'],
+                ['→ 확인 칸', '<b>"사업소득금액"</b>'],
+                ['서류 ②', '소득금액증명원'],
+                ['→ 확인 칸', '<b>"사업소득금액"</b>'],
+                ['5월 신고 전', '작년분 사용 + 올해 받은 금액 별도 합산'],
+                ['여러 곳 3.3%', '모두 합산해서 신고된 사업소득금액 사용'],
             ],
-            hint: '종합소득세 신고서의 "사업소득금액"을 입력하세요',
+            inputLabel: '사업소득금액 (연)',
+            hint: '종합소득세 신고서 또는 소득금액증명원의 "사업소득금액"을 입력',
             link: { href: '/guide/freelancer.html', text: '프리랜서 자세한 가이드 →' },
-        },
-        mixed: {
-            title: '복합 소득 — 양쪽 서류 합산',
-            rows: [
-                ['회사+사업', '원천징수영수증 16번 + 종합소득금액 합산'],
-                ['회사+임대', '원천징수영수증 + 부동산임대소득 합산'],
-                ['투잡', '주된 직장 16번 + 부업 종합소득세 신고분'],
-            ],
-            hint: '근로 + 사업/임대 소득을 모두 합산해서 입력하세요',
-            link: { href: '/guide/edge-cases.html', text: '복합 소득 가이드 →' },
         },
         unemployed: {
             title: '무직·구직 중',
             rows: [
                 ['서류', '없음 (소득 0원)'],
                 ['미포함', '자녀 보육수당·부모 도움·기초생활급여'],
-                ['배우자만', '외벌이로 설정 후 배우자 소득 입력'],
+                ['배우자만 있는 경우', '구분을 "1인 또는 외벌이"로 설정'],
             ],
-            hint: '소득 0 (배우자만 있다면 외벌이로 전환)',
+            inputLabel: null,
+            hint: null,
             link: null,
         },
     };
@@ -626,10 +660,11 @@
     };
 
     let familyCount = 2;
-    let grossAnnualMan = 0;       // 만원, 가구 합산 세전 연봉 (사용자 직접 입력)
-    let currentPercent = 0;       // 마지막으로 계산된 소득분위 %
     let earners = 'dual';         // 'single' | 'dual'
-    let incomeType = null;        // 'employee' | 'business' | 'freelancer' | 'mixed' | 'unemployed'
+    // 구성원별 입력: 본인 + (맞벌이일 때) 배우자
+    let self_ = { type: null, annualMan: 0 };
+    let spouse_ = { type: null, annualMan: 0 };
+    let currentPercent = 0;
     let activeRegion = 'all';
     let showExpired = false;
     let allAnnouncements = [];
@@ -666,18 +701,37 @@
         return { label: '마감', tone: 'expired', rank: 2, expired: true };
     }
 
-    // ---------- 소득 유형 선택 ----------
-    function setIncomeType(type) {
-        incomeType = type;
-        document.querySelectorAll('#incomeTypeChips .chip').forEach(c =>
-            c.classList.toggle('active', c.dataset.type === type));
-
-        const g = TYPE_GUIDES[type];
-        const guideEl = document.getElementById('typeGuide');
-        if (!g) {
-            guideEl.style.display = 'none';
-            return;
+    // ---------- 배우자 카드 표시 여부 ----------
+    function updateSpouseVisibility() {
+        const show = (earners === 'dual' && familyCount >= 2);
+        document.getElementById('spouseCard').style.display = show ? '' : 'none';
+        if (!show) {
+            // 배우자 데이터 리셋 (계산에서 제외)
+            spouse_ = { type: null, annualMan: 0 };
+            // UI도 리셋
+            document.querySelectorAll('#spouseTypeChips .chip').forEach(c => c.classList.remove('active'));
+            document.getElementById('spouseGuide').style.display = 'none';
+            document.getElementById('spouseInputSection').style.display = 'none';
+            const si = document.getElementById('spouseInput');
+            if (si) si.value = '';
         }
+    }
+
+    // ---------- 유형 선택 (구성원별) ----------
+    function applyTypeGuide(member, type) {
+        const g = TYPE_GUIDES[type];
+        const isSelf = (member === 'self');
+        const prefix = isSelf ? 'self' : 'spouse';
+        const chips = document.querySelectorAll(`#${prefix}TypeChips .chip`);
+        const guideEl = document.getElementById(`${prefix}Guide`);
+        const inputSection = document.getElementById(`${prefix}InputSection`);
+        const inputEl = document.getElementById(`${prefix}Input`);
+        const inputLabelEl = document.getElementById(`${prefix}InputLabel`);
+        const hintEl = document.getElementById(`${prefix}Hint`);
+
+        chips.forEach(c => c.classList.toggle('active', c.dataset.type === type));
+
+        // 가이드 렌더링
         const rowsHtml = g.rows.map(([k, v]) =>
             `<div class="doc-row"><span class="k">${k}</span><span class="v">${v}</span></div>`
         ).join('');
@@ -687,14 +741,33 @@
         guideEl.innerHTML = `<h4>${g.title}</h4>${rowsHtml}${linkHtml}`;
         guideEl.style.display = 'block';
 
-        document.getElementById('grossHint').textContent = g.hint;
-
-        if (type === 'unemployed') {
-            grossAnnualMan = 0;
-            document.getElementById('grossInput').value = '';
-            recompute();
-            _scheduleRender();
+        // 입력 섹션
+        if (g.inputLabel) {
+            inputSection.style.display = '';
+            inputLabelEl.textContent = g.inputLabel;
+            hintEl.textContent = g.hint || '';
+            // 유형 바뀌면 입력값 초기화
+            inputEl.value = '';
+        } else {
+            // 무직: 입력 숨김 + 금액 0
+            inputSection.style.display = 'none';
+            inputEl.value = '';
         }
+    }
+
+    function setSelfType(type) {
+        self_.type = type;
+        self_.annualMan = 0;
+        applyTypeGuide('self', type);
+        recompute();
+        _scheduleRender();
+    }
+    function setSpouseType(type) {
+        spouse_.type = type;
+        spouse_.annualMan = 0;
+        applyTypeGuide('spouse', type);
+        recompute();
+        _scheduleRender();
     }
 
     // ---------- Family chip ----------
@@ -702,11 +775,12 @@
         familyCount = +n;
         document.querySelectorAll('#familyChips .chip').forEach(c =>
             c.classList.toggle('active', +c.dataset.family === familyCount));
+        updateSpouseVisibility();
         recompute();
         if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
     }
 
-    // ---------- 세전 연봉 입력 ----------
+    // ---------- 입력 핸들러 (구성원별) ----------
     let _renderTimer = null;
     function _scheduleRender() {
         clearTimeout(_renderTimer);
@@ -715,8 +789,13 @@
         }, 120);
     }
 
-    function onGrossInput(e) {
-        grossAnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+    function onSelfInput(e) {
+        self_.annualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+        _scheduleRender();
+    }
+    function onSpouseInput(e) {
+        spouse_.annualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
         recompute();
         _scheduleRender();
     }
@@ -726,6 +805,7 @@
         earners = v;
         document.querySelectorAll('#earnersSeg button').forEach(b =>
             b.classList.toggle('active', b.dataset.earners === v));
+        updateSpouseVisibility();
         recompute();
         renderHot();
         renderAll();
@@ -733,9 +813,11 @@
 
     // ---------- Recompute (live) ----------
     function recompute() {
-        // 사용자가 직접 입력한 세전 연봉(가구 합산) → 월 세전 → 가구 100% 기준 대비 %
-        const grossMonthly = (grossAnnualMan * 10000) / 12;
-        currentPercent = grossAnnualMan > 0
+        // 본인 + (맞벌이일 때) 배우자 소득 합산
+        const includeSpouse = (earners === 'dual' && familyCount >= 2);
+        const householdAnnual = (self_.annualMan || 0) + (includeSpouse ? (spouse_.annualMan || 0) : 0);
+        const grossMonthly = (householdAnnual * 10000) / 12;
+        currentPercent = householdAnnual > 0
             ? Math.round((grossMonthly / incomeStd[familyCount]) * 100)
             : 0;
         document.getElementById('resultPercent').textContent = currentPercent;
@@ -935,10 +1017,6 @@
 
     // ---------- Init ----------
     async function init() {
-        // 소득 유형 chip
-        document.querySelectorAll('#incomeTypeChips .chip').forEach(c => {
-            c.addEventListener('click', () => setIncomeType(c.dataset.type));
-        });
         // 가구원 chip
         document.querySelectorAll('#familyChips .chip').forEach(c => {
             c.addEventListener('click', () => setFamily(c.dataset.family));
@@ -947,19 +1025,29 @@
         document.querySelectorAll('#earnersSeg button').forEach(b => {
             b.addEventListener('click', () => setEarners(b.dataset.earners));
         });
+        // 본인 소득 유형 chip
+        document.querySelectorAll('#selfTypeChips .chip').forEach(c => {
+            c.addEventListener('click', () => setSelfType(c.dataset.type));
+        });
+        // 배우자 소득 유형 chip
+        document.querySelectorAll('#spouseTypeChips .chip').forEach(c => {
+            c.addEventListener('click', () => setSpouseType(c.dataset.type));
+        });
+        // 본인·배우자 금액 입력
+        document.getElementById('selfInput').addEventListener('input', onSelfInput);
+        document.getElementById('spouseInput').addEventListener('input', onSpouseInput);
         // 지역 chip
         document.querySelectorAll('#regionChips .chip').forEach(c => {
             c.addEventListener('click', () => setRegion(c.dataset.region));
         });
-        // 세전 연봉 입력
-        document.getElementById('grossInput').addEventListener('input', onGrossInput);
         // 마감 포함 토글
         document.getElementById('showExpiredToggle').addEventListener('change', e => {
             showExpired = e.target.checked;
-            allExpanded = false;   // 마감 포함 토글 시 펼침 리셋
+            allExpanded = false;
             renderAll();
         });
 
+        updateSpouseVisibility();
         recompute();
 
         // 병렬 fetch (criteria + 공고)
