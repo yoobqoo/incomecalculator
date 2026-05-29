@@ -260,8 +260,42 @@
         .elig-chip.over { background: #FFF0F0; color: #C0392B; }
         .elig-chip.na   { background: var(--surface-2); color: var(--text-3); }
 
-        /* 세전 환산 sub-label (슬라이더 아래) */
-        .gross-sublabel { font-size: 11px; color: var(--text-3); text-align: center; margin-top: 6px; letter-spacing: -0.2px; }
+        /* 소득 유형 가이드 카드 */
+        .type-row { gap: 6px; }
+        .type-guide {
+            background: var(--surface-2); border-radius: var(--radius-md);
+            padding: 14px 16px; margin-bottom: 8px; font-size: 13px;
+            color: var(--text-2); line-height: 1.7; letter-spacing: -0.2px;
+        }
+        .type-guide h4 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 8px; letter-spacing: -0.2px; }
+        .type-guide .doc-row { display: flex; gap: 6px; margin-bottom: 5px; }
+        .type-guide .doc-row .k { color: var(--text-3); flex-shrink: 0; min-width: 60px; }
+        .type-guide .doc-row .v { color: var(--text); }
+        .type-guide a.guide-link {
+            display: inline-block; margin-top: 8px; color: var(--accent);
+            font-size: 12px; font-weight: 600; text-decoration: none;
+        }
+        .type-guide a.guide-link:hover { text-decoration: underline; }
+
+        /* 세전 연봉 입력 */
+        .gross-input-section { margin-top: 16px; }
+        .gross-input-section .label { display: block; margin-bottom: 8px; }
+        .gross-input-wrap {
+            display: flex; align-items: center; gap: 8px;
+            padding: 12px 14px; background: var(--surface-2);
+            border-radius: var(--radius-md); border: 1px solid transparent;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+        .gross-input-wrap:focus-within { background: var(--surface); border-color: var(--accent); }
+        .gross-input {
+            flex: 1; border: none; background: transparent; outline: none;
+            font-family: inherit; font-size: 24px; font-weight: 700;
+            color: var(--text); text-align: right; letter-spacing: -0.5px;
+            font-variant-numeric: tabular-nums;
+        }
+        .gross-input::placeholder { color: var(--text-3); font-weight: 500; }
+        .gross-unit { font-size: 13px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
+        .gross-hint { font-size: 11px; color: var(--text-3); margin-top: 6px; text-align: center; letter-spacing: -0.2px; }
 
         /* 결과 카드 면책 문구 */
         .disclaimer {
@@ -328,10 +362,22 @@
         <h1 class="brand-name">청약을 위한<br/>소득분위 계산기</h1>
     </header>
 
-    <!-- 2. Input Card (moved to top for above-the-fold) -->
+    <!-- 2. Input Card — 소득 유형 선택 + 세전 연봉 직접 입력 -->
     <section class="card">
-        <div class="label">가구원 수</div>
-        <div class="chip-row" id="familyChips" style="margin-bottom: 14px;">
+        <div class="label">소득 유형</div>
+        <div class="chip-row type-row" id="incomeTypeChips" style="margin-bottom: 12px;">
+            <button type="button" class="chip" data-type="employee">회사원</button>
+            <button type="button" class="chip" data-type="business">사업자</button>
+            <button type="button" class="chip" data-type="freelancer">프리랜서</button>
+            <button type="button" class="chip" data-type="mixed">복합 소득</button>
+            <button type="button" class="chip" data-type="unemployed">무직</button>
+        </div>
+
+        <!-- 유형별 서류 가이드 (선택 시 표시) -->
+        <div class="type-guide" id="typeGuide" style="display:none;"></div>
+
+        <div class="label" style="margin-top: 18px;">가구원 수</div>
+        <div class="chip-row" id="familyChips" style="margin-bottom: 12px;">
             <button type="button" class="chip" data-family="1">1인</button>
             <button type="button" class="chip active" data-family="2">2인</button>
             <button type="button" class="chip" data-family="3">3인</button>
@@ -344,29 +390,16 @@
                 <button type="button" data-earners="single">외벌이</button>
                 <button type="button" class="active" data-earners="dual">맞벌이</button>
             </div>
-            <div class="seg" id="incomeSeg">
-                <button type="button" class="active" data-mode="monthly">월소득</button>
-                <button type="button" data-mode="annual">연봉</button>
-            </div>
         </div>
 
-        <div class="slider-wrapper">
-            <div class="slider-top-label" id="sliderTopLabel">최근 통장에 들어온 금액</div>
-            <div class="slider-amount" id="sliderAmount">월 596만원<small class="after-tax-tag">세후</small></div>
-            <input type="range" class="slider" id="incomeSlider">
-            <div class="slider-marks">
-                <span>50%</span>
-                <span>평균 100%</span>
-                <span>250%</span>
+        <!-- 세전 연봉 직접 입력 -->
+        <div class="gross-input-section">
+            <label class="label" for="grossInput">세전 연봉 (가구 합산)</label>
+            <div class="gross-input-wrap">
+                <input type="number" id="grossInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                <span class="gross-unit">만원 / 연</span>
             </div>
-            <div class="gross-sublabel" id="grossSubLabel">↳ 세전 환산 약 월 0만원 (예상)</div>
-            <div class="bonus-row">
-                <label class="bonus-label" for="bonusInput">성과급·상여금<small class="after-tax-tag">세후</small></label>
-                <div class="bonus-input-wrap">
-                    <input type="number" id="bonusInput" class="bonus-input" placeholder="0" min="0" step="10">
-                    <span class="bonus-unit">만원 / 연간</span>
-                </div>
-            </div>
+            <div class="gross-hint" id="grossHint">먼저 소득 유형을 선택하세요</div>
         </div>
     </section>
 
@@ -376,8 +409,9 @@
         <div class="display"><span id="resultPercent">100</span><span class="percent-sign">%</span></div>
         <div class="eligibility-list" id="eligibilityList"></div>
         <div class="disclaimer">
-            본 결과는 사용자가 입력한 <b>세후 금액</b>을 바탕으로 역산한 참고용 수치입니다.
-            정확한 부적격 여부 확인을 위해 반드시 아래 공식 채널의 모집공고문을 확인하시기 바랍니다.
+            본 결과는 <b>입력한 세전 연봉</b>을 도시근로자 월평균소득과 비교한 값입니다.
+            1~2인 가구 가산률, 자산 기준, 거주기간 등 공고별 추가 요건은 별도 확인이 필요하니
+            반드시 아래 공식 채널의 모집공고문을 확인하시기 바랍니다.
             <div class="official-links">
                 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 ↗</a>
                 <a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스 ↗</a>
@@ -434,7 +468,7 @@
                 <tr><th>5인 가구</th><td>9,326,985원</td></tr>
             </tbody>
         </table>
-        <p>2025년 3월부터 2026년 2월까지 모집공고에 적용되는 기준입니다. 청약 소득분위는 본인 가구의 월평균소득(세전)을 위 도시근로자 월평균소득으로 나눈 백분율로, 1인 가구는 +20%p, 2인 가구는 +10%p 가산률이 적용됩니다. 신혼부부 특별공급, 생애최초 특별공급, 신생아 특례, 공공분양은 각각 정해진 % 이하만 신청 가능합니다.</p>
+        <p>2025년 3월부터 2026년 2월까지 모집공고에 적용되는 기준입니다. 청약 소득분위는 본인 가구의 월평균소득(세전)을 위 도시근로자 월평균소득으로 나눈 백분율입니다. 신혼부부 특별공급, 생애최초 특별공급, 신생아 특례, 공공분양 일반공급은 각각 정해진 % 이하만 신청 가능하며, 1~2인 가구는 가산률·자산 기준 등 추가 요건이 별도로 적용됩니다.</p>
     </section>
 
     <!-- 7. FAQ (SEO + 리치 스니펫) -->
@@ -463,7 +497,7 @@
             </details>
             <details class="faq-item">
                 <summary>청약 소득은 세전 기준인가요, 세후 기준인가요?</summary>
-                <div class="faq-a">공식 청약 자격 심사는 세전(원천징수영수증상 총급여) 기준 소득을 사용합니다. 다만 본 계산기는 사용자 편의를 위해 실수령액(세후) 기준으로 입력할 수 있게 설계되어 있으며, 매월 통장에 들어온 금액과 연간 성과급을 합산해 추정 소득분위를 보여드립니다. 정확한 자격 판정은 반드시 청약 공고문 원문을 확인해주세요.</div>
+                <div class="faq-a">공식 청약 자격 심사는 <b>세전 총급여</b>(원천징수영수증 16번 칸) 또는 사업소득자의 <b>종합소득금액</b>(종합소득세 신고서)을 기준으로 합니다. 본 사이트도 사용자가 직접 정확한 세전 연봉을 입력하도록 설계해 청약 심사와 동일한 기준으로 분위를 산출합니다. 1년 미만 근무·휴직 등 환산이 필요한 경우는 가이드 페이지를 참고해 주세요.</div>
             </details>
         </div>
     </section>
@@ -487,7 +521,7 @@
         </div>
     </section>
 
-    <div class="footer-note">※ 2025년 통계청 발표 도시근로자 가구당 월평균소득 기준입니다. 1인 가구 +20%p, 2인 가구 +10%p 가산이 적용되며, 세후 입력값은 Tiered 환산률(1.16~1.28배)로 세전 변환 후 비교됩니다. 공고마다 실제 소득·자산 기준이 다를 수 있으니 공고문 원문을 반드시 확인하세요.</div>
+    <div class="footer-note">※ 2025년 통계청 발표 도시근로자 가구당 월평균소득 기준입니다. 청약 자격 심사는 세전 총급여(원천징수영수증 16번 칸) 또는 종합소득세 신고서의 종합소득금액을 기준으로 합니다. 공고마다 자산·거주기간·자녀가점 등 추가 기준이 다를 수 있으니 공고문 원문을 반드시 확인하세요.</div>
 
     <nav class="site-footer">
         <a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>·<a href="mailto:unspired100@gmail.com">문의</a>
@@ -519,29 +553,65 @@
      * 출처: 국세청 근로소득 간이세액조견표 + 4대보험 요율 (2025년)
      * 한계: 부양가족 수·연말정산·비과세 항목으로 ±3%p 오차 가능
      */
-    function netToGross(netMonthlyMan) {
-        let factor;
-        if (netMonthlyMan <= 400)        factor = 1.16;
-        else if (netMonthlyMan <= 700)   factor = 1.19;
-        else if (netMonthlyMan <= 1000)  factor = 1.23;
-        else                              factor = 1.28;
-        return Math.round(netMonthlyMan * factor);
-    }
+    // (구버전의 Tiered Net-to-Gross 환산과 1-2인 가산 로직은 제거됨.
+    //  사용자가 직접 정확한 세전 연봉을 입력하므로 환산 없이 비교.)
 
-    /**
-     * 1-2인 가구 소득기준 가산 (도시근로자 월평균소득 표가 1-2인 가구에 불리한 점 보정)
-     *   - 1인 가구: +20%p
-     *   - 2인 가구: +10%p
-     *   - 3인 이상: 가산 없음
-     * 적용 범위: 소득제한이 있는 모든 특별공급·공공 일반공급
-     * (민간 일반공급은 원래 소득제한 없음 → null 그대로)
-     */
-    function adjustLimit(baseLimit, familyCount) {
-        if (baseLimit === null) return null;
-        if (familyCount === 1) return baseLimit + 20;
-        if (familyCount === 2) return baseLimit + 10;
-        return baseLimit;
-    }
+    // ---------- 소득 유형별 서류 가이드 ----------
+    const TYPE_GUIDES = {
+        employee: {
+            title: '회사원 — 원천징수영수증',
+            rows: [
+                ['서류', '원천징수영수증 (근로소득)'],
+                ['어디서', '홈택스 또는 회사 인사팀'],
+                ['확인 칸', '16번 "총급여" = 청약 세전 연봉'],
+                ['1년 미만', '(총급여 ÷ 근무월수) × 12 환산'],
+            ],
+            hint: '원천징수영수증 16번 칸의 "총급여"를 입력하세요',
+            link: { href: '/guide/income-check.html', text: '회사원 자세한 가이드 →' },
+        },
+        business: {
+            title: '사업자 — 종합소득세 신고서',
+            rows: [
+                ['서류', '종합소득세 신고서 사본'],
+                ['어디서', '홈택스 → 신고/납부 → 종합소득세'],
+                ['확인 칸', '"종합소득금액" 또는 "사업소득금액"'],
+                ['미신고 시', '작년 신고분 사용'],
+            ],
+            hint: '종합소득세 신고서의 "종합소득금액"을 입력하세요',
+            link: { href: '/guide/business.html', text: '사업자 자세한 가이드 →' },
+        },
+        freelancer: {
+            title: '프리랜서 — 원천징수 + 종합소득세',
+            rows: [
+                ['서류', '종합소득세 신고서 + 원천징수영수증'],
+                ['확인 칸', '종합소득세 신고서의 "사업소득금액"'],
+                ['5월 신고 전', '작년분 + 올해 받은 금액 합산'],
+                ['3.3% 받은 곳', '연말까지 합산해서 신고'],
+            ],
+            hint: '종합소득세 신고서의 "사업소득금액"을 입력하세요',
+            link: { href: '/guide/freelancer.html', text: '프리랜서 자세한 가이드 →' },
+        },
+        mixed: {
+            title: '복합 소득 — 양쪽 서류 합산',
+            rows: [
+                ['회사+사업', '원천징수영수증 16번 + 종합소득금액 합산'],
+                ['회사+임대', '원천징수영수증 + 부동산임대소득 합산'],
+                ['투잡', '주된 직장 16번 + 부업 종합소득세 신고분'],
+            ],
+            hint: '근로 + 사업/임대 소득을 모두 합산해서 입력하세요',
+            link: { href: '/guide/edge-cases.html', text: '복합 소득 가이드 →' },
+        },
+        unemployed: {
+            title: '무직·구직 중',
+            rows: [
+                ['서류', '없음 (소득 0원)'],
+                ['미포함', '자녀 보육수당·부모 도움·기초생활급여'],
+                ['배우자만', '외벌이로 설정 후 배우자 소득 입력'],
+            ],
+            hint: '소득 0 (배우자만 있다면 외벌이로 전환)',
+            link: null,
+        },
+    };
 
     // 2024.03~ 개편 기준 소득요건 (%). null = 해당 특공 없음.
     const CRITERIA = {
@@ -556,11 +626,10 @@
     };
 
     let familyCount = 2;
-    let monthlyIncome = Math.round(incomeStd[2] / 10000); // 만원 (항상 월 단위로 저장)
-    let bonusAnnual = 0;          // 만원, 연간 성과급 (세후)
-    let currentPercent = 100;     // 마지막으로 계산된 소득분위 % (카드 렌더링에 사용)
+    let grossAnnualMan = 0;       // 만원, 가구 합산 세전 연봉 (사용자 직접 입력)
+    let currentPercent = 0;       // 마지막으로 계산된 소득분위 %
     let earners = 'dual';         // 'single' | 'dual'
-    let incomeMode = 'monthly';   // 'monthly' | 'annual'
+    let incomeType = null;        // 'employee' | 'business' | 'freelancer' | 'mixed' | 'unemployed'
     let activeRegion = 'all';
     let showExpired = false;
     let allAnnouncements = [];
@@ -597,11 +666,35 @@
         return { label: '마감', tone: 'expired', rank: 2, expired: true };
     }
 
-    // ---------- Slider top label ----------
-    function updateSliderTopLabel() {
-        const base = incomeMode === 'annual' ? '계약 연봉' : '최근 통장에 들어온 금액';
-        const suffix = familyCount >= 2 ? ' (합산)' : '';
-        document.getElementById('sliderTopLabel').textContent = base + suffix;
+    // ---------- 소득 유형 선택 ----------
+    function setIncomeType(type) {
+        incomeType = type;
+        document.querySelectorAll('#incomeTypeChips .chip').forEach(c =>
+            c.classList.toggle('active', c.dataset.type === type));
+
+        const g = TYPE_GUIDES[type];
+        const guideEl = document.getElementById('typeGuide');
+        if (!g) {
+            guideEl.style.display = 'none';
+            return;
+        }
+        const rowsHtml = g.rows.map(([k, v]) =>
+            `<div class="doc-row"><span class="k">${k}</span><span class="v">${v}</span></div>`
+        ).join('');
+        const linkHtml = g.link
+            ? `<a class="guide-link" href="${g.link.href}">${g.link.text}</a>`
+            : '';
+        guideEl.innerHTML = `<h4>${g.title}</h4>${rowsHtml}${linkHtml}`;
+        guideEl.style.display = 'block';
+
+        document.getElementById('grossHint').textContent = g.hint;
+
+        if (type === 'unemployed') {
+            grossAnnualMan = 0;
+            document.getElementById('grossInput').value = '';
+            recompute();
+            _scheduleRender();
+        }
     }
 
     // ---------- Family chip ----------
@@ -609,45 +702,11 @@
         familyCount = +n;
         document.querySelectorAll('#familyChips .chip').forEach(c =>
             c.classList.toggle('active', +c.dataset.family === familyCount));
-        updateSliderTopLabel();
-        setupSlider();
         recompute();
         if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
     }
 
-    // ---------- Income mode toggle ----------
-    function setIncomeMode(v) {
-        incomeMode = v;
-        document.querySelectorAll('#incomeSeg button').forEach(b =>
-            b.classList.toggle('active', b.dataset.mode === v));
-        updateSliderTopLabel();
-        setupSlider();
-        recompute();
-        if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
-    }
-
-    // ---------- Slider ----------
-    function setupSlider() {
-        const base = Math.round(incomeStd[familyCount] / 10000); // 월 만원
-        const unit = incomeMode === 'annual' ? 12 : 1;
-        const min  = Math.round(base * 0.5) * unit;
-        const max  = Math.round(base * 2.5) * unit;
-        const step = 10 * unit;
-        const slider = document.getElementById('incomeSlider');
-        slider.min  = min;
-        slider.max  = max;
-        slider.step = step;
-        monthlyIncome = base; // 평균으로 리셋 (월 단위 저장)
-        slider.value  = base * unit;
-        updateSliderTrack(slider);
-    }
-
-    function updateSliderTrack(slider) {
-        const min = +slider.min, max = +slider.max, val = +slider.value;
-        const pct = ((val - min) / (max - min)) * 100;
-        slider.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, var(--surface-2) ${pct}%, var(--surface-2) 100%)`;
-    }
-
+    // ---------- 세전 연봉 입력 ----------
     let _renderTimer = null;
     function _scheduleRender() {
         clearTimeout(_renderTimer);
@@ -656,10 +715,8 @@
         }, 120);
     }
 
-    function onSliderInput(e) {
-        const raw = +e.target.value;
-        monthlyIncome = incomeMode === 'annual' ? Math.round(raw / 12) : raw;
-        updateSliderTrack(e.target);
+    function onGrossInput(e) {
+        grossAnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
         recompute();
         _scheduleRender();
     }
@@ -676,53 +733,22 @@
 
     // ---------- Recompute (live) ----------
     function recompute() {
-        // 1) 성과급을 월 단위로 합산 (세후 기준)
-        const bonus월 = Math.round(bonusAnnual / 12);
-        const net월 = monthlyIncome + bonus월;
-
-        // 2) 세후 → 세전 환산 (Tiered 4구간)
-        const gross월 = netToGross(net월);
-
-        // 3) 도시근로자 월평균소득(세전) 대비 % 산출
-        const grossKrw = gross월 * 10000;
-        currentPercent = Math.round((grossKrw / incomeStd[familyCount]) * 100);
+        // 사용자가 직접 입력한 세전 연봉(가구 합산) → 월 세전 → 가구 100% 기준 대비 %
+        const grossMonthly = (grossAnnualMan * 10000) / 12;
+        currentPercent = grossAnnualMan > 0
+            ? Math.round((grossMonthly / incomeStd[familyCount]) * 100)
+            : 0;
         document.getElementById('resultPercent').textContent = currentPercent;
 
-        // 디버그 로그: 세후→세전 환산 과정 추적
-        console.log('[내집컷] 소득분위 계산', {
-            가구원수: familyCount,
-            세후월소득: net월 + '만원',
-            성과급_월환산: bonus월 + '만원',
-            세전_환산: gross월 + '만원',
-            가구_100기준: (incomeStd[familyCount] / 10000) + '만원',
-            결과_percent: currentPercent + '%',
-        });
-
-        // 금액 표시 (세후 태그 + 세전 환산 sub-label)
-        const amountText = incomeMode === 'annual'
-            ? `연봉 ${(monthlyIncome * 12).toLocaleString()}만원`
-            : `월 ${monthlyIncome.toLocaleString()}만원`;
-        document.getElementById('sliderAmount').innerHTML =
-            `${amountText}<small class="after-tax-tag">세후</small>`;
-
-        // 세전 환산 표시 (sub-label) — 신뢰감 강화
-        const grossSubLabelEl = document.getElementById('grossSubLabel');
-        if (grossSubLabelEl) {
-            const grossDisplay = incomeMode === 'annual'
-                ? `연봉 ${(gross월 * 12).toLocaleString()}만원`
-                : `월 ${gross월.toLocaleString()}만원`;
-            grossSubLabelEl.textContent = `↳ 세전 환산 약 ${grossDisplay} (예상)`;
-        }
-
         // 결과 카드: 민간 기준 고정 (공공은 각 공고 카드에서 판단)
-        // 1-2인 가구는 adjustLimit 으로 가산률 적용 (+20%p / +10%p)
+        // ※ 1-2인 가산률은 적용하지 않습니다. 사용자가 입력한 정확한 세전 연봉을 그대로 비교.
         const table = CRITERIA['private'][earners];
         const earnersLabel = earners === 'dual' ? '맞벌이' : '외벌이';
         const rows = [
-            { name: `신혼부부 ${earnersLabel}`, limit: adjustLimit(table.신혼부부, familyCount) },
-            { name: `생애최초 ${earnersLabel}`, limit: adjustLimit(table.생애최초, familyCount) },
-            { name: '일반공급', note: '소득기준 없음', limit: adjustLimit(table.일반공급, familyCount) },
-            { name: `신생아 특례 ${earnersLabel}`, limit: adjustLimit(table.신생아특례, familyCount) },
+            { name: `신혼부부 ${earnersLabel}`, limit: table.신혼부부 },
+            { name: `생애최초 ${earnersLabel}`, limit: table.생애최초 },
+            { name: '일반공급', note: '소득기준 없음', limit: table.일반공급 },
+            { name: `신생아 특례 ${earnersLabel}`, limit: table.신생아특례 },
         ];
 
         const html = rows.map(r => {
@@ -763,12 +789,11 @@
     function buildEligibilityInline(item) {
         const type = item.isPublic ? 'public' : 'private';
         const table = CRITERIA[type][earners];
-        // 1-2인 가구 가산률 적용 (+20%p / +10%p)
         const checks = [
-            { name: '신혼부부',   limit: adjustLimit(table.신혼부부,   familyCount) },
-            { name: '생애최초',   limit: adjustLimit(table.생애최초,   familyCount) },
-            { name: '신생아특례', limit: adjustLimit(table.신생아특례, familyCount) },
-            { name: '일반공급',   limit: adjustLimit(table.일반공급,   familyCount) },
+            { name: '신혼부부',   limit: table.신혼부부 },
+            { name: '생애최초',   limit: table.생애최초 },
+            { name: '신생아특례', limit: table.신생아특례 },
+            { name: '일반공급',   limit: table.일반공급 },
         ];
         return checks.map(({ name, limit }) => {
             if (limit === null) {
@@ -910,6 +935,10 @@
 
     // ---------- Init ----------
     async function init() {
+        // 소득 유형 chip
+        document.querySelectorAll('#incomeTypeChips .chip').forEach(c => {
+            c.addEventListener('click', () => setIncomeType(c.dataset.type));
+        });
         // 가구원 chip
         document.querySelectorAll('#familyChips .chip').forEach(c => {
             c.addEventListener('click', () => setFamily(c.dataset.family));
@@ -918,23 +947,12 @@
         document.querySelectorAll('#earnersSeg button').forEach(b => {
             b.addEventListener('click', () => setEarners(b.dataset.earners));
         });
-        // 월소득/연봉 seg
-        document.querySelectorAll('#incomeSeg button').forEach(b => {
-            b.addEventListener('click', () => setIncomeMode(b.dataset.mode));
-        });
         // 지역 chip
         document.querySelectorAll('#regionChips .chip').forEach(c => {
             c.addEventListener('click', () => setRegion(c.dataset.region));
         });
-        // 슬라이더
-        const slider = document.getElementById('incomeSlider');
-        slider.addEventListener('input', onSliderInput);
-        // 성과급 입력
-        document.getElementById('bonusInput').addEventListener('input', e => {
-            bonusAnnual = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
-            recompute();
-            _scheduleRender();
-        });
+        // 세전 연봉 입력
+        document.getElementById('grossInput').addEventListener('input', onGrossInput);
         // 마감 포함 토글
         document.getElementById('showExpiredToggle').addEventListener('change', e => {
             showExpired = e.target.checked;
@@ -942,8 +960,6 @@
             renderAll();
         });
 
-        updateSliderTopLabel();
-        setupSlider();
         recompute();
 
         // 병렬 fetch (criteria + 공고)
