@@ -280,6 +280,8 @@
         .type-guide .doc-row { display: flex; gap: 8px; margin-bottom: 6px; }
         .type-guide .doc-row .k { color: var(--text-3); flex-shrink: 0; min-width: 68px; }
         .type-guide .doc-row .v { color: var(--text); }
+        .type-guide .doc-row .v a { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .type-guide .doc-row .v a:hover { text-decoration: underline; }
         .type-guide a.guide-link {
             display: inline-block; margin-top: 10px; color: var(--accent);
             font-size: 14px; font-weight: 600; text-decoration: none;
@@ -401,7 +403,7 @@
         <div class="label">구분</div>
         <div class="toggle-groups" style="margin-bottom: 14px;">
             <div class="seg" id="earnersSeg">
-                <button type="button" data-earners="single">1인 또는 외벌이</button>
+                <button type="button" data-earners="single" id="singleEarnerBtn">외벌이</button>
                 <button type="button" class="active" data-earners="dual">맞벌이</button>
             </div>
         </div>
@@ -615,13 +617,17 @@
 
     // ---------- 가구 소득 유형별 서류 가이드 ----------
     // 출처: 국토교통부 2024 주택청약 FAQ (Q294, Q318, Q350)
+    const HT = 'https://www.hometax.go.kr';      // 홈택스 메인 (딥링크 불안정)
+    const GOV24 = 'https://www.gov.kr';          // 정부24 (소득금액증명 발급 가능)
     const TYPE_GUIDES = {
         employee: {
             title: '근로소득자 — 가구 모두 직장인',
             rows: [
-                ['서류', '근로소득 원천징수영수증 (홈택스 또는 회사 발급)'],
+                ['서류', '근로소득 원천징수영수증'],
+                ['발급 ①', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a> &rsaquo; My홈택스 &rsaquo; 연말정산·지급명세서 &rsaquo; 지급명세서 등 제출내역`],
+                ['발급 ②', '회사 인사팀 요청'],
                 ['→ 확인 칸', '<b>21번 항목 "총급여액"</b>'],
-                ['대체 서류', '소득금액증명원의 "근로소득(수입금액)"'],
+                ['대체 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 민원증명 ↗</a>의 소득금액증명 → "근로소득(수입금액)"`],
                 ['맞벌이', '부부 각자 21번 총급여액을 <b>합산</b>해서 입력'],
             ],
             inputLabel: '21번 총급여액 (가구 합산, 연)',
@@ -631,10 +637,12 @@
         business: {
             title: '사업소득자 — 가구 모두 사업/프리랜서',
             rows: [
-                ['서류', '소득금액증명원 (홈택스 → 민원증명)'],
+                ['서류', '소득금액증명원'],
+                ['발급 ①', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a> &rsaquo; 민원증명 &rsaquo; 소득·지출증명 &rsaquo; 소득금액증명`],
+                ['발급 ②', `<a href="${GOV24}" target="_blank" rel="noopener">정부24 ↗</a>에서 "소득금액증명" 검색`],
                 ['→ 확인 칸', '<b>"사업소득금액"</b>'],
                 ['프리랜서 3.3%', '종합소득세 신고분 = 소득금액증명원 사업소득금액'],
-                ['공동사업', '본인 지분만 (인별 과세 → 본인 소득금액증명 사용)'],
+                ['공동사업', '본인 지분만 (인별 과세 → 본인 소득금액증명)'],
                 ['미신고 시', '전전년도 소득금액증명원 사용'],
             ],
             inputLabel: '사업소득금액 (가구 합산, 연)',
@@ -644,11 +652,9 @@
         mixed: {
             title: '복합 — 가구 내 근로 + 사업 혼합',
             rows: [
-                ['서류 ①', '근로소득 원천징수영수증 (근로 있는 분)'],
-                ['→ 확인 칸', '<b>21번 "총급여액"</b>'],
-                ['서류 ②', '소득금액증명원 (사업 있는 분)'],
-                ['→ 확인 칸', '<b>"사업소득금액"</b>'],
-                ['합산 공식', '총급여액 + 사업소득금액 = 가구 연소득'],
+                ['근로 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a>의 근로소득 원천징수영수증 &rsaquo; <b>21번 총급여액</b>`],
+                ['사업 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 민원증명 ↗</a>의 소득금액증명 &rsaquo; <b>사업소득금액</b>`],
+                ['합산 공식', '21번 총급여액 + 사업소득금액 = 가구 연소득'],
                 ['주의', '복합 케이스는 공급 주체에 반드시 더블체크'],
             ],
             inputLabel: '총급여 + 사업소득 (가구 합산, 연)',
@@ -756,25 +762,26 @@
         if (useSplit) {
             single.style.display = 'none';
             split.style.display  = '';
-            // 라벨 세팅
+            // 라벨 통일: 항상 "구성원 1" / "구성원 2"
+            document.querySelector('#member1Label .member-tag').textContent = '구성원 1';
+            document.querySelector('#member2Label .member-tag').textContent = '구성원 2';
             if (isMixed) {
-                // 복합: 근로 / 사업
-                document.querySelector('#member1Label .member-tag').textContent = '근로소득';
-                document.getElementById('member1LabelText').textContent = ' 21번 총급여액';
-                document.querySelector('#member2Label .member-tag').textContent = '사업소득';
-                document.getElementById('member2LabelText').textContent = ' 소득금액증명 사업소득금액';
+                // 복합: 구성원 1 = 근로 / 구성원 2 = 사업
+                document.getElementById('member1LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">근로 — 21번 총급여액</span>';
+                document.getElementById('member2LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">사업 — 소득금액증명 사업소득금액</span>';
                 document.getElementById('splitHint').textContent
-                    = '근로 + 사업 두 가지 모두 합산해서 비교합니다';
+                    = '한 명이 근로+사업 겸업인 경우도 동일하게 분리 입력하세요';
             } else {
-                // 근로 or 사업 + 맞벌이: 구성원 1 / 구성원 2
-                document.querySelector('#member1Label .member-tag').textContent = '구성원 1';
-                document.getElementById('member1LabelText').textContent
-                    = ' ' + (g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', ''));
-                document.querySelector('#member2Label .member-tag').textContent = '구성원 2';
-                document.getElementById('member2LabelText').textContent
-                    = ' ' + (g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', ''));
+                // 근로 or 사업 + 맞벌이: 같은 항목 각자 입력
+                const docLabel = g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', '');
+                document.getElementById('member1LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">' + docLabel + '</span>';
+                document.getElementById('member2LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">' + docLabel + '</span>';
                 document.getElementById('splitHint').textContent
-                    = '구성원 1 + 구성원 2의 ' + g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', '') + ' 각각 입력';
+                    = '구성원 1 + 구성원 2의 ' + docLabel + ' 각각 입력';
             }
             document.getElementById('member1Input').value = '';
             document.getElementById('member2Input').value = '';
@@ -795,7 +802,7 @@
 
         // 1인 가구는 맞벌이가 불가능 → 강제로 single로 설정 + 맞벌이 버튼 비활성화
         const dualBtn = document.querySelector('#earnersSeg button[data-earners="dual"]');
-        const singleBtn = document.querySelector('#earnersSeg button[data-earners="single"]');
+        const singleBtn = document.getElementById('singleEarnerBtn');
         if (familyCount === 1) {
             if (earners !== 'single') {
                 earners = 'single';
@@ -803,8 +810,10 @@
                 dualBtn.classList.remove('active');
             }
             dualBtn.disabled = true;
+            singleBtn.textContent = '1인 또는 외벌이';  // 1인일 땐 명시
         } else {
             dualBtn.disabled = false;
+            singleBtn.textContent = '외벌이';            // 2인+ 일 땐 간결하게
         }
 
         updateInputLayout();
