@@ -69,23 +69,23 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
             margin-bottom: 12px;
         }
-        .label { font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 10px; letter-spacing: -0.2px; }
-        .caption { font-size: 12px; color: var(--text-3); letter-spacing: -0.1px; }
+        .label { font-size: 15px; font-weight: 600; color: var(--text-2); margin-bottom: 10px; letter-spacing: -0.2px; }
+        .caption { font-size: 14px; color: var(--text-3); letter-spacing: -0.1px; }
 
         /* Result card (compact) */
         .result-card { padding: 16px 20px 10px; }
-        .result-card .display { font-size: 44px; font-weight: 700; color: var(--text); letter-spacing: -2px; line-height: 1; margin: 2px 0 14px -1px; }
-        .result-card .display .percent-sign { font-size: 28px; color: var(--text-2); margin-left: 2px; letter-spacing: -0.8px; }
+        .result-card .display { font-size: 50px; font-weight: 700; color: var(--text); letter-spacing: -2px; line-height: 1; margin: 2px 0 14px -1px; }
+        .result-card .display .percent-sign { font-size: 32px; color: var(--text-2); margin-left: 2px; letter-spacing: -0.8px; }
         .eligibility-list { display: flex; flex-direction: column; }
-        .eligibility-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-top: 1px solid var(--border); min-height: 32px; }
-        .eligibility-row .name { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
-        .eligibility-row .name small { color: var(--text-3); font-size: 11px; font-weight: 500; margin-left: 6px; letter-spacing: 0; }
+        .eligibility-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--border); min-height: 36px; }
+        .eligibility-row .name { font-size: 16px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+        .eligibility-row .name small { color: var(--text-3); font-size: 13px; font-weight: 500; margin-left: 6px; letter-spacing: 0; }
         .eligibility-row.na .name, .eligibility-row.na .name small { color: var(--text-3); }
-        .eligibility-row .mark { font-size: 13px; font-weight: 600; letter-spacing: -0.2px; }
+        .eligibility-row .mark { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
         .mark.ok { color: var(--success); }
         .mark.ng { color: var(--text-3); }
         .mark.na { color: var(--text-3); font-weight: 500; }
-        .footer-note { padding: 6px 4px 0; font-size: 11px; color: var(--text-3); line-height: 1.55; letter-spacing: -0.1px; }
+        .footer-note { padding: 6px 4px 0; font-size: 13px; color: var(--text-3); line-height: 1.6; letter-spacing: -0.1px; }
 
         /* 광고 영역 (Kakao AdFit) */
         .adfit-wrap { display: flex; justify-content: center; margin: 12px 0; }
@@ -127,9 +127,9 @@
         .seg button {
             border: none;
             background: transparent;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 500;
             color: var(--text-2);
             cursor: pointer;
@@ -138,17 +138,18 @@
             -webkit-tap-highlight-color: transparent;
             transition: all 0.15s ease;
         }
+        .seg button:disabled { opacity: 0.35; cursor: not-allowed; }
         .seg button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.08); font-weight: 600; }
 
         /* Chips (family + region) */
         .chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
         .chip {
-            padding: 8px 14px;
+            padding: 9px 15px;
             border-radius: 999px;
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text);
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.15s ease;
@@ -262,26 +263,26 @@
 
         /* 단계 태그 */
         .step-tag {
-            display: inline-block; padding: 3px 10px; margin-bottom: 12px;
+            display: inline-block; padding: 4px 12px; margin-bottom: 12px;
             background: var(--accent); color: white; border-radius: 999px;
-            font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
         }
-        .label-hint { font-weight: 400; color: var(--text-3); margin-left: 4px; }
+        .label-hint { font-weight: 400; color: var(--text-3); margin-left: 4px; font-size: 13px; }
 
         /* 소득 유형 가이드 카드 */
         .type-row { gap: 6px; }
         .type-guide {
             background: var(--surface-2); border-radius: var(--radius-md);
-            padding: 14px 16px; margin-bottom: 8px; font-size: 13px;
-            color: var(--text-2); line-height: 1.7; letter-spacing: -0.2px;
+            padding: 16px 18px; margin-bottom: 8px; font-size: 15px;
+            color: var(--text-2); line-height: 1.75; letter-spacing: -0.2px;
         }
-        .type-guide h4 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 8px; letter-spacing: -0.2px; }
-        .type-guide .doc-row { display: flex; gap: 6px; margin-bottom: 5px; }
-        .type-guide .doc-row .k { color: var(--text-3); flex-shrink: 0; min-width: 60px; }
+        .type-guide h4 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 10px; letter-spacing: -0.2px; }
+        .type-guide .doc-row { display: flex; gap: 8px; margin-bottom: 6px; }
+        .type-guide .doc-row .k { color: var(--text-3); flex-shrink: 0; min-width: 68px; }
         .type-guide .doc-row .v { color: var(--text); }
         .type-guide a.guide-link {
-            display: inline-block; margin-top: 8px; color: var(--accent);
-            font-size: 12px; font-weight: 600; text-decoration: none;
+            display: inline-block; margin-top: 10px; color: var(--accent);
+            font-size: 14px; font-weight: 600; text-decoration: none;
         }
         .type-guide a.guide-link:hover { text-decoration: underline; }
 
@@ -290,33 +291,47 @@
         .gross-input-section .label { display: block; margin-bottom: 8px; }
         .gross-input-wrap {
             display: flex; align-items: center; gap: 8px;
-            padding: 12px 14px; background: var(--surface-2);
+            padding: 13px 15px; background: var(--surface-2);
             border-radius: var(--radius-md); border: 1px solid transparent;
             transition: border-color 0.15s ease, background 0.15s ease;
         }
         .gross-input-wrap:focus-within { background: var(--surface); border-color: var(--accent); }
         .gross-input {
             flex: 1; border: none; background: transparent; outline: none;
-            font-family: inherit; font-size: 24px; font-weight: 700;
+            font-family: inherit; font-size: 26px; font-weight: 700;
             color: var(--text); text-align: right; letter-spacing: -0.5px;
-            font-variant-numeric: tabular-nums;
+            font-variant-numeric: tabular-nums; min-width: 0;
         }
         .gross-input::placeholder { color: var(--text-3); font-weight: 500; }
-        .gross-unit { font-size: 13px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
-        .gross-hint { font-size: 11px; color: var(--text-3); margin-top: 6px; text-align: center; letter-spacing: -0.2px; }
+        .gross-unit { font-size: 14px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
+        .gross-hint { font-size: 13px; color: var(--text-3); margin-top: 8px; text-align: center; letter-spacing: -0.2px; line-height: 1.5; }
+
+        /* 구성원별 입력 (맞벌이 또는 복합 케이스) */
+        .member-input { margin-bottom: 12px; }
+        .member-input:last-child { margin-bottom: 0; }
+        .member-input-label {
+            display: block; font-size: 14px; font-weight: 600;
+            color: var(--text-2); margin-bottom: 6px; letter-spacing: -0.2px;
+        }
+        .member-input-label .member-tag {
+            display: inline-block; padding: 3px 9px; margin-right: 8px;
+            background: var(--accent); color: white; border-radius: 999px;
+            font-size: 11px; font-weight: 700;
+        }
+        .member-input-label .member-tag.alt { background: #FF9500; }
 
         /* 결과 카드 면책 문구 */
         .disclaimer {
-            margin-top: 12px; padding: 11px 13px; background: var(--surface-2);
-            border-radius: var(--radius-sm); font-size: 11px; color: var(--text-2);
-            line-height: 1.6; letter-spacing: -0.2px;
+            margin-top: 14px; padding: 13px 15px; background: var(--surface-2);
+            border-radius: var(--radius-sm); font-size: 13px; color: var(--text-2);
+            line-height: 1.7; letter-spacing: -0.2px;
         }
         .disclaimer b { color: var(--text); font-weight: 600; }
-        .official-links { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .official-links { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
         .official-links a {
-            display: inline-flex; align-items: center; padding: 5px 10px;
+            display: inline-flex; align-items: center; padding: 6px 12px;
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: 6px; font-size: 11px; font-weight: 600;
+            border-radius: 7px; font-size: 13px; font-weight: 600;
             color: var(--accent); text-decoration: none; letter-spacing: -0.2px;
         }
         .official-links a:hover { background: #F0F8FF; }
@@ -395,7 +410,7 @@
         <div class="chip-row type-row" id="typeChips">
             <button type="button" class="chip" data-type="employee">근로소득자</button>
             <button type="button" class="chip" data-type="business">사업소득자</button>
-            <button type="button" class="chip" data-type="mixed">복합</button>
+            <button type="button" class="chip" data-type="mixed">복합 : 근로 + 사업</button>
         </div>
     </section>
 
@@ -406,13 +421,37 @@
         <!-- 유형별 서류 가이드 -->
         <div class="type-guide" id="typeGuide" style="display:none;"></div>
 
-        <div class="gross-input-section">
+        <!-- 단일 입력 (외벌이·근로/사업) -->
+        <div class="gross-input-section" id="singleInputSection">
             <label class="label" for="grossInput" id="grossInputLabel">가구 합산 연소득</label>
             <div class="gross-input-wrap">
                 <input type="number" id="grossInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
                 <span class="gross-unit">만원 / 연</span>
             </div>
             <div class="gross-hint" id="grossHint">먼저 STEP 1의 가구 소득 유형을 선택하세요</div>
+        </div>
+
+        <!-- 분리 입력 (맞벌이 또는 복합) -->
+        <div class="gross-input-section" id="splitInputSection" style="display:none;">
+            <div class="member-input">
+                <label class="member-input-label" for="member1Input" id="member1Label">
+                    <span class="member-tag">구성원 1</span><span id="member1LabelText">금액</span>
+                </label>
+                <div class="gross-input-wrap">
+                    <input type="number" id="member1Input" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                    <span class="gross-unit">만원 / 연</span>
+                </div>
+            </div>
+            <div class="member-input">
+                <label class="member-input-label" for="member2Input" id="member2Label">
+                    <span class="member-tag alt">구성원 2</span><span id="member2LabelText">금액</span>
+                </label>
+                <div class="gross-input-wrap">
+                    <input type="number" id="member2Input" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                    <span class="gross-unit">만원 / 연</span>
+                </div>
+            </div>
+            <div class="gross-hint" id="splitHint"></div>
         </div>
     </section>
 
@@ -633,7 +672,9 @@
     let familyCount = 2;
     let earners = 'dual';         // 'single' | 'dual'
     let householdType = null;     // 'employee' | 'business' | 'mixed'
-    let householdAnnualMan = 0;   // 가구 합산 연소득 (만원)
+    let householdAnnualMan = 0;   // 단일 입력 케이스 (만원)
+    let member1AnnualMan = 0;     // 분리 입력 — 구성원 1 (또는 근로)
+    let member2AnnualMan = 0;     // 분리 입력 — 구성원 2 (또는 사업)
     let currentPercent = 0;
     let activeRegion = 'all';
     let showExpired = false;
@@ -675,6 +716,8 @@
     function setHouseholdType(type) {
         householdType = type;
         householdAnnualMan = 0;
+        member1AnnualMan = 0;
+        member2AnnualMan = 0;
         document.querySelectorAll('#typeChips .chip').forEach(c =>
             c.classList.toggle('active', c.dataset.type === type));
 
@@ -689,12 +732,59 @@
         guideEl.innerHTML = `<h4>${g.title}</h4>${rowsHtml}${linkHtml}`;
         guideEl.style.display = 'block';
 
-        document.getElementById('grossInputLabel').textContent = g.inputLabel;
-        document.getElementById('grossHint').textContent = g.hint;
-        document.getElementById('grossInput').value = '';
-
+        // 단일/분리 입력 토글
+        updateInputLayout();
         recompute();
         _scheduleRender();
+    }
+
+    // ---------- 단일 vs 분리 입력 레이아웃 결정 ----------
+    function updateInputLayout() {
+        if (!householdType) return;
+
+        const single = document.getElementById('singleInputSection');
+        const split  = document.getElementById('splitInputSection');
+        const g = TYPE_GUIDES[householdType];
+
+        // 분리 입력 조건:
+        //   1) 복합: 항상 (근로 칸 + 사업 칸)
+        //   2) 근로 or 사업 + 맞벌이: 구성원 1 / 구성원 2 분리
+        const isMixed = householdType === 'mixed';
+        const isDualEmployee = (householdType !== 'mixed') && earners === 'dual' && familyCount >= 2;
+        const useSplit = isMixed || isDualEmployee;
+
+        if (useSplit) {
+            single.style.display = 'none';
+            split.style.display  = '';
+            // 라벨 세팅
+            if (isMixed) {
+                // 복합: 근로 / 사업
+                document.querySelector('#member1Label .member-tag').textContent = '근로소득';
+                document.getElementById('member1LabelText').textContent = ' 21번 총급여액';
+                document.querySelector('#member2Label .member-tag').textContent = '사업소득';
+                document.getElementById('member2LabelText').textContent = ' 소득금액증명 사업소득금액';
+                document.getElementById('splitHint').textContent
+                    = '근로 + 사업 두 가지 모두 합산해서 비교합니다';
+            } else {
+                // 근로 or 사업 + 맞벌이: 구성원 1 / 구성원 2
+                document.querySelector('#member1Label .member-tag').textContent = '구성원 1';
+                document.getElementById('member1LabelText').textContent
+                    = ' ' + (g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', ''));
+                document.querySelector('#member2Label .member-tag').textContent = '구성원 2';
+                document.getElementById('member2LabelText').textContent
+                    = ' ' + (g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', ''));
+                document.getElementById('splitHint').textContent
+                    = '구성원 1 + 구성원 2의 ' + g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', '') + ' 각각 입력';
+            }
+            document.getElementById('member1Input').value = '';
+            document.getElementById('member2Input').value = '';
+        } else {
+            single.style.display = '';
+            split.style.display  = 'none';
+            document.getElementById('grossInputLabel').textContent = g.inputLabel;
+            document.getElementById('grossHint').textContent = g.hint;
+            document.getElementById('grossInput').value = '';
+        }
     }
 
     // ---------- Family chip ----------
@@ -702,6 +792,22 @@
         familyCount = +n;
         document.querySelectorAll('#familyChips .chip').forEach(c =>
             c.classList.toggle('active', +c.dataset.family === familyCount));
+
+        // 1인 가구는 맞벌이가 불가능 → 강제로 single로 설정 + 맞벌이 버튼 비활성화
+        const dualBtn = document.querySelector('#earnersSeg button[data-earners="dual"]');
+        const singleBtn = document.querySelector('#earnersSeg button[data-earners="single"]');
+        if (familyCount === 1) {
+            if (earners !== 'single') {
+                earners = 'single';
+                singleBtn.classList.add('active');
+                dualBtn.classList.remove('active');
+            }
+            dualBtn.disabled = true;
+        } else {
+            dualBtn.disabled = false;
+        }
+
+        updateInputLayout();
         recompute();
         if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
     }
@@ -720,12 +826,25 @@
         recompute();
         _scheduleRender();
     }
+    function onMember1Input(e) {
+        member1AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+        _scheduleRender();
+    }
+    function onMember2Input(e) {
+        member2AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+        _scheduleRender();
+    }
 
     // ---------- Toggles (earners) ----------
     function setEarners(v) {
+        // 1인 가구일 땐 맞벌이 선택 무시
+        if (familyCount === 1 && v === 'dual') return;
         earners = v;
         document.querySelectorAll('#earnersSeg button').forEach(b =>
             b.classList.toggle('active', b.dataset.earners === v));
+        updateInputLayout();
         recompute();
         renderHot();
         renderAll();
@@ -733,9 +852,16 @@
 
     // ---------- Recompute (live) ----------
     function recompute() {
-        // 가구 합산 연소득 → 월 평균 → 가구 100% 기준 대비 %
-        const grossMonthly = (householdAnnualMan * 10000) / 12;
-        currentPercent = householdAnnualMan > 0
+        // 단일/분리 입력 자동 판별 후 가구 합산
+        const isMixed = householdType === 'mixed';
+        const isDualSplit = (householdType !== 'mixed') && earners === 'dual' && familyCount >= 2;
+        const useSplit = isMixed || isDualSplit;
+        const totalMan = useSplit
+            ? (member1AnnualMan + member2AnnualMan)
+            : householdAnnualMan;
+
+        const grossMonthly = (totalMan * 10000) / 12;
+        currentPercent = totalMan > 0
             ? Math.round((grossMonthly / incomeStd[familyCount]) * 100)
             : 0;
         document.getElementById('resultPercent').textContent = currentPercent;
@@ -947,8 +1073,10 @@
         document.querySelectorAll('#typeChips .chip').forEach(c => {
             c.addEventListener('click', () => setHouseholdType(c.dataset.type));
         });
-        // 가구 합산 소득 입력
+        // 가구 합산 소득 입력 (단일 + 분리 둘 다)
         document.getElementById('grossInput').addEventListener('input', onGrossInput);
+        document.getElementById('member1Input').addEventListener('input', onMember1Input);
+        document.getElementById('member2Input').addEventListener('input', onMember2Input);
         // 지역 chip
         document.querySelectorAll('#regionChips .chip').forEach(c => {
             c.addEventListener('click', () => setRegion(c.dataset.region));
