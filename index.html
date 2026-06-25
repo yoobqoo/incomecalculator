@@ -90,21 +90,6 @@
         /* 광고 영역 (Kakao AdFit) */
         .adfit-wrap { display: flex; justify-content: center; margin: 12px 0; }
 
-        /* 공고 더보기/접기 버튼 */
-        .expand-btn {
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            width: 100%; margin-top: 10px; padding: 12px;
-            background: var(--surface-2); border: 1px solid var(--border);
-            border-radius: var(--radius-md); color: var(--text);
-            font-size: 13px; font-weight: 600; letter-spacing: -0.2px;
-            font-family: inherit; cursor: pointer;
-            transition: background 0.12s ease, color 0.12s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .expand-btn:hover { background: #EFEFF2; color: var(--accent); }
-        .expand-btn .chev { font-size: 10px; color: var(--text-2); }
-        .expand-btn.collapse { color: var(--text-2); }
-
         /* Guide grid section */
         .guide-grid { display: grid; gap: 8px; }
         .guide-grid a {
@@ -493,24 +478,6 @@
         </div>
     </section>
 
-    <!-- 5. All Announcements -->
-    <section class="card">
-        <div class="section-head">
-            <div class="label">진행 중인 공고</div>
-            <label class="toggle"><input type="checkbox" id="showExpiredToggle"> 마감 포함</label>
-        </div>
-        <div class="chip-row" id="regionChips" style="margin-bottom: 12px;">
-            <button type="button" class="chip active" data-region="all">전체</button>
-            <button type="button" class="chip" data-region="seoul">서울</button>
-            <button type="button" class="chip" data-region="gyeonggi">경기</button>
-            <button type="button" class="chip" data-region="other">이외</button>
-        </div>
-        <div class="caption" id="allCount" style="margin-bottom: 10px;"></div>
-        <div id="allList" class="announcement-list">
-            <div class="loading"><span class="spinner"></span>불러오는 중...</div>
-        </div>
-    </section>
-
     <!-- 6. 도시근로자 월평균소득 기준표 (SEO) -->
     <section class="card seo-section">
         <h2>2025년 도시근로자 월평균소득 (100% 기준)</h2>
@@ -690,12 +657,8 @@
     let member1AnnualMan = 0;     // 분리 입력 — 구성원 1 (또는 근로)
     let member2AnnualMan = 0;     // 분리 입력 — 구성원 2 (또는 사업)
     let currentPercent = 0;
-    let activeRegion = 'all';
-    let showExpired = false;
     let allAnnouncements = [];
     let criteria = { announcements: {} };
-    let allExpanded = false;          // 진행 중인 공고 펼침 상태
-    const ALL_PREVIEW_COUNT = 5;      // 기본 노출 개수
 
     // ---------- Date utilities ----------
     function parseYmd(s) {
@@ -826,7 +789,7 @@
 
         updateInputLayout();
         recompute();
-        if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
+        if (allAnnouncements.length > 0) renderHot();
     }
 
     // ---------- 가구 합산 소득 입력 핸들러 ----------
@@ -834,7 +797,7 @@
     function _scheduleRender() {
         clearTimeout(_renderTimer);
         _renderTimer = setTimeout(() => {
-            if (allAnnouncements.length > 0) { renderHot(); renderAll(); }
+            if (allAnnouncements.length > 0) renderHot();
         }, 120);
     }
 
@@ -864,7 +827,6 @@
         updateInputLayout();
         recompute();
         renderHot();
-        renderAll();
     }
 
     // ---------- Recompute (live) ----------
@@ -909,23 +871,6 @@
             </div>`;
         }).join('');
         document.getElementById('eligibilityList').innerHTML = html;
-    }
-
-    // ---------- Region ----------
-    function setRegion(r) {
-        activeRegion = r;
-        document.querySelectorAll('#regionChips .chip').forEach(c =>
-            c.classList.toggle('active', c.dataset.region === r));
-        allExpanded = false;   // 지역 변경 시 펼침 상태 리셋
-        renderAll();
-    }
-
-    function filterByRegion(list, region) {
-        if (region === 'all') return list;
-        if (region === 'seoul') return list.filter(a => a.region === '서울');
-        if (region === 'gyeonggi') return list.filter(a => a.region === '경기');
-        if (region === 'other') return list.filter(a => a.region !== '서울' && a.region !== '경기');
-        return list;
     }
 
     // ---------- Announcement rendering ----------
@@ -995,58 +940,7 @@
         el.innerHTML = hot.map(announcementItem).join('');
     }
 
-    function renderAll() {
-        let list = allAnnouncements.slice();
-        if (!showExpired) {
-            list = list.filter(a => !statusFor(a.applicationStart, a.applicationEnd).expired);
-        }
-        list = filterByRegion(list, activeRegion);
-        // 정렬: 청약중 → D-n 오름차순 → 마감/미정
-        list.sort((a, b) => {
-            const sa = statusFor(a.applicationStart, a.applicationEnd);
-            const sb = statusFor(b.applicationStart, b.applicationEnd);
-            if (sa.rank !== sb.rank) return sa.rank - sb.rank;
-            const ea = parseYmd(a.applicationEnd), eb = parseYmd(b.applicationEnd);
-            if (ea && eb) return ea - eb;
-            return 0;
-        });
-
-        const el = document.getElementById('allList');
-        const count = document.getElementById('allCount');
-        if (list.length === 0) {
-            el.innerHTML = '<div class="empty">조건에 맞는 공고가 없습니다.</div>';
-            count.textContent = '';
-            return;
-        }
-        count.textContent = `총 ${list.length}개`;
-
-        // 5개 초과 시 미펼침 상태면 잘라서 보여주고 [더보기] 버튼 추가
-        const isCollapsed = !allExpanded && list.length > ALL_PREVIEW_COUNT;
-        const displayList = isCollapsed ? list.slice(0, ALL_PREVIEW_COUNT) : list;
-        const cardsHtml = displayList.map(announcementItem).join('');
-
-        let toggleHtml = '';
-        if (list.length > ALL_PREVIEW_COUNT) {
-            const remaining = list.length - ALL_PREVIEW_COUNT;
-            toggleHtml = isCollapsed
-                ? `<button type="button" class="expand-btn" id="expandBtn">+${remaining}개 더 보기 <span class="chev">▾</span></button>`
-                : `<button type="button" class="expand-btn collapse" id="expandBtn">접기 <span class="chev">▴</span></button>`;
-        }
-        el.innerHTML = cardsHtml + toggleHtml;
-
-        // 버튼 이벤트 바인딩
-        const btn = document.getElementById('expandBtn');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                allExpanded = !allExpanded;
-                renderAll();
-                // 접을 때는 목록 상단으로 스크롤
-                if (!allExpanded) {
-                    document.getElementById('allList').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
-    }
+    // renderAll() 제거됨 — "진행 중인 공고" 섹션 폐기에 따라 (인기 청약만 유지)
 
     // ---------- Data fetching ----------
     async function fetchCriteria() {
@@ -1072,7 +966,6 @@
         } catch (e) {
             console.error('fetchAnnouncements error:', e);
             document.getElementById('hotList').innerHTML = '<div class="empty">공고를 불러올 수 없습니다.</div>';
-            document.getElementById('allList').innerHTML = '<div class="empty">공고를 불러올 수 없습니다.</div>';
         }
     }
 
@@ -1094,23 +987,12 @@
         document.getElementById('grossInput').addEventListener('input', onGrossInput);
         document.getElementById('member1Input').addEventListener('input', onMember1Input);
         document.getElementById('member2Input').addEventListener('input', onMember2Input);
-        // 지역 chip
-        document.querySelectorAll('#regionChips .chip').forEach(c => {
-            c.addEventListener('click', () => setRegion(c.dataset.region));
-        });
-        // 마감 포함 토글
-        document.getElementById('showExpiredToggle').addEventListener('change', e => {
-            showExpired = e.target.checked;
-            allExpanded = false;
-            renderAll();
-        });
 
         recompute();
 
-        // 병렬 fetch (criteria + 공고)
+        // 병렬 fetch (criteria + 인기 청약용 공고)
         await Promise.all([fetchCriteria(), fetchAnnouncements()]);
         renderHot();
-        renderAll();
     }
 
     init();
