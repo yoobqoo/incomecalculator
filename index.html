@@ -101,6 +101,31 @@
         .guide-grid a:hover { background: #EFEFF2; }
         .guide-grid a small { display: block; font-size: 12px; color: var(--text-3); font-weight: 400; margin-top: 3px; }
 
+        /* Hero (content-first) */
+        .hero { padding: 8px 4px 18px; }
+        .hero h2 { font-size: 23px; font-weight: 700; color: var(--text); line-height: 1.35; letter-spacing: -0.6px; margin: 0 0 8px; }
+        .hero p { font-size: 15px; color: var(--text-2); line-height: 1.6; margin: 0; letter-spacing: -0.2px; }
+
+        /* 상황별 찾아보기 카드 그리드 */
+        .situation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .situation-card {
+            display: flex; flex-direction: column; gap: 6px;
+            padding: 16px 14px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-md); text-decoration: none; color: var(--text);
+            transition: border-color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .situation-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,122,255,0.1); }
+        .situation-card .emoji { font-size: 26px; line-height: 1; }
+        .situation-card .s-title { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.35; }
+        .situation-card .s-desc { font-size: 12px; color: var(--text-3); font-weight: 400; letter-spacing: -0.1px; line-height: 1.4; }
+        .situation-card.wide { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 12px; }
+        .situation-card.wide .emoji { font-size: 22px; }
+        .situation-card.wide .s-body { display: flex; flex-direction: column; gap: 3px; }
+        .situation-card.accent { background: var(--accent); border-color: var(--accent); }
+        .situation-card.accent .s-title, .situation-card.accent .emoji { color: white; }
+        .situation-card.accent .s-desc { color: rgba(255,255,255,0.85); }
+        .situation-card.accent:hover { box-shadow: 0 6px 18px rgba(0,122,255,0.35); }
+
         /* Site footer (navigation links) */
         .site-footer { padding: 16px 4px 0; text-align: center; font-size: 12px; color: var(--text-3); }
         .site-footer a { color: var(--text-3); margin: 0 5px; text-decoration: none; }
@@ -369,11 +394,60 @@
     <!-- 1. Brand header -->
     <header class="brand">
         <img src="/logo.svg" alt="내집컷 로고" class="brand-logo" />
-        <h1 class="brand-name">청약을 위한<br/>소득분위 계산기</h1>
+        <h1 class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</h1>
     </header>
 
-    <!-- 2. 1단계: 필수 선택 (3가지) -->
+    <!-- 2. Hero + 상황별 찾아보기 -->
+    <section class="hero">
+        <h2>내 상황에서<br/>청약 소득, 어떻게 계산하죠?</h2>
+        <p>육아휴직·이직·무직·사업자… 상황마다 계산법이 다릅니다. 국토교통부 공식 기준으로 딱 맞는 답을 찾아보세요.</p>
+    </section>
+
     <section class="card">
+        <div class="label">🔎 내 상황 찾아보기</div>
+        <div class="situation-grid">
+            <a class="situation-card" href="/guide/parental-leave.html">
+                <span class="emoji">🍼</span>
+                <span class="s-title">육아휴직 중이에요</span>
+                <span class="s-desc">휴직 전 소득으로 계산</span>
+            </a>
+            <a class="situation-card" href="/guide/job-change.html">
+                <span class="emoji">💼</span>
+                <span class="s-title">작년에 이직했어요</span>
+                <span class="s-desc">'주(현)' 총급여 기준</span>
+            </a>
+            <a class="situation-card" href="/guide/maternity-leave.html">
+                <span class="emoji">🤰</span>
+                <span class="s-title">출산휴가 중이에요</span>
+                <span class="s-desc">유급휴가는 소득 포함</span>
+            </a>
+            <a class="situation-card" href="/guide/unemployed.html">
+                <span class="emoji">🏠</span>
+                <span class="s-title">지금 무직이에요</span>
+                <span class="s-desc">일할계산으로 산정</span>
+            </a>
+            <a class="situation-card" href="/guide/business-loss.html">
+                <span class="emoji">📉</span>
+                <span class="s-title">사업소득이 마이너스</span>
+                <span class="s-desc">외벌이로 분류</span>
+            </a>
+            <a class="situation-card" href="/guide/edge-cases.html">
+                <span class="emoji">📚</span>
+                <span class="s-title">그 외 특이 케이스</span>
+                <span class="s-desc">폐업·복합소득 등</span>
+            </a>
+            <a class="situation-card wide accent" href="#calculator">
+                <span class="emoji">🧮</span>
+                <span class="s-body">
+                    <span class="s-title">일단 내 소득분위부터 볼래요</span>
+                    <span class="s-desc">가구원 수·소득 입력하면 1초 계산</span>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 3. 빠른 계산기 : 1단계 필수 선택 -->
+    <section class="card" id="calculator">
         <div class="step-tag">STEP 1 · 가구 정보</div>
 
         <div class="label">가구원 수</div>
@@ -467,17 +541,6 @@
             data-ad-height="100"></ins>
     </div>
 
-    <!-- 4. 인기 청약 (moved below result) -->
-    <section class="card">
-        <div class="section-head">
-            <div class="label">인기 청약</div>
-            <span class="caption" id="hotCount"></span>
-        </div>
-        <div id="hotList" class="announcement-list">
-            <div class="loading"><span class="spinner"></span>불러오는 중...</div>
-        </div>
-    </section>
-
     <!-- 6. 도시근로자 월평균소득 기준표 (SEO) -->
     <section class="card seo-section">
         <h2>2025년 도시근로자 월평균소득 (100% 기준)</h2>
@@ -519,7 +582,7 @@
             </details>
             <details class="faq-item">
                 <summary>청약 소득은 세전 기준인가요, 세후 기준인가요?</summary>
-                <div class="faq-a">공식 청약 자격 심사는 <b>세전 총급여</b>(원천징수영수증 16번 칸) 또는 사업소득자의 <b>종합소득금액</b>(종합소득세 신고서)을 기준으로 합니다. 본 사이트도 사용자가 직접 정확한 세전 연봉을 입력하도록 설계해 청약 심사와 동일한 기준으로 분위를 산출합니다. 1년 미만 근무·휴직 등 환산이 필요한 경우는 가이드 페이지를 참고해 주세요.</div>
+                <div class="faq-a">공식 청약 자격 심사는 <b>세전 총급여</b>(원천징수영수증 21번 칸) 또는 사업소득자의 <b>종합소득금액</b>(종합소득세 신고서)을 기준으로 합니다. 본 사이트도 사용자가 직접 정확한 세전 연봉을 입력하도록 설계해 청약 심사와 동일한 기준으로 분위를 산출합니다. 1년 미만 근무·휴직 등 환산이 필요한 경우는 가이드 페이지를 참고해 주세요.</div>
             </details>
         </div>
     </section>
@@ -555,7 +618,7 @@
         </div>
     </section>
 
-    <div class="footer-note">※ 2025년 통계청 발표 도시근로자 가구당 월평균소득 기준입니다. 청약 자격 심사는 세전 총급여(원천징수영수증 16번 칸) 또는 종합소득세 신고서의 종합소득금액을 기준으로 합니다. 공고마다 자산·거주기간·자녀가점 등 추가 기준이 다를 수 있으니 공고문 원문을 반드시 확인하세요.</div>
+    <div class="footer-note">※ 2025년 통계청 발표 도시근로자 가구당 월평균소득 기준입니다. 청약 자격 심사는 세전 총급여(원천징수영수증 21번 칸) 또는 종합소득세 신고서의 종합소득금액을 기준으로 합니다. 공고마다 자산·거주기간·자녀가점 등 추가 기준이 다를 수 있으니 공고문 원문을 반드시 확인하세요.</div>
 
     <nav class="site-footer">
         <a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>·<a href="mailto:unspired100@gmail.com">문의</a>
@@ -657,37 +720,6 @@
     let member1AnnualMan = 0;     // 분리 입력 — 구성원 1 (또는 근로)
     let member2AnnualMan = 0;     // 분리 입력 — 구성원 2 (또는 사업)
     let currentPercent = 0;
-    let allAnnouncements = [];
-    let criteria = { announcements: {} };
-
-    // ---------- Date utilities ----------
-    function parseYmd(s) {
-        // YYYY-MM-DD 또는 YYYYMMDD 모두 처리
-        const clean = (s || '').replace(/-/g, '');
-        if (!/^\d{8}$/.test(clean)) return null;
-        const y = +clean.slice(0, 4), m = +clean.slice(4, 6) - 1, d = +clean.slice(6, 8);
-        const dt = new Date(y, m, d);
-        return (dt.getFullYear() === y && dt.getMonth() === m && dt.getDate() === d) ? dt : null;
-    }
-
-    function fmtDate(s) {
-        const dt = parseYmd(s);
-        if (!dt) return '미정';
-        return `${dt.getFullYear()}.${String(dt.getMonth() + 1).padStart(2, '0')}.${String(dt.getDate()).padStart(2, '0')}`;
-    }
-
-    function statusFor(startStr, endStr) {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const s = parseYmd(startStr), e = parseYmd(endStr);
-        if (!s || !e) return { label: '일정 미정', tone: 'expired', rank: 3 };
-        if (today < s) {
-            const d = Math.ceil((s - today) / 86400000);
-            return { label: `D-${d}`, tone: 'upcoming', rank: 1 };
-        }
-        if (today <= e) return { label: '청약중', tone: 'ongoing', rank: 0 };
-        return { label: '마감', tone: 'expired', rank: 2, expired: true };
-    }
 
     // ---------- 가구 유형 선택 ----------
     function setHouseholdType(type) {
@@ -712,7 +744,6 @@
         // 단일/분리 입력 토글
         updateInputLayout();
         recompute();
-        _scheduleRender();
     }
 
     // ---------- 단일 vs 분리 입력 레이아웃 결정 ----------
@@ -789,32 +820,20 @@
 
         updateInputLayout();
         recompute();
-        if (allAnnouncements.length > 0) renderHot();
     }
 
     // ---------- 가구 합산 소득 입력 핸들러 ----------
-    let _renderTimer = null;
-    function _scheduleRender() {
-        clearTimeout(_renderTimer);
-        _renderTimer = setTimeout(() => {
-            if (allAnnouncements.length > 0) renderHot();
-        }, 120);
-    }
-
     function onGrossInput(e) {
         householdAnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
         recompute();
-        _scheduleRender();
     }
     function onMember1Input(e) {
         member1AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
         recompute();
-        _scheduleRender();
     }
     function onMember2Input(e) {
         member2AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
         recompute();
-        _scheduleRender();
     }
 
     // ---------- Toggles (earners) ----------
@@ -826,7 +845,6 @@
             b.classList.toggle('active', b.dataset.earners === v));
         updateInputLayout();
         recompute();
-        renderHot();
     }
 
     // ---------- Recompute (live) ----------
@@ -873,104 +891,8 @@
         document.getElementById('eligibilityList').innerHTML = html;
     }
 
-    // ---------- Announcement rendering ----------
-    function buildEligibilityInline(item) {
-        const type = item.isPublic ? 'public' : 'private';
-        const table = CRITERIA[type][earners];
-        const checks = [
-            { name: '신혼부부',   limit: table.신혼부부 },
-            { name: '생애최초',   limit: table.생애최초 },
-            { name: '신생아특례', limit: table.신생아특례 },
-            { name: '일반공급',   limit: table.일반공급 },
-        ];
-        return checks.map(({ name, limit }) => {
-            if (limit === null) {
-                return `<span class="elig-chip na">${name} 제한없음</span>`;
-            }
-            const ok = currentPercent <= limit;
-            return `<span class="elig-chip ${ok ? 'ok' : 'over'}">${name} ${limit}% ${ok ? '✓' : '✗'}</span>`;
-        }).join('');
-    }
-
-    function announcementItem(item) {
-        const status = statusFor(item.applicationStart, item.applicationEnd);
-        const statusBadge = `<span class="badge ${status.tone}">${status.label}</span>`;
-        const typeLabel = item.isPublic ? '공공' : '민간';
-        const typeClass = item.isPublic ? 'public' : 'private';
-
-        const unitsPart = item.totalUnits
-            ? ` &nbsp;·&nbsp; 총 ${Number(item.totalUnits).toLocaleString()}세대` : '';
-        const specialPart = item.specialApplicationStart ? ' &nbsp;·&nbsp; 특공 있음' : '';
-
-        const href = item.link || 'https://www.apartmentdb.co.kr';
-        const safeHref = href.replace(/"/g, '&quot;');
-
-        return `<a class="announcement-item ${status.expired ? 'expired' : ''}" href="${safeHref}" target="_blank" rel="noopener">
-            <div class="announcement-head">
-                <div class="announcement-title">
-                    ${item.name || '제목 미정'}
-                    <span class="type-tag ${typeClass}">${typeLabel}</span>
-                </div>
-                <div class="badge-group">${statusBadge}</div>
-            </div>
-            <div class="announcement-meta">
-                <div class="meta-row">📍 ${item.region || '-'}${unitsPart}${specialPart}</div>
-                <div class="meta-row">📅 ${fmtDate(item.applicationStart)} ~ ${fmtDate(item.applicationEnd)}</div>
-                <div class="eligibility-inline">${buildEligibilityInline(item)}</div>
-                <div class="announcement-arrow">공고문 보기 →</div>
-            </div>
-        </a>`;
-    }
-
-    function renderHot() {
-        const hotAreas = ['분당', '판교', '구리', '과천'];
-        const hot = allAnnouncements
-            .filter(a => !statusFor(a.applicationStart, a.applicationEnd).expired)
-            .filter(a => a.region === '서울' || hotAreas.some(h => (a.name || '').includes(h)))
-            .slice(0, 3);
-
-        const el = document.getElementById('hotList');
-        const count = document.getElementById('hotCount');
-        if (hot.length === 0) {
-            el.innerHTML = '<div class="empty">진행 중인 인기 청약이 없습니다.</div>';
-            count.textContent = '';
-            return;
-        }
-        count.textContent = `${hot.length}개`;
-        el.innerHTML = hot.map(announcementItem).join('');
-    }
-
-    // renderAll() 제거됨 — "진행 중인 공고" 섹션 폐기에 따라 (인기 청약만 유지)
-
-    // ---------- Data fetching ----------
-    async function fetchCriteria() {
-        try {
-            const res = await fetch('/data/criteria.json', { cache: 'no-cache' });
-            if (res.ok) {
-                criteria = await res.json();
-            }
-        } catch (e) {
-            console.warn('criteria.json not available yet', e);
-        }
-    }
-
-    async function fetchAnnouncements() {
-        try {
-            const res = await fetch('/api/proxy?page=1&perPage=100');
-            const data = await res.json();
-            if (data.success && Array.isArray(data.announcements)) {
-                allAnnouncements = data.announcements;
-            } else {
-                throw new Error('Invalid response');
-            }
-        } catch (e) {
-            console.error('fetchAnnouncements error:', e);
-            document.getElementById('hotList').innerHTML = '<div class="empty">공고를 불러올 수 없습니다.</div>';
-        }
-    }
-
     // ---------- Init ----------
-    async function init() {
+    function init() {
         // 가구원 chip
         document.querySelectorAll('#familyChips .chip').forEach(c => {
             c.addEventListener('click', () => setFamily(c.dataset.family));
@@ -989,10 +911,6 @@
         document.getElementById('member2Input').addEventListener('input', onMember2Input);
 
         recompute();
-
-        // 병렬 fetch (criteria + 인기 청약용 공고)
-        await Promise.all([fetchCriteria(), fetchAnnouncements()]);
-        renderHot();
     }
 
     init();

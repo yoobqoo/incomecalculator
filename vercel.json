@@ -2,16 +2,5 @@
   "version": 2,
   "public": true,
   "buildCommand": "echo 'Static site, no build needed'",
-  "outputDirectory": ".",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    { "handle": "filesystem" },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "outputDirectory": "."
 }
