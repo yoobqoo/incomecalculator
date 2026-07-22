@@ -2,5 +2,9 @@
   "version": 2,
   "public": true,
   "buildCommand": "echo 'Static site, no build needed'",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
 }
