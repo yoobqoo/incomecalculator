@@ -16,8 +16,8 @@
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/single-household.html">
     <style>
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
         :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --warn:#FF9500; --border:#F0F0F2; }
         * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
@@ -139,8 +139,77 @@
         </div>
     </article>
     <footer>
-        <a href="/">홈</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
     </footer>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "1인 가구 청약 소득기준 (+20%p 가산) 완전정리",
+      "description": "1인 가구는 청약 소득기준에 +20%p 가산이 적용됩니다. 2025년 도시근로자 월평균소득 1인 기준 금액, 가산 적용 방식, 신청 가능한 특별공급 트랙까지 정리.",
+      "inLanguage": "ko",
+      "datePublished": "2026-06-04",
+      "dateModified": "2026-07-22",
+      "author": {
+        "@type": "Person",
+        "name": "unspired"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "내집컷",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://homecut.kr/logo.svg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://homecut.kr/guide/single-household.html"
+      },
+      "image": "https://homecut.kr/og.png",
+      "isBasedOn": "국토교통부 2024 주택청약 FAQ"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://homecut.kr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "소득기준"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "1인 가구 가산",
+          "item": "https://homecut.kr/guide/single-household.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "1인 가구 청약 소득기준 (+20%p 가산) 완전정리",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1인 가구는 소득기준에 +20%p가 가산됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 160%까지 인정돼요. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>

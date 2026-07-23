@@ -16,8 +16,8 @@
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/unemployed.html">
     <style>
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
         :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --warn:#FF9500; --border:#F0F0F2; }
         * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
@@ -125,8 +125,77 @@
         </div>
     </article>
     <footer>
-        <a href="/">홈</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
     </footer>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "무직인데 청약 넣을 수 있나요?",
+      "description": "무직일 때 청약 소득 산정법. 계속 무직이면 '사실증명(신고사실 없음)'으로 무소득 증빙. 중간에 소득이 있었다면 전년도 1월부터 모집공고일까지 총소득을 일할계산합니다.",
+      "inLanguage": "ko",
+      "datePublished": "2026-06-04",
+      "dateModified": "2026-07-22",
+      "author": {
+        "@type": "Person",
+        "name": "unspired"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "내집컷",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://homecut.kr/logo.svg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://homecut.kr/guide/unemployed.html"
+      },
+      "image": "https://homecut.kr/og.png",
+      "isBasedOn": "국토교통부 2024 주택청약 FAQ"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://homecut.kr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "상황별 가이드"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "무직일 때 청약 소득",
+          "item": "https://homecut.kr/guide/unemployed.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "무직인데 청약 넣을 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "무직이어도 청약은 가능합니다. 계속 무직이면 무소득으로 처리되고, 전년도 중 일부라도 소득이 있었다면 전년도 1월부터 모집공고일까지의 총소득을 그 기간으로 나눠(일할계산) 월평균소득을 산정합니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>

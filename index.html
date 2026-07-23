@@ -32,8 +32,8 @@
     <meta name="twitter:description" content="청약을 위한 소득분위 계산기">
     <meta name="twitter:image"       content="https://homecut.kr/og.png">
     <style>
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
-        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 
         :root {
             --bg: #FAFAFA;
@@ -600,6 +600,10 @@
     <!-- 8. 청약 가이드 (콘텐츠 페이지) -->
     <section class="card seo-section">
         <h2>📚 청약 소득 가이드</h2>
+        <p style="font-size:14px;color:var(--text-3);margin:-4px 0 12px;letter-spacing:-0.2px;">
+            국토교통부 공식 기준으로 정리한 15편 —
+            <a href="/guide/" style="color:var(--accent);font-weight:600;text-decoration:none;">전체보기 →</a>
+        </p>
         <div class="guide-grid">
             <a href="/guide/edge-cases.html">
                 ⭐ 특이 케이스 청약 소득 계산법
