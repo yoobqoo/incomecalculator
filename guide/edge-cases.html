@@ -54,6 +54,17 @@
         .toc { background: var(--surface-2); border-radius: 10px; padding: 14px 18px; margin: 18px 0 8px; font-size: 13px; }
         .toc ol { padding-left: 20px; margin: 6px 0 0; }
         .toc a { color: var(--accent); text-decoration: none; }
+        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .sources ul { padding-left: 18px; margin: 0; }
+        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
+        .sources a { color: var(--accent); text-decoration: none; }
+        .sources a:hover { text-decoration: underline; }
+        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
+                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
+        .byline b { color: var(--text); font-weight: 600; }
+        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
@@ -66,6 +77,13 @@
     <article>
         <h1>특이 케이스 청약 소득 계산법<br/><small style="font-size:16px;color:var(--text-2);font-weight:500;">국토교통부 2024 주택청약 FAQ 공식 답변 기반</small></h1>
         <div class="meta">2026.05 작성 · 8분 가이드</div>
+        <div class="byline">
+            <span>작성 <b>내집컷 편집팀</b></span>
+            <span class="sep">·</span>
+            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
+            <span class="sep">·</span>
+            <span>최종 확인 <b>2026.07.22</b></span>
+        </div>
 
         <p>본 사이트의 메인 계산기는 <b>1년간 풀근무</b>한 가구를 기준으로 합니다. 하지만 실제로는 다음과 같은 특이 케이스가 흔합니다. 국토교통부가 공식 발행한 "2024 주택청약 FAQ" 기준으로 각 케이스의 정확한 산정 방법을 정리했습니다.</p>
 
@@ -90,7 +108,7 @@
         </div>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q314</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q314</a></b><br/>
             "(연말정산 이후인 경우) 전년도 근로소득 원천징수영수증상의 '근무처별 소득명세'표상 '주(현)' 총급여 금액을 '재직증명서(직인날인)' 또는 건강보험자격득실확인서상 자격취득일자로 나누어 월평균 소득을 산정합니다."
         </div>
 
@@ -118,12 +136,12 @@
         </ul>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q307</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q307</a></b><br/>
             "전년도에 정상적으로 근무한 기간 동안의 소득을 정상적으로 근무한 기간으로 나누어 월평균소득을 산정합니다. 정상재직기간에는 출산휴가 기간은 포함하되, 육아휴직 기간은 제외합니다."
         </div>
 
         <div class="official" style="margin-top: 8px;">
-            <b>📌 국토부 FAQ Q309</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q309</a></b><br/>
             "육아휴직기간은 정상재직기간이 아니므로 해당 기간에 받은 급여(상여, 성과금 포함)는 소득금액 산정에 포함치 않습니다."
         </div>
 
@@ -137,13 +155,13 @@
 
         <h3>📐 케이스 A: 전년도 전체 휴직, 현재까지 미복직</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q305</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q305</a></b><br/>
             "전년도 전(全)기간 휴직하고 현재에도 복직하지 않았다면 <b>육아휴직 전 정상재직한 기간의 소득</b>으로 월평균소득을 산정합니다. 휴직기간이 명기된 재직증명서를 제출하고, 휴직 전 정상재직한 연도의 근로소득 원천징수영수증을 제출하여 월평균소득을 산정합니다."
         </div>
 
         <h3>📐 케이스 B: 전년도 전체 휴직, 금년도 복직</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q306</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q306</a></b><br/>
             "금년도 복직한 이후 기간을 기준으로 월평균소득을 산정합니다. 금년도의 '갑종근로소득에 대한 원천징수영수증' 또는 월별 '소득자별 근로자 원천징수부'와 재직증명서(직인날인, 휴가기간 명기)를 제출하여 복직 이후 정상재직한 기간에 대한 급여를 정상재직 기간으로 나누어 월평균소득을 산정합니다."
         </div>
 
@@ -160,7 +178,7 @@
         </div>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q314</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q314</a></b><br/>
             "(연말정산 이후) 전년도 근로소득 원천징수영수증상의 '근무처별 소득명세'표상 <b>'주(현)' 총급여 금액</b>을 재직증명서 또는 건강보험자격득실확인서상 자격취득일자로 나누어 월평균 소득을 산정합니다."
         </div>
 
@@ -188,7 +206,7 @@
         </div>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q350</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q350</a></b><br/>
             "근로 및 사업소득 모두 증빙하여야 합니다.<br/>
             * 월평균소득 = (사업소득/사업기간) + (근로소득/근로기간)"
         </div>
@@ -215,7 +233,7 @@
         </div>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q328</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q328</a></b><br/>
             "입주자모집공고일 현재 무직이라면 무직자 기준으로 소득을 산정합니다. (전년도 1월 1일부터 입주자모집공고일까지의 총소득을 해당기간으로 나누어 월평균소득 산정)<br/>
             ※ 금년도 폐업자의 금년도 소득은 전년도 소득금액증명원으로 추정한 월평균소득으로 추정"
         </div>
@@ -238,6 +256,18 @@
         </div>
 
         <a href="/" class="cta">계산기로 돌아가기 →</a>
+
+        <div class="sources">
+            <h3>📚 근거 자료 및 출처</h3>
+            <ul>
+                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
+                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
+                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
+                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
+                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
+                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
+            </ul>
+        </div>
 
         <div class="related">
             <h3>관련 가이드</h3>

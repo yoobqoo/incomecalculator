@@ -53,6 +53,17 @@
         .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
         footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
+        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .sources ul { padding-left: 18px; margin: 0; }
+        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
+        .sources a { color: var(--accent); text-decoration: none; }
+        .sources a:hover { text-decoration: underline; }
+        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
+                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
+        .byline b { color: var(--text); font-weight: 600; }
+        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
@@ -65,6 +76,13 @@
     <article>
         <h1>프리랜서 청약 소득 산정법<br/><small style="font-size:18px;color:var(--text-2);font-weight:500;">3.3% 원천징수 받는 사업소득자</small></h1>
         <div class="meta">2026.05 작성 · 국토부 2024 주택청약 FAQ 기반 · 7분</div>
+        <div class="byline">
+            <span>작성 <b>내집컷 편집팀</b></span>
+            <span class="sep">·</span>
+            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
+            <span class="sep">·</span>
+            <span>최종 확인 <b>2026.07.22</b></span>
+        </div>
 
         <p>강사·작가·디자이너·보험모집인·방문판매원 등 매월 <b>3.3%</b>를 원천징수당하는 분들이 해당합니다. 회사 소속 근로자가 아니라 <b>사업소득자(종합소득세 신고대상)</b>로 분류되며, 청약 소득 산정 방식도 일반 사업자와 비슷하지만 몇 가지 특수성이 있습니다.</p>
 
@@ -77,7 +95,7 @@
         </div>
 
         <div class="official">
-            <b>📌 국토부 FAQ Q342</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q342</a></b><br/>
             "종합소득세 신고대상자의 경우, 전년도 '소득금액증명원'의 사업(기타)소득금액을 소득 발생기간으로 나누어 월평균 소득을 산정합니다.<br/>
             계속적인 프리랜서로서 종합소득세 신고대상자는 전년도 소득금액증명원이 발급되기 전(1.1.~6.30.)인 경우라면 전전년도 종합소득세 소득금액증명원으로 소득을 추정합니다."
         </div>
@@ -127,7 +145,7 @@
 
         <h3>6) 학원강사 — 근로소득 원천징수영수증 발급 안되는 경우</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q343</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q343</a></b><br/>
             "고용형태가 근로자가 아닌 경우에는 근로소득 원천징수영수증이 발급되지 않을 수 있습니다. 소득금액증명원을 발급하거나, 종합소득세 신고대상이 아닌 경우에는 거주자의 사업(기타)소득 원천징수영수증을 발급받아 재직기간으로 나누어 월평균소득을 산정합니다. (위촉장 제출 필요)"
         </div>
 
@@ -169,6 +187,18 @@
         </div>
 
         <a href="/" class="cta">계산기로 자격 확인하기 →</a>
+
+        <div class="sources">
+            <h3>📚 근거 자료 및 출처</h3>
+            <ul>
+                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
+                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
+                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
+                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
+                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
+                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
+            </ul>
+        </div>
 
         <div class="related">
             <h3>관련 가이드</h3>

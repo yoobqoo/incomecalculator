@@ -52,6 +52,17 @@
         .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
         footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
+        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .sources ul { padding-left: 18px; margin: 0; }
+        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
+        .sources a { color: var(--accent); text-decoration: none; }
+        .sources a:hover { text-decoration: underline; }
+        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
+                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
+        .byline b { color: var(--text); font-weight: 600; }
+        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
@@ -64,6 +75,13 @@
     <article>
         <h1>무직인데<br/>청약 넣을 수 있나요?</h1>
         <div class="meta">국토교통부 2024 주택청약 FAQ 기반 · 5분</div>
+        <div class="byline">
+            <span>작성 <b>내집컷 편집팀</b></span>
+            <span class="sep">·</span>
+            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
+            <span class="sep">·</span>
+            <span>최종 확인 <b>2026.07.22</b></span>
+        </div>
 
         <div class="answer-box">
             <b>결론부터:</b> 무직이어도 청약은 가능합니다. <b>계속 무직</b>이면 무소득으로 처리되고, 전년도 중 <b>일부라도 소득이 있었다면</b> 전년도 1월부터 모집공고일까지의 총소득을 그 기간으로 나눠(일할계산) 월평균소득을 산정합니다.
@@ -73,7 +91,7 @@
 
         <h3>① 전년도부터 지금까지 계속 무직</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q297</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q297</a></b><br/>
             "비사업자로서 건강보험자격득실확인서상 직장가입자가 아닌 경우(계속하여 근로소득, 사업소득 모두 미발생)에는 과세관청에서 발급 가능한 전년도 '사실증명(신고사실 없음)'을 제출하여 무소득임을 증명하고, 비사업자 각서를 작성합니다."
         </div>
         <p>이 경우 <b>소득 0원</b>으로 처리됩니다. 소득 기준이 있는 모든 특별공급에서 소득 요건은 자동으로 충족돼요 (물론 무주택·청약통장 등 다른 요건은 별도).</p>
@@ -86,7 +104,7 @@
             월평균소득 = (전년도 1.1. ~ 모집공고일까지 총소득) ÷ 해당 일수 × 30
         </div>
         <div class="official">
-            <b>📌 국토부 FAQ Q298</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q298</a></b><br/>
             "입주자모집공고일 현재 무직자인 경우에는 전년도 1월 1일부터 입주자모집공고일까지의 총소득을 해당기간으로 나누어 월평균소득을 산정합니다(일할계산)."
         </div>
         <div class="tip">
@@ -98,7 +116,7 @@
 
         <h2>배우자가 무직인 경우 (맞벌이? 외벌이?)</h2>
         <div class="official">
-            <b>📌 국토부 FAQ Q302</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q302</a></b><br/>
             "배우자가 현재 무직인 경우라면 무직자의 소득산정 기준으로 월평균소득을 산정하며, 산정 결과 소득이 발생하였다면('-' 또는 '0'이 아니라면) <b>맞벌이</b>로 봅니다."
         </div>
         <p>즉 배우자가 전년도에 소득이 조금이라도 있었으면 맞벌이, 완전 무소득(0원)이면 외벌이로 분류됩니다. 신혼부부 특공은 부부 중 1인의 소득이 도시근로자 월평균소득의 140%(신생아·소득우선은 100%)를 넘지 않아야 하는 조건도 있습니다.</p>
@@ -114,6 +132,18 @@
         </ul>
 
         <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기 →</a>
+
+        <div class="sources">
+            <h3>📚 근거 자료 및 출처</h3>
+            <ul>
+                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
+                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
+                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
+                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
+                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
+                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
+            </ul>
+        </div>
 
         <div class="related">
             <h3>관련 상황 가이드</h3>

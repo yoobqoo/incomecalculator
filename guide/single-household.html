@@ -58,6 +58,17 @@
         .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
         footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
+        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .sources ul { padding-left: 18px; margin: 0; }
+        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
+        .sources a { color: var(--accent); text-decoration: none; }
+        .sources a:hover { text-decoration: underline; }
+        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
+                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
+        .byline b { color: var(--text); font-weight: 600; }
+        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
@@ -70,6 +81,13 @@
     <article>
         <h1>1인 가구 청약 소득기준<br/>(+20%p 가산) 완전정리</h1>
         <div class="meta">2025년 적용 기준 · 6분</div>
+        <div class="byline">
+            <span>작성 <b>내집컷 편집팀</b></span>
+            <span class="sep">·</span>
+            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
+            <span class="sep">·</span>
+            <span>최종 확인 <b>2026.07.22</b></span>
+        </div>
 
         <div class="answer-box">
             <b>결론부터:</b> 1인 가구는 소득기준에 <b>+20%p가 가산</b>됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 <b>160%</b>까지 인정돼요. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다.
@@ -113,7 +131,7 @@
         <h2>1인 가구가 신청 가능한 특별공급</h2>
         <p>1인 가구는 일부 트랙에서 신청이 제한됩니다. 대표적으로 신혼부부 특별공급의 순차공급에서 1인 가구는 <b>추첨제에만</b> 신청 가능합니다.</p>
         <div class="official">
-            <b>📌 국토부 FAQ (신혼부부 특공 순차공급)</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ (신혼부부 특공 순차공급)</a></b><br/>
             "※ 1인가구: 추첨제에만 청약신청 가능"
         </div>
         <ul>
@@ -128,6 +146,18 @@
         </div>
 
         <a href="/#calculator" class="cta">계산기로 내 소득분위 확인 →</a>
+
+        <div class="sources">
+            <h3>📚 근거 자료 및 출처</h3>
+            <ul>
+                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
+                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
+                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
+                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
+                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
+                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
+            </ul>
+        </div>
 
         <div class="related">
             <h3>관련 가이드</h3>

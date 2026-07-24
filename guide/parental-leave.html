@@ -54,6 +54,17 @@
         .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
         footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
+        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .sources ul { padding-left: 18px; margin: 0; }
+        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
+        .sources a { color: var(--accent); text-decoration: none; }
+        .sources a:hover { text-decoration: underline; }
+        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
+                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
+        .byline b { color: var(--text); font-weight: 600; }
+        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
@@ -66,6 +77,13 @@
     <article>
         <h1>육아휴직 중인데<br/>청약 소득은 어떻게 계산하나요?</h1>
         <div class="meta">국토교통부 2024 주택청약 FAQ 기반 · 5분</div>
+        <div class="byline">
+            <span>작성 <b>내집컷 편집팀</b></span>
+            <span class="sep">·</span>
+            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
+            <span class="sep">·</span>
+            <span>최종 확인 <b>2026.07.22</b></span>
+        </div>
 
         <div class="answer-box">
             <b>결론부터:</b> 육아휴직 기간은 소득 계산에서 <b>제외</b>됩니다. <b>휴직 전 정상적으로 근무한 기간의 소득</b>을 그 기간으로 나눠 월평균소득을 산정해요. 휴직 중 받은 급여·성과금도 포함하지 않습니다.
@@ -81,7 +99,7 @@
             월평균소득 = 정상근무 기간의 총급여 ÷ 정상근무 개월수
         </div>
         <div class="official">
-            <b>📌 국토부 FAQ Q307</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q307</a></b><br/>
             "전년도에 정상적으로 근무한 기간 동안의 소득을 정상적으로 근무한 기간으로 나누어 월평균소득을 산정합니다. 정상재직기간에는 출산휴가 기간은 포함하되, <b>육아휴직 기간은 제외</b>합니다."
         </div>
         <div class="tip">
@@ -91,14 +109,14 @@
 
         <h3>② 전년도 전체를 휴직하고 아직 복직 안 한 경우</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q305</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q305</a></b><br/>
             "전년도 전(全)기간 휴직하고 현재에도 복직하지 않았다면 <b>육아휴직 전 정상재직한 기간의 소득</b>으로 월평균소득을 산정합니다. 휴직기간이 명기된 재직증명서와 휴직 전 정상재직한 연도의 근로소득 원천징수영수증을 제출합니다."
         </div>
         <p>즉, 전전년도 등 <b>휴직 이전에 정상 근무했던 해</b>의 원천징수영수증 21번 총급여액을 기준으로 계산합니다.</p>
 
         <h3>③ 전년도 전체 휴직 후 올해 복직한 경우</h3>
         <div class="official">
-            <b>📌 국토부 FAQ Q306</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q306</a></b><br/>
             "금년도 복직한 이후 기간을 기준으로 월평균소득을 산정합니다. 복직 이후 정상재직한 기간에 대한 급여를 정상재직 기간으로 나누어 월평균소득을 산정합니다."
         </div>
         <div class="tip">
@@ -108,7 +126,7 @@
 
         <h2>육아휴직 중 받은 급여는 포함되나요?</h2>
         <div class="official">
-            <b>📌 국토부 FAQ Q309</b><br/>
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q309</a></b><br/>
             "육아휴직기간은 정상재직기간이 아니므로 해당 기간에 받은 급여(상여, 성과금 포함)는 소득금액 산정에 포함치 않습니다."
         </div>
         <p>육아휴직 급여(고용보험에서 나오는 것 + 회사가 주는 것)는 <b>소득에 포함하지 않습니다</b>. 단, 예외가 하나 있어요. 아래를 보세요.</p>
@@ -131,6 +149,18 @@
         </div>
 
         <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기 →</a>
+
+        <div class="sources">
+            <h3>📚 근거 자료 및 출처</h3>
+            <ul>
+                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
+                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
+                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
+                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
+                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
+                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
+            </ul>
+        </div>
 
         <div class="related">
             <h3>관련 상황 가이드</h3>
