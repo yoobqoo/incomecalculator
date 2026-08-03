@@ -11,9 +11,11 @@
   2. /analysis/<slug>.html 정적 분석 페이지 생성 (E-E-A-T·JSON-LD 포함)
   3. 생성 후 사람이 검토 → git commit → 배포 (런타임 API 의존 없음)
 
-주의: 경쟁률은 '예측'하지 않는다. 공고문에 있는 확정 물량·소득기준·일정만 팩트로 제시.
+주의: 접수 종료 후 API에 집계된 '실제 경쟁률'만 팩트로 제시한다. 아직 접수 전/집계 전이면
+경쟁률 섹션은 생략하고 물량·일정만 노출. 소득 커트라인은 개인정보라 API에 없으므로
+'소득 구간(우선/일반공급)'으로만 안내한다.
 """
-import urllib.request, json, sys, os, re
+import urllib.request, urllib.parse, json, sys, os, re
 sys.stdout.reconfigure(encoding='utf-8')
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -21,10 +23,34 @@ K = os.environ.get('APARTMENT_API_KEY',
     "17c1015e63414c5f5f8ae48f2bda5b47079578dde490f420775cfd325449ce15")
 BASE = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/"
 
+# 경쟁률·신청현황 API 키 (별도 서비스). tools/.secrets 또는 env에서 로드.
+def _load_cmpet_key():
+    k = os.environ.get('CMPET_API_KEY')
+    if k: return k
+    sec = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.secrets')
+    if os.path.exists(sec):
+        for line in open(sec, encoding='utf-8'):
+            if line.startswith('CMPET_API_KEY='):
+                return line.split('=', 1)[1].strip()
+    return None
+CK = _load_cmpet_key()
+CBASE = "https://api.odcloud.kr/api/ApplyhomeInfoCmpetRtSvc/v1/"
+
 def api(op, extra=""):
     url = BASE+op+"?serviceKey=%s&page=1&perPage=50&returnType=JSON%s" % (K, extra)
     req = urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'})
     return json.load(urllib.request.urlopen(req, timeout=30)).get('data', [])
+
+def capi(op, hmn):
+    """경쟁률 서비스 호출. 키 없거나 데이터 없으면 [] 반환 (안전)."""
+    if not CK: return []
+    q = urllib.parse.urlencode({'serviceKey': CK, 'page': 1, 'perPage': 60, 'returnType': 'JSON'})
+    url = CBASE+op+"?%s&cond[HOUSE_MANAGE_NO::EQ]=%s" % (q, hmn)
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        return json.load(urllib.request.urlopen(req, timeout=30)).get('data', []) or []
+    except Exception:
+        return []
 
 def fmt_won(man):
     """만원 단위 정수 → '1억 2,635만원'"""
@@ -116,7 +142,69 @@ def build(hmn, slug):
     if all(t['gen']==0 for t in trs):
         analysis += "<li>이 단지는 <b>전 타입이 특별공급 중심</b>으로 배정돼 일반공급 물량이 적거나 없습니다. 특공 자격이 되면 특공으로 노리는 것이 유리합니다.</li>"
 
-    desc = "%s %s 청약 정보 총정리 — 평형별(타입별) 세대수, 특별공급 물량(신혼부부·생애최초·신생아), 분양가, 접수 일정과 소득기준까지 청약홈 공식 데이터 기반 분석." % (region, name)
+    # ===== 실제 경쟁률 (접수 종료 후 집계된 팩트만) =====
+    cmpet_html = ""
+    cmpet_analysis = ""
+    sp = capi("getAPTSpsplyReqstStus", hmn)     # 특공 신청현황
+    gen = capi("getAPTLttotPblancCmpet", hmn)   # 일반공급 순위별 경쟁률
+    has_cmpet = bool(sp) and any(
+        (r.get('CRSPAREA_NWBB_NWBBSHR_CNT',0) or 0) + (r.get('ETC_AREA_NWBB_NWBBSHR_CNT',0) or 0)
+        + (r.get('CRSPAREA_LFE_FRST_CNT',0) or 0) + (r.get('CRSPAREA_NWWDS_NMTW_CNT',0) or 0) > 0
+        for r in sp)
+
+    if has_cmpet:
+        # 특공 경쟁률 테이블 (평형 × 유형)
+        def rate(alloc, req):
+            if not alloc: return None
+            return round(req / alloc, 1)
+        sp_rows = []
+        for r in sp:
+            t = clean_ty(r.get('HOUSE_TY'))
+            def cnt(base): return (r.get('CRSPAREA_'+base, 0) or 0) + (r.get('ETC_AREA_'+base, 0) or 0) + (r.get('CTPRVN_'+base, 0) or 0)
+            entry = dict(ty=t,
+                nwbb=(r.get('NWBB_NWBBSHR_HSHLDCO', 0) or 0, cnt('NWBB_NWBBSHR_CNT')),
+                lfe=(r.get('LFE_FRST_HSHLDCO', 0) or 0, cnt('LFE_FRST_CNT')),
+                nwds=(r.get('NWWDS_NMTW_HSHLDCO', 0) or 0, cnt('NWWDS_NMTW_CNT')))
+            sp_rows.append(entry)
+
+        def cell(pair):
+            alloc, req = pair
+            r = rate(alloc, req)
+            if r is None: return "<td>-</td>"
+            return "<td>%s:1<br><small>%d/%d</small></td>" % (r, req, alloc)
+
+        body = ""
+        for e in sp_rows:
+            if e['nwbb'][0] or e['lfe'][0] or e['nwds'][0]:
+                body += "<tr><td><b>%s</b></td>%s%s%s</tr>" % (
+                    e['ty'], cell(e['nwbb']), cell(e['lfe']), cell(e['nwds']))
+        cmpet_html += ("<table class='u'><thead><tr><th>타입</th><th>신혼부부</th><th>생애최초</th><th>신생아</th></tr></thead>"
+                       "<tbody>%s</tbody></table><p style='font-size:12px;color:var(--text-3);'>※ 셀 아래 숫자는 신청건수/배정세대. 지역 전체 합산 기준.</p>") % body
+
+        # 일반공급 경쟁률 (1순위 해당지역 위주)
+        gen_body = ""
+        for r in gen:
+            cr = r.get('CMPET_RATE')
+            if cr and cr not in ('-', '') and str(r.get('SUBSCRPT_RANK_CODE')) == '1' and r.get('RESIDE_SENM') == '해당지역':
+                gen_body += "<tr><td><b>%s</b></td><td>%s세대</td><td>%s명</td><td><b>%s:1</b></td></tr>" % (
+                    clean_ty(r.get('HOUSE_TY')), r.get('SUPLY_HSHLDCO'), r.get('REQ_CNT'), cr)
+        if gen_body:
+            cmpet_html += ("<h3>일반공급 1순위(해당지역) 경쟁률</h3>"
+                           "<table class='u'><thead><tr><th>타입</th><th>공급</th><th>신청</th><th>경쟁률</th></tr></thead>"
+                           "<tbody>%s</tbody></table>") % gen_body
+
+        # 인사이트: 신혼부부 경쟁률 최저 타입
+        nwbb_rates = [(e['ty'], rate(*e['nwbb'])) for e in sp_rows if e['nwbb'][0] and rate(*e['nwbb']) is not None]
+        if len(nwbb_rates) >= 2:
+            lo = min(nwbb_rates, key=lambda x: x[1]); hi = max(nwbb_rates, key=lambda x: x[1])
+            cmpet_analysis = ("<div class='insight'><b>💡 신혼부부 실측 인사이트:</b> 같은 특공이라도 타입별 경쟁률이 갈렸습니다. "
+                              "<b>%s 타입이 %s:1로 가장 낮았고</b>, %s 타입은 %s:1로 가장 치열했습니다. "
+                              "물량이 많다고 무조건 유리한 게 아니라, 신청도 함께 몰린다는 뜻입니다.</div>") % (
+                              lo[0], lo[1], hi[0], hi[1])
+
+    desc = "%s %s 청약 %s — 평형별(타입별) 특별공급 물량과 %s, 분양가·접수 일정까지 청약홈 공식 데이터 기반." % (
+        region, name, ("실제 경쟁률 분석" if has_cmpet else "정보 총정리"),
+        ("신혼부부·생애최초·신생아 실제 경쟁률" if has_cmpet else "신혼부부·생애최초·신생아 물량"))
 
     page_url = "https://homecut.kr/analysis/%s.html" % slug
     article = {
@@ -148,14 +236,20 @@ def build(hmn, slug):
       '__UNITTABLE__': unit_table(),
       '__ANALYSIS__': analysis or "<li>평형별 특공 물량은 위 표를 참고하세요.</li>",
       '__NTYPES__': str(len(trs)),
+      '__CMPETSECTION__': (
+          '<h2 id="cmpet">📈 실제 경쟁률 (접수 마감 집계)</h2>'
+          '<p>이 단지는 <b>접수가 마감되어 실제 신청 결과가 집계</b>됐습니다. 아래는 청약홈 공식 신청현황 데이터입니다.</p>'
+          + cmpet_analysis
+          + '<h3>특별공급 경쟁률 (타입 × 유형)</h3>' + cmpet_html
+          if has_cmpet else ''),
       '__JSONLD__': '<script type="application/ld+json">\n%s\n</script>' % JSONLD,
     }
     for k,v in reps.items(): html = html.replace(k, v)
     os.makedirs('analysis', exist_ok=True)
     path = 'analysis/%s.html' % slug
     open(path,'w',encoding='utf-8').write(html)
-    print("생성:", path, "(%d bytes, 평형 %d개)" % (len(html), len(trs)))
-    print("   신혼 최다:", best_nwbb['ty'] if best_nwbb else '-', "/ 신생아 최다:", best_nwds['ty'] if best_nwds else '-')
+    print("생성:", path, "(%d bytes, 평형 %d개, 경쟁률 %s)" % (
+        len(html), len(trs), "있음" if has_cmpet else "없음(접수 전/집계 전)"))
 
 
 TEMPLATE = '''<!DOCTYPE html>
@@ -208,6 +302,9 @@ TEMPLATE = '''<!DOCTYPE html>
         table.u td { padding: 9px 4px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
         table.u td small { color: var(--text-3); font-size: 11px; }
         table.u tbody tr:nth-child(even) { background: var(--surface-2); }
+        table.u td small { color: var(--text-3); font-size: 10px; }
+        .insight { background: #EAF4FF; border-radius: 12px; padding: 14px 16px; margin: 14px 0; font-size: 14px; line-height: 1.7; color: var(--text); }
+        .insight b { color: #0060C7; }
         .cta { display: block; text-align: center; background: var(--accent); color: white; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 600; margin: 24px 0 8px; font-size: 15px; }
         .official-links { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
         .official-links a { display: inline-flex; padding: 8px 14px; background: var(--surface-2); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
@@ -253,7 +350,10 @@ TEMPLATE = '''<!DOCTYPE html>
 
         <h2>📊 어떤 특공·타입을 노릴까?</h2>
         <ul>__ANALYSIS__</ul>
-        <div class="warn-box"><b>⚠️ 경쟁률은 예측이 아닙니다.</b> 위 물량은 청약홈 공식 <b>확정 데이터</b>입니다. 실제 경쟁률은 접수 마감·당첨자 발표 후 청약홈에 공개되며, 인근 단지 과거 경쟁률과 본인 가점·소득을 함께 고려해 판단하세요.</div>
+
+        __CMPETSECTION__
+
+        <div class="warn-box"><b>⚠️ 경쟁률 데이터 안내.</b> 위 경쟁률은 청약홈에 집계된 <b>실제 신청 결과</b>입니다(집계된 경우에만 표시). 당첨은 경쟁률뿐 아니라 소득 구간·순위·가점에 따라 결정되며, 접수 전 단지는 경쟁률이 표시되지 않습니다. 소득 구간별 당첨 커트라인은 개인정보라 공개되지 않습니다.</div>
 
         <h2>💰 내 소득이 기준에 맞을까?</h2>
         <p>특별공급은 소득 기준(도시근로자 월평균소득 대비 %)을 충족해야 신청할 수 있습니다. 신혼부부·생애최초·신생아별 기준이 다르니, 계산기로 내 가구 소득분위부터 확인하세요.</p>
