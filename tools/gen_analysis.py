@@ -9,7 +9,7 @@
 동작:
   1. 청약홈 API에서 해당 공고의 상세 + 평형별 특공 물량을 가져옴
   2. /analysis/<slug>.html 정적 분석 페이지 생성 (E-E-A-T·JSON-LD 포함)
-  3. 생성 후 사람이 검토 → git commit → 배포 (런타임 API 의존 없음)
+  3. 생성 후 사람이 검토  git commit  배포 (런타임 API 의존 없음)
 
 주의: 접수 종료 후 API에 집계된 '실제 경쟁률'만 팩트로 제시한다. 아직 접수 전/집계 전이면
 경쟁률 섹션은 생략하고 물량·일정만 노출. 소득 커트라인은 개인정보라 API에 없으므로
@@ -53,7 +53,7 @@ def capi(op, hmn):
         return []
 
 def fmt_won(man):
-    """만원 단위 정수 → '1억 2,635만원'"""
+    """만원 단위 정수  '1억 2,635만원'"""
     try: n = int(man)
     except: return "-"
     if n <= 0: return "-"
@@ -71,7 +71,7 @@ def pyeong(area):
     except: return None
 
 def clean_ty(house_ty):
-    """'059.9667A' → '59A'"""
+    """'059.9667A'  '59A'"""
     m = re.match(r'0*(\d+)\.\d+([A-Z]?)', house_ty or '')
     if m: return m.group(1) + (m.group(2) or '')
     return house_ty or '?'
@@ -197,7 +197,7 @@ def build(hmn, slug):
         nwbb_rates = [(e['ty'], rate(*e['nwbb'])) for e in sp_rows if e['nwbb'][0] and rate(*e['nwbb']) is not None]
         if len(nwbb_rates) >= 2:
             lo = min(nwbb_rates, key=lambda x: x[1]); hi = max(nwbb_rates, key=lambda x: x[1])
-            cmpet_analysis = ("<div class='insight'><b>💡 신혼부부 실측 인사이트:</b> 같은 특공이라도 타입별 경쟁률이 갈렸습니다. "
+            cmpet_analysis = ("<div class='insight'><b>신혼부부 실측 인사이트:</b> 같은 특공이라도 타입별 경쟁률이 갈렸습니다. "
                               "<b>%s 타입이 %s:1로 가장 낮았고</b>, %s 타입은 %s:1로 가장 치열했습니다. "
                               "물량이 많다고 무조건 유리한 게 아니라, 신청도 함께 몰린다는 뜻입니다.</div>") % (
                               lo[0], lo[1], hi[0], hi[1])
@@ -237,7 +237,7 @@ def build(hmn, slug):
       '__ANALYSIS__': analysis or "<li>평형별 특공 물량은 위 표를 참고하세요.</li>",
       '__NTYPES__': str(len(trs)),
       '__CMPETSECTION__': (
-          '<h2 id="cmpet">📈 실제 경쟁률 (접수 마감 집계)</h2>'
+          '<h2 id="cmpet">실제 경쟁률 (접수 마감 집계)</h2>'
           '<p>이 단지는 <b>접수가 마감되어 실제 신청 결과가 집계</b>됐습니다. 아래는 청약홈 공식 신청현황 데이터입니다.</p>'
           + cmpet_analysis
           + '<h3>특별공급 경쟁률 (타입 × 유형)</h3>' + cmpet_html
@@ -271,48 +271,52 @@ TEMPLATE = '''<!DOCTYPE html>
     <link rel="canonical" href="https://homecut.kr/analysis/__SLUG__.html">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
-        :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --warn:#FF9500; --border:#F0F0F2; }
-        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 720px; }
-        .brand { display: flex; align-items: center; gap: 10px; padding: 4px 4px 14px; text-decoration: none; }
-        .brand-logo { width: 56px; height: 56px; }
-        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.25; }
-        .crumbs { font-size: 13px; color: var(--text-3); margin-bottom: 8px; }
+        :root { --bg:#FFFFFF; --text:#191F28; --text-2:#4E5968; --text-3:#8B95A1; --accent:#3182F6; --line:#F2F4F6; --tint:#F9FAFB; --warn:#FFB020; --warn-bg:#FFFBF2; }
+        * { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
+        .container { width: 100%; max-width: 680px; padding: 0 24px 80px; }
+        .brand { display: flex; align-items: center; gap: 8px; padding: 24px 0 6px; text-decoration: none; }
+        .brand-logo { width: 30px; height: 30px; }
+        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.3; }
+        .crumbs { font-size: 13px; color: var(--text-3); margin: 6px 0 0; }
         .crumbs a { color: var(--text-3); text-decoration: none; }
-        article { background: var(--surface); border-radius: 20px; padding: 28px 24px; border: 1px solid var(--border); }
-        h1 { font-size: 24px; line-height: 1.4; letter-spacing: -0.5px; margin: 0 0 8px; }
-        .subt { font-size: 14px; color: var(--text-2); margin-bottom: 8px; }
-        .byline { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; padding: 11px 14px; background: var(--surface-2); border-radius: 10px; font-size: 12px; color: var(--text-2); margin: 0 0 20px; }
-        .byline b { color: var(--text); }
-        .byline .sep { color: var(--text-3); }
-        h2 { font-size: 18px; margin: 30px 0 12px; letter-spacing: -0.3px; padding-top: 8px; border-top: 1px solid var(--border); }
-        h2:first-of-type { border-top: none; padding-top: 0; }
-        p, li { font-size: 15px; line-height: 1.75; color: var(--text); letter-spacing: -0.2px; }
-        ul { padding-left: 20px; }
+        article { background: transparent; border: none; border-radius: 0; padding: 0; }
+        h1 { font-size: 26px; line-height: 1.4; font-weight: 700; letter-spacing: -0.03em; margin: 26px 0 10px; }
+        .subt { font-size: 15px; color: var(--text-2); font-weight: 400; }
+        .byline { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; font-size: 13px; color: var(--text-3); margin: 0 0 36px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+        .byline b { color: var(--text-2); font-weight: 600; }
+        .byline .sep { color: var(--line); }
+        h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 48px 0 14px; padding-top: 0; border-top: none; line-height: 1.4; }
+        h3 { font-size: 16px; font-weight: 600; margin: 28px 0 10px; }
+        p, li { font-size: 16px; line-height: 1.8; color: var(--text); letter-spacing: -0.01em; }
+        p { margin: 0 0 20px; }
+        ul { padding-left: 20px; margin: 0 0 20px; }
         li { margin-bottom: 8px; }
         b { font-weight: 600; }
-        a { color: var(--accent); }
-        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
-        table.info td { padding: 9px 10px; border-bottom: 1px solid var(--border); }
-        table.info td:first-child { color: var(--text-2); width: 38%; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 24px; }
+        table.info td { padding: 14px 12px; border-bottom: 1px solid var(--line); font-size: 15px; }
+        table.info td:first-child { color: var(--text-3); width: 34%; }
         table.u { text-align: center; }
-        table.u th { background: var(--accent); color: #fff; padding: 8px 4px; font-size: 12px; font-weight: 600; }
-        table.u td { padding: 9px 4px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+        table.u th { background: var(--tint); color: var(--text-3); padding: 12px 4px; font-size: 12.5px; font-weight: 600; border-bottom: 1px solid var(--line); }
+        table.u td { padding: 13px 4px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; font-size: 14.5px; }
         table.u td small { color: var(--text-3); font-size: 11px; }
-        table.u tbody tr:nth-child(even) { background: var(--surface-2); }
-        table.u td small { color: var(--text-3); font-size: 10px; }
-        .insight { background: #EAF4FF; border-radius: 12px; padding: 14px 16px; margin: 14px 0; font-size: 14px; line-height: 1.7; color: var(--text); }
-        .insight b { color: #0060C7; }
-        .cta { display: block; text-align: center; background: var(--accent); color: white; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 600; margin: 24px 0 8px; font-size: 15px; }
+        .insight { background: var(--tint); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0; font-size: 15px; line-height: 1.75; color: var(--text); }
+        .insight b { color: var(--accent); }
+        .cta { display: block; text-align: center; background: var(--accent); color: #fff; padding: 17px; border-radius: 14px; text-decoration: none; font-weight: 600; margin: 32px 0 8px; font-size: 16px; }
+        .cta:hover { text-decoration: none; opacity: 0.94; }
         .official-links { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
-        .official-links a { display: inline-flex; padding: 8px 14px; background: var(--surface-2); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
-        .warn-box { background: #FFF8EC; border: 1px solid #FFE4B8; padding: 14px 16px; border-radius: 10px; margin: 20px 0; font-size: 13px; color: var(--text-2); line-height: 1.7; }
-        .warn-box b { color: #BF5700; }
-        .sources { margin-top: 24px; padding: 14px 16px; background: var(--surface-2); border-radius: 12px; font-size: 13px; color: var(--text-2); line-height: 1.7; }
-        .sources a { color: var(--accent); text-decoration: none; }
-        footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
+        .official-links a { display: inline-flex; padding: 11px 16px; background: var(--tint); border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .official-links a:hover { text-decoration: none; background: #EEF2F6; }
+        .warn-box { background: var(--warn-bg); border-left: 3px solid var(--warn); border-radius: 0 12px 12px 0; padding: 15px 18px; margin: 20px 0; font-size: 14px; color: var(--text-2); line-height: 1.75; }
+        .warn-box b { color: #B26B00; }
+        .sources { margin-top: 40px; padding: 18px 20px; background: var(--tint); border-radius: 14px; font-size: 13.5px; color: var(--text-3); line-height: 1.8; }
+        .sources a { color: var(--text-2); text-decoration: none; }
+        footer { margin-top: 40px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
     </style>
 </head>
@@ -340,33 +344,33 @@ TEMPLATE = '''<!DOCTYPE html>
             <tr><td>총 공급</td><td><b>__TOT__세대</b> (__NTYPES__개 타입)</td></tr>
         </table>
 
-        <h2>📅 청약 일정</h2>
+        <h2>청약 일정</h2>
         <table class="info">__DATES__</table>
 
-        <h2>🏠 평형별 세대수 · 특별공급 물량</h2>
+        <h2>평형별 세대수 · 특별공급 물량</h2>
         <p>같은 59㎡라도 <b>타입(A/B)별로 특공 물량이 다릅니다.</b> 아래 표에서 내가 노릴 타입의 특공 세대수를 확인하세요. (단위: 세대)</p>
         __UNITTABLE__
         <p style="font-size:12px;color:var(--text-3);">※ 신혼=신혼부부, 생최=생애최초, 신생아=신생아 특별공급. 다자녀·노부모·기관추천 물량은 공고문 원문 참고.</p>
 
-        <h2>📊 어떤 특공·타입을 노릴까?</h2>
+        <h2>어떤 특공·타입을 노릴까?</h2>
         <ul>__ANALYSIS__</ul>
 
         __CMPETSECTION__
 
-        <div class="warn-box"><b>⚠️ 경쟁률 데이터 안내.</b> 위 경쟁률은 청약홈에 집계된 <b>실제 신청 결과</b>입니다(집계된 경우에만 표시). 당첨은 경쟁률뿐 아니라 소득 구간·순위·가점에 따라 결정되며, 접수 전 단지는 경쟁률이 표시되지 않습니다. 소득 구간별 당첨 커트라인은 개인정보라 공개되지 않습니다.</div>
+        <div class="warn-box"><b>경쟁률 데이터 안내.</b> 위 경쟁률은 청약홈에 집계된 <b>실제 신청 결과</b>입니다(집계된 경우에만 표시). 당첨은 경쟁률뿐 아니라 소득 구간·순위·가점에 따라 결정되며, 접수 전 단지는 경쟁률이 표시되지 않습니다. 소득 구간별 당첨 커트라인은 개인정보라 공개되지 않습니다.</div>
 
-        <h2>💰 내 소득이 기준에 맞을까?</h2>
+        <h2>내 소득이 기준에 맞을까?</h2>
         <p>특별공급은 소득 기준(도시근로자 월평균소득 대비 %)을 충족해야 신청할 수 있습니다. 신혼부부·생애최초·신생아별 기준이 다르니, 계산기로 내 가구 소득분위부터 확인하세요.</p>
-        <a href="/#calculator" class="cta">🧮 내 소득분위 1초 계산 →</a>
+        <a href="/#calculator" class="cta"> 내 소득분위 1초 계산 </a>
 
-        <h2>🔗 공식 청약 페이지</h2>
+        <h2>공식 청약 페이지</h2>
         <div class="official-links">
-            <a href="__LINK__" target="_blank" rel="noopener">모집공고 상세 ↗</a>
-            <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 ↗</a>
+            <a href="__LINK__" target="_blank" rel="noopener">모집공고 상세 </a>
+            <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 </a>
         </div>
 
         <div class="sources">
-            <b>📚 출처</b><br/>
+            <b>출처</b><br/>
             평형·물량·일정 데이터: <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">한국부동산원 청약홈</a> 공급정보 (공공데이터포털 ApplyhomeInfoDetailSvc)<br/>
             소득·자격 기준: <a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 주택청약 FAQ(2024.05)</a>
         </div>

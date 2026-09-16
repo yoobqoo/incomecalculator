@@ -24,50 +24,74 @@
     <link rel="canonical" href="https://homecut.kr/guide/first-time.html">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
-        :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --border:#F0F0F2; }
-        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 720px; }
-        .brand { display: flex; align-items: center; gap: 10px; padding: 4px 4px 14px; text-decoration: none; }
-        .brand-logo { width: 56px; height: 56px; }
-        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.25; }
-        .crumbs { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
+        :root { --bg:#FFFFFF; --text:#191F28; --text-2:#4E5968; --text-3:#8B95A1; --accent:#3182F6; --line:#F2F4F6; --tint:#F9FAFB; --warn:#FFB020; --warn-bg:#FFFBF2; }
+        * { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
+        .container { width: 100%; max-width: 680px; padding: 0 24px 80px; }
+        .brand { display: flex; align-items: center; gap: 8px; padding: 24px 0 6px; text-decoration: none; }
+        .brand-logo { width: 30px; height: 30px; }
+        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.3; }
+        .crumbs { font-size: 13px; color: var(--text-3); margin: 6px 0 0; }
         .crumbs a { color: var(--text-3); text-decoration: none; }
-        article { background: var(--surface); border-radius: 20px; padding: 28px 24px; border: 1px solid var(--border); }
-        h1 { font-size: 26px; line-height: 1.35; letter-spacing: -0.5px; margin: 0 0 6px; }
-        .meta { font-size: 12px; color: var(--text-3); margin-bottom: 20px; }
-        h2 { font-size: 19px; margin: 32px 0 12px; letter-spacing: -0.3px; padding-top: 8px; border-top: 1px solid var(--border); }
-        h2:first-of-type { border-top: none; padding-top: 0; }
-        h3 { font-size: 15px; margin: 20px 0 8px; color: var(--text); }
-        p, li { font-size: 15px; line-height: 1.75; color: var(--text); letter-spacing: -0.2px; }
-        ul, ol { padding-left: 22px; }
-        li { margin-bottom: 6px; }
-        b, strong { font-weight: 600; }
-        .tip { background: var(--surface-2); padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.65; margin: 14px 0; color: var(--text-2); }
-        .tip b { color: var(--text); }
-        .step { background: #F0F8FF; border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 14px 0; }
-        table.t { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
-        table.t th, table.t td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--border); }
-        table.t th { background: var(--surface-2); font-weight: 600; }
-        .cta { display: block; text-align: center; background: var(--accent); color: white; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 600; margin: 28px 0 8px; font-size: 15px; }
-        .related { margin-top: 32px; padding-top: 24px; border-top: 2px solid var(--border); }
-        .related h3 { font-size: 14px; color: var(--text-2); margin-bottom: 12px; }
+        article { background: transparent; border: none; border-radius: 0; padding: 0; }
+        h1 { font-size: 27px; line-height: 1.4; font-weight: 700; letter-spacing: -0.03em; margin: 28px 0 14px; }
+        .meta { font-size: 13px; color: var(--text-3); margin-bottom: 6px; }
+        .byline { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+        .byline b { color: var(--text-2); font-weight: 600; }
+        .byline .sep { color: var(--line); }
+        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; padding-top: 0; border-top: none; line-height: 1.4; }
+        h3 { font-size: 17px; font-weight: 600; margin: 34px 0 10px; color: var(--text); }
+        p, li { font-size: 17px; line-height: 1.85; color: var(--text); letter-spacing: -0.01em; }
+        p { margin: 0 0 22px; }
+        ul, ol { padding-left: 20px; margin: 0 0 22px; }
+        li { margin-bottom: 8px; }
+        strong, b { font-weight: 600; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        /* 결론 박스 */
+        .answer-box { background: var(--tint); border-left: 3px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 20px; margin: 24px 0 30px; font-size: 17px; line-height: 1.8; color: var(--text); }
+        .answer-box b { color: var(--accent); font-weight: 600; }
+        /* 공식 인용 */
+        .official { background: var(--tint); border-radius: 12px; padding: 15px 17px; margin: 18px 0; font-size: 14.5px; color: var(--text-2); line-height: 1.75; }
+        .official b { color: var(--text); font-weight: 600; }
+        .official a { color: var(--text); }
+        /* 계산식 */
+        .formula { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 16px; color: var(--text); font-weight: 600; line-height: 1.6; }
+        /* 팁 */
+        .tip { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 15px; line-height: 1.75; color: var(--text-2); }
+        .tip b { color: var(--text); font-weight: 600; }
+        /* 주의 */
+        .warn-box { background: var(--warn-bg); border-left: 3px solid var(--warn); border-radius: 0 12px 12px 0; padding: 15px 18px; margin: 24px 0; font-size: 15px; color: var(--text-2); line-height: 1.75; }
+        .warn-box b { color: #B26B00; font-weight: 600; }
+        .warn-box a { color: #B26B00; }
+        /* 표 */
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 28px; }
+        table.t, table.u { font-size: 15px; }
+        th, td { text-align: left; padding: 14px 12px; font-size: 15px; line-height: 1.6; border-bottom: 1px solid var(--line); vertical-align: top; }
+        th { color: var(--text-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
+        td b { font-weight: 600; }
+        td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        /* CTA */
+        .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
+        .cta:hover { text-decoration: none; opacity: 0.94; }
+        /* 관련 */
+        .related { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+        .related h3 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; font-weight: 600; }
         .related-grid { display: grid; gap: 8px; }
-        .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
-        footer { margin-top: 24px; text-align: center; font-size: 12px; color: var(--text-3); }
-        footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
-        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
+        .related-grid a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; color: var(--text); text-decoration: none; font-size: 15.5px; font-weight: 600; }
+        .related-grid a:hover { background: #EEF2F6; text-decoration: none; }
+        /* 출처 */
+        .sources { margin-top: 40px; padding: 18px 20px; background: var(--tint); border-radius: 14px; }
+        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text-2); margin: 0 0 12px; }
         .sources ul { padding-left: 18px; margin: 0; }
-        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
-        .sources a { color: var(--accent); text-decoration: none; }
-        .sources a:hover { text-decoration: underline; }
-        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
-                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
-                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
-        .byline b { color: var(--text); font-weight: 600; }
-        .byline .sep { color: var(--text-3); }
+        .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
+        .sources a { color: var(--text-2); }
+        /* 푸터 */
+        footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
+        footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -97,7 +121,7 @@
         <ul>
             <li><b>민간분양</b>: 약 9~10%를 생애최초에 배정</li>
             <li><b>공공분양</b>: 약 25%를 배정 (민간보다 물량 많음)</li>
-            <li>가점이 아닌 <b>추첨제</b>로 당첨자 선정 (1순위 추첨 → 미달 시 2순위 추첨)</li>
+            <li>가점이 아닌 <b>추첨제</b>로 당첨자 선정 (1순위 추첨  미달 시 2순위 추첨)</li>
         </ul>
 
         <h2>핵심 자격 5가지 (전부 충족)</h2>
@@ -110,7 +134,7 @@
         </ol>
 
         <div class="tip">
-            <b>💡 1인 세대주도 가능한 경우</b><br/>
+            <b>1인 세대주도 가능한 경우</b><br/>
             본래 생애최초는 혼인 또는 자녀가 있어야 했으나, 2021년 개정으로 <b>1인 세대주도 추첨제 일부에 신청 가능</b>해졌습니다. 단, 신청 가능한 물량이 제한적이며 1순위가 아닌 2순위에 해당합니다.
         </div>
 
@@ -135,10 +159,10 @@
         </ul>
 
         <div class="tip">
-            <b>📋 계산 예시: 4인 가구 맞벌이, 생애최초</b><br/>
+            <b>계산 예시: 4인 가구 맞벌이, 생애최초</b><br/>
             4인 가구 100% 기준: 8,802,202원 (2025년 발표)<br/>
             140% 한도: 8,802,202 × 1.4 = <b>12,323,083원</b><br/>
-            → 가구 세전 월소득 1,230만원 이하면 자격 충족
+             가구 세전 월소득 1,230만원 이하면 자격 충족
         </div>
 
         <h2>자산 기준 (공공분양만)</h2>
@@ -164,7 +188,7 @@
         <h2>당첨자 선정 방식</h2>
         <p>생애최초는 점수제가 아닌 <b>추첨제</b>입니다. 신청자 모두에게 번호를 부여하고, 그중 무작위로 당첨자를 뽑습니다.</p>
         <div class="tip">
-            <b>💡 가점이 낮은 분들에게 유리:</b> 청약 가점이 40점 미만으로 일반공급 당첨이 어려운 분들에게는 생애최초가 사실상 가장 현실적인 트랙입니다. 추첨이라 운에 좌우되지만, 자격만 갖추면 누구나 동등한 확률입니다.
+            <b>가점이 낮은 분들에게 유리:</b> 청약 가점이 40점 미만으로 일반공급 당첨이 어려운 분들에게는 생애최초가 사실상 가장 현실적인 트랙입니다. 추첨이라 운에 좌우되지만, 자격만 갖추면 누구나 동등한 확률입니다.
         </div>
 
         <h2>5년 소득세 납부 증명 방법</h2>
@@ -183,7 +207,7 @@
             <li>관심 단지 모집공고 확인 — 생애최초 일정 (보통 특별공급 첫째 날)</li>
             <li>지정일에 청약 신청</li>
             <li>당첨자 발표 후 7일 이내 서류 제출</li>
-            <li>계약 → 중도금 → 잔금 → 입주</li>
+            <li>계약  중도금  잔금  입주</li>
         </ol>
 
         <h3>제출 서류</h3>
@@ -198,19 +222,19 @@
         </ul>
 
         <h2>자주 묻는 실수</h2>
-        <h3>❌ "예전에 부모님과 잠깐 산 적이 있는 집"을 본인 명의 주택으로 오해</h3>
+        <h3>"예전에 부모님과 잠깐 산 적이 있는 집"을 본인 명의 주택으로 오해</h3>
         <p>본인 명의로 소유한 적이 없으면 무주택입니다. 부모님 집에 같은 등본에 등재되어 있었던 것은 무관합니다.</p>
 
-        <h3>❌ "5년 소득세를 연속 5년"으로 해석</h3>
+        <h3>"5년 소득세를 연속 5년"으로 해석</h3>
         <p>누적 5년만 충족하면 됩니다. 군 복무, 유학, 휴직 등으로 중간에 공백이 있어도 무방합니다.</p>
 
-        <h3>❌ "1인 세대주는 생애최초 신청 불가"라고 잘못 안 분들</h3>
+        <h3>"1인 세대주는 생애최초 신청 불가"라고 잘못 안 분들</h3>
         <p>2020년 개정 이후 1인 세대주도 신청 가능합니다 (2순위). 다만 1순위 신청자가 많으면 사실상 당첨이 어려울 수 있습니다.</p>
 
-        <a href="/" class="cta">계산기로 생애최초 자격 확인하기 →</a>
+        <a href="/" class="cta">계산기로 생애최초 자격 확인하기 </a>
 
         <div class="sources">
-            <h3>📚 근거 자료 및 출처</h3>
+            <h3>근거 자료 및 출처</h3>
             <ul>
                 <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
                 <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
@@ -224,8 +248,8 @@
         <div class="related">
             <h3>관련 가이드</h3>
             <div class="related-grid">
-                <a href="/guide/income-check.html">📄 홈택스 원천징수영수증 떼는 법</a>
-                <a href="/guide/newlywed.html">📄 신혼부부 특별공급 자격 완전 정리</a>
+                <a href="/guide/income-check.html"> 홈택스 원천징수영수증 떼는 법</a>
+                <a href="/guide/newlywed.html"> 신혼부부 특별공급 자격 완전 정리</a>
             </div>
         </div>
     </article>

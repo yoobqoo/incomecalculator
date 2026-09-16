@@ -6,239 +6,325 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8D1NXGBRTR');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>육아휴직 중 청약, 소득은 어떻게 계산하나요? | 내집컷</title>
-    <meta name="description" content="육아휴직 중일 때 청약 소득 산정법. 국토교통부 공식 기준 — 휴직 전 정상재직 기간 소득으로 계산하며 휴직 중 받은 급여·성과금은 제외됩니다.">
+    <title>육아휴직 중 청약 소득 계산법 — 휴직기간 제외 기준 | 내집컷</title>
+    <meta name="description" content="육아휴직 중 청약 소득은 휴직기간을 제외하고 정상근무 기간 소득으로 계산합니다. 일부 휴직·전기간 휴직·복직 후·퇴사한 경우까지 상황별로 정리했습니다.">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="육아휴직 중 청약, 소득은 어떻게 계산하나요?">
-    <meta property="og:description" content="휴직 전 소득으로 계산 — 국토부 FAQ 공식 답변 기반">
+    <meta property="og:title" content="육아휴직 중 청약 소득 계산법">
+    <meta property="og:description" content="휴직기간은 빼고 정상근무 기간 소득으로 — 상황별 정리">
     <meta property="og:url" content="https://homecut.kr/guide/parental-leave.html">
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/parental-leave.html">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
-        :root { --bg:#FAFAFA; --surface:#FFFFFF; --surface-2:#F5F5F7; --text:#111113; --text-2:#6E6E73; --text-3:#AEAEB2; --accent:#007AFF; --warn:#FF9500; --border:#F0F0F2; }
-        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); margin: 0; padding: 20px 16px 48px; color: var(--text); display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 720px; }
-        .brand { display: flex; align-items: center; gap: 10px; padding: 4px 4px 14px; text-decoration: none; }
-        .brand-logo { width: 56px; height: 56px; }
-        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.25; }
-        .crumbs { font-size: 13px; color: var(--text-3); margin-bottom: 8px; }
+        :root {
+            --bg:#FFFFFF; --text:#191F28; --text-2:#4E5968; --text-3:#8B95A1;
+            --accent:#3182F6; --line:#F2F4F6; --tint:#F9FAFB;
+        }
+        * { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text); margin: 0;
+            display: flex; justify-content: center;
+            -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+        }
+        .wrap { width: 100%; max-width: 680px; padding: 0 24px 80px; }
+        /* 상단 브랜드 */
+        .top { display: flex; align-items: center; gap: 8px; padding: 24px 0 8px; text-decoration: none; }
+        .top img { width: 30px; height: 30px; }
+        .top span { font-size: 14px; font-weight: 600; color: var(--text-2); }
+        .crumbs { font-size: 13px; color: var(--text-3); padding: 6px 0 0; }
         .crumbs a { color: var(--text-3); text-decoration: none; }
-        article { background: var(--surface); border-radius: 20px; padding: 28px 24px; border: 1px solid var(--border); }
-        h1 { font-size: 25px; line-height: 1.4; letter-spacing: -0.5px; margin: 0 0 8px; }
-        .meta { font-size: 13px; color: var(--text-3); margin-bottom: 20px; }
-        h2 { font-size: 19px; margin: 32px 0 12px; letter-spacing: -0.3px; padding-top: 8px; border-top: 1px solid var(--border); }
-        h2:first-of-type { border-top: none; padding-top: 0; }
-        h3 { font-size: 15px; margin: 20px 0 8px; color: var(--text); font-weight: 600; }
-        p, li { font-size: 15px; line-height: 1.75; color: var(--text); letter-spacing: -0.2px; }
-        ul, ol { padding-left: 22px; }
-        li { margin-bottom: 6px; }
-        b, strong { font-weight: 600; }
-        a { color: var(--accent); }
-        .answer-box { background: #EAF4FF; border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 15px; line-height: 1.7; }
-        .answer-box b { color: #0060C7; }
-        .official { background: #FFF8EC; border-left: 3px solid var(--warn); padding: 12px 15px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: 14px; color: var(--text-2); line-height: 1.7; }
-        .official b { color: #BF5700; }
-        .formula { background: #F0F8FF; border-left: 3px solid var(--accent); padding: 12px 15px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: 14px; color: var(--text); font-weight: 600; }
-        .tip { background: var(--surface-2); padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.7; margin: 14px 0; color: var(--text-2); }
-        .tip b { color: var(--text); }
-        .warn-box { background: #FFF0F0; border: 1px solid #FFD6D6; padding: 14px 16px; border-radius: 10px; margin: 24px 0; font-size: 13px; color: #C0392B; line-height: 1.7; }
-        .warn-box b { color: #A03020; }
-        .cta { display: block; text-align: center; background: var(--accent); color: white; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 600; margin: 28px 0 8px; font-size: 15px; }
-        .related { margin-top: 32px; padding-top: 24px; border-top: 2px solid var(--border); }
-        .related h3 { font-size: 14px; color: var(--text-2); margin-bottom: 12px; }
-        .related-grid { display: grid; gap: 8px; }
-        .related-grid a { display: block; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
-        footer { margin-top: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
+        /* 제목 영역 */
+        h1 { font-size: 27px; line-height: 1.4; font-weight: 700; letter-spacing: -0.03em; margin: 28px 0 14px; }
+        .byline { font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+        .byline b { color: var(--text-2); font-weight: 600; }
+        /* 본문 */
+        p { font-size: 17px; line-height: 1.85; color: var(--text); margin: 0 0 22px; }
+        .lead { font-size: 18px; line-height: 1.8; color: var(--text); margin: 0 0 32px; }
+        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; line-height: 1.4; }
+        h3 { font-size: 17px; font-weight: 600; margin: 34px 0 10px; color: var(--text); }
+        strong, b { font-weight: 600; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        /* 상황 선택 */
+        .pick { background: var(--tint); border-radius: 16px; padding: 8px; margin: 0 0 36px; }
+        .pick a { display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 16px 18px; border-radius: 12px; text-decoration: none; color: var(--text); transition: background 0.15s; }
+        .pick a:hover { background: #EEF2F6; text-decoration: none; }
+        .pick a + a { border-top: 1px solid #EDF0F3; }
+        .pick .q { font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; }
+        .pick .arw { color: var(--text-3); font-size: 15px; flex-shrink: 0; }
+        /* 도표 */
+        .figure { margin: 4px 0 36px; }
+        .figure svg { width: 100%; height: auto; display: block; }
+        .figure figcaption { font-size: 13.5px; color: var(--text-3); text-align: center; margin-top: 14px; line-height: 1.6; }
+        /* 케이스 박스 */
+        .case { border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px 8px; margin: 0 0 14px; }
+        .case h2 { margin: 0 0 14px; padding-top: 0; font-size: 19px; display: flex; align-items: center; gap: 11px; line-height: 1.4; }
+        .case .num { display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+        .case p:last-of-type { margin-bottom: 16px; }
+        /* 비교 그림 */
+        .compare { display: flex; gap: 12px; margin: 22px 0 8px; }
+        .cmp { flex: 1; background: var(--tint); border-radius: 14px; padding: 18px 18px; }
+        .cmp .who { font-size: 12.5px; font-weight: 600; color: var(--text-3); margin-bottom: 10px; line-height: 1.5; }
+        .cmp .verdict { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+        .cmp.out .verdict { color: var(--text-2); }
+        .cmp.in .verdict { color: var(--accent); }
+        .cmp .sub { font-size: 13px; color: var(--text-3); margin-top: 7px; line-height: 1.55; }
+        @media (max-width: 460px) { .compare { flex-direction: column; } }
+        /* 구분선 */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 52px 0; }
+        /* 예시 */
+        .ex { background: var(--tint); border-radius: 14px; padding: 20px 22px; margin: 20px 0; }
+        .ex .t { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; letter-spacing: 0.02em; }
+        .ex p { font-size: 15px; line-height: 1.75; margin: 0; color: var(--text-2); }
+        .ex .calc { font-size: 16px; color: var(--text); font-weight: 600; margin-top: 8px; }
+        /* 주의 한 줄 */
+        .note { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; margin: 24px 0; }
+        .note p { font-size: 15.5px; line-height: 1.75; color: var(--text-2); margin: 0; }
+        .note b { color: var(--text); }
+        /* 표 */
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 28px; }
+        th, td { text-align: left; padding: 15px 14px; font-size: 15px; line-height: 1.6; border-bottom: 1px solid var(--line); vertical-align: top; }
+        th { color: var(--text-3); font-weight: 600; font-size: 13px; }
+        td b { font-weight: 600; }
+        /* 서류 리스트 */
+        ul.doc { list-style: none; padding: 0; margin: 0 0 24px; }
+        ul.doc li { font-size: 16px; line-height: 1.7; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--text); }
+        ul.doc li span { display: block; font-size: 14px; color: var(--text-3); margin-top: 3px; }
+        /* FAQ */
+        .faq { margin: 8px 0 24px; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16.5px; font-weight: 600; padding: 20px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 18px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '−'; }
+        .faq p { font-size: 15.5px; line-height: 1.8; color: var(--text-2); padding: 0 0 20px; margin: 0; }
+        /* CTA */
+        .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600;
+            padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
+        .cta:hover { text-decoration: none; opacity: 0.94; }
+        /* 근거 */
+        .refs { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+        .refs h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .refs table { margin: 0 0 20px; }
+        .refs td { padding: 11px 12px; font-size: 14px; color: var(--text-2); }
+        .refs td:first-child { color: var(--text-3); white-space: nowrap; width: 72px; }
+        .refs ul { padding-left: 18px; margin: 0; }
+        .refs li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); }
+        .refs a { color: var(--text-2); }
+        /* 관련 */
+        .rel { margin-top: 40px; }
+        .rel h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .rel a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; text-decoration: none;
+            color: var(--text); font-size: 15.5px; font-weight: 600; margin-bottom: 8px; }
+        .rel a:hover { background: #EEF2F6; text-decoration: none; }
+        footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-        .sources { margin-top: 28px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; }
-        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 10px; }
-        .sources ul { padding-left: 18px; margin: 0; }
-        .sources li { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 5px; }
-        .sources a { color: var(--accent); text-decoration: none; }
-        .sources a:hover { text-decoration: underline; }
-        .byline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
-                  padding: 12px 14px; background: var(--surface-2); border-radius: 10px;
-                  font-size: 13px; color: var(--text-2); margin: 0 0 20px; }
-        .byline b { color: var(--text); font-weight: 600; }
-        .byline .sep { color: var(--text-3); }
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="/" class="brand">
-        <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
-        <span class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</span>
+<div class="wrap">
+    <a href="/" class="top">
+        <img src="/logo.svg" alt="내집컷">
+        <span>내집컷</span>
     </a>
-    <div class="crumbs"><a href="/">홈</a> &rsaquo; 상황별 가이드 &rsaquo; 육아휴직 중 청약 소득</div>
-    <article>
-        <h1>육아휴직 중인데<br/>청약 소득은 어떻게 계산하나요?</h1>
-        <div class="meta">국토교통부 2024 주택청약 FAQ 기반 · 5분</div>
-        <div class="byline">
-            <span>작성 <b>내집컷 편집팀</b></span>
-            <span class="sep">·</span>
-            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
-            <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
-        </div>
+    <div class="crumbs"><a href="/">홈</a> › <a href="/guide/">가이드</a> › 육아휴직 중 청약 소득</div>
 
-        <div class="answer-box">
-            <b>결론부터:</b> 육아휴직 기간은 소득 계산에서 <b>제외</b>됩니다. <b>휴직 전 정상적으로 근무한 기간의 소득</b>을 그 기간으로 나눠 월평균소득을 산정해요. 휴직 중 받은 급여·성과금도 포함하지 않습니다.
-        </div>
+    <h1>육아휴직 중 청약 소득,<br>어떻게 계산할까요?</h1>
+    <div class="byline">내집컷 편집팀 · 국토교통부 주택청약 FAQ 기준 · 상황별 3분 정리</div>
 
-        <h2>왜 휴직 전 소득으로 계산하나요?</h2>
-        <p>청약 소득 심사는 "평소 벌이"를 보는 것이 목적입니다. 육아휴직 중에는 소득이 크게 줄거나 없기 때문에, 그 기간을 그대로 반영하면 실제 소득 수준을 왜곡하게 됩니다. 그래서 국토교통부는 <b>휴직 기간을 빼고, 정상 근무한 기간의 소득만</b>으로 월평균을 계산하도록 규정하고 있습니다.</p>
+    <p class="lead">육아휴직 중에 청약을 넣으려니 소득을 어떻게 잡아야 할지 막막하셨을 거예요. 결론부터 말씀드리면, <b>육아휴직 기간은 계산에서 빼고 정상적으로 일했던 기간의 소득만</b> 봅니다. 휴직 중에 받은 급여나 성과금도 넣지 않고요.</p>
 
-        <h2>상황별 계산법</h2>
+    <figure class="figure" aria-label="1년 중 정상근무한 기간의 소득만 계산에 넣고 육아휴직 기간은 제외하는 방식을 나타낸 타임라인">
+        <svg viewBox="0 0 640 96" role="img" xmlns="http://www.w3.org/2000/svg">
+            <text x="190" y="20" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="#3182F6">정상근무 · 7개월</text>
+            <text x="502" y="20" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="14" font-weight="600" fill="#8B95A1">육아휴직 · 제외</text>
+            <rect x="11" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="34" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">1</text>
+            <rect x="63" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="86" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">2</text>
+            <rect x="115" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="138" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">3</text>
+            <rect x="167" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="190" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">4</text>
+            <rect x="219" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="242" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">5</text>
+            <rect x="271" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="294" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">6</text>
+            <rect x="323" y="34" width="46" height="46" rx="9" fill="#3182F6"/>
+            <text x="346" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">7</text>
+            <rect x="375" y="34" width="46" height="46" rx="9" fill="#EAEDF0"/>
+            <text x="398" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#8B95A1">8</text>
+            <rect x="427" y="34" width="46" height="46" rx="9" fill="#EAEDF0"/>
+            <text x="450" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#8B95A1">9</text>
+            <rect x="479" y="34" width="46" height="46" rx="9" fill="#EAEDF0"/>
+            <text x="502" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#8B95A1">10</text>
+            <rect x="531" y="34" width="46" height="46" rx="9" fill="#EAEDF0"/>
+            <text x="554" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#8B95A1">11</text>
+            <rect x="583" y="34" width="46" height="46" rx="9" fill="#EAEDF0"/>
+            <text x="606" y="57" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#8B95A1">12</text>
+        </svg>
+        <figcaption>파란색 정상근무 기간의 소득만 계산에 넣고, 회색 육아휴직 기간은 뺍니다</figcaption>
+    </figure>
 
-        <h3>① 전년도 일부만 육아휴직한 경우</h3>
-        <div class="formula">
-            월평균소득 = 정상근무 기간의 총급여 ÷ 정상근무 개월수
-        </div>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q307</a></b><br/>
-            "전년도에 정상적으로 근무한 기간 동안의 소득을 정상적으로 근무한 기간으로 나누어 월평균소득을 산정합니다. 정상재직기간에는 출산휴가 기간은 포함하되, <b>육아휴직 기간은 제외</b>합니다."
-        </div>
-        <div class="tip">
-            <b>💡 예시:</b> 1~7월 정상근무(총급여 4,200만원) + 8~12월 육아휴직<br/>
-            → 4,200만 ÷ 7개월 × 12 = <b>7,200만원</b>으로 환산해서 입력
-        </div>
+    <p>다만 작년에 며칠만 쉬었는지, 한 해를 통째로 쉬었는지, 올해 복직했는지에 따라 기준이 조금씩 달라집니다. 아래에서 내 상황을 먼저 골라보세요.</p>
 
-        <h3>② 전년도 전체를 휴직하고 아직 복직 안 한 경우</h3>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q305</a></b><br/>
-            "전년도 전(全)기간 휴직하고 현재에도 복직하지 않았다면 <b>육아휴직 전 정상재직한 기간의 소득</b>으로 월평균소득을 산정합니다. 휴직기간이 명기된 재직증명서와 휴직 전 정상재직한 연도의 근로소득 원천징수영수증을 제출합니다."
-        </div>
-        <p>즉, 전전년도 등 <b>휴직 이전에 정상 근무했던 해</b>의 원천징수영수증 21번 총급여액을 기준으로 계산합니다.</p>
+    <div class="pick">
+        <a href="#case1"><span class="q">작년에 일부 기간만 육아휴직했어요</span><span class="arw">›</span></a>
+        <a href="#case2"><span class="q">작년 내내 휴직했고, 아직 복직 전이에요</span><span class="arw">›</span></a>
+        <a href="#case3"><span class="q">작년 내내 휴직했고, 올해 복직했어요</span><span class="arw">›</span></a>
+        <a href="#case4"><span class="q">휴직하다 퇴사해서 지금은 무직이에요</span><span class="arw">›</span></a>
+    </div>
 
-        <h3>③ 전년도 전체 휴직 후 올해 복직한 경우</h3>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q306</a></b><br/>
-            "금년도 복직한 이후 기간을 기준으로 월평균소득을 산정합니다. 복직 이후 정상재직한 기간에 대한 급여를 정상재직 기간으로 나누어 월평균소득을 산정합니다."
+    <section class="case" id="case1">
+        <h2><span class="num">1</span>작년에 일부 기간만 육아휴직</h2>
+        <p>작년에 정상적으로 근무한 기간이 있다면, 그 기간의 소득만 보고 계산합니다. 육아휴직으로 쉰 달은 아예 빼고요. 예를 들어 1월부터 7월까지 일하고 8월부터 휴직에 들어갔다면, 1~7월 소득만 봅니다.</p>
+        <p>이 기간의 총급여를 실제로 일한 개월 수로 나누면 월평균소득이 나옵니다.</p>
+        <div class="ex">
+            <div class="t">예시</div>
+            <p>1~7월 정상근무, 이 기간 총급여 4,200만 원</p>
+            <p class="calc">월평균소득 = 4,200만 원 ÷ 7개월 = <b>600만 원</b></p>
         </div>
-        <div class="tip">
-            <b>💡 예시:</b> 3월 복직 후 모집공고일(예: 8월)까지 5개월간 2,500만원 수령<br/>
-            → 2,500만 ÷ 5개월 × 12 = <b>6,000만원</b>으로 환산
-        </div>
+        <p>출산휴가는 육아휴직과 다르게 봅니다. <b>출산휴가 기간은 정상근무한 것으로 쳐서 포함</b>하고, 육아휴직 기간만 뺍니다.</p>
+    </section>
 
-        <h2>육아휴직 중 받은 급여는 포함되나요?</h2>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:#BF5700;">📌 국토부 FAQ Q309</a></b><br/>
-            "육아휴직기간은 정상재직기간이 아니므로 해당 기간에 받은 급여(상여, 성과금 포함)는 소득금액 산정에 포함치 않습니다."
-        </div>
-        <p>육아휴직 급여(고용보험에서 나오는 것 + 회사가 주는 것)는 <b>소득에 포함하지 않습니다</b>. 단, 예외가 하나 있어요. 아래를 보세요.</p>
+    <section class="case" id="case2">
+        <h2><span class="num">2</span>작년 내내 휴직, 아직 복직 전</h2>
+        <p>작년 한 해를 전부 육아휴직으로 보냈고 지금도 복직하지 않았다면, <b>휴직에 들어가기 전 정상적으로 근무했던 해</b>의 소득을 봅니다. 보통은 육아휴직 직전 연도의 근로소득 원천징수영수증에 적힌 총급여액(21번 항목)이 기준이 됩니다.</p>
+        <p>예를 들어 2025년 내내 휴직했고 2026년 청약 시점에도 복직 전이라면, 정상 근무했던 2024년 소득으로 계산하는 식이에요.</p>
+    </section>
 
-        <div class="warn-box">
-            <b>⚠️ 예외 — 휴직 후 퇴사해서 현재 무직이라면?</b><br/>
-            육아휴직 후 복직하지 않고 퇴사해 <b>모집공고일 현재 무직</b>이라면, 무직자 기준(전년도 1.1.~모집공고일까지 총소득 ÷ 해당기간)으로 계산합니다. 이때는 <b>육아휴직 기간 중 받은 급여도 총소득에 포함</b>됩니다 (Q303). 상황이 다르니 <a href="/guide/unemployed.html">무직 청약 가이드</a>를 확인하세요.
+    <section class="case" id="case3">
+        <h2><span class="num">3</span>작년 내내 휴직, 올해 복직</h2>
+        <p>작년은 전부 휴직이었지만 올해 복직했다면, 이번에는 <b>복직한 뒤 받은 급여</b>를 기준으로 봅니다. 복직 이후 일한 기간의 급여를 그 개월 수로 나눠 월평균을 냅니다.</p>
+        <div class="ex">
+            <div class="t">예시</div>
+            <p>3월 복직, 청약 시점(8월)까지 5개월간 2,500만 원 수령</p>
+            <p class="calc">월평균소득 = 2,500만 원 ÷ 5개월 = <b>500만 원</b></p>
         </div>
+    </section>
 
-        <h2>필요 서류</h2>
+    <section class="case" id="case4">
+        <h2><span class="num">4</span>휴직하다 퇴사, 지금 무직</h2>
+        <p>이 경우는 기준이 완전히 다릅니다. 육아휴직 후 복직하지 않고 퇴사해서 청약 시점에 무직이라면, <b>무직자 기준</b>으로 소득을 계산해요. 이때는 앞선 경우와 달리 <b>육아휴직 중 받았던 급여도 총소득에 포함</b>될 수 있습니다.</p>
+        <p>계산 방식이 아예 다르니 <a href="/guide/unemployed.html">무직일 때 청약 소득 계산법</a>에서 따로 확인하시는 걸 권합니다.</p>
+    </section>
+
+    <h2>휴직 중 받은 급여는 소득에 넣나요?</h2>
+    <p>넣지 않습니다. 육아휴직 기간은 정상근무한 기간이 아니기 때문에, 그동안 받은 급여는 물론 상여와 성과금까지 청약 소득 계산에서 뺍니다. 고용보험에서 나오는 육아휴직 급여도 마찬가지예요. 단 하나, 퇴사해서 무직이 된 경우만 예외입니다.</p>
+
+    <div class="compare">
+        <div class="cmp out">
+            <div class="who">육아휴직 중이거나<br>복직할 예정</div>
+            <div class="verdict">휴직 급여 제외</div>
+            <div class="sub">정상근무 기간의 소득만 봐요</div>
+        </div>
+        <div class="cmp in">
+            <div class="who">휴직 후 퇴사해<br>지금 무직</div>
+            <div class="verdict">휴직 급여 포함</div>
+            <div class="sub">무직자 기준으로 넘어가요</div>
+        </div>
+    </div>
+
+    <h2>어떤 서류가 필요한가요?</h2>
+    <ul class="doc">
+        <li>휴직 기간이 명기된 재직증명서<span>회사 직인이 찍힌 것</span></li>
+        <li>휴직 전 정상근무 연도의 근로소득 원천징수영수증<span>21번 총급여액을 확인</span></li>
+        <li>복직한 경우, 복직 이후 급여를 확인할 수 있는 원천징수부<span>또는 갑종근로소득 원천징수영수증</span></li>
+    </ul>
+    <p>공고마다 요구하는 서류가 조금씩 다를 수 있으니, 신청 전에는 모집공고문을 꼭 확인하세요.</p>
+
+    <h2>내집컷 계산기에는 어떻게 넣나요?</h2>
+    <p>계산기에서 소득 유형을 <b>근로소득자</b>로 고른 뒤, 위에서 구한 <b>월평균소득에 12를 곱한 값</b>을 넣으면 소득분위가 바로 나옵니다. 앞선 예시라면 월평균 600만 원 × 12 = 7,200만 원을 입력하는 식이에요.</p>
+    <div class="note">
+        <p>여기서 7,200만 원은 <b>계산기에 넣기 위한 연환산 값</b>일 뿐, 실제로 받은 연봉(4,200만 원)이 아닙니다. 청약 심사도 이 월평균소득을 기준표와 비교하는 것이지 12배 한 금액을 보는 게 아니에요.</p>
+    </div>
+
+    <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기</a>
+
+    <hr class="div">
+
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+        <details>
+            <summary>출산휴가 기간도 빼나요?</summary>
+            <p>아니요. 출산휴가는 정상근무한 기간에 포함하고, 육아휴직 기간만 뺍니다. 둘을 헷갈리기 쉬운데 기준이 다릅니다.</p>
+        </details>
+        <details>
+            <summary>휴직 중 받은 성과금도 빼나요?</summary>
+            <p>네. 육아휴직 기간에 받은 급여·상여·성과금은 원칙적으로 청약 소득 계산에 넣지 않습니다.</p>
+        </details>
+        <details>
+            <summary>복직한 지 얼마 안 됐는데 신청할 수 있나요?</summary>
+            <p>복직 후 일한 기간의 급여를 그 개월 수로 나눠 월평균소득을 냅니다. 기간이 짧아도 계산은 가능하지만, 공고별 제출서류 기준은 반드시 확인하세요.</p>
+        </details>
+        <details>
+            <summary>작년 소득이 거의 없으면 청약 소득도 낮게 보나요?</summary>
+            <p>육아휴직 때문에 줄어든 소득은 그대로 반영하지 않습니다. 휴직 기간을 빼고 정상근무한 기간의 소득으로 다시 계산합니다.</p>
+        </details>
+    </div>
+
+    <div class="rel">
+        <h2>관련 가이드</h2>
+        <a href="/guide/maternity-leave.html">출산휴가 중 청약 소득 계산법</a>
+        <a href="/guide/unemployed.html">무직일 때 청약 소득 계산법</a>
+        <a href="/guide/edge-cases.html">이직·복합소득·폐업 등 특이 케이스</a>
+    </div>
+
+    <div class="refs">
+        <h2>공식 근거</h2>
+        <table>
+            <tr><td>Q305</td><td>전년도 전(全)기간 휴직 후 미복직자의 소득 산정</td></tr>
+            <tr><td>Q306</td><td>전년도 전기간 휴직 후 금년도 복직자의 소득 산정</td></tr>
+            <tr><td>Q307</td><td>전년도 일부 육아휴직자의 소득 산정(출산휴가 포함·육아휴직 제외)</td></tr>
+            <tr><td>Q309</td><td>육아휴직 기간 중 급여·상여·성과금 제외</td></tr>
+        </table>
         <ul>
-            <li><b>휴직 기간이 명기된 재직증명서</b> (직인 날인)</li>
-            <li>휴직 전 정상근무 연도의 <b>근로소득 원천징수영수증</b> (21번 총급여액)</li>
-            <li>복직한 경우: 복직 이후의 갑종근로소득 원천징수영수증 또는 소득자별 근로소득 원천징수부</li>
+            <li>출처: <a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05)</a></li>
+            <li>법령: <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙</a> · 신청: <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> · 발급: <a href="https://hometax.go.kr" target="_blank" rel="noopener">홈택스</a></li>
         </ul>
+    </div>
 
-        <h2>본 계산기 입력 방법</h2>
-        <div class="tip">
-            휴직 기간을 뺀 <b>정상근무 기간 기준 환산 연봉</b>을 계산해서, 계산기의 "가구 소득 유형 → 근로소득자"를 선택한 뒤 그 금액을 입력하면 소득분위가 바로 나옵니다.
-        </div>
-
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기 →</a>
-
-        <div class="sources">
-            <h3>📚 근거 자료 및 출처</h3>
-            <ul>
-                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
-                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
-                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
-                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
-                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
-                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
-            </ul>
-        </div>
-
-        <div class="related">
-            <h3>관련 상황 가이드</h3>
-            <div class="related-grid">
-                <a href="/guide/maternity-leave.html">🤰 출산휴가 중 청약 소득 계산법</a>
-                <a href="/guide/unemployed.html">🏠 무직일 때 청약 소득 계산법</a>
-                <a href="/guide/edge-cases.html">📚 특이 케이스 총정리 (이직·복합·폐업)</a>
-            </div>
-        </div>
-    </article>
     <footer>
-        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>
     </footer>
 </div>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Article",
-      "headline": "육아휴직 중인데 청약 소득은 어떻게 계산하나요?",
-      "description": "육아휴직 중일 때 청약 소득 산정법. 국토교통부 공식 기준 — 휴직 전 정상재직 기간 소득으로 계산하며 휴직 중 받은 급여·성과금은 제외됩니다.",
+      "headline": "육아휴직 중 청약 소득 계산법 — 휴직기간 제외 기준",
+      "description": "육아휴직 중 청약 소득은 휴직기간을 제외하고 정상근무 기간 소득으로 계산합니다. 일부 휴직·전기간 휴직·복직 후·퇴사한 경우까지 상황별로 정리했습니다.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
       "dateModified": "2026-07-22",
-      "author": {
-        "@type": "Person",
-        "name": "unspired"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "내집컷",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://homecut.kr/logo.svg"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://homecut.kr/guide/parental-leave.html"
-      },
+      "author": { "@type": "Organization", "name": "내집컷 편집팀" },
+      "publisher": { "@type": "Organization", "name": "내집컷", "logo": { "@type": "ImageObject", "url": "https://homecut.kr/logo.svg" } },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://homecut.kr/guide/parental-leave.html" },
       "image": "https://homecut.kr/og.png",
       "isBasedOn": "국토교통부 2024 주택청약 FAQ"
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "홈",
-          "item": "https://homecut.kr/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "상황별 가이드"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "육아휴직 중 청약 소득",
-          "item": "https://homecut.kr/guide/parental-leave.html"
-        }
+        { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://homecut.kr/" },
+        { "@type": "ListItem", "position": 2, "name": "청약 소득 가이드", "item": "https://homecut.kr/guide/" },
+        { "@type": "ListItem", "position": 3, "name": "육아휴직 중 청약 소득", "item": "https://homecut.kr/guide/parental-leave.html" }
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "육아휴직 중인데 청약 소득은 어떻게 계산하나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "육아휴직 기간은 소득 계산에서 제외됩니다. 휴직 전 정상적으로 근무한 기간의 소득을 그 기간으로 나눠 월평균소득을 산정해요. 휴직 중 받은 급여·성과금도 포함하지 않습니다."
-          }
-        }
+        { "@type": "Question", "name": "출산휴가 기간도 청약 소득 계산에서 빼나요?", "acceptedAnswer": { "@type": "Answer", "text": "아니요. 출산휴가는 정상근무한 기간에 포함하고, 육아휴직 기간만 제외합니다." } },
+        { "@type": "Question", "name": "육아휴직 중 받은 성과금도 소득에서 빼나요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 육아휴직 기간에 받은 급여·상여·성과금은 원칙적으로 청약 소득 계산에 포함하지 않습니다." } },
+        { "@type": "Question", "name": "복직한 지 얼마 안 됐는데 청약 신청할 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "복직 후 정상근무한 기간의 급여를 그 개월 수로 나눠 월평균소득을 산정합니다. 기간이 짧아도 계산은 가능하지만 공고별 제출서류 기준을 확인해야 합니다." } }
       ]
     }
   ]
