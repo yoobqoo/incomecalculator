@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5180948563619303" crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8D1NXGBRTR"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-8D1NXGBRTR');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8D1NXGBRTR');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈택스에서 원천징수영수증 떼는 법 - 청약 세전 연봉 확인 | 내집컷</title>
-    <meta name="description" content="청약 소득 심사용 원천징수영수증 발급 방법. 홈택스 접속부터 21번 칸 '총급여' 확인까지 5분 만에 따라하는 가이드.">
+    <title>홈택스 원천징수영수증 떼는 법 — 21번 총급여액 확인 | 내집컷</title>
+    <meta name="description" content="청약 소득 증빙용 원천징수영수증을 홈택스에서 5분 만에 발급받는 법. 21번 총급여액이 청약에 쓰이는 세전 연봉이며, 맞벌이 합산·사업자 종합소득금액까지 단계별로 정리했습니다.">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="홈택스에서 원천징수영수증 떼는 법">
-    <meta property="og:description" content="청약 세전 연봉 확인을 위한 5분 가이드.">
+    <meta property="og:title" content="원천징수영수증 21번, 홈택스에서 떼는 법">
+    <meta property="og:description" content="원천징수영수증 21번 총급여액 확인">
     <meta property="og:url" content="https://homecut.kr/guide/income-check.html">
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/income-check.html">
@@ -30,203 +23,182 @@
         * { box-sizing: border-box; }
         html { -webkit-text-size-adjust: 100%; }
         body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
-        .container { width: 100%; max-width: 680px; padding: 0 24px 80px; }
-        .brand { display: flex; align-items: center; gap: 8px; padding: 24px 0 6px; text-decoration: none; }
-        .brand-logo { width: 30px; height: 30px; }
-        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.3; }
-        .crumbs { font-size: 13px; color: var(--text-3); margin: 6px 0 0; }
+        .wrap { width: 100%; max-width: 680px; padding: 0 24px 80px; }
+        .top { display: flex; align-items: center; gap: 8px; padding: 24px 0 8px; text-decoration: none; }
+        .top img { width: 30px; height: 30px; }
+        .top span { font-size: 14px; font-weight: 600; color: var(--text-2); }
+        .crumbs { font-size: 13px; color: var(--text-3); padding: 6px 0 0; }
         .crumbs a { color: var(--text-3); text-decoration: none; }
-        article { background: transparent; border: none; border-radius: 0; padding: 0; }
         h1 { font-size: 27px; line-height: 1.4; font-weight: 700; letter-spacing: -0.03em; margin: 28px 0 14px; }
-        .meta { font-size: 13px; color: var(--text-3); margin-bottom: 6px; }
-        .byline { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+        .byline { font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
         .byline b { color: var(--text-2); font-weight: 600; }
-        .byline .sep { color: var(--line); }
-        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; padding-top: 0; border-top: none; line-height: 1.4; }
-        h3 { font-size: 17px; font-weight: 600; margin: 34px 0 10px; color: var(--text); }
-        p, li { font-size: 17px; line-height: 1.85; color: var(--text); letter-spacing: -0.01em; }
-        p { margin: 0 0 22px; }
-        ul, ol { padding-left: 20px; margin: 0 0 22px; }
-        li { margin-bottom: 8px; }
+        p { font-size: 17px; line-height: 1.85; color: var(--text); margin: 0 0 22px; }
+        .lead { font-size: 18px; line-height: 1.8; margin: 0 0 32px; }
+        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; line-height: 1.4; }
+        h3 { font-size: 17px; font-weight: 600; margin: 30px 0 10px; }
         strong, b { font-weight: 600; }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        /* 결론 박스 */
-        .answer-box { background: var(--tint); border-left: 3px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 20px; margin: 24px 0 30px; font-size: 17px; line-height: 1.8; color: var(--text); }
-        .answer-box b { color: var(--accent); font-weight: 600; }
-        /* 공식 인용 */
-        .official { background: var(--tint); border-radius: 12px; padding: 15px 17px; margin: 18px 0; font-size: 14.5px; color: var(--text-2); line-height: 1.75; }
-        .official b { color: var(--text); font-weight: 600; }
-        .official a { color: var(--text); }
-        /* 계산식 */
-        .formula { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 16px; color: var(--text); font-weight: 600; line-height: 1.6; }
-        /* 팁 */
-        .tip { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 15px; line-height: 1.75; color: var(--text-2); }
-        .tip b { color: var(--text); font-weight: 600; }
-        /* 주의 */
-        .warn-box { background: var(--warn-bg); border-left: 3px solid var(--warn); border-radius: 0 12px 12px 0; padding: 15px 18px; margin: 24px 0; font-size: 15px; color: var(--text-2); line-height: 1.75; }
-        .warn-box b { color: #B26B00; font-weight: 600; }
-        .warn-box a { color: #B26B00; }
-        /* 표 */
-        table { width: 100%; border-collapse: collapse; margin: 8px 0 28px; }
-        table.t, table.u { font-size: 15px; }
+        .figure { margin: 8px 0 30px; }
+        .figure svg { width: 100%; height: auto; display: block; }
+        .figure figcaption { font-size: 13.5px; color: var(--text-3); text-align: center; margin-top: 14px; line-height: 1.6; }
+        .case { border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; margin: 0 0 12px; }
+        .case h3 { margin: 0 0 8px; font-size: 17px; display: flex; align-items: center; gap: 11px; line-height: 1.4; }
+        .case .num { display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+        .case p { font-size: 15.5px; line-height: 1.72; color: var(--text-2); margin: 0 0 10px; }
+        .case p:last-child { margin-bottom: 0; }
+        .case p b { color: var(--text); }
+        .compare { display: flex; gap: 12px; margin: 20px 0 8px; }
+        .cmp { flex: 1; background: var(--tint); border-radius: 14px; padding: 18px; }
+        .cmp .who { font-size: 12.5px; font-weight: 600; color: var(--text-3); margin-bottom: 10px; line-height: 1.5; }
+        .cmp .verdict { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+        .cmp.out .verdict { color: var(--text-2); }
+        .cmp.in .verdict { color: var(--accent); }
+        .cmp .sub { font-size: 13px; color: var(--text-3); margin-top: 7px; line-height: 1.55; }
+        @media (max-width: 460px) { .compare { flex-direction: column; } }
+        .ex { background: var(--tint); border-radius: 14px; padding: 20px 22px; margin: 20px 0; }
+        .ex .t { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+        .ex p { font-size: 15px; line-height: 1.75; margin: 0 0 4px; color: var(--text-2); }
+        .ex .calc { font-size: 16px; color: var(--text); font-weight: 600; margin-top: 8px; }
+        .note { border-left: 3px solid var(--warn); background: var(--warn-bg); border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 24px 0; }
+        .note p { font-size: 15.5px; line-height: 1.75; color: var(--text-2); margin: 0; }
+        .note b { color: #B26B00; }
+        .quote { background: var(--tint); border-radius: 12px; padding: 15px 17px; margin: 16px 0; font-size: 14.5px; color: var(--text-2); line-height: 1.75; }
+        .quote .src { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-3); margin-bottom: 8px; }
+        .quote a { color: var(--text-2); }
+        .formula { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 16px 0; font-size: 15.5px; color: var(--text); font-weight: 600; line-height: 1.6; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 24px; }
         th, td { text-align: left; padding: 14px 12px; font-size: 15px; line-height: 1.6; border-bottom: 1px solid var(--line); vertical-align: top; }
-        th { color: var(--text-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
+        th { color: var(--text-3); font-weight: 600; font-size: 13px; }
         td b { font-weight: 600; }
-        td.num { text-align: right; font-variant-numeric: tabular-nums; }
-        /* CTA */
+        ul.doc { list-style: none; padding: 0; margin: 0 0 24px; }
+        ul.doc li { font-size: 16px; line-height: 1.7; padding: 13px 0; border-bottom: 1px solid var(--line); }
+        ul.plain { padding-left: 20px; margin: 0 0 22px; }
+        ul.plain li { font-size: 16px; line-height: 1.8; margin-bottom: 8px; }
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 52px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16.5px; font-weight: 600; padding: 20px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 18px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15.5px; line-height: 1.8; color: var(--text-2); padding: 0 0 20px; margin: 0; }
         .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
         .cta:hover { text-decoration: none; opacity: 0.94; }
-        /* 관련 */
-        .related { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
-        .related h3 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; font-weight: 600; }
-        .related-grid { display: grid; gap: 8px; }
-        .related-grid a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; color: var(--text); text-decoration: none; font-size: 15.5px; font-weight: 600; }
-        .related-grid a:hover { background: #EEF2F6; text-decoration: none; }
-        /* 출처 */
-        .sources { margin-top: 40px; padding: 18px 20px; background: var(--tint); border-radius: 14px; }
-        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text-2); margin: 0 0 12px; }
-        .sources ul { padding-left: 18px; margin: 0; }
-        .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
-        .sources a { color: var(--text-2); }
-        /* 푸터 */
+        .refs { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+        .refs h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .refs ul { padding-left: 18px; margin: 0; }
+        .refs li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); }
+        .refs a { color: var(--text-2); }
+        .rel { margin-top: 40px; }
+        .rel h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .rel a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; text-decoration: none; color: var(--text); font-size: 15.5px; font-weight: 600; margin-bottom: 8px; }
+        .rel a:hover { background: #EEF2F6; text-decoration: none; }
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="/" class="brand">
-        <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
-        <span class="brand-name">내집컷<br/>청약 소득분위 계산기</span>
-    </a>
-    <div class="crumbs"><a href="/">홈</a> &rsaquo; 가이드 &rsaquo; 원천징수영수증 발급</div>
-    <article>
-        <h1>홈택스에서 원천징수영수증 떼는 법<br/><small style="font-size:18px;color:var(--text-2);font-weight:500;">청약 세전 연봉 확인용</small></h1>
-        <div class="meta">2026.05 작성 · 5분 가이드</div>
-        <div class="byline">
-            <span>작성 <b>내집컷 편집팀</b></span>
-            <span class="sep">·</span>
-            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
-            <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
-        </div>
+<div class="wrap">
+    <a href="/" class="top"><img src="/logo.svg" alt="내집컷"><span>내집컷</span></a>
+    <div class="crumbs"><a href="/">홈</a> › <a href="/guide/">가이드</a> › 원천징수영수증 21번</div>
+    <h1>원천징수영수증 21번,<br>홈택스에서 떼는 법</h1>
+    <div class="byline">내집컷 편집팀 · 국토교통부 주택청약 FAQ 기준 · 최종 확인 2026.07.22</div>
 
-        <p>청약 특별공급에 도전하려는데 본인 세전 연봉이 얼마인지 정확히 모르는 경우가 많습니다. 월급통장에 들어오는 실수령액만 보고 살아왔기 때문이죠. 청약 자격 심사에서 쓰이는 소득은 <b>세전 총급여</b>이고, 이 값은 매년 회사에서 발급하는 <b>원천징수영수증</b>의 21번 칸에 정확하게 기재되어 있습니다.</p>
+    <p class="lead">청약을 넣으려는데 내 세전 연봉이 얼마인지 모르는 분이 많아요. 월급통장 실수령액만 봐왔으니까요. 청약에서 쓰는 소득은 <b>세전 총급여</b>이고, 그 값은 <b>원천징수영수증 21번 칸</b>에 딱 적혀 있습니다. 홈택스에서 5분이면 뗄 수 있어요.</p>
 
-        <p>그런데 원천징수영수증이 분실되거나 찾기 귀찮을 때, 홈택스에서 직접 5분 만에 발급받을 수 있습니다. 아래 단계대로 따라하시면 됩니다.</p>
+    <figure class="figure" aria-label="원천징수영수증에서 21번 총급여액 칸이 청약에 쓰이는 세전 연봉임을 강조한 그림">
+        <svg viewBox="0 0 640 250" role="img" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="14" width="520" height="222" rx="14" fill="#FFFFFF" stroke="#E5E8EB" stroke-width="1.5"/>
+            <text x="84" y="46" font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="#191F28">근로소득 원천징수영수증</text>
+            <rect x="84" y="66" width="472" height="26" rx="6" fill="#F2F4F6"/>
+            <text x="98" y="83" font-family="Pretendard, sans-serif" font-size="12.5" fill="#8B95A1">16. 계</text>
+            <rect x="84" y="98" width="472" height="40" rx="8" fill="#3182F6"/>
+            <text x="98" y="123" font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">21. 총급여액</text>
+            <text x="542" y="123" text-anchor="end" font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">72,400,000</text>
+            <rect x="84" y="144" width="472" height="26" rx="6" fill="#F2F4F6"/>
+            <text x="98" y="161" font-family="Pretendard, sans-serif" font-size="12.5" fill="#8B95A1">72. 차감징수세액</text>
+            <rect x="84" y="176" width="472" height="26" rx="6" fill="#F2F4F6"/>
+            <text x="98" y="193" font-family="Pretendard, sans-serif" font-size="12.5" fill="#8B95A1">17. 비과세소득</text>
+            <text x="320" y="224" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="12.5" fill="#3182F6" font-weight="600">이 21번 칸이 청약에 쓰이는 세전 연봉이에요</text>
+        </svg>
+        <figcaption>21번 "총급여액"이 청약 심사에 쓰이는 세전 연봉입니다 (국토부 FAQ Q294)</figcaption>
+    </figure>
 
-        <h2>왜 원천징수영수증인가요?</h2>
-        <p>청약 신청 시 소득 증빙 서류로 가장 널리 인정되는 문서가 원천징수영수증입니다. 이유는 다음과 같습니다.</p>
+    <p>월급통장 실수령액만 12번 더하면 성과급·상여가 빠지고 세금·보험료가 이미 차감돼 있어서 <b>실제 세전 소득과 15~22% 차이</b>가 납니다. 반드시 21번 총급여액을 쓰세요.</p>
+
+    <h2>홈택스에서 5분 만에 떼는 법</h2>
+
+    <section class="case">
+        <h3><span class="num">1</span>홈택스 로그인</h3>
+        <p><a href="https://hometax.go.kr" target="_blank" rel="noopener">hometax.go.kr</a> 접속 → 우상단 로그인 → <b>간편인증(카카오·네이버·PASS)</b>이 가장 빠릅니다. 모바일은 손택스 앱으로도 가능하지만 화면이 커서 PC를 권합니다.</p>
+    </section>
+    <section class="case">
+        <h3><span class="num">2</span>메뉴 경로 찾기</h3>
+        <p>My홈택스 → 연말정산·지급명세서 → <b>지급명세서 등 제출내역</b> → 가장 최근 귀속연도의 원천징수영수증 PDF 다운로드. 연말정산 직후(보통 2~3월)부터 조회됩니다.</p>
+    </section>
+    <section class="case">
+        <h3><span class="num">3</span>21번 "총급여액" 확인</h3>
+        <p>PDF를 열어 <b>21. 총급여액</b> 칸을 보세요. 이 숫자가 청약에서 쓰는 세전 연봉입니다.</p>
+    </section>
+    <section class="case">
+        <h3><span class="num">4</span>맞벌이면 부부 합산</h3>
+        <p>부부가 각자 발급받아 두 사람의 21번 총급여를 <b>단순히 더한 값</b>이 가구 총소득입니다.</p>
+    </section>
+    <section class="case">
+        <h3><span class="num">5</span>사업자·프리랜서는 다른 서류</h3>
+        <p>사업소득이 주면 원천징수영수증 대신 <b>종합소득세 신고서</b>를 씁니다. 신고서의 <b>종합소득금액</b>(매출 − 필요경비)이 본인 소득으로 인정돼요.</p>
+    </section>
+
+    <div class="ex">
+        <div class="t">예시</div>
+        <p>21. 총급여액: 72,400,000원</p>
+        <p class="calc">→ 2025년 세전 7,240만 원 (월 약 603만 원)</p>
+    </div>
+
+    <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기</a>
+
+    <hr class="div">
+
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+        <details><summary>월급통장에 들어온 금액을 넣으면 안 되나요?</summary><p>실수령액(세후)은 세금·4대보험이 빠진 금액이라 청약 기준(세전)과 15~22% 차이가 납니다. 21번 총급여액을 확인하는 것이 정확합니다.</p></details>
+        <details><summary>비과세 식대(월 20만 원)도 포함해야 하나요?</summary><p>아니요. 비과세 식대는 21번 총급여액에서 이미 제외돼 있습니다. 명세서에 식대가 적혀 있어도 청약 심사에는 영향이 없습니다.</p></details>
+        <details><summary>성과급 받은 달만 따로 더해야 하나요?</summary><p>성과급은 연 단위로 합산되어 21번 칸에 이미 포함돼 있습니다. 따로 더할 필요가 없습니다.</p></details>
+        <details><summary>회사 종이 영수증과 홈택스 PDF는 효력이 같나요?</summary><p>네. 회사가 발급한 종이 영수증과 홈택스에서 출력한 PDF는 효력이 동일하며, 청약 제출 시 둘 다 인정됩니다.</p></details>
+    </div>
+
+    <div class="rel">
+        <h2>관련 가이드</h2>
+        <a href="/guide/newlywed.html">신혼부부 특별공급 자격 완전정리</a>
+        <a href="/guide/first-time.html">생애최초 특별공급 자격</a>
+        <a href="/guide/dual-income.html">맞벌이 부부 소득 합산법</a>
+        <a href="/guide/business.html">사업자 소득금액증명원 떼는 법</a>
+    </div>
+    <div class="refs">
+        <h2>공식 근거</h2>
         <ul>
-            <li><b>국세청 공식 자료</b>이기 때문에 위변조 우려가 없습니다.</li>
-            <li>지난 1년간의 <b>총급여(세전), 결정세액, 4대 보험료</b>가 한 장에 모두 정리되어 있습니다.</li>
-            <li>청약홈, LH청약플러스가 가장 우선적으로 요구하는 양식입니다.</li>
+            <li>출처: <a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05)</a></li>
+            <li>법령: <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙</a> · 신청: <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> · 발급: <a href="https://hometax.go.kr" target="_blank" rel="noopener">홈택스</a></li>
         </ul>
-        <div class="tip"><b>알아두기:</b> 회사가 발급한 종이 영수증과 홈택스에서 출력한 PDF는 효력이 동일합니다. 청약 제출 시 둘 다 인정됩니다.</div>
-
-        <h2>1단계: 홈택스 접속 + 로그인</h2>
-        <div class="step">
-            <p><b>1.</b> 검색창에 <b>"홈택스"</b> 입력 후 첫 번째 결과(<a href="https://hometax.go.kr" target="_blank" rel="noopener">hometax.go.kr</a>) 클릭</p>
-            <p><b>2.</b> 우상단 <b>"로그인"</b> 클릭</p>
-            <p><b>3.</b> 인증 수단 선택 — <b>간편인증(카카오·네이버·PASS 등)</b>이 가장 빠릅니다. 공동인증서(구 공인인증서)도 가능합니다.</p>
-        </div>
-        <div class="tip"><b>모바일에서도 가능:</b> 손택스 앱을 설치하면 모바일에서도 동일하게 발급할 수 있습니다. 단, 화면이 작아서 PC 권장.</div>
-
-        <h2>2단계: 메뉴 경로 찾아가기</h2>
-        <div class="step">
-            <p><b>1.</b> 상단 메뉴에서 <b>"My홈택스"</b> 클릭</p>
-            <p><b>2.</b> 왼쪽 메뉴에서 <b>"연말정산·지급명세서"</b> 선택</p>
-            <p><b>3.</b> <b>"지급명세서 등 제출내역"</b> 클릭</p>
-            <p><b>4.</b> 가장 최근 귀속연도(예: 2025년 귀속)의 <b>"원천징수영수증"</b> PDF 다운로드</p>
-        </div>
-        <p>회사에서 연말정산을 마친 직후(보통 매년 2~3월)부터 조회 가능합니다. 만약 "조회 결과 없음"이 뜨면 회사에서 아직 신고하지 않은 상태이니, 인사팀에 요청하시면 됩니다.</p>
-
-        <h2>3단계: 21번 칸 "총급여액" 확인</h2>
-        <p>다운로드한 PDF를 열면 표가 빼곡하게 들어있습니다. 가장 중요한 칸은 <b>"21. 총급여액" 칸</b>입니다. 이 숫자가 청약에서 사용되는 <b>세전 연봉</b>입니다 (국토교통부 2024 주택청약 FAQ Q294 기준).</p>
-
-        <div class="tip">
-            <b>예시</b><br/>
-            21. 총급여액: <b>72,400,000원</b><br/>
-             이 사람은 2025년 한 해 동안 세전 총 7,240만원을 벌었다는 뜻입니다.<br/>
-             월 기준으로 환산하면 약 <b>월 603만원 (세전)</b> 입니다.
-        </div>
-
-        <h3>참고로 함께 보면 유용한 칸</h3>
-        <ul>
-            <li><b>17. 비과세소득</b> — 식대, 자가운전보조금 등. 청약 심사 시 일부 항목은 소득에서 제외됩니다.</li>
-            <li><b>72. 차감징수세액</b> — 실제로 낸 소득세. 환급받았으면 마이너스(-).</li>
-            <li><b>4대 보험료 항목</b> — 국민연금, 건강보험, 고용보험 납부액. 청약 시 별도 증빙 필요 없이 이 한 장으로 처리됩니다.</li>
-        </ul>
-
-        <h2>4단계: 부부 합산 (맞벌이의 경우)</h2>
-        <p>맞벌이 가구는 <b>부부 각자 원천징수영수증을 발급</b>받아야 합니다. 둘의 21번 칸 "총급여"를 단순히 더한 값이 가구 총소득입니다.</p>
-        <div class="tip">
-            <b>맞벌이 예시</b><br/>
-            남편 총급여: 7,240만원<br/>
-            아내 총급여: 5,800만원<br/>
-             가구 합산 세전 연봉: <b>13,040만원</b> (월 약 1,087만원 세전)
-        </div>
-        <p>이 합산 값을 가구원 수에 해당하는 도시근로자 월평균소득과 비교해 본인의 소득 분위(%)를 산출합니다.</p>
-
-        <h2>5단계: 사업자·프리랜서의 경우</h2>
-        <p>근로소득이 아닌 사업소득이 주된 분들은 원천징수영수증이 아닌 <b>"종합소득세 신고서 사본"</b>을 사용합니다.</p>
-        <div class="step">
-            <p><b>경로:</b> 홈택스 &rsaquo; 신고/납부 &rsaquo; 종합소득세 &rsaquo; 신고내역 조회 &rsaquo; 가장 최근 신고분 출력</p>
-        </div>
-        <p>신고서에서 확인할 핵심 숫자는 <b>"종합소득금액"</b>입니다. 매출에서 필요경비를 뺀 순수 사업 이익 개념으로, 이 값이 청약 심사 시 본인 소득으로 인정됩니다.</p>
-
-        <h2>자주 묻는 실수</h2>
-        <h3>"월급 통장에 들어온 금액"을 그대로 입력</h3>
-        <p>실수령액(세후)은 4대 보험과 세금이 차감된 후 금액입니다. 청약 기준은 세전이므로 약 15~22% 정도 차이가 납니다. 본 사이트의 계산기를 쓰시면 세후 입력을 자동으로 세전으로 환산해주지만, 정확도를 100% 보장하려면 원천징수영수증을 직접 확인하는 것이 좋습니다.</p>
-
-        <h3>"비과세 식대(20만원)"까지 포함</h3>
-        <p>매월 받는 식대(현재 비과세 한도 20만원)는 21번 총급여에서 제외되어 있습니다. 본인 명세서에 "200,000원 식대"가 적혀있어도 청약 심사에는 영향이 없습니다.</p>
-
-        <h3>"성과급 받은 달만" 입력</h3>
-        <p>성과급은 연 단위로 합산되어 21번 칸에 포함되어 있습니다. 별도로 더할 필요가 없습니다. 다만 본 사이트의 계산기에 세후 월급을 입력할 때는 연간 성과급도 별도로 입력해야 정확합니다 (월급통장에 안 들어온 보너스도 합산하기 위함).</p>
-
-        <a href="/" class="cta">계산기로 내 소득 분위 확인하기 </a>
-
-        <div class="sources">
-            <h3>근거 자료 및 출처</h3>
-            <ul>
-                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
-                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
-                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
-                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
-                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
-                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
-            </ul>
-        </div>
-
-        <div class="related">
-            <h3>관련 가이드</h3>
-            <div class="related-grid">
-                <a href="/guide/newlywed.html"> 신혼부부 특별공급 자격 완전 정리</a>
-                <a href="/guide/first-time.html"> 생애최초 특별공급 자격</a>
-            </div>
-        </div>
-    </article>
+    </div>
     <footer>
-        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>
     </footer>
 </div>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Article",
-      "headline": "홈택스에서 원천징수영수증 떼는 법 청약 세전 연봉 확인용",
-      "description": "청약 소득 심사용 원천징수영수증 발급 방법. 홈택스 접속부터 21번 칸 '총급여' 확인까지 5분 만에 따라하는 가이드.",
+      "headline": "홈택스 원천징수영수증 떼는 법 — 21번 총급여액 확인",
+      "description": "청약 소득 증빙용 원천징수영수증을 홈택스에서 5분 만에 발급받는 법. 21번 총급여액이 청약에 쓰이는 세전 연봉이며, 맞벌이 합산·사업자 종합소득금액까지 단계별로 정리했습니다.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
       "dateModified": "2026-07-22",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -255,13 +227,43 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "가이드"
+          "name": "청약 소득 가이드",
+          "item": "https://homecut.kr/guide/"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "원천징수영수증 발급",
+          "name": "원천징수영수증 21번",
           "item": "https://homecut.kr/guide/income-check.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "청약 소득은 원천징수영수증 어느 칸을 보나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "21번 \"총급여액\" 칸입니다. 이 값이 청약 심사에 쓰이는 세전 연봉이며 국토교통부 FAQ Q294 기준입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "실수령액을 넣으면 왜 안 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "실수령액은 세금과 4대보험이 차감된 세후 금액이라 청약 기준인 세전 총급여와 15~22% 차이가 납니다. 21번 총급여액을 확인해야 정확합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "맞벌이는 소득을 어떻게 합산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "부부가 각자 원천징수영수증을 발급받아 두 사람의 21번 총급여액을 단순히 더한 값이 가구 총소득입니다."
+          }
         }
       ]
     }
