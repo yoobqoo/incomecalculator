@@ -6,12 +6,12 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8D1NXGBRTR');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>맞벌이 부부 청약 소득 합산, 어떻게 계산하나요? | 내집컷</title>
-    <meta name="description" content="맞벌이 부부 청약 소득 합산 방법. 부부 각자 원천징수영수증 21번 총급여액을 더한 값이 가구 소득. 맞벌이 판정 기준, 신혼부부 특공의 1인 소득 상한(140%)까지 국토부 FAQ 기반 정리.">
+    <title>맞벌이 부부 청약 소득 합산법 — 1인 소득 상한 주의 | 내집컷</title>
+    <meta name="description" content="맞벌이 부부 청약 소득은 부부 각자 원천징수영수증 21번 총급여액을 더한 값입니다. 맞벌이 판정 기준과 신혼부부 특공의 1인 소득 상한(140%) 함정까지 국토부 FAQ 기준으로 정리했습니다.">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="맞벌이 부부 청약 소득 합산, 어떻게 계산하나요?">
-    <meta property="og:description" content="부부 각자 21번 총급여 합산 — 국토부 FAQ 기반">
+    <meta property="og:title" content="맞벌이 부부 청약 소득 합산법">
+    <meta property="og:description" content="부부 각자 21번 총급여 합산 + 1인 소득 상한 주의">
     <meta property="og:url" content="https://homecut.kr/guide/dual-income.html">
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/dual-income.html">
@@ -23,224 +23,197 @@
         * { box-sizing: border-box; }
         html { -webkit-text-size-adjust: 100%; }
         body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
-        .container { width: 100%; max-width: 680px; padding: 0 24px 80px; }
-        .brand { display: flex; align-items: center; gap: 8px; padding: 24px 0 6px; text-decoration: none; }
-        .brand-logo { width: 30px; height: 30px; }
-        .brand-name { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.3; }
-        .crumbs { font-size: 13px; color: var(--text-3); margin: 6px 0 0; }
+        .wrap { width: 100%; max-width: 680px; padding: 0 24px 80px; }
+        .top { display: flex; align-items: center; gap: 8px; padding: 24px 0 8px; text-decoration: none; }
+        .top img { width: 30px; height: 30px; }
+        .top span { font-size: 14px; font-weight: 600; color: var(--text-2); }
+        .crumbs { font-size: 13px; color: var(--text-3); padding: 6px 0 0; }
         .crumbs a { color: var(--text-3); text-decoration: none; }
-        article { background: transparent; border: none; border-radius: 0; padding: 0; }
         h1 { font-size: 27px; line-height: 1.4; font-weight: 700; letter-spacing: -0.03em; margin: 28px 0 14px; }
-        .meta { font-size: 13px; color: var(--text-3); margin-bottom: 6px; }
-        .byline { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+        .byline { font-size: 13px; color: var(--text-3); margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
         .byline b { color: var(--text-2); font-weight: 600; }
-        .byline .sep { color: var(--line); }
-        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; padding-top: 0; border-top: none; line-height: 1.4; }
-        h3 { font-size: 17px; font-weight: 600; margin: 34px 0 10px; color: var(--text); }
-        p, li { font-size: 17px; line-height: 1.85; color: var(--text); letter-spacing: -0.01em; }
-        p { margin: 0 0 22px; }
-        ul, ol { padding-left: 20px; margin: 0 0 22px; }
-        li { margin-bottom: 8px; }
+        p { font-size: 17px; line-height: 1.85; color: var(--text); margin: 0 0 22px; }
+        .lead { font-size: 18px; line-height: 1.8; margin: 0 0 32px; }
+        h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 52px 0 18px; line-height: 1.4; }
+        h3 { font-size: 17px; font-weight: 600; margin: 30px 0 10px; }
         strong, b { font-weight: 600; }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        /* 결론 박스 */
-        .answer-box { background: var(--tint); border-left: 3px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 20px; margin: 24px 0 30px; font-size: 17px; line-height: 1.8; color: var(--text); }
-        .answer-box b { color: var(--accent); font-weight: 600; }
-        /* 공식 인용 */
-        .official { background: var(--tint); border-radius: 12px; padding: 15px 17px; margin: 18px 0; font-size: 14.5px; color: var(--text-2); line-height: 1.75; }
-        .official b { color: var(--text); font-weight: 600; }
-        .official a { color: var(--text); }
-        /* 계산식 */
-        .formula { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 16px; color: var(--text); font-weight: 600; line-height: 1.6; }
-        /* 팁 */
-        .tip { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 18px 0; font-size: 15px; line-height: 1.75; color: var(--text-2); }
-        .tip b { color: var(--text); font-weight: 600; }
-        /* 주의 */
-        .warn-box { background: var(--warn-bg); border-left: 3px solid var(--warn); border-radius: 0 12px 12px 0; padding: 15px 18px; margin: 24px 0; font-size: 15px; color: var(--text-2); line-height: 1.75; }
-        .warn-box b { color: #B26B00; font-weight: 600; }
-        .warn-box a { color: #B26B00; }
-        /* 표 */
-        table { width: 100%; border-collapse: collapse; margin: 8px 0 28px; }
-        table.t, table.u { font-size: 15px; }
-        th, td { text-align: left; padding: 14px 12px; font-size: 15px; line-height: 1.6; border-bottom: 1px solid var(--line); vertical-align: top; }
-        th { color: var(--text-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
-        td b { font-weight: 600; }
-        td.num { text-align: right; font-variant-numeric: tabular-nums; }
-        /* CTA */
+        .figure { margin: 8px 0 28px; }
+        .figure svg { width: 100%; height: auto; display: block; }
+        .figure figcaption { font-size: 13.5px; color: var(--text-3); text-align: center; margin-top: 14px; line-height: 1.6; }
+        .ex { background: var(--tint); border-radius: 14px; padding: 20px 22px; margin: 20px 0; }
+        .ex .t { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+        .ex p { font-size: 15px; line-height: 1.75; margin: 0 0 4px; color: var(--text-2); }
+        .ex .calc { font-size: 16px; color: var(--text); font-weight: 600; margin-top: 8px; }
+        .note { border-left: 3px solid var(--warn); background: var(--warn-bg); border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 24px 0; }
+        .note p { font-size: 15.5px; line-height: 1.75; color: var(--text-2); margin: 0; }
+        .note b { color: #B26B00; }
+        .quote { background: var(--tint); border-radius: 12px; padding: 15px 17px; margin: 16px 0; font-size: 14.5px; color: var(--text-2); line-height: 1.75; }
+        .quote .src { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-3); margin-bottom: 8px; }
+        .quote a { color: var(--text-2); }
+        ul.doc { list-style: none; padding: 0; margin: 0 0 24px; }
+        ul.doc li { font-size: 16px; line-height: 1.7; padding: 13px 0; border-bottom: 1px solid var(--line); }
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 52px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16.5px; font-weight: 600; padding: 20px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 18px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '−'; }
+        .faq p { font-size: 15.5px; line-height: 1.8; color: var(--text-2); padding: 0 0 20px; margin: 0; }
         .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
         .cta:hover { text-decoration: none; opacity: 0.94; }
-        /* 관련 */
-        .related { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
-        .related h3 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; font-weight: 600; }
-        .related-grid { display: grid; gap: 8px; }
-        .related-grid a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; color: var(--text); text-decoration: none; font-size: 15.5px; font-weight: 600; }
-        .related-grid a:hover { background: #EEF2F6; text-decoration: none; }
-        /* 출처 */
-        .sources { margin-top: 40px; padding: 18px 20px; background: var(--tint); border-radius: 14px; }
-        .sources h3 { font-size: 14px; font-weight: 700; color: var(--text-2); margin: 0 0 12px; }
-        .sources ul { padding-left: 18px; margin: 0; }
-        .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
-        .sources a { color: var(--text-2); }
-        /* 푸터 */
+        .refs { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+        .refs h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .refs ul { padding-left: 18px; margin: 0; }
+        .refs li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); }
+        .refs a { color: var(--text-2); }
+        .rel { margin-top: 40px; }
+        .rel h2 { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+        .rel a { display: block; padding: 16px 18px; background: var(--tint); border-radius: 12px; text-decoration: none; color: var(--text); font-size: 15.5px; font-weight: 600; margin-bottom: 8px; }
+        .rel a:hover { background: #EEF2F6; text-decoration: none; }
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="/" class="brand">
-        <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
-        <span class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</span>
+<div class="wrap">
+    <a href="/" class="top">
+        <img src="/logo.svg" alt="내집컷">
+        <span>내집컷</span>
     </a>
-    <div class="crumbs"><a href="/">홈</a> &rsaquo; 소득기준 &rsaquo; 맞벌이 부부 합산</div>
-    <article>
-        <h1>맞벌이 부부 청약 소득,<br/>어떻게 합산하나요?</h1>
-        <div class="meta">국토교통부 2024 주택청약 FAQ 기반 · 5분</div>
-        <div class="byline">
-            <span>작성 <b>내집컷 편집팀</b></span>
-            <span class="sep">·</span>
-            <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
-            <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
-        </div>
+    <div class="crumbs"><a href="/">홈</a> › <a href="/guide/">가이드</a> › 맞벌이 부부 합산</div>
 
-        <div class="answer-box">
-            <b>결론부터:</b> 부부 <b>각자</b> 원천징수영수증 <b>21번 총급여액</b>을 발급받아 <b>단순히 더한 값</b>이 가구 소득입니다. 그 합계를 가구원 수별 도시근로자 월평균소득과 비교해 소득분위를 판정합니다.
-        </div>
+    <h1>맞벌이 부부 청약 소득,<br>어떻게 합산하나요?</h1>
+    <div class="byline">내집컷 편집팀 · 국토교통부 주택청약 FAQ 기준 · 최종 확인 2026.07.22</div>
 
-        <h2>합산 공식</h2>
-        <div class="formula">
-            가구 소득 = 본인 21번 총급여액 + 배우자 21번 총급여액
-        </div>
-        <div class="tip">
-            <b>예시:</b> 본인 총급여 7,240만원 + 배우자 총급여 5,800만원<br/>
-             가구 합산 <b>1억 3,040만원</b> (월 약 1,087만원)<br/>
-             3인 가구 100% 기준(817만원) 대비 약 <b>133%</b>
-        </div>
-        <p>사업소득자라면 21번 총급여액 대신 <b>소득금액증명원의 사업소득금액</b>을 씁니다. 부부 중 한쪽은 근로·한쪽은 사업이면 각자 해당 서류의 금액을 더하면 됩니다 (<a href="/guide/edge-cases.html">복합 소득 가이드</a>).</p>
+    <p class="lead">맞벌이라면 소득을 어떻게 잡아야 할지 헷갈리시죠. 방법은 의외로 단순합니다. <b>부부가 각자 원천징수영수증 21번 총급여액을 떼서 그냥 더하면</b> 그게 가구 소득이에요. 그 합계를 가구원 수별 기준과 비교해 소득분위를 판정합니다.</p>
 
-        <h2>맞벌이 판정 기준</h2>
-        <p>"맞벌이"는 <b>부부 모두 소득이 있는 경우</b>만 해당합니다. 한쪽이 무직이거나 사업소득이 0·마이너스면 외벌이로 분류됩니다.</p>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener"> 국토부 FAQ Q302</a></b><br/>
-            "배우자가 현재 무직인 경우라면 무직자의 소득산정 기준으로 월평균소득을 산정하며, 산정 결과 소득이 발생하였다면('-' 또는 '0'이 아니라면) <b>맞벌이</b>로 봅니다."
-        </div>
-        <p>맞벌이는 외벌이보다 소득 한도가 높게 적용되는 편이라, 부부 합산이 커도 맞벌이 기준으로는 통과되는 경우가 많습니다.</p>
+    <figure class="figure" aria-label="본인의 21번 총급여와 배우자의 21번 총급여를 더하면 가구 소득이 되는 구조">
+        <svg viewBox="0 0 640 118" role="img" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="25" width="180" height="72" rx="14" fill="#F9FAFB"/>
+            <text x="100" y="52" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" font-weight="600" fill="#8B95A1">본인</text>
+            <text x="100" y="76" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#191F28">21번 총급여</text>
+            <text x="210" y="70" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="26" font-weight="700" fill="#8B95A1">+</text>
+            <rect x="230" y="25" width="180" height="72" rx="14" fill="#F9FAFB"/>
+            <text x="320" y="52" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" font-weight="600" fill="#8B95A1">배우자</text>
+            <text x="320" y="76" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="15" font-weight="600" fill="#191F28">21번 총급여</text>
+            <text x="430" y="70" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="26" font-weight="700" fill="#8B95A1">=</text>
+            <rect x="450" y="25" width="180" height="72" rx="14" fill="#3182F6"/>
+            <text x="540" y="61" text-anchor="middle" dominant-baseline="central" font-family="Pretendard, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">가구 소득</text>
+        </svg>
+        <figcaption>부부 각자의 21번 총급여액을 단순히 더한 값이 가구 소득입니다</figcaption>
+    </figure>
 
-        <h2>신혼부부 특공의 함정: 1인 소득 상한</h2>
-        <p>신혼부부 특별공급은 맞벌이여도 <b>부부 중 1명의 소득</b>이 일정 기준을 넘으면 안 되는 추가 조건이 있습니다.</p>
-        <div class="official">
-            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener"> 국토부 FAQ Q302</a></b><br/>
-            "신혼부부 모두 소득이 있는 경우라 하더라도 부부 중 1인의 소득이 전년도 도시근로자 가구당 월평균소득의 <b>140퍼센트</b>(신생아우선공급 및 소득우선공급의 경우는 <b>100퍼센트</b>)를 넘지 않아야 합니다."
-        </div>
-        <div class="tip">
-            <b>즉:</b> 한 사람이 고소득이면 부부 합산이 기준 이내여도 신혼부부 특공에서 탈락할 수 있습니다. 소득이 한쪽에 몰린 맞벌이는 이 조건을 꼭 확인하세요.
-        </div>
+    <div class="ex">
+        <div class="t">예시</div>
+        <p>본인 총급여 7,240만 원 + 배우자 총급여 5,800만 원</p>
+        <p class="calc">가구 합산 = 1억 3,040만 원 (월 약 1,087만 원)</p>
+        <p>→ 3인 가구 100% 기준(817만 원) 대비 약 133%</p>
+    </div>
 
-        <h2>필요 서류</h2>
+    <p>사업소득자라면 21번 총급여액 대신 <b>소득금액증명원의 사업소득금액</b>을 씁니다. 부부 중 한쪽은 근로, 한쪽은 사업이면 각자 해당 서류의 금액을 더하면 돼요. (<a href="/guide/edge-cases.html">복합 소득 가이드</a>)</p>
+
+    <h2>맞벌이로 인정되려면?</h2>
+    <p>"맞벌이"는 <b>부부 모두 소득이 있는 경우</b>만 해당합니다. 한쪽이 무직이거나 사업소득이 0·마이너스면 외벌이로 분류돼요.</p>
+    <div class="quote">
+        <span class="src"><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토부 FAQ Q302</a></span>
+        "배우자가 현재 무직인 경우라면 무직자의 소득산정 기준으로 월평균소득을 산정하며, 산정 결과 소득이 발생하였다면('-' 또는 '0'이 아니라면) 맞벌이로 봅니다."
+    </div>
+    <p>맞벌이는 외벌이보다 소득 한도가 넓게 적용되는 편이라, 부부 합산이 커도 맞벌이 기준으로는 통과되는 경우가 많습니다.</p>
+
+    <h2>주의: 신혼부부 특공의 1인 소득 상한</h2>
+    <p>맞벌이라고 안심하면 안 되는 함정이 하나 있어요. 신혼부부 특별공급은 <b>부부 중 1명의 소득</b>이 일정 기준을 넘으면 안 되는 추가 조건이 붙습니다.</p>
+    <div class="quote">
+        <span class="src"><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토부 FAQ Q302</a></span>
+        "신혼부부 모두 소득이 있는 경우라 하더라도 부부 중 1인의 소득이 전년도 도시근로자 가구당 월평균소득의 140퍼센트(신생아우선공급 및 소득우선공급의 경우는 100퍼센트)를 넘지 않아야 합니다."
+    </div>
+    <div class="note">
+        <p><b>한 사람이 고소득이면, 부부 합산이 기준 이내여도 신혼부부 특공에서 탈락할 수 있어요.</b> 소득이 한쪽에 몰린 맞벌이라면 이 1인 상한을 꼭 확인하세요.</p>
+    </div>
+
+    <h2>필요 서류</h2>
+    <ul class="doc">
+        <li>부부 각자 근로소득 원천징수영수증 (21번 총급여액) — <a href="/guide/income-check.html">떼는 법</a></li>
+        <li>사업소득자면 각자 소득금액증명원 (사업소득금액)</li>
+        <li>주민등록등본 (부부·세대원 확인)</li>
+    </ul>
+
+    <a href="/#calculator" class="cta">계산기로 부부 합산 소득분위 확인하기</a>
+
+    <hr class="div">
+
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+        <details>
+            <summary>배우자가 육아휴직 중이면 맞벌이인가요?</summary>
+            <p>휴직자의 소득 산정 기준으로 계산했을 때 소득이 0이나 마이너스가 아니라면 맞벌이로 봅니다. 계산 방법은 <a href="/guide/parental-leave.html">육아휴직 가이드</a>를 참고하세요.</p>
+        </details>
+        <details>
+            <summary>부부 합산은 통과인데 왜 신혼특공에서 떨어졌을까요?</summary>
+            <p>신혼부부 특공에는 1인 소득 상한(140%, 우선공급은 100%)이 별도로 있습니다. 합산은 통과해도 한 사람 소득이 이 상한을 넘으면 자격이 되지 않습니다.</p>
+        </details>
+        <details>
+            <summary>한쪽이 사업소득자면 어떻게 더하나요?</summary>
+            <p>근로자는 21번 총급여액, 사업자는 소득금액증명원의 사업소득금액을 각자 확인해 더하면 됩니다. 서류만 다를 뿐 합산 방식은 같아요.</p>
+        </details>
+        <details>
+            <summary>배우자가 프리랜서(3.3%)면요?</summary>
+            <p>프리랜서도 소득금액증명원상 사업소득금액을 기준으로 잡아 더합니다. 자세한 산정은 <a href="/guide/freelancer.html">프리랜서 가이드</a>를 확인하세요.</p>
+        </details>
+    </div>
+
+    <div class="rel">
+        <h2>관련 가이드</h2>
+        <a href="/guide/newlywed.html">신혼부부 특별공급 자격 완전정리</a>
+        <a href="/guide/business-loss.html">배우자 사업소득이 마이너스일 때</a>
+        <a href="/guide/edge-cases.html">근로+사업 복합 소득 계산법</a>
+        <a href="/guide/income-check.html">원천징수영수증 21번 떼는 법</a>
+    </div>
+
+    <div class="refs">
+        <h2>공식 근거</h2>
         <ul>
-            <li>부부 각자 <b>근로소득 원천징수영수증</b> (21번 총급여액) — <a href="/guide/income-check.html">떼는 법</a></li>
-            <li>사업소득자면 각자 <b>소득금액증명원</b> (사업소득금액)</li>
-            <li>주민등록등본 (부부·세대원 확인)</li>
+            <li>출처: <a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05)</a> — 맞벌이 판정·1인 소득 상한(Q302)</li>
+            <li>법령: <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙</a> · 신청: <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> · 발급: <a href="https://hometax.go.kr" target="_blank" rel="noopener">홈택스</a></li>
         </ul>
+    </div>
 
-        <div class="warn-box">
-            <b>안내</b><br/>
-            소득 상한·가산율은 공급유형(민간/공공)과 트랙(신혼·생애최초·신생아)마다 다릅니다. 신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문으로 확인하세요.
-        </div>
-
-        <a href="/#calculator" class="cta">계산기로 부부 합산 소득분위 확인 </a>
-
-        <div class="sources">
-            <h3>근거 자료 및 출처</h3>
-            <ul>
-                <li><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a> — 본문 인용 Q번호의 원문</li>
-                <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener">주택공급에 관한 규칙 (국가법령정보센터)</a> — 청약 자격·소득기준의 법적 근거</li>
-                <li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 (한국부동산원)</a> — 모집공고문 원문 및 청약 신청</li>
-                <li><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a> — 공공분양·임대 공고</li>
-                <li><a href="https://www.myhome.go.kr" target="_blank" rel="noopener">마이홈포털</a> — 주거지원 자격 진단</li>
-                <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> — 원천징수영수증·소득금액증명 발급</li>
-            </ul>
-        </div>
-
-        <div class="related">
-            <h3>관련 가이드</h3>
-            <div class="related-grid">
-                <a href="/guide/newlywed.html"> 신혼부부 특별공급 자격 완전정리</a>
-                <a href="/guide/business-loss.html"> 배우자 사업소득이 마이너스일 때</a>
-                <a href="/guide/edge-cases.html"> 근로+사업 복합 소득 계산법</a>
-            </div>
-        </div>
-    </article>
     <footer>
-        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>
     </footer>
 </div>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Article",
-      "headline": "맞벌이 부부 청약 소득, 어떻게 합산하나요?",
-      "description": "맞벌이 부부 청약 소득 합산 방법. 부부 각자 원천징수영수증 21번 총급여액을 더한 값이 가구 소득. 맞벌이 판정 기준, 신혼부부 특공의 1인 소득 상한(140%)까지 국토부 FAQ 기반 정리.",
+      "headline": "맞벌이 부부 청약 소득 합산법 — 1인 소득 상한 주의",
+      "description": "맞벌이 부부 청약 소득은 부부 각자 원천징수영수증 21번 총급여액을 더한 값입니다. 맞벌이 판정 기준과 신혼부부 특공의 1인 소득 상한(140%) 함정까지 정리했습니다.",
       "inLanguage": "ko",
-      "datePublished": "2026-06-04",
+      "datePublished": "2026-07-21",
       "dateModified": "2026-07-22",
-      "author": {
-        "@type": "Person",
-        "name": "unspired"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "내집컷",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://homecut.kr/logo.svg"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://homecut.kr/guide/dual-income.html"
-      },
+      "author": { "@type": "Organization", "name": "내집컷 편집팀" },
+      "publisher": { "@type": "Organization", "name": "내집컷", "logo": { "@type": "ImageObject", "url": "https://homecut.kr/logo.svg" } },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://homecut.kr/guide/dual-income.html" },
       "image": "https://homecut.kr/og.png",
       "isBasedOn": "국토교통부 2024 주택청약 FAQ"
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "홈",
-          "item": "https://homecut.kr/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "소득기준"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "맞벌이 부부 합산",
-          "item": "https://homecut.kr/guide/dual-income.html"
-        }
+        { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://homecut.kr/" },
+        { "@type": "ListItem", "position": 2, "name": "청약 소득 가이드", "item": "https://homecut.kr/guide/" },
+        { "@type": "ListItem", "position": 3, "name": "맞벌이 부부 합산", "item": "https://homecut.kr/guide/dual-income.html" }
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "맞벌이 부부 청약 소득, 어떻게 합산하나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "부부 각자 원천징수영수증 21번 총급여액을 발급받아 단순히 더한 값이 가구 소득입니다. 그 합계를 가구원 수별 도시근로자 월평균소득과 비교해 소득분위를 판정합니다."
-          }
-        }
+        { "@type": "Question", "name": "맞벌이 부부의 청약 소득은 어떻게 합산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "부부가 각자 원천징수영수증 21번 총급여액을 발급받아 단순히 더한 값이 가구 소득입니다. 사업소득자는 소득금액증명원의 사업소득금액을 사용합니다." } },
+        { "@type": "Question", "name": "부부 합산 소득은 기준 이내인데 신혼부부 특공에서 탈락할 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 신혼부부 특별공급은 부부 중 1인의 소득이 도시근로자 월평균소득의 140%(우선공급은 100%)를 넘지 않아야 하는 추가 조건이 있어, 합산이 통과해도 한 사람 소득이 상한을 넘으면 자격이 되지 않습니다." } },
+        { "@type": "Question", "name": "배우자가 무직이면 맞벌이인가요?", "acceptedAnswer": { "@type": "Answer", "text": "무직자 소득산정 기준으로 계산한 결과 소득이 0이나 마이너스가 아니라면 맞벌이로 봅니다. 완전 무소득이면 외벌이로 분류됩니다." } }
       ]
     }
   ]
