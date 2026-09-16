@@ -82,6 +82,14 @@
         .sources ul { padding-left: 18px; margin: 0; }
         .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
         .sources a { color: var(--text-2); }
+        /* FAQ */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16px; font-weight: 600; padding: 18px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
@@ -122,7 +130,30 @@
         <p>거주기간이 부족해도 청약 자체가 막히는 것은 아닙니다. 해당지역 우선공급 물량에서 밀릴 뿐, <b>해당지역 거주자(기간 미충족)  인근·기타지역 거주자</b> 순의 다음 순위로 신청할 수 있습니다. 물량이 남으면 당첨 기회가 있습니다.</p>
         <div class="tip"><b>장기복무 군인·해외체류 예외:</b> 10년 이상 장기복무 군인은 거주지역 판단에 특례가 있고, 해외체류자는 체류기간에 따라 우선공급이 제한될 수 있습니다. 특수 상황이면 공고문의 거주요건 항목을 꼭 확인하세요.</div>
         <div class="warn-box"><b>안내</b><br/>거주기간 요건은 지역·단지별로 크게 다릅니다(무주택·통장 요건과 별개). 신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문의 "거주기간" 항목을 확인하세요.</div>
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인 </a>
+
+        <h2>우선공급 순위는 이렇게 밀립니다</h2>
+        <p>같은 단지라도 거주 조건에 따라 배정 순서가 나뉩니다. 보통 아래 순서로 물량을 채워갑니다.</p>
+        <ul>
+            <li><b>1순위</b>: 해당지역에 거주기간을 충족하며 계속 거주한 사람</li>
+            <li><b>2순위</b>: 해당지역 거주자지만 거주기간을 못 채운 사람</li>
+            <li><b>3순위</b>: 인근·기타지역 거주자</li>
+        </ul>
+        <p>그래서 인기 단지일수록 거주기간을 채운 해당지역 1순위 안에서 사실상 마감되는 경우가 많습니다.</p>
+
+        <h2>이사를 계획 중이라면</h2>
+        <p>노리는 지역이 있다면 전입일이 빠를수록 유리합니다. 특히 <b>수도권 대규모 택지지구</b>는 1~2년 이상 거주 요건이 흔해서, 청약 시점보다 훨씬 앞서 전입해 두어야 합니다. 이미 전출입이 잦았다면 주민등록초본으로 <b>계속 거주 여부</b>부터 확인하세요. 중간에 다른 시·도로 옮긴 이력이 있으면 거주기간이 끊겼을 수 있습니다.</p>
+
+        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기</a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>거주기간은 언제부터 언제까지로 계산하나요?</summary><p>주민등록표상 전입일부터 입주자모집공고일까지 계속 거주한 기간으로 봅니다. 신청일이 아니라 공고일이 기준입니다.</p></details>
+            <details><summary>중간에 이사 갔다 다시 돌아왔어요. 이어지나요?</summary><p>같은 지역 안에서의 이사는 대체로 문제되지 않지만, 다른 시·도로 전출했다가 돌아온 경우 거주기간이 끊길 수 있습니다. 주민등록초본으로 계속 거주 여부를 확인하세요.</p></details>
+            <details><summary>거주기간을 못 채우면 청약을 아예 못 하나요?</summary><p>아닙니다. 해당지역 우선공급에서 밀릴 뿐, 해당지역 거주자(기간 미충족) → 인근·기타지역 순의 다음 순위로 신청할 수 있습니다. 물량이 남으면 당첨 기회가 있습니다.</p></details>
+            <details><summary>장기복무 군인이나 해외체류자는 어떻게 되나요?</summary><p>10년 이상 장기복무 군인은 거주지역 판단에 특례가 있고, 해외체류자는 체류기간에 따라 우선공급이 제한될 수 있습니다. 특수 상황이면 공고문의 거주요건 항목을 확인하세요.</p></details>
+        </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -144,7 +175,7 @@
         </div>
     </article>
     <footer>
-        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
+        <a href="/">홈</a>·<a href="/guide/">가이드 전체</a>·<a href="/about.html">소개</a>·<a href="/contact.html">문의</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>
     </footer>
 </div>
 <script type="application/ld+json">
@@ -210,7 +241,9 @@
             "@type": "Answer",
             "text": "해당지역 거주 여부와 거주기간은 주민등록표상 전입일을 기준으로 판단합니다. 대규모 택지개발지구 등은 일정 기간(예: 1~2년) 이상 계속 거주해야 우선공급 자격이 주어지며, 거주기간을 채우지 못해도 해당 지역이나 인근 지역 거주자로서 그 다음 순위로 청약할 수 있는 경우가 있습니다."
           }
-        }
+        },
+        { "@type": "Question", "name": "청약 거주기간은 언제부터 언제까지로 계산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "주민등록표상 전입일부터 입주자모집공고일까지 계속 거주한 기간으로 봅니다. 신청일이 아니라 공고일이 기준입니다." } },
+        { "@type": "Question", "name": "거주기간을 못 채우면 청약을 아예 못 하나요?", "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 해당지역 우선공급에서 밀릴 뿐, 해당지역 거주자(기간 미충족)에서 인근·기타지역 거주자 순의 다음 순위로 신청할 수 있으며 물량이 남으면 당첨 기회가 있습니다." } }
       ]
     }
   ]
