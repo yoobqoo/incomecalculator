@@ -67,6 +67,10 @@
         th { color: var(--text-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
         td b { font-weight: 600; }
         td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        /* 그림 */
+        figure.fig { margin: 26px 0 28px; }
+        figure.fig svg { width: 100%; height: auto; display: block; }
+        figure.fig figcaption { font-size: 13px; color: var(--text-3); line-height: 1.7; margin-top: 10px; }
         /* CTA */
         .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
         .cta:hover { text-decoration: none; opacity: 0.94; }
@@ -82,6 +86,14 @@
         .sources ul { padding-left: 18px; margin: 0; }
         .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
         .sources a { color: var(--text-2); }
+        /* FAQ */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16px; font-weight: 600; padding: 18px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
@@ -100,7 +112,7 @@
         <div class="byline">
             <span>작성 <b>내집컷 편집팀</b></span><span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span><span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.21</b></span>
         </div>
 
         <div class="answer-box">
@@ -133,9 +145,70 @@
             <li><b>기관추천</b>: 국가유공자·보훈대상자·장애인·중소기업 장기근속자 등, 해당 기관의 추천 필요</li>
             <li><b>이전기관 종사자</b>: 세종·혁신도시 등으로 이전한 공공기관·기업 종사자</li>
         </ul>
+        <h2>특별공급, 공통으로 갖춰야 할 조건</h2>
+        <p>유형마다 대상은 다르지만, 특별공급 대부분에는 <b>공통 관문</b>이 있습니다. 이 조건을 먼저 통과해야 각 유형의 세부 경쟁으로 들어갑니다.</p>
+        <ul>
+            <li><b>무주택 세대구성원</b>: 세대에 속한 전원이 무주택이어야 하는 것이 원칙입니다.</li>
+            <li><b>청약통장</b>: 주택청약종합저축 가입 후 유형별 최소 납입 요건(예: 생애최초 24회)을 충족해야 합니다.</li>
+            <li><b>소득·자산 기준</b>: 도시근로자 월평균소득 대비 비율(소득분위)과 부동산·자동차 자산 기준이 함께 적용됩니다.</li>
+            <li><b>1인 1건 · 재당첨 제한</b>: 한 단지에서 특별공급은 1건만 신청되고, 당첨 이력이 있으면 일정 기간 재당첨이 제한됩니다.</li>
+        </ul>
+        <div class="official">
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토부 주택청약 FAQ</a> 기준</b><br/>
+            특별공급은 무주택 세대구성원에게 <b>1회(1인 1건)</b>에 한해 우선 공급하며, 유형별 소득·자산 기준과 재당첨 제한이 적용됩니다.
+        </div>
+
+        <h2>물량과 당첨은 이렇게 정해집니다</h2>
+        <p>특별공급은 <b>일반공급과 물량이 분리</b>돼 있어, 특공 신청자끼리만 경쟁합니다. 유형별 배정 비율은 공공·민영과 단지별로 달라 모집공고문에서 확인해야 하며, 특공에서 미달된 물량은 <b>일반공급으로 넘어갑니다</b>.</p>
+
+        <figure class="fig">
+            <svg viewBox="0 0 680 208" role="img" aria-label="한 단지의 공급 물량이 특별공급(신혼부부·생애최초·신생아·기타 특공)과 일반공급으로 나뉘는 개념도. 특별공급에서 미달된 물량은 일반공급으로 넘어감." xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, sans-serif">
+                <text x="40" y="26" font-size="16" font-weight="700" fill="#191F28">한 단지의 공급 물량은 이렇게 나뉩니다</text>
+                <text x="40" y="47" font-size="12.5" fill="#8B95A1">예시 개념도 · 실제 비율은 공공·민영과 단지·공고별로 다릅니다</text>
+
+                <rect x="40" y="66" width="105" height="44" rx="5" fill="#3182F6"/>
+                <text x="92" y="93" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">18%</text>
+                <rect x="151" y="66" width="87" height="44" rx="5" fill="#4E93F7"/>
+                <text x="194" y="93" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">15%</text>
+                <rect x="244" y="66" width="66" height="44" rx="5" fill="#7DB0FA"/>
+                <text x="277" y="93" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">12%</text>
+                <rect x="316" y="66" width="84" height="44" rx="5" fill="#A9CCFB"/>
+                <text x="358" y="93" font-size="12.5" font-weight="700" fill="#2B6DD6" text-anchor="middle">15%</text>
+                <rect x="406" y="66" width="234" height="44" rx="5" fill="#C4CBD3"/>
+                <text x="523" y="93" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">일반공급 40%</text>
+
+                <text x="223" y="132" font-size="12.5" font-weight="600" fill="#8B95A1" text-anchor="middle">◀ 특별공급 (약 60%) ▶</text>
+                <text x="523" y="132" font-size="12.5" font-weight="600" fill="#8B95A1" text-anchor="middle">↳ 특공 미달분은 일반공급으로</text>
+
+                <rect x="40" y="160" width="12" height="12" rx="3" fill="#3182F6"/>
+                <text x="58" y="170" font-size="12.5" fill="#4E5968">신혼부부</text>
+                <rect x="140" y="160" width="12" height="12" rx="3" fill="#4E93F7"/>
+                <text x="158" y="170" font-size="12.5" fill="#4E5968">생애최초</text>
+                <rect x="240" y="160" width="12" height="12" rx="3" fill="#7DB0FA"/>
+                <text x="258" y="170" font-size="12.5" fill="#4E5968">신생아</text>
+                <rect x="326" y="160" width="12" height="12" rx="3" fill="#A9CCFB"/>
+                <text x="344" y="170" font-size="12.5" fill="#4E5968">기타 특공</text>
+                <rect x="446" y="160" width="12" height="12" rx="3" fill="#C4CBD3"/>
+                <text x="464" y="170" font-size="12.5" fill="#4E5968">일반공급</text>
+            </svg>
+            <figcaption>특별공급은 유형별로 물량이 나뉘어 신청자끼리만 경쟁하고, 미달된 물량은 일반공급으로 넘어갑니다. (비율은 개념 예시)</figcaption>
+        </figure>
+
+        <p>유형 안에서의 당첨 방식도 제각각입니다. 신혼부부·다자녀는 <b>배점(가점)제</b>, 생애최초는 <b>추첨제</b>가 중심이라, 같은 자격이라도 어떤 트랙을 고르느냐에 따라 당첨 확률이 크게 달라집니다.</p>
+
         <div class="tip"><b>중복 자격이 있다면?</b> 한 단지에서 특공은 1건만 신청되므로, <b>당첨 확률이 가장 높은 트랙</b>을 고르는 게 전략입니다. 자녀가 어리면 신생아, 결혼 초기면 신혼부부, 가점·소득이 애매하면 생애최초 추첨을 노리는 식입니다.</div>
-        <div class="warn-box"><b>안내</b><br/>각 유형의 세부 요건·물량 비율은 공급유형과 연도별로 다릅니다. 신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문을 확인하세요.</div>
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인 </a>
+        <div class="warn-box"><b>안내</b><br/>각 유형의 세부 요건·물량 비율은 공급유형과 연도별로 다릅니다.<br/>신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문을 확인하세요.</div>
+        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기</a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>특별공급은 한 번에 여러 유형을 신청할 수 있나요?</summary><p>아닙니다. 한 단지에서 특별공급은 1인 1건만 신청됩니다. 여러 유형에 해당하더라도 당첨 확률이 가장 높은 한 가지를 골라야 합니다.</p></details>
+            <details><summary>특별공급과 일반공급을 같이 넣을 수 있나요?</summary><p>네. 같은 단지에서 특별공급과 일반공급은 함께 신청할 수 있고, 특별공급에서 떨어지면 일반공급에서 다시 경쟁하게 됩니다. 다만 특별공급끼리는 중복되지 않습니다.</p></details>
+            <details><summary>특별공급에도 소득 기준이 있나요?</summary><p>대부분 있습니다. 도시근로자 월평균소득 대비 비율과 자산 기준이 적용되며, 생애최초·신혼부부는 추첨 물량에서 소득 기준이 더 완화되기도 합니다. 유형·연도별로 다르므로 공고문을 확인하세요.</p></details>
+            <details><summary>특별공급에서 떨어지면 그 단지는 끝인가요?</summary><p>아닙니다. 특별공급에서 미당첨되면 함께 신청한 일반공급 경쟁으로 자동 편입되고, 특공에서 남은 물량도 일반공급으로 넘어갑니다.</p></details>
+        </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -170,7 +243,7 @@
       "description": "청약 특별공급 7가지 총정리 — 신혼부부·생애최초·신생아·다자녀·노부모부양·기관추천·이전기관. 각 유형의 대상, 소득기준, 물량 비율과 나에게 맞는 트랙 찾는 법.",
       "inLanguage": "ko",
       "datePublished": "2026-07-22",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-21",
       "author": {
         "@type": "Person",
         "name": "내집컷 편집팀"
@@ -223,7 +296,10 @@
             "@type": "Answer",
             "text": "주요 특별공급은 신혼부부, 생애최초, 신생아, 다자녀가구, 노부모부양, 기관추천, 이전기관 종사자 특별공급이 있습니다. 각 유형마다 대상 요건과 소득·자산 기준, 배정 물량이 다르며 한 단지에서 특별공급은 1인 1건만 신청할 수 있습니다."
           }
-        }
+        },
+        { "@type": "Question", "name": "특별공급과 일반공급을 같이 신청할 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 같은 단지에서 특별공급과 일반공급은 함께 신청할 수 있고, 특별공급에서 미당첨되면 일반공급 경쟁으로 자동 편입됩니다. 다만 특별공급끼리는 1인 1건만 신청됩니다." } },
+        { "@type": "Question", "name": "특별공급에도 소득 기준이 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "대부분 있습니다. 도시근로자 월평균소득 대비 비율과 부동산·자동차 자산 기준이 적용되며, 생애최초·신혼부부는 추첨 물량에서 소득 기준이 더 완화되기도 합니다. 유형·연도별로 다르므로 공고문을 확인해야 합니다." } },
+        { "@type": "Question", "name": "특별공급에서 떨어지면 그 단지는 끝인가요?", "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 특별공급에서 미당첨되면 함께 신청한 일반공급 경쟁으로 자동 편입되고, 특별공급에서 남은 물량도 일반공급으로 넘어갑니다." } }
       ]
     }
   ]

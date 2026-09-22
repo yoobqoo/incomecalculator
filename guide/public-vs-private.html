@@ -67,6 +67,10 @@
         th { color: var(--text-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
         td b { font-weight: 600; }
         td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        /* 그림 */
+        figure.fig { margin: 26px 0 28px; }
+        figure.fig svg { width: 100%; height: auto; display: block; }
+        figure.fig figcaption { font-size: 13px; color: var(--text-3); line-height: 1.7; margin-top: 10px; }
         /* CTA */
         .cta { display: block; text-align: center; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; padding: 17px; border-radius: 14px; text-decoration: none; margin: 40px 0 8px; }
         .cta:hover { text-decoration: none; opacity: 0.94; }
@@ -82,6 +86,14 @@
         .sources ul { padding-left: 18px; margin: 0; }
         .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
         .sources a { color: var(--text-2); }
+        /* FAQ */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16px; font-weight: 600; padding: 18px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
@@ -100,7 +112,7 @@
         <div class="byline">
             <span>작성 <b>내집컷 편집팀</b></span><span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span><span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.18</b></span>
         </div>
 
         <div class="answer-box">
@@ -123,16 +135,84 @@
         <h3>민간분양 — "가점 + 운(추첨)"</h3>
         <p>민간분양 일반공급은 <b>청약가점제</b>(무주택기간·부양가족수·통장 가입기간, 84점 만점)와 <b>추첨제</b>를 병행합니다. 가점이 낮아도 추첨 물량으로 당첨을 노릴 수 있습니다.</p>
         <h2>소득·자산 기준 차이</h2>
-        <p>민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급(전용 60㎡ 이하)은 도시근로자 월평균소득 <b>100% 이하</b>여야 합니다. 특별공급은 양쪽 다 소득 기준이 있으나, 신혼부부는 공공 기준(맞벌이 200%)이 민간(맞벌이 160%)보다 완화돼 있습니다.</p>
-        <div class="tip"><b></b> 소득이 낮으면 공공분양이, 소득이 높고 가점이 좋으면 민간분양이 유리한 경우가 많습니다. <a href="/#calculator">계산기</a>로 내 소득분위부터 확인하세요.</div>
+        <p>민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급(전용 60㎡ 이하)은 도시근로자 월평균소득 <b>100% 이하</b>여야 합니다. 여기에 <b>부동산·자동차 자산 기준</b>도 함께 적용됩니다. 특별공급은 양쪽 다 소득 기준이 있으나, 신혼부부는 공공 기준(맞벌이 200%)이 민간(맞벌이 160%)보다 완화돼 있어, 같은 소득이라도 공공에서 자격이 열리는 경우가 있습니다.</p>
+
+        <figure class="fig">
+            <svg viewBox="0 0 680 322" role="img" aria-label="소득 기준 상한 비교 막대그래프. 공공 일반공급 100퍼센트, 공공 신혼부부 특별공급 맞벌이 200퍼센트, 민간 일반공급 제한 없음, 민간 신혼부부 특별공급 맞벌이 160퍼센트." xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, -apple-system, sans-serif">
+                <text x="0" y="22" font-size="16" font-weight="700" fill="#191F28">소득 기준 상한 비교 — 공공 vs 민간</text>
+                <text x="0" y="44" font-size="12.5" fill="#8B95A1">도시근로자 월평균소득 대비 · 값이 클수록 소득이 높아도 신청 가능</text>
+
+                <!-- Row 1: 공공 일반공급 100% -->
+                <text x="0" y="84" font-size="12.5" fill="#4E5968">공공 일반공급 (60㎡↓)</text>
+                <rect x="200" y="70" width="440" height="20" rx="6" fill="#F2F4F6"/>
+                <rect x="200" y="70" width="220" height="20" rx="6" fill="#3182F6"/>
+                <text x="430" y="84" font-size="12.5" font-weight="600" fill="#3182F6">100%</text>
+
+                <!-- Row 2: 공공 신혼 특공 200% -->
+                <text x="0" y="126" font-size="12.5" fill="#4E5968">공공 신혼 특공 (맞벌이)</text>
+                <rect x="200" y="112" width="440" height="20" rx="6" fill="#F2F4F6"/>
+                <rect x="200" y="112" width="440" height="20" rx="6" fill="#3182F6"/>
+                <text x="630" y="126" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="end">200%</text>
+
+                <!-- Row 3: 민간 일반공급 제한 없음 -->
+                <text x="0" y="168" font-size="12.5" fill="#4E5968">민간 일반공급</text>
+                <rect x="200" y="154" width="440" height="20" rx="6" fill="#EEF1F4" stroke="#CBD2DA" stroke-width="1.2" stroke-dasharray="5 4"/>
+                <text x="420" y="168" font-size="12.5" font-weight="600" fill="#8B95A1" text-anchor="middle">소득 기준 없음</text>
+
+                <!-- Row 4: 민간 신혼 특공 160% -->
+                <text x="0" y="210" font-size="12.5" fill="#4E5968">민간 신혼 특공 (맞벌이)</text>
+                <rect x="200" y="196" width="440" height="20" rx="6" fill="#F2F4F6"/>
+                <rect x="200" y="196" width="352" height="20" rx="6" fill="#94A3B8"/>
+                <text x="562" y="210" font-size="12.5" font-weight="600" fill="#64748B">160%</text>
+
+                <!-- 눈금 -->
+                <line x1="200" y1="232" x2="640" y2="232" stroke="#F2F4F6" stroke-width="1"/>
+                <text x="200" y="250" font-size="11" fill="#B0B8C1">0%</text>
+                <text x="420" y="250" font-size="11" fill="#B0B8C1" text-anchor="middle">100%</text>
+                <text x="640" y="250" font-size="11" fill="#B0B8C1" text-anchor="end">200%</text>
+
+                <!-- 범례 -->
+                <rect x="200" y="288" width="12" height="12" rx="3" fill="#3182F6"/>
+                <text x="218" y="298" font-size="12.5" fill="#4E5968">공공분양</text>
+                <rect x="300" y="288" width="12" height="12" rx="3" fill="#94A3B8"/>
+                <text x="318" y="298" font-size="12.5" fill="#4E5968">민간분양</text>
+            </svg>
+            <figcaption>일반공급은 공공만 소득 기준(전용 60㎡ 이하 100%)이 있고 민간은 없습니다. 특별공급은 양쪽 다 있으나 공공이 더 완화돼 있습니다. (신혼부부·맞벌이 기준, 단지·연도별로 다를 수 있음)</figcaption>
+        </figure>
+
+        <div class="official">
+            <b><a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener">국토부 FAQ</a></b><br/>
+            "공공주택 일반공급은 입주자저축 순위와 저축총액(또는 납입횟수)에 따라, 민영주택 일반공급은 가점제 및 추첨제에 따라 입주자를 선정합니다."
+        </div>
+        <div class="tip"><b>정리하면:</b> 소득·자산이 낮고 통장을 오래 부었다면 공공분양이, 소득이 높고 가점이 좋다면 민간분양이 유리한 경우가 많습니다. <a href="/#calculator">계산기</a>로 내 소득분위부터 확인하세요.</div>
+
+        <h2>청약통장은 어떻게 준비하나요?</h2>
+        <p>지금은 <b>주택청약종합저축</b> 하나로 공공·민간 청약을 모두 넣을 수 있습니다. 다만 당첨을 계산하는 방식이 달라, 준비 포인트도 다릅니다.</p>
+        <ul>
+            <li><b>공공분양</b>: 매월 꾸준히 납입한 <b>총액과 횟수</b>가 핵심입니다. 2024년부터 월 납입 인정한도가 10만 원에서 <b>25만 원</b>으로 올라, 여유가 있다면 인정한도까지 넣는 편이 저축총액 경쟁에 유리합니다.</li>
+            <li><b>민간분양</b>: 매월 금액보다 지역·전용면적별 <b>예치기준금액</b>을 모집공고일 전까지 채웠는지가 중요합니다. 가점(가입기간)은 통장을 일찍 만들수록 쌓입니다.</li>
+        </ul>
+
         <h2>어느 쪽을 노려야 하나요?</h2>
         <ul>
-            <li><b>소득·자산 낮고 통장 오래 부음</b>  공공분양</li>
-            <li><b>무주택 길고 부양가족 많음(가점)</b>  민간분양 가점제</li>
-            <li><b>가점 낮은 젊은 세대</b>  민간 추첨제 + 생애최초·신혼부부 특공</li>
+            <li><b>소득·자산 낮고 통장 오래 부음</b> → 공공분양 일반공급</li>
+            <li><b>무주택 기간 길고 부양가족 많음(가점 높음)</b> → 민간분양 가점제</li>
+            <li><b>가점 낮은 젊은 세대</b> → 민간 추첨제 + 생애최초·신혼부부 특별공급</li>
         </ul>
-        <div class="warn-box"><b>안내</b><br/>당첨 방식·소득·자산 기준은 단지와 연도별로 다릅니다. 신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문을 확인하세요.</div>
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인 </a>
+        <p>한쪽만 고집할 필요는 없습니다. 주택청약종합저축 하나로 양쪽에 모두 청약할 수 있으므로, 공고가 뜰 때마다 <b>내 소득분위와 가점을 기준</b>으로 유리한 쪽을 그때그때 선택하는 것이 현실적입니다.</p>
+
+        <div class="warn-box"><b>안내</b><br/>당첨 방식·소득·자산 기준은 단지와 연도별로 다릅니다.<br/>신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문을 확인하세요.</div>
+        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기</a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>공공분양과 민간분양, 통장은 따로 만들어야 하나요?</summary><p>아닙니다. 현재는 주택청약종합저축 하나로 공공·민간 모두 청약할 수 있습니다. 과거의 청약저축·청약예금·청약부금이 이 통장으로 통합되었습니다.</p></details>
+            <details><summary>가점이 낮은데 민간분양은 가망이 없나요?</summary><p>그렇지 않습니다. 민간분양 일반공급은 가점제와 함께 추첨제 물량이 있어, 가점이 낮아도 추첨으로 당첨을 노릴 수 있습니다. 여기에 생애최초·신혼부부 등 특별공급까지 함께 고려하면 기회가 넓어집니다.</p></details>
+            <details><summary>공공분양은 소득이 높으면 아예 안 되나요?</summary><p>공공분양 일반공급(전용 60제곱미터 이하)은 도시근로자 월평균소득 100% 이하라는 소득 기준이 있어, 이를 넘으면 일반공급 신청이 제한됩니다. 다만 특별공급은 유형별로 기준이 더 높게 설정되어 있어 소득이 높아도 해당될 수 있습니다.</p></details>
+            <details><summary>분양가는 정말 공공이 더 싼가요?</summary><p>일반적으로 공공분양은 분양가상한제 등으로 시세보다 낮게 공급되는 경우가 많습니다. 다만 단지 입지와 시점에 따라 차이가 크므로, 개별 모집공고의 분양가를 주변 시세와 비교해 판단해야 합니다.</p></details>
+        </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -167,7 +247,7 @@
       "description": "공공분양과 민간분양의 차이. 당첨자 선정 방식(저축총액·납입횟수 vs 가점제·추첨제), 소득·자산 기준, 분양가, 청약통장까지 한눈에 비교하고 어느 쪽을 노려야 할지 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-07-22",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-18",
       "author": {
         "@type": "Person",
         "name": "내집컷 편집팀"
@@ -220,7 +300,10 @@
             "@type": "Answer",
             "text": "가장 큰 차이는 당첨자 선정 방식입니다. 공공분양은 청약통장 저축 총액·납입 횟수로, 민간분양은 가점제·추첨제로 당첨자를 뽑습니다. 공공분양은 일반공급에도 소득(전용 60제곱미터 이하 100% 이하)·자산 기준이 있지만 민간분양 일반공급은 소득 기준이 없습니다."
           }
-        }
+        },
+        { "@type": "Question", "name": "공공분양과 민간분양, 통장은 따로 만들어야 하나요?", "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 현재는 주택청약종합저축 하나로 공공·민간 모두 청약할 수 있습니다. 과거의 청약저축·청약예금·청약부금이 이 통장으로 통합되었습니다." } },
+        { "@type": "Question", "name": "가점이 낮은데 민간분양은 가망이 없나요?", "acceptedAnswer": { "@type": "Answer", "text": "그렇지 않습니다. 민간분양 일반공급은 가점제와 함께 추첨제 물량이 있어, 가점이 낮아도 추첨으로 당첨을 노릴 수 있습니다. 생애최초·신혼부부 등 특별공급까지 고려하면 기회가 넓어집니다." } },
+        { "@type": "Question", "name": "분양가는 공공분양이 더 싼가요?", "acceptedAnswer": { "@type": "Answer", "text": "일반적으로 공공분양은 분양가상한제 등으로 시세보다 낮게 공급되는 경우가 많습니다. 다만 단지 입지와 시점에 따라 차이가 크므로 개별 모집공고의 분양가를 주변 시세와 비교해 판단해야 합니다." } }
       ]
     }
   ]

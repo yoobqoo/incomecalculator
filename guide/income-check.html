@@ -6,12 +6,13 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8D1NXGBRTR');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈택스 원천징수영수증 떼는 법 — 21번 총급여액 확인 | 내집컷</title>
-    <meta name="description" content="청약 소득 증빙용 원천징수영수증을 홈택스에서 5분 만에 발급받는 법. 21번 총급여액이 청약에 쓰이는 세전 연봉이며, 맞벌이 합산·사업자 종합소득금액까지 단계별로 정리했습니다.">
+    <title>청약 소득분위 계산법 — 내 세전 소득(원천징수 21번) 확인부터 | 내집컷</title>
+    <meta name="description" content="청약 소득분위는 내 가구 월평균 세전소득을 도시근로자 월평균소득과 비교해 계산합니다. 소득분위 계산식부터 기준이 되는 세전 총급여(원천징수영수증 21번)를 홈택스에서 떼는 법까지 화면과 함께 단계별로 정리했습니다.">
+    <meta name="keywords" content="청약 소득분위 계산, 소득분위 계산법, 도시근로자 월평균소득, 세전 소득 확인, 원천징수영수증 21번, 홈택스 원천징수영수증 발급">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="원천징수영수증 21번, 홈택스에서 떼는 법">
-    <meta property="og:description" content="원천징수영수증 21번 총급여액 확인">
+    <meta property="og:title" content="청약 소득분위, 어떻게 계산하나요?">
+    <meta property="og:description" content="소득분위 계산식과 기준이 되는 세전 소득 확인법">
     <meta property="og:url" content="https://homecut.kr/guide/income-check.html">
     <meta property="og:image" content="https://homecut.kr/og.png">
     <link rel="canonical" href="https://homecut.kr/guide/income-check.html">
@@ -67,6 +68,9 @@
         .quote .src { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-3); margin-bottom: 8px; }
         .quote a { color: var(--text-2); }
         .formula { background: var(--tint); border-radius: 12px; padding: 16px 18px; margin: 16px 0; font-size: 15.5px; color: var(--text); font-weight: 600; line-height: 1.6; }
+        .path { display: inline-block; background: var(--tint); border: 1px solid var(--line); border-radius: 8px; padding: 2px 9px; font-size: 14.5px; font-weight: 600; color: var(--text); margin: 1px; }
+        .case .figure { margin: 4px 0 14px; }
+        .case .figure figcaption { font-size: 12.5px; }
         table { width: 100%; border-collapse: collapse; margin: 8px 0 24px; }
         th, td { text-align: left; padding: 14px 12px; font-size: 15px; line-height: 1.6; border-bottom: 1px solid var(--line); vertical-align: top; }
         th { color: var(--text-3); font-weight: 600; font-size: 13px; }
@@ -100,11 +104,17 @@
 <body>
 <div class="wrap">
     <a href="/" class="top"><img src="/logo.svg" alt="내집컷"><span>내집컷</span></a>
-    <div class="crumbs"><a href="/">홈</a> › <a href="/guide/">가이드</a> › 원천징수영수증 21번</div>
-    <h1>원천징수영수증 21번,<br>홈택스에서 떼는 법</h1>
-    <div class="byline">내집컷 편집팀 · 국토교통부 주택청약 FAQ 기준 · 최종 확인 2026.07.22</div>
+    <div class="crumbs"><a href="/">홈</a> › <a href="/guide/">가이드</a> › 소득분위 계산법</div>
+    <h1>청약 소득분위,<br>어떻게 계산하나요?</h1>
+    <div class="byline">내집컷 편집팀 · 국토교통부 주택청약 FAQ 기준 · 최종 확인 2026.09.21</div>
 
-    <p class="lead">청약을 넣으려는데 내 세전 연봉이 얼마인지 모르는 분이 많아요. 월급통장 실수령액만 봐왔으니까요. 청약에서 쓰는 소득은 <b>세전 총급여</b>이고, 그 값은 <b>원천징수영수증 21번 칸</b>에 딱 적혀 있습니다. 홈택스에서 5분이면 뗄 수 있어요.</p>
+    <p class="lead">청약 특별공급 자격은 내 <b>소득분위</b>, 즉 <b>도시근로자 월평균소득 대비 내 소득의 비율</b>로 갈립니다. 계산의 출발점은 실수령액이 아니라 <b>세전 총급여</b>이고, 그 값은 <b>원천징수영수증 21번 칸</b>에 그대로 적혀 있습니다. 홈택스에서 5분이면 확인할 수 있습니다.</p>
+
+    <h2>청약 소득분위는 이렇게 계산됩니다</h2>
+    <p>소득분위는 <b>내 가구의 월평균 세전소득</b>을 <b>전년도 도시근로자 가구원수별 월평균소득</b>과 비교한 비율(%)입니다. 이 비율이 특별공급 소득기준(예: 신혼부부 특공 140~160%, 생애최초 특공 160%, 공공 일반공급 100%)을 넘는지로 자격이 갈립니다.</p>
+    <div class="formula">소득분위(%) = ( 내 가구 월평균 세전소득 ÷ 도시근로자 가구원수별 월평균소득 ) × 100</div>
+    <p>즉 계산의 핵심 입력값은 <b>세전 소득</b> 하나입니다. 가구원 수와 도시근로자 기준 금액에 따라 결과가 달라지지만, 그 부분은 계산기가 처리하므로 <b>내 세전 소득만 정확히 확인</b>하면 됩니다. 문제는 대부분 실수령액(세후)만 알고 있다는 점인데, 세전 소득은 <b>원천징수영수증 21번 "총급여액"</b>에 적혀 있습니다.</p>
+    <a href="/#calculator" class="cta">계산기로 내 소득분위 바로 계산하기</a>
 
     <figure class="figure" aria-label="원천징수영수증에서 21번 총급여액 칸이 청약에 쓰이는 세전 연봉임을 강조한 그림">
         <svg viewBox="0 0 640 250" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -124,29 +134,89 @@
         <figcaption>21번 "총급여액"이 청약 심사에 쓰이는 세전 연봉입니다 (국토부 FAQ Q294)</figcaption>
     </figure>
 
-    <p>월급통장 실수령액만 12번 더하면 성과급·상여가 빠지고 세금·보험료가 이미 차감돼 있어서 <b>실제 세전 소득과 15~22% 차이</b>가 납니다. 반드시 21번 총급여액을 쓰세요.</p>
+    <p>월급통장 실수령액을 열두 달 합산하는 방식으로는 성과급·상여가 누락되고 세금·4대보험이 이미 차감돼 있어, <b>실제 세전 소득과 15~22% 차이</b>가 납니다. 소득분위가 실제보다 낮게 잡히므로, 반드시 21번 총급여액을 기준으로 확인해야 합니다.</p>
 
-    <h2>홈택스에서 5분 만에 떼는 법</h2>
+    <h2>홈택스에서 떼는 법 (화면 따라하기)</h2>
+
+    <div class="note">
+        <p><b>안내</b><br>아래 화면은 경로를 쉽게 따라오도록 만든 <b>안내용 재현 이미지</b>입니다. 실제 홈택스 화면과 배치·명칭이 조금 다를 수 있으니, 버튼 이름을 기준으로 찾아 주세요.</p>
+    </div>
 
     <section class="case">
-        <h3><span class="num">1</span>홈택스 로그인</h3>
-        <p><a href="https://hometax.go.kr" target="_blank" rel="noopener">hometax.go.kr</a> 접속 → 우상단 로그인 → <b>간편인증(카카오·네이버·PASS)</b>이 가장 빠릅니다. 모바일은 손택스 앱으로도 가능하지만 화면이 커서 PC를 권합니다.</p>
+        <h3><span class="num">1</span>홈택스 접속 후 로그인</h3>
+        <figure class="figure" aria-label="홈택스 로그인 화면 재현 이미지. 간편인증 버튼이 강조되어 있음.">
+            <svg viewBox="0 0 640 280" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, sans-serif">
+                <rect x="20" y="14" width="600" height="252" rx="14" fill="#FFFFFF" stroke="#E5E8EB" stroke-width="1.5"/>
+                <rect x="20" y="14" width="600" height="40" rx="14" fill="#F7F8FA"/>
+                <rect x="20" y="40" width="600" height="14" fill="#F7F8FA"/>
+                <circle cx="44" cy="34" r="5" fill="#E5E8EB"/><circle cx="62" cy="34" r="5" fill="#E5E8EB"/><circle cx="80" cy="34" r="5" fill="#E5E8EB"/>
+                <rect x="150" y="24" width="340" height="20" rx="10" fill="#FFFFFF" stroke="#E5E8EB"/>
+                <text x="168" y="38" font-size="12" fill="#8B95A1">hometax.go.kr</text>
+                <text x="320" y="94" text-anchor="middle" font-size="16" font-weight="700" fill="#191F28">홈택스 로그인</text>
+                <rect x="120" y="116" width="400" height="46" rx="10" fill="#3182F6"/>
+                <text x="320" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">간편인증 (카카오 · 네이버 · PASS)</text>
+                <rect x="120" y="174" width="192" height="42" rx="10" fill="#FFFFFF" stroke="#D1D6DB"/>
+                <text x="216" y="201" text-anchor="middle" font-size="14" fill="#4E5968">공동·금융인증서</text>
+                <rect x="328" y="174" width="192" height="42" rx="10" fill="#FFFFFF" stroke="#D1D6DB"/>
+                <text x="424" y="201" text-anchor="middle" font-size="14" fill="#4E5968">아이디 로그인</text>
+                <text x="320" y="244" text-anchor="middle" font-size="12.5" fill="#3182F6" font-weight="600">가장 빠른 방법은 간편인증입니다</text>
+            </svg>
+            <figcaption>우측 상단 로그인 → 간편인증이 가장 빠릅니다 (안내용 재현 화면)</figcaption>
+        </figure>
+        <p><a href="https://hometax.go.kr" target="_blank" rel="noopener">hometax.go.kr</a>에 접속해 우측 상단 <b>로그인</b>을 누릅니다. 스마트폰만 있으면 <b>간편인증(카카오·네이버·PASS)</b>으로 1분 안에 됩니다. PC 화면이 커서 보기 편하지만, 손택스 앱으로도 동일하게 발급할 수 있습니다.</p>
+    </section>
+
+    <section class="case">
+        <h3><span class="num">2</span>My홈택스 → 지급명세서 제출내역</h3>
+        <figure class="figure" aria-label="My홈택스 메뉴 재현 이미지. 지급명세서 등 제출내역 항목이 강조되어 있음.">
+            <svg viewBox="0 0 640 210" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, sans-serif">
+                <rect x="20" y="14" width="600" height="182" rx="14" fill="#FFFFFF" stroke="#E5E8EB" stroke-width="1.5"/>
+                <text x="44" y="44" font-size="13.5" font-weight="700" fill="#191F28">My홈택스</text>
+                <text x="44" y="68" font-size="12.5" fill="#8B95A1">연말정산·지급명세서</text>
+                <rect x="40" y="82" width="560" height="42" rx="10" fill="#EAF2FE" stroke="#3182F6" stroke-width="1.6"/>
+                <text x="60" y="108" font-size="14" font-weight="700" fill="#3182F6">지급명세서 등 제출내역</text>
+                <text x="580" y="108" text-anchor="end" font-size="13" font-weight="700" fill="#3182F6">›</text>
+                <rect x="40" y="132" width="560" height="38" rx="10" fill="#F7F8FA"/>
+                <text x="60" y="156" font-size="13.5" fill="#8B95A1">연말정산 간소화 자료</text>
+            </svg>
+            <figcaption>My홈택스 안에서 <b>지급명세서 등 제출내역</b> 선택 (안내용 재현 화면)</figcaption>
+        </figure>
+        <p>로그인 후 <span class="path">My홈택스</span> → <span class="path">연말정산·지급명세서</span> → <span class="path">지급명세서 등 제출내역</span> 순으로 들어갑니다. 메뉴 이름이 헷갈리면 상단 <b>검색창에 "지급명세서"</b>를 입력해도 됩니다.</p>
+    </section>
+
+    <section class="case">
+        <h3><span class="num">3</span>귀속연도 선택 → 보기 → 인쇄·PDF</h3>
+        <figure class="figure" aria-label="지급명세서 제출내역 목록 재현 이미지. 최근 귀속연도의 보기 버튼이 강조되어 있음.">
+            <svg viewBox="0 0 640 220" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, sans-serif">
+                <rect x="20" y="14" width="600" height="192" rx="14" fill="#FFFFFF" stroke="#E5E8EB" stroke-width="1.5"/>
+                <text x="44" y="44" font-size="13.5" font-weight="700" fill="#191F28">근로소득 지급명세서 제출내역</text>
+                <rect x="40" y="58" width="560" height="26" rx="6" fill="#F7F8FA"/>
+                <text x="56" y="75" font-size="12" fill="#8B95A1">귀속연도</text>
+                <text x="240" y="75" font-size="12" fill="#8B95A1">제출처(회사)</text>
+                <text x="470" y="75" font-size="12" fill="#8B95A1">원천징수영수증</text>
+                <rect x="40" y="90" width="560" height="44" rx="8" fill="#FFFFFF" stroke="#E5E8EB"/>
+                <text x="56" y="117" font-size="13.5" font-weight="700" fill="#191F28">2025년</text>
+                <text x="240" y="117" font-size="13" fill="#4E5968">(주)내집컷</text>
+                <rect x="452" y="100" width="128" height="26" rx="7" fill="#3182F6"/>
+                <text x="516" y="118" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">보기 · 인쇄</text>
+                <rect x="40" y="140" width="560" height="40" rx="8" fill="#FFFFFF" stroke="#E5E8EB"/>
+                <text x="56" y="165" font-size="13.5" fill="#8B95A1">2024년</text>
+                <text x="240" y="165" font-size="13" fill="#8B95A1">(주)내집컷</text>
+                <rect x="452" y="149" width="128" height="24" rx="7" fill="#F2F4F6"/>
+                <text x="516" y="166" text-anchor="middle" font-size="12" fill="#8B95A1">보기 · 인쇄</text>
+            </svg>
+            <figcaption>최근 <b>귀속연도</b> 줄의 <b>보기·인쇄</b>를 눌러 PDF로 저장 (안내용 재현 화면)</figcaption>
+        </figure>
+        <p>가장 최근 <b>귀속연도</b> 줄에서 <b>보기·인쇄</b>를 누르고, 상호·사업자등록번호 공개 여부를 정한 뒤 <b>인쇄 또는 PDF 저장</b>하면 끝입니다. 참고로 2025년 소득은 회사가 지급명세서를 제출한 뒤인 <b>2026년 3월 말~4월 초</b>부터 조회됩니다.</p>
+    </section>
+
+    <section class="case">
+        <h3><span class="num">4</span>21번 "총급여액" 확인</h3>
+        <p>발급한 PDF에서 <b>21. 총급여액</b> 칸을 보세요(맨 위 그림 참고). 이 숫자가 청약에서 쓰는 <b>세전 연봉</b>입니다.</p>
     </section>
     <section class="case">
-        <h3><span class="num">2</span>메뉴 경로 찾기</h3>
-        <p>My홈택스 → 연말정산·지급명세서 → <b>지급명세서 등 제출내역</b> → 가장 최근 귀속연도의 원천징수영수증 PDF 다운로드. 연말정산 직후(보통 2~3월)부터 조회됩니다.</p>
-    </section>
-    <section class="case">
-        <h3><span class="num">3</span>21번 "총급여액" 확인</h3>
-        <p>PDF를 열어 <b>21. 총급여액</b> 칸을 보세요. 이 숫자가 청약에서 쓰는 세전 연봉입니다.</p>
-    </section>
-    <section class="case">
-        <h3><span class="num">4</span>맞벌이면 부부 합산</h3>
-        <p>부부가 각자 발급받아 두 사람의 21번 총급여를 <b>단순히 더한 값</b>이 가구 총소득입니다.</p>
-    </section>
-    <section class="case">
-        <h3><span class="num">5</span>사업자·프리랜서는 다른 서류</h3>
-        <p>사업소득이 주면 원천징수영수증 대신 <b>종합소득세 신고서</b>를 씁니다. 신고서의 <b>종합소득금액</b>(매출 − 필요경비)이 본인 소득으로 인정돼요.</p>
+        <h3><span class="num">5</span>맞벌이·사업자는 이렇게</h3>
+        <p><b>맞벌이</b>면 부부가 각자 발급받아 두 사람의 21번 총급여를 <b>단순히 더한 값</b>이 가구 총소득입니다. <b>사업소득이 주</b>라면 원천징수영수증 대신 <b>종합소득세 신고서</b>를 쓰고, 신고서의 <b>종합소득금액</b>(매출 − 필요경비)이 소득으로 인정됩니다.</p>
     </section>
 
     <div class="ex">
@@ -161,6 +231,7 @@
 
     <h2>자주 묻는 질문</h2>
     <div class="faq">
+        <details><summary>청약 소득분위는 어떻게 계산하나요?</summary><p>내 가구의 월평균 세전소득을 전년도 도시근로자 가구원수별 월평균소득으로 나눈 비율(%)입니다. 예를 들어 3인 가구 기준 월평균소득이 700만 원이고 내 세전 월소득이 700만 원이면 소득분위는 100%입니다. 세전 소득만 알면 나머지는 계산기가 처리합니다.</p></details>
         <details><summary>월급통장에 들어온 금액을 넣으면 안 되나요?</summary><p>실수령액(세후)은 세금·4대보험이 빠진 금액이라 청약 기준(세전)과 15~22% 차이가 납니다. 21번 총급여액을 확인하는 것이 정확합니다.</p></details>
         <details><summary>비과세 식대(월 20만 원)도 포함해야 하나요?</summary><p>아니요. 비과세 식대는 21번 총급여액에서 이미 제외돼 있습니다. 명세서에 식대가 적혀 있어도 청약 심사에는 영향이 없습니다.</p></details>
         <details><summary>성과급 받은 달만 따로 더해야 하나요?</summary><p>성과급은 연 단위로 합산되어 21번 칸에 이미 포함돼 있습니다. 따로 더할 필요가 없습니다.</p></details>
@@ -191,11 +262,11 @@
   "@graph": [
     {
       "@type": "Article",
-      "headline": "홈택스 원천징수영수증 떼는 법 — 21번 총급여액 확인",
-      "description": "청약 소득 증빙용 원천징수영수증을 홈택스에서 5분 만에 발급받는 법. 21번 총급여액이 청약에 쓰이는 세전 연봉이며, 맞벌이 합산·사업자 종합소득금액까지 단계별로 정리했습니다.",
+      "headline": "청약 소득분위 계산법 — 세전 소득(원천징수 21번) 확인부터",
+      "description": "청약 소득분위는 내 가구 월평균 세전소득을 도시근로자 월평균소득과 비교해 계산합니다. 소득분위 계산식부터 기준이 되는 세전 총급여(원천징수영수증 21번)를 홈택스에서 떼는 법까지 화면과 함께 단계별로 정리했습니다.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-21",
       "author": {
         "@type": "Organization",
         "name": "내집컷 편집팀"
@@ -233,7 +304,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "원천징수영수증 21번",
+          "name": "소득분위 계산법",
           "item": "https://homecut.kr/guide/income-check.html"
         }
       ]
@@ -241,6 +312,14 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "청약 소득분위는 어떻게 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "내 가구의 월평균 세전소득을 전년도 도시근로자 가구원수별 월평균소득으로 나눈 비율(%)입니다. 이 비율이 특별공급 소득기준(신혼부부 140~160%, 생애최초 160%, 공공 일반공급 100% 등)을 넘는지로 자격이 결정됩니다. 세전 소득은 원천징수영수증 21번 총급여액으로 확인합니다."
+          }
+        },
         {
           "@type": "Question",
           "name": "청약 소득은 원천징수영수증 어느 칸을 보나요?",
