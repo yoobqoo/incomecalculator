@@ -82,6 +82,14 @@
         .sources ul { padding-left: 18px; margin: 0; }
         .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
         .sources a { color: var(--text-2); }
+        /* FAQ */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16px; font-weight: 600; padding: 18px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
@@ -93,7 +101,7 @@
         <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
         <span class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</span>
     </a>
-    <div class="crumbs"><a href="/">홈</a> &rsaquo; 상황별 가이드 &rsaquo; 출산휴가 중 청약 소득</div>
+    <div class="crumbs"><a href="/">홈</a> &rsaquo; <a href="/guide/">가이드</a> &rsaquo; 출산휴가 중 청약 소득</div>
     <article>
         <h1>출산휴가 중인데<br/>청약 소득에 포함되나요?</h1>
         <div class="meta">국토교통부 2024 주택청약 FAQ 기반 · 4분</div>
@@ -102,7 +110,7 @@
             <span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
             <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.22</b></span>
         </div>
 
         <div class="answer-box">
@@ -139,6 +147,11 @@
             <b>예시:</b> 전년도 1~10월 정상근무 + 11~12월 출산휴가(회사 무급, 고용보험 급여 수령)<br/>
              11~12월은 제외. 1~10월 총급여 ÷ 10개월 × 12로 환산해서 입력
         </div>
+        <div class="formula">정상근무·유급휴가 달 총급여 ÷ 정상재직 개월수 × 12 = 환산 연소득</div>
+        <p>제외되는 달을 빼고 남은 개월수로 나눈 뒤 12를 곱해 연 소득으로 환산하는 것이 핵심입니다. 무급이었던 달을 그대로 12개월에 포함해 나누면 소득이 실제보다 낮게 잡히므로 주의해야 합니다.</p>
+
+        <h2>맞벌이 배우자가 출산휴가라면?</h2>
+        <p>맞벌이 부부는 각자의 소득을 위 방식으로 따로 환산한 뒤 <b>두 사람의 값을 합산</b>합니다. 한 명이 출산휴가로 일부 달이 제외되더라도, 그 사람은 남은 정상재직 개월수로 환산하고 배우자는 정상적으로 계산해 더하면 됩니다. 합산 방법은 <a href="/guide/dual-income.html">맞벌이 부부 소득 합산법</a>에서 자세히 다룹니다.</p>
 
         <h2>출산휴가 + 육아휴직을 이어서 쓴 경우</h2>
         <p>출산휴가(유급) 후 곧바로 육아휴직에 들어간 경우, <b>출산휴가 유급 기간까지는 포함</b>하고 <b>육아휴직부터는 제외</b>합니다. 육아휴직 처리는 <a href="/guide/parental-leave.html">육아휴직 청약 가이드</a>에서 자세히 확인하세요.</p>
@@ -150,7 +163,17 @@
             <li>고용보험 출산전후휴가급여 수령 내역 (해당 시)</li>
         </ul>
 
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인하기 </a>
+        <a href="/calculator.html" class="cta">계산기로 내 소득분위 확인하기 </a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>출산휴가 기간은 청약 소득에 포함되나요?</summary><p>유급 출산휴가는 원칙적으로 정상재직 기간에 포함되고, 그 기간에 받은 급여도 소득에 들어갑니다. 육아휴직과 달리 제외되지 않습니다.</p></details>
+            <details><summary>회사에서 급여를 못 받은 출산휴가 달은 어떻게 하나요?</summary><p>급여를 받지 않았거나 고용보험 출산전후휴가급여를 받은 달은 정상재직 기간에서 제외합니다. 그 달을 뺀 나머지 개월수로 총급여를 나눈 뒤 12를 곱해 연 소득으로 환산합니다.</p></details>
+            <details><summary>고용보험 출산전후휴가급여도 소득으로 잡히나요?</summary><p>해당 급여를 받은 달은 정상재직 기간에서 빠지며, 이 급여 자체는 청약 소득 산정 대상으로 보지 않습니다. 회사가 지급한 급여만 소득에 포함됩니다.</p></details>
+            <details><summary>출산휴가 후 바로 육아휴직에 들어갔어요.</summary><p>유급 출산휴가까지는 포함하고, 육아휴직에 들어간 시점부터는 제외합니다. 육아휴직 처리는 별도 가이드에서 확인하세요.</p></details>
+        </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -188,10 +211,10 @@
       "description": "출산휴가는 청약 소득 산정 시 정상재직 기간에 포함됩니다. 단 회사가 급여를 주지 않았거나 고용보험 출산전후휴가급여를 받은 달은 제외. 육아휴직과의 차이도 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-22",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -220,7 +243,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "상황별 가이드"
+          "name": "청약 소득 가이드",
+          "item": "https://homecut.kr/guide/"
         },
         {
           "@type": "ListItem",
@@ -240,7 +264,10 @@
             "@type": "Answer",
             "text": "출산휴가는 원칙적으로 정상재직 기간에 포함됩니다(육아휴직과 다름). 단, 회사가 급여를 주지 않았거나 고용보험 출산전후휴가급여를 받은 달은 제외합니다."
           }
-        }
+        },
+        { "@type": "Question", "name": "회사에서 급여를 못 받은 출산휴가 달은 어떻게 계산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "급여를 받지 않았거나 고용보험 출산전후휴가급여를 받은 달은 정상재직 기간에서 제외합니다. 그 달을 뺀 나머지 개월수로 총급여를 나눈 뒤 12를 곱해 연 소득으로 환산합니다." } },
+        { "@type": "Question", "name": "고용보험 출산전후휴가급여도 청약 소득으로 잡히나요?", "acceptedAnswer": { "@type": "Answer", "text": "해당 급여를 받은 달은 정상재직 기간에서 제외되며, 이 급여 자체는 청약 소득 산정 대상으로 보지 않습니다. 회사가 지급한 급여만 소득에 포함됩니다." } },
+        { "@type": "Question", "name": "출산휴가 후 바로 육아휴직에 들어갔다면?", "acceptedAnswer": { "@type": "Answer", "text": "유급 출산휴가까지는 정상재직 기간에 포함하고, 육아휴직에 들어간 시점부터는 제외합니다." } }
       ]
     }
   ]

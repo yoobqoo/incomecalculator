@@ -16,21 +16,17 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>내집컷 | 청약 소득분위 계산기</title>
-    <meta name="description" content="내집컷 — 슬라이더 한 번으로 청약 소득분위 즉시 확인. 신혼부부·생애최초·공공분양 자격 판독.">
+    <title>청약 소득분위 계산기 — 신혼·생애최초·신생아 자격 판독 | 내집컷</title>
+    <meta name="description" content="가구원 수·세전 소득만 입력하면 청약 소득분위를 즉시 계산합니다. 신혼부부·생애최초·신생아 특례·공공분양 소득기준 자격을 한 번에 판독하세요.">
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
-    <!-- Open Graph (카카오·슬랙·텔레그램 등 공유 썸네일) -->
-    <meta property="og:type"        content="website">
-    <meta property="og:url"         content="https://homecut.kr/">
-    <meta property="og:title"       content="내집컷">
-    <meta property="og:description" content="청약을 위한 소득분위 계산기">
-    <meta property="og:image"       content="https://homecut.kr/og.png">
-    <meta property="og:image:width"  content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="내집컷">
-    <meta name="twitter:description" content="청약을 위한 소득분위 계산기">
-    <meta name="twitter:image"       content="https://homecut.kr/og.png">
+    <link rel="canonical" href="https://homecut.kr/calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://homecut.kr/calculator.html">
+    <meta property="og:title" content="청약 소득분위 계산기">
+    <meta property="og:description" content="가구 소득 입력하면 특별공급 자격 즉시 판독">
+    <meta property="og:image" content="https://homecut.kr/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://homecut.kr/og.png">
     <style>
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
         @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
@@ -391,82 +387,104 @@
 <body>
 <div class="container">
 
-    <!-- 1. Brand header -->
     <header class="brand">
         <img src="/logo.svg" alt="내집컷 로고" class="brand-logo" />
         <h1 class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</h1>
     </header>
 
-    <!-- 2. Hero + 상황별 찾아보기 -->
+    <p style="margin:8px 0 0;font-size:13px;color:var(--text-3);"><a href="/" style="color:var(--text-3);text-decoration:none;">← 홈으로</a></p>
+
     <section class="hero">
-        <h2>내 상황에서<br/>청약 소득, 어떻게 계산하죠?</h2>
-        <p>육아휴직·이직·무직·사업자… 상황마다 계산법이 다릅니다. 국토교통부 공식 기준으로 딱 맞는 답을 찾아보세요.</p>
+        <h2>청약 소득분위,<br/>1초 만에 계산하기</h2>
+        <p>가구원 수와 세전 소득만 입력하면 신혼부부·생애최초·신생아·공공분양 자격을 바로 판독합니다.</p>
     </section>
 
-    <a href="/calculator.html" style="display:block;text-align:center;background:var(--accent);color:#fff;font-weight:700;font-size:16px;padding:17px;border-radius:14px;text-decoration:none;margin:8px 0 4px;">🧮 청약 소득분위 계산기 열기 →</a>
+    <!-- 3. 빠른 계산기 : 1단계 필수 선택 -->
+    <section class="card" id="calculator">
+        <div class="step-tag">STEP 1 · 가구 정보</div>
 
-    <section class="card">
-        <div class="label">🔎 내 상황 찾아보기</div>
-        <div class="situation-grid">
-            <a class="situation-card" href="/guide/parental-leave.html">
-                <span class="emoji">🍼</span>
-                <span class="s-title">육아휴직 중이에요</span>
-                <span class="s-desc">휴직 전 소득으로 계산</span>
-            </a>
-            <a class="situation-card" href="/guide/job-change.html">
-                <span class="emoji">💼</span>
-                <span class="s-title">작년에 이직했어요</span>
-                <span class="s-desc">'주(현)' 총급여 기준</span>
-            </a>
-            <a class="situation-card" href="/guide/maternity-leave.html">
-                <span class="emoji">🤰</span>
-                <span class="s-title">출산휴가 중이에요</span>
-                <span class="s-desc">유급휴가는 소득 포함</span>
-            </a>
-            <a class="situation-card" href="/guide/unemployed.html">
-                <span class="emoji">🏠</span>
-                <span class="s-title">지금 무직이에요</span>
-                <span class="s-desc">일할계산으로 산정</span>
-            </a>
-            <a class="situation-card" href="/guide/business-loss.html">
-                <span class="emoji">📉</span>
-                <span class="s-title">사업소득이 마이너스</span>
-                <span class="s-desc">외벌이로 분류</span>
-            </a>
-            <a class="situation-card" href="/guide/dual-income.html">
-                <span class="emoji">👫</span>
-                <span class="s-title">맞벌이라 합산해야 해요</span>
-                <span class="s-desc">부부 21번 총급여 합산</span>
-            </a>
-            <a class="situation-card" href="/guide/bonus.html">
-                <span class="emoji">💰</span>
-                <span class="s-title">성과급을 받았어요</span>
-                <span class="s-desc">총급여액에 이미 포함</span>
-            </a>
-            <a class="situation-card" href="/guide/edge-cases.html">
-                <span class="emoji">📚</span>
-                <span class="s-title">그 외 특이 케이스</span>
-                <span class="s-desc">폐업·복합소득 등</span>
-            </a>
-            <a class="situation-card wide accent" href="/calculator.html">
-                <span class="emoji">🧮</span>
-                <span class="s-body">
-                    <span class="s-title">일단 내 소득분위부터 볼래요</span>
-                    <span class="s-desc">가구원 수·소득 입력하면 1초 계산</span>
-                </span>
-            </a>
-            <!-- 단지 분석 코너 임시 비활성화 (정기 업데이트 재개 시 복구)
-            <a class="situation-card wide" href="/analysis/">
-                <span class="emoji">📊</span>
-                <span class="s-body">
-                    <span class="s-title">곧 청약하는 단지 분석 보기</span>
-                    <span class="s-desc">59A vs 59B — 평형별 특공 물량·일정 정리</span>
-                </span>
-            </a>
-            -->
+        <div class="label">가구원 수</div>
+        <div class="chip-row" id="familyChips" style="margin-bottom: 14px;">
+            <button type="button" class="chip" data-family="1">1인</button>
+            <button type="button" class="chip active" data-family="2">2인</button>
+            <button type="button" class="chip" data-family="3">3인</button>
+            <button type="button" class="chip" data-family="4">4인</button>
+            <button type="button" class="chip" data-family="5">5인</button>
+        </div>
+
+        <div class="label">구분</div>
+        <div class="toggle-groups" style="margin-bottom: 14px;">
+            <div class="seg" id="earnersSeg">
+                <button type="button" data-earners="single" id="singleEarnerBtn">외벌이</button>
+                <button type="button" class="active" data-earners="dual">맞벌이</button>
+            </div>
+        </div>
+
+        <div class="label">가구 소득 유형 <small class="label-hint">(어떤 서류를 봐야 할지 결정)</small></div>
+        <div class="chip-row type-row" id="typeChips">
+            <button type="button" class="chip" data-type="employee">근로소득자</button>
+            <button type="button" class="chip" data-type="business">사업소득자</button>
+            <button type="button" class="chip" data-type="mixed">복합 : 근로 + 사업</button>
         </div>
     </section>
 
+    <!-- 3. 2단계: 가구 소득 입력 -->
+    <section class="card" id="incomeCard">
+        <div class="step-tag">STEP 2 · 가구 합산 소득</div>
+
+        <!-- 유형별 서류 가이드 -->
+        <div class="type-guide" id="typeGuide" style="display:none;"></div>
+
+        <!-- 단일 입력 (외벌이·근로/사업) -->
+        <div class="gross-input-section" id="singleInputSection">
+            <label class="label" for="grossInput" id="grossInputLabel">가구 합산 연소득</label>
+            <div class="gross-input-wrap">
+                <input type="number" id="grossInput" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                <span class="gross-unit">만원 / 연</span>
+            </div>
+            <div class="gross-hint" id="grossHint">먼저 STEP 1의 가구 소득 유형을 선택하세요</div>
+        </div>
+
+        <!-- 분리 입력 (맞벌이 또는 복합) -->
+        <div class="gross-input-section" id="splitInputSection" style="display:none;">
+            <div class="member-input">
+                <label class="member-input-label" for="member1Input" id="member1Label">
+                    <span class="member-tag">구성원 1</span><span id="member1LabelText">금액</span>
+                </label>
+                <div class="gross-input-wrap">
+                    <input type="number" id="member1Input" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                    <span class="gross-unit">만원 / 연</span>
+                </div>
+            </div>
+            <div class="member-input">
+                <label class="member-input-label" for="member2Input" id="member2Label">
+                    <span class="member-tag alt">구성원 2</span><span id="member2LabelText">금액</span>
+                </label>
+                <div class="gross-input-wrap">
+                    <input type="number" id="member2Input" class="gross-input" placeholder="0" min="0" step="100" inputmode="numeric">
+                    <span class="gross-unit">만원 / 연</span>
+                </div>
+            </div>
+            <div class="gross-hint" id="splitHint"></div>
+        </div>
+    </section>
+
+    <!-- 3. Result Card (compact, always visible) -->
+    <section class="card result-card">
+        <h2 class="sr-only">내 청약 소득분위 결과</h2>
+        <div class="display"><span id="resultPercent">100</span><span class="percent-sign">%</span></div>
+        <div class="eligibility-list" id="eligibilityList"></div>
+        <div class="disclaimer">
+            본 결과는 사용자가 입력한 <b>가구 합산 연소득</b>을 12로 나눈 월평균소득을 도시근로자 가구당 월평균소득과 비교한 값입니다.
+            특이 케이스(1년 미만 근무·휴직·이직·복합소득 등)는 환산 방식이 다를 수 있으니
+            <a href="/guide/edge-cases.html" style="color:var(--accent); font-weight:600;">특이 케이스 가이드</a>를 확인하시고,
+            반드시 공식 채널의 모집공고문 원문을 확인하시기 바랍니다.
+            <div class="official-links">
+                <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈 ↗</a>
+                <a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스 ↗</a>
+            </div>
+        </div>
+    </section>
 
     <!-- AdFit 320x100 -->
     <div class="adfit-wrap">
@@ -476,213 +494,328 @@
             data-ad-height="100"></ins>
     </div>
 
-    <!-- 6. 도시근로자 월평균소득 기준표 (SEO) -->
-    <section class="card seo-section">
-        <h2>2025년 도시근로자 월평균소득 (100% 기준)</h2>
-        <table class="income-table">
-            <tbody>
-                <tr><th>1인 가구</th><td>3,813,363원</td></tr>
-                <tr><th>2인 가구</th><td>5,866,270원</td></tr>
-                <tr><th>3인 가구</th><td>8,168,429원</td></tr>
-                <tr><th>4인 가구</th><td>8,802,202원</td></tr>
-                <tr><th>5인 가구</th><td>9,326,985원</td></tr>
-            </tbody>
-        </table>
-        <p>2025년 3월부터 2026년 2월까지 모집공고에 적용되는 기준입니다. 청약 소득분위는 본인 가구의 월평균소득(세전)을 위 도시근로자 월평균소득으로 나눈 백분율입니다. 신혼부부 특별공급, 생애최초 특별공급, 신생아 특례, 공공분양 일반공급은 각각 정해진 % 이하만 신청 가능하며, 1~2인 가구는 가산률·자산 기준 등 추가 요건이 별도로 적용됩니다.</p>
-    </section>
+    <p style="text-align:center;margin:30px 0 0;"><a href="/guide/" style="color:var(--accent);font-weight:600;text-decoration:none;">📚 청약 소득 가이드 20편 보기 →</a></p>
 
-    <!-- 7. FAQ (SEO + 리치 스니펫) -->
-    <section class="card seo-section">
-        <h2>청약 소득기준 자주 묻는 질문</h2>
-        <div class="faq-list">
-            <details class="faq-item">
-                <summary>신혼부부 특별공급 소득기준은 어떻게 되나요?</summary>
-                <div class="faq-a">신혼부부 특별공급은 도시근로자 월평균소득 대비 일정 비율 이하만 신청할 수 있습니다. 민간분양은 외벌이 140% · 맞벌이 160% 이하, 공공분양은 외벌이 130% · 맞벌이 200% 이하 기준이 적용됩니다. 자녀가 있는 경우 자녀 수에 따라 가구원 수가 늘어 기준 금액도 함께 상승합니다.</div>
-            </details>
-            <details class="faq-item">
-                <summary>생애최초 특별공급 소득기준은 얼마인가요?</summary>
-                <div class="faq-a">생애최초 특별공급은 민간분양과 공공분양 모두 외벌이 130% · 맞벌이 140% 이하 소득 기준이 적용됩니다. 청약통장 24회 이상 납입, 5년 이상 근로소득세 또는 사업소득세 납부, 무주택 세대주 등 추가 조건도 충족해야 합니다.</div>
-            </details>
-            <details class="faq-item">
-                <summary>청약 소득분위 100%는 어떻게 계산하나요?</summary>
-                <div class="faq-a">청약 소득분위 100%는 가구원 수별 도시근로자 월평균소득(세전)과 동일한 금액을 의미합니다. 2025년 적용 기준으로 3인 가구는 월 약 817만원이 100%, 4인 가구는 약 880만원이 100%입니다. 본 계산기는 사용자가 입력한 세후 금액을 평균 공제율로 세전 환산한 뒤 위 기준과 비교하여 소득분위 %를 즉시 보여드립니다.</div>
-            </details>
-            <details class="faq-item">
-                <summary>신생아 특례 청약 소득기준은 어떻게 되나요?</summary>
-                <div class="faq-a">신생아 특별공급은 입주자 모집공고일 기준 2세 이하 자녀(태아 포함)가 있는 가구를 대상으로 합니다. 소득기준은 민간·공공 모두 맞벌이 200% 이하, 외벌이의 경우 민간 140% · 공공 150% 이하가 적용됩니다. 2024년 신설된 제도로 청년·신혼·생애최초 다음으로 별도 트랙으로 운영됩니다.</div>
-            </details>
-            <details class="faq-item">
-                <summary>공공분양과 민간분양의 소득기준은 어떻게 다른가요?</summary>
-                <div class="faq-a">민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급은 도시근로자 월평균소득의 100% 이하 (전용 60㎡ 이하)만 신청 가능합니다. 특별공급의 경우 신혼부부는 공공분양 기준(맞벌이 200%)이 민간(맞벌이 160%)보다 더 완화되어 있고, 생애최초와 신생아 특례는 양쪽 기준이 거의 동일합니다.</div>
-            </details>
-            <details class="faq-item">
-                <summary>청약 소득은 세전 기준인가요, 세후 기준인가요?</summary>
-                <div class="faq-a">공식 청약 자격 심사는 <b>세전 총급여</b>(원천징수영수증 21번 칸) 또는 사업소득자의 <b>종합소득금액</b>(종합소득세 신고서)을 기준으로 합니다. 본 사이트도 사용자가 직접 정확한 세전 연봉을 입력하도록 설계해 청약 심사와 동일한 기준으로 분위를 산출합니다. 1년 미만 근무·휴직 등 환산이 필요한 경우는 가이드 페이지를 참고해 주세요.</div>
-            </details>
-        </div>
-    </section>
+            .footer-note { padding: 6px 4px 0; font-size: 13px; color: var(--text-3); line-height: 1.6; letter-spacing: -0.1px; }
 
-    <!-- 8. 청약 가이드 (콘텐츠 페이지) -->
-    <section class="card seo-section">
-        <h2>📚 청약 소득 가이드</h2>
-        <p style="font-size:14px;color:var(--text-3);margin:-4px 0 12px;letter-spacing:-0.2px;">
-            국토교통부 공식 기준으로 정리한 20편 —
-            <a href="/guide/" style="color:var(--accent);font-weight:600;text-decoration:none;">전체보기 →</a>
-        </p>
-        <div class="guide-grid">
-            <a href="/guide/edge-cases.html">
-                ⭐ 특이 케이스 청약 소득 계산법
-                <small>휴직·이직·복합소득·폐업 — 국토부 FAQ 공식 답변 기반</small>
-            </a>
-            <a href="/guide/income-check.html">
-                회사원 — 원천징수영수증 21번 총급여액 떼는 법
-                <small>홈택스 5분 가이드 (근로소득자용)</small>
-            </a>
-            <a href="/guide/business.html">
-                사업자 — 소득금액증명원 떼는 법
-                <small>자영업·개인사업자·법인대표 산정 방식</small>
-            </a>
-            <a href="/guide/freelancer.html">
-                프리랜서 — 3.3% 원천징수자 산정법
-                <small>강사·작가·디자이너·보험모집인 가이드</small>
-            </a>
-            <a href="/guide/newlywed.html">
-                신혼부부 특별공급 자격 완전 정리
-                <small>2026년 적용 자격조건·소득·자산·우선순위</small>
-            </a>
-            <a href="/guide/first-time.html">
-                생애최초 특별공급 자격 완전 정리
-                <small>5년 소득세, 청약통장 24회, 추첨제 안내</small>
-            </a>
-            <a href="/guide/newborn.html">
-                신생아 특별공급 자격·소득기준 완전정리
-                <small>2년 이내 출생 자녀 — 2024년 신설 트랙</small>
-            </a>
-            <a href="/guide/single-household.html">
-                1인 가구 청약 소득기준 (+20%p 가산)
-                <small>가산율 적용 방식과 신청 가능 트랙</small>
-            </a>
-            <a href="/guide/public-vs-private.html">
-                공공분양 vs 민간분양 차이 완전정리
-                <small>당첨 방식·소득·자산 기준 비교</small>
-            </a>
-            <a href="/guide/supply-types.html">
-                특별공급 종류 총정리 (7가지)
-                <small>신혼·생애최초·신생아·다자녀·노부모·기관추천·이전기관</small>
-            </a>
-            <a href="/guide/asset-standard.html">
-                청약 자산기준 완전정리
-                <small>총자산·자동차가액 기준과 부채 차감 산정법</small>
-            </a>
-            <a href="/guide/residency-period.html">
-                청약 거주기간 요건
-                <small>해당지역 우선공급 거주기간·전입일 기준</small>
-            </a>
-        </div>
-    </section>
-
-    <!-- 9. 근거 자료 및 출처 (E-E-A-T) -->
-    <section class="card seo-section">
-        <h2>📚 근거 자료 및 출처</h2>
-        <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin:0 0 12px;">
-            본 사이트의 모든 계산 기준과 가이드는 아래 정부 공식 자료를 근거로 작성했습니다.
-            각 가이드 본문의 인용문은 원문에서 직접 확인하실 수 있습니다.
-        </p>
-        <ul style="padding-left:20px;margin:0;">
-            <li style="font-size:14px;line-height:1.8;color:var(--text-2);">
-                <a href="https://www.data.go.kr/data/15035942/fileData.do" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;">국토교통부 「주택청약 및 공급규칙 FAQ」 (2024.05.29)</a>
-                — 소득 산정 방식의 공식 유권해석
-            </li>
-            <li style="font-size:14px;line-height:1.8;color:var(--text-2);">
-                <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%ED%83%9D%EA%B3%B5%EA%B8%89%EC%97%90%EA%B4%80%ED%95%9C%EA%B7%9C%EC%B9%99" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;">주택공급에 관한 규칙</a>
-                — 청약 자격·소득기준의 법적 근거 (국가법령정보센터)
-            </li>
-            <li style="font-size:14px;line-height:1.8;color:var(--text-2);">
-                <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;">청약홈 (한국부동산원)</a>
-                — 모집공고문 원문·청약 신청
-            </li>
-            <li style="font-size:14px;line-height:1.8;color:var(--text-2);">
-                <a href="https://apply.lh.or.kr" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;">LH청약플러스</a>
-                — 공공분양·임대 공고 및 소득기준표
-            </li>
-            <li style="font-size:14px;line-height:1.8;color:var(--text-2);">
-                <a href="https://hometax.go.kr" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;">국세청 홈택스</a>
-                — 원천징수영수증·소득금액증명 발급
-            </li>
-        </ul>
-        <p style="font-size:13px;color:var(--text-3);margin:14px 0 0;line-height:1.6;">
-            최종 확인 2026.07.22 · 도시근로자 월평균소득 기준은 매년 3월 통계청 발표에 따라 갱신됩니다.
-        </p>
-    </section>
-
-    <div class="footer-note">※ 2025년 통계청 발표 도시근로자 가구당 월평균소득 기준입니다. 청약 자격 심사는 세전 총급여(원천징수영수증 21번 칸) 또는 종합소득세 신고서의 종합소득금액을 기준으로 합니다. 공고마다 자산·거주기간·자녀가점 등 추가 기준이 다를 수 있으니 공고문 원문을 반드시 확인하세요.</div>
-
-    <nav class="site-footer">
+        <nav class="site-footer">
         <a href="/about.html">소개</a>·<a href="/privacy.html">개인정보처리방침</a>·<a href="/terms.html">이용약관</a>·<a href="/contact.html">문의</a>
     </nav>
 
 </div>
 
+<script>
+    // ---------- State ----------
+    // 2025년 적용 도시근로자 가구당 월평균소득 (세전, 100% 기준)
+    // 2026년 청약(2025.03~2026.02 모집공고) 적용분 - 통계청 2024년 통계 기반
+    // 출처: LH청약플러스 공식 페이지 (apply.lh.or.kr)
+    // ⚠️ 매년 3월 초 통계청 신규 발표 시 5개 숫자 갱신 필요
+    const incomeStd = {
+        1: 3813363,   // 1인가구
+        2: 5866270,   // 2인가구
+        3: 8168429,   // 3인가구
+        4: 8802202,   // 4인가구
+        5: 9326985,   // 5인가구
+    };
 
+    /**
+     * 세후(실수령액) → 세전(Gross) 환산
+     * Tiered 4구간 (한국 직장인 평균 공제율: 소득세 + 지방소득세 + 4대 보험)
+     *   - 월 ≤400만원:    공제율 ~14% → gross-up ×1.16
+     *   - 월 400~700만원: 공제율 ~16% → gross-up ×1.19
+     *   - 월 700~1000만원: 공제율 ~19% → gross-up ×1.23
+     *   - 월 >1000만원:   공제율 ~22% → gross-up ×1.28
+     * 출처: 국세청 근로소득 간이세액조견표 + 4대보험 요율 (2025년)
+     * 한계: 부양가족 수·연말정산·비과세 항목으로 ±3%p 오차 가능
+     */
+    // (구버전의 Tiered Net-to-Gross 환산과 1-2인 가산 로직은 제거됨.
+    //  사용자가 직접 정확한 세전 연봉을 입력하므로 환산 없이 비교.)
 
-<!-- JSON-LD: FAQPage 스키마 (리치 스니펫용) -->
+    // ---------- 가구 소득 유형별 서류 가이드 ----------
+    // 출처: 국토교통부 2024 주택청약 FAQ (Q294, Q318, Q350)
+    const HT = 'https://www.hometax.go.kr';      // 홈택스 메인 (딥링크 불안정)
+    const GOV24 = 'https://www.gov.kr';          // 정부24 (소득금액증명 발급 가능)
+    const TYPE_GUIDES = {
+        employee: {
+            title: '근로소득자 — 가구 모두 직장인',
+            rows: [
+                ['서류', '근로소득 원천징수영수증'],
+                ['발급 ①', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a> &rsaquo; My홈택스 &rsaquo; 연말정산·지급명세서 &rsaquo; 지급명세서 등 제출내역`],
+                ['발급 ②', '회사 인사팀 요청'],
+                ['→ 확인 칸', '<b>21번 항목 "총급여액"</b>'],
+                ['대체 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 민원증명 ↗</a>의 소득금액증명 → "근로소득(수입금액)"`],
+                ['맞벌이', '부부 각자 21번 총급여액을 <b>합산</b>해서 입력'],
+            ],
+            inputLabel: '21번 총급여액 (가구 합산, 연)',
+            hint: '원천징수영수증 21번 "총급여액" 또는 소득금액증명원 "근로소득(수입금액)"',
+            link: { href: '/guide/income-check.html', text: '근로소득자 자세한 가이드 →' },
+        },
+        business: {
+            title: '사업소득자 — 가구 모두 사업/프리랜서',
+            rows: [
+                ['서류', '소득금액증명원'],
+                ['발급 ①', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a> &rsaquo; 민원증명 &rsaquo; 소득·지출증명 &rsaquo; 소득금액증명`],
+                ['발급 ②', `<a href="${GOV24}" target="_blank" rel="noopener">정부24 ↗</a>에서 "소득금액증명" 검색`],
+                ['→ 확인 칸', '<b>"사업소득금액"</b>'],
+                ['프리랜서 3.3%', '종합소득세 신고분 = 소득금액증명원 사업소득금액'],
+                ['공동사업', '본인 지분만 (인별 과세 → 본인 소득금액증명)'],
+                ['미신고 시', '전전년도 소득금액증명원 사용'],
+            ],
+            inputLabel: '사업소득금액 (가구 합산, 연)',
+            hint: '소득금액증명원의 "사업소득금액"을 입력 (가구 합산)',
+            link: { href: '/guide/business.html', text: '사업·프리랜서 자세한 가이드 →' },
+        },
+        mixed: {
+            title: '복합 — 가구 내 근로 + 사업 혼합',
+            rows: [
+                ['근로 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 ↗</a>의 근로소득 원천징수영수증 &rsaquo; <b>21번 총급여액</b>`],
+                ['사업 서류', `<a href="${HT}" target="_blank" rel="noopener">홈택스 민원증명 ↗</a>의 소득금액증명 &rsaquo; <b>사업소득금액</b>`],
+                ['합산 공식', '21번 총급여액 + 사업소득금액 = 가구 연소득'],
+                ['주의', '복합 케이스는 공급 주체에 반드시 더블체크'],
+            ],
+            inputLabel: '총급여 + 사업소득 (가구 합산, 연)',
+            hint: '근로 21번 총급여액 + 사업 소득금액증명원 사업소득금액 합산',
+            link: { href: '/guide/edge-cases.html', text: '복합·특이 케이스 가이드 →' },
+        },
+    };
+
+    // 2024.03~ 개편 기준 소득요건 (%). null = 해당 특공 없음.
+    const CRITERIA = {
+        private: {
+            single: { 신혼부부: 140, 생애최초: 130, 일반공급: null, 신생아특례: 140 },
+            dual:   { 신혼부부: 160, 생애최초: 140, 일반공급: null, 신생아특례: 200 },
+        },
+        public: {
+            single: { 신혼부부: 130, 생애최초: 130, 일반공급: 100,  신생아특례: 150 },
+            dual:   { 신혼부부: 200, 생애최초: 140, 일반공급: 100,  신생아특례: 200 },
+        },
+    };
+
+    let familyCount = 2;
+    let earners = 'dual';         // 'single' | 'dual'
+    let householdType = null;     // 'employee' | 'business' | 'mixed'
+    let householdAnnualMan = 0;   // 단일 입력 케이스 (만원)
+    let member1AnnualMan = 0;     // 분리 입력 — 구성원 1 (또는 근로)
+    let member2AnnualMan = 0;     // 분리 입력 — 구성원 2 (또는 사업)
+    let currentPercent = 0;
+
+    // ---------- 가구 유형 선택 ----------
+    function setHouseholdType(type) {
+        householdType = type;
+        householdAnnualMan = 0;
+        member1AnnualMan = 0;
+        member2AnnualMan = 0;
+        document.querySelectorAll('#typeChips .chip').forEach(c =>
+            c.classList.toggle('active', c.dataset.type === type));
+
+        const g = TYPE_GUIDES[type];
+        const guideEl = document.getElementById('typeGuide');
+        const rowsHtml = g.rows.map(([k, v]) =>
+            `<div class="doc-row"><span class="k">${k}</span><span class="v">${v}</span></div>`
+        ).join('');
+        const linkHtml = g.link
+            ? `<a class="guide-link" href="${g.link.href}">${g.link.text}</a>`
+            : '';
+        guideEl.innerHTML = `<h4>${g.title}</h4>${rowsHtml}${linkHtml}`;
+        guideEl.style.display = 'block';
+
+        // 단일/분리 입력 토글
+        updateInputLayout();
+        recompute();
+    }
+
+    // ---------- 단일 vs 분리 입력 레이아웃 결정 ----------
+    function updateInputLayout() {
+        if (!householdType) return;
+
+        const single = document.getElementById('singleInputSection');
+        const split  = document.getElementById('splitInputSection');
+        const g = TYPE_GUIDES[householdType];
+
+        // 분리 입력 조건:
+        //   1) 복합: 항상 (근로 칸 + 사업 칸)
+        //   2) 근로 or 사업 + 맞벌이: 구성원 1 / 구성원 2 분리
+        const isMixed = householdType === 'mixed';
+        const isDualEmployee = (householdType !== 'mixed') && earners === 'dual' && familyCount >= 2;
+        const useSplit = isMixed || isDualEmployee;
+
+        if (useSplit) {
+            single.style.display = 'none';
+            split.style.display  = '';
+            // 라벨 통일: 항상 "구성원 1" / "구성원 2"
+            document.querySelector('#member1Label .member-tag').textContent = '구성원 1';
+            document.querySelector('#member2Label .member-tag').textContent = '구성원 2';
+            if (isMixed) {
+                // 복합: 구성원 1 = 근로 / 구성원 2 = 사업
+                document.getElementById('member1LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">근로 — 21번 총급여액</span>';
+                document.getElementById('member2LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">사업 — 소득금액증명 사업소득금액</span>';
+                document.getElementById('splitHint').textContent
+                    = '한 명이 근로+사업 겸업인 경우도 동일하게 분리 입력하세요';
+            } else {
+                // 근로 or 사업 + 맞벌이: 같은 항목 각자 입력
+                const docLabel = g.inputLabel.replace(' (가구 합산, 연)', '').replace(' (연)', '');
+                document.getElementById('member1LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">' + docLabel + '</span>';
+                document.getElementById('member2LabelText').innerHTML
+                    = ' <span style="color:var(--text-3);font-weight:500;">' + docLabel + '</span>';
+                document.getElementById('splitHint').textContent
+                    = '구성원 1 + 구성원 2의 ' + docLabel + ' 각각 입력';
+            }
+            document.getElementById('member1Input').value = '';
+            document.getElementById('member2Input').value = '';
+        } else {
+            single.style.display = '';
+            split.style.display  = 'none';
+            document.getElementById('grossInputLabel').textContent = g.inputLabel;
+            document.getElementById('grossHint').textContent = g.hint;
+            document.getElementById('grossInput').value = '';
+        }
+    }
+
+    // ---------- Family chip ----------
+    function setFamily(n) {
+        familyCount = +n;
+        document.querySelectorAll('#familyChips .chip').forEach(c =>
+            c.classList.toggle('active', +c.dataset.family === familyCount));
+
+        // 1인 가구는 맞벌이가 불가능 → 강제로 single로 설정 + 맞벌이 버튼 비활성화
+        const dualBtn = document.querySelector('#earnersSeg button[data-earners="dual"]');
+        const singleBtn = document.getElementById('singleEarnerBtn');
+        if (familyCount === 1) {
+            if (earners !== 'single') {
+                earners = 'single';
+                singleBtn.classList.add('active');
+                dualBtn.classList.remove('active');
+            }
+            dualBtn.disabled = true;
+            singleBtn.textContent = '1인 또는 외벌이';  // 1인일 땐 명시
+        } else {
+            dualBtn.disabled = false;
+            singleBtn.textContent = '외벌이';            // 2인+ 일 땐 간결하게
+        }
+
+        updateInputLayout();
+        recompute();
+    }
+
+    // ---------- 가구 합산 소득 입력 핸들러 ----------
+    function onGrossInput(e) {
+        householdAnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+    }
+    function onMember1Input(e) {
+        member1AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+    }
+    function onMember2Input(e) {
+        member2AnnualMan = Math.max(0, parseInt(e.target.value || '0', 10) || 0);
+        recompute();
+    }
+
+    // ---------- Toggles (earners) ----------
+    function setEarners(v) {
+        // 1인 가구일 땐 맞벌이 선택 무시
+        if (familyCount === 1 && v === 'dual') return;
+        earners = v;
+        document.querySelectorAll('#earnersSeg button').forEach(b =>
+            b.classList.toggle('active', b.dataset.earners === v));
+        updateInputLayout();
+        recompute();
+    }
+
+    // ---------- Recompute (live) ----------
+    function recompute() {
+        // 단일/분리 입력 자동 판별 후 가구 합산
+        const isMixed = householdType === 'mixed';
+        const isDualSplit = (householdType !== 'mixed') && earners === 'dual' && familyCount >= 2;
+        const useSplit = isMixed || isDualSplit;
+        const totalMan = useSplit
+            ? (member1AnnualMan + member2AnnualMan)
+            : householdAnnualMan;
+
+        const grossMonthly = (totalMan * 10000) / 12;
+        currentPercent = totalMan > 0
+            ? Math.round((grossMonthly / incomeStd[familyCount]) * 100)
+            : 0;
+        document.getElementById('resultPercent').textContent = currentPercent;
+
+        // 결과 카드: 민간 기준 고정 (공공은 각 공고 카드에서 판단)
+        // ※ 1-2인 가산률은 적용하지 않습니다. 사용자가 입력한 정확한 세전 연봉을 그대로 비교.
+        const table = CRITERIA['private'][earners];
+        const earnersLabel = earners === 'dual' ? '맞벌이' : '외벌이';
+        const rows = [
+            { name: `신혼부부 ${earnersLabel}`, limit: table.신혼부부 },
+            { name: `생애최초 ${earnersLabel}`, limit: table.생애최초 },
+            { name: '일반공급', note: '소득기준 없음', limit: table.일반공급 },
+            { name: `신생아 특례 ${earnersLabel}`, limit: table.신생아특례 },
+        ];
+
+        const html = rows.map(r => {
+            if (r.limit === null) {
+                return `<div class="eligibility-row na">
+                    <div class="name">${r.name}<small>${r.note || '해당없음'}</small></div>
+                    <div class="mark na">—</div>
+                </div>`;
+            }
+            const ok = currentPercent <= r.limit;
+            const sub = r.note ? `${r.limit}% 이하 · ${r.note}` : `${r.limit}% 이하`;
+            return `<div class="eligibility-row">
+                <div class="name">${r.name}<small>${sub}</small></div>
+                <div class="mark ${ok ? 'ok' : 'ng'}">${ok ? '✓ 가능' : '초과'}</div>
+            </div>`;
+        }).join('');
+        document.getElementById('eligibilityList').innerHTML = html;
+    }
+
+    // ---------- Init ----------
+    function init() {
+        // 가구원 chip
+        document.querySelectorAll('#familyChips .chip').forEach(c => {
+            c.addEventListener('click', () => setFamily(c.dataset.family));
+        });
+        // 외벌이/맞벌이 seg
+        document.querySelectorAll('#earnersSeg button').forEach(b => {
+            b.addEventListener('click', () => setEarners(b.dataset.earners));
+        });
+        // 가구 소득 유형 chip
+        document.querySelectorAll('#typeChips .chip').forEach(c => {
+            c.addEventListener('click', () => setHouseholdType(c.dataset.type));
+        });
+        // 가구 합산 소득 입력 (단일 + 분리 둘 다)
+        document.getElementById('grossInput').addEventListener('input', onGrossInput);
+        document.getElementById('member1Input').addEventListener('input', onMember1Input);
+        document.getElementById('member2Input').addEventListener('input', onMember2Input);
+
+        recompute();
+    }
+
+    init();
+</script>
+
+<!-- JSON-LD: WebApplication 스키마 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "신혼부부 특별공급 소득기준은 어떻게 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "신혼부부 특별공급은 도시근로자 월평균소득 대비 일정 비율 이하만 신청할 수 있습니다. 민간분양은 외벌이 140% · 맞벌이 160% 이하, 공공분양은 외벌이 130% · 맞벌이 200% 이하 기준이 적용됩니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "생애최초 특별공급 소득기준은 얼마인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "생애최초 특별공급은 민간분양과 공공분양 모두 외벌이 130% · 맞벌이 140% 이하 소득 기준이 적용됩니다. 청약통장 24회 이상 납입, 5년 이상 근로소득세 또는 사업소득세 납부, 무주택 세대주 등 추가 조건도 충족해야 합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "청약 소득분위 100%는 어떻게 계산하나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "청약 소득분위 100%는 가구원 수별 도시근로자 월평균소득(세전)과 동일한 금액입니다. 2025년 적용 기준으로 3인 가구는 월 약 817만원, 4인 가구는 약 880만원이 100%이며 1인 가구는 +20%p, 2인 가구는 +10%p 가산률이 적용됩니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "신생아 특례 청약 소득기준은 어떻게 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "신생아 특별공급은 모집공고일 기준 2세 이하 자녀(태아 포함)가 있는 가구가 대상입니다. 소득기준은 민간·공공 모두 맞벌이 200% 이하, 외벌이는 민간 140% · 공공 150% 이하가 적용됩니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "공공분양과 민간분양의 소득기준은 어떻게 다른가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "민간분양 일반공급은 소득 기준이 없지만, 공공분양 일반공급은 도시근로자 월평균소득 100% 이하 (전용 60㎡ 이하)만 신청 가능합니다. 신혼부부는 공공분양 기준이 민간보다 더 완화되어 있고, 생애최초와 신생아 특례는 양쪽 기준이 거의 동일합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "청약 소득은 세전 기준인가요, 세후 기준인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "공식 청약 자격 심사는 세전(원천징수영수증상 총급여) 기준입니다. 본 계산기는 사용자 편의를 위해 실수령액(세후) 기준으로 입력하도록 설계되어 매월 통장에 들어온 금액과 연간 성과급을 합산해 추정 소득분위를 보여드립니다."
-      }
-    }
-  ]
+  "@type": "WebApplication",
+  "name": "내집컷",
+  "alternateName": "청약 소득분위 계산기",
+  "description": "슬라이더 한 번으로 청약 소득분위를 즉시 확인하세요. 신혼부부·생애최초·신생아 특례·공공분양 자격 판독.",
+  "url": "https://homecut.kr/calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "ko",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "KRW"
+  }
 }
 </script>
 
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://homecut.kr/"},{"@type":"ListItem","position":2,"name":"청약 소득분위 계산기","item":"https://homecut.kr/calculator.html"}]}
+</script>
 </body>
 </html>
-

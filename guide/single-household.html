@@ -82,6 +82,14 @@
         .sources ul { padding-left: 18px; margin: 0; }
         .sources li { font-size: 13.5px; line-height: 1.8; color: var(--text-3); margin-bottom: 5px; }
         .sources a { color: var(--text-2); }
+        /* FAQ */
+        hr.div { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { font-size: 16px; font-weight: 600; padding: 18px 0; cursor: pointer; list-style: none; position: relative; padding-right: 28px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 20px; color: var(--text-3); font-weight: 400; }
+        .faq details[open] summary::after { content: '\2212'; }
+        .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
@@ -93,7 +101,7 @@
         <img src="/logo.svg" alt="내집컷 로고" class="brand-logo">
         <span class="brand-name">내집컷<br/>청약 소득, 쉽게 확인</span>
     </a>
-    <div class="crumbs"><a href="/">홈</a> &rsaquo; 소득기준 &rsaquo; 1인 가구 가산</div>
+    <div class="crumbs"><a href="/">홈</a> &rsaquo; <a href="/guide/">가이드</a> &rsaquo; 1인 가구 가산</div>
     <article>
         <h1>1인 가구 청약 소득기준<br/>(+20%p 가산) 완전정리</h1>
         <div class="meta">2025년 적용 기준 · 6분</div>
@@ -102,11 +110,11 @@
             <span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
             <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.22</b></span>
         </div>
 
         <div class="answer-box">
-            <b>결론부터:</b> 1인 가구는 소득기준에 <b>+20%p가 가산</b>됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 <b>160%</b>까지 인정돼요. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다.
+            <b>결론부터:</b> 1인 가구는 소득기준에 <b>+20%p가 가산</b>됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 <b>160%</b>까지 인정됩니다. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다.
         </div>
 
         <h2>왜 1인 가구에 가산이 있나요?</h2>
@@ -161,7 +169,17 @@
             가산율과 신청 가능 트랙은 공급유형·단지·연도별로 달라집니다. 본 계산기는 정확한 세전 소득을 입력하면 % 를 산출해 주지만, 최종 자격 판정은 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 모집공고문으로 확인하세요.
         </div>
 
-        <a href="/#calculator" class="cta">계산기로 내 소득분위 확인 </a>
+        <a href="/calculator.html" class="cta">계산기로 내 소득분위 확인 </a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>1인 가구는 청약 소득기준이 왜 더 높나요?</summary><p>도시근로자 월평균소득 표는 가구원 수가 적을수록 기준 금액이 낮아, 1인 가구가 불리합니다. 이를 보정하려고 1인 가구에는 소득기준에 +20%p를 가산합니다. 예를 들어 140% 기준 항목은 1인 가구에게 160%로 적용됩니다.</p></details>
+            <details><summary>2인 가구도 가산이 있나요?</summary><p>네. 2인 가구는 +10%p가 가산되고, 3인 이상 가구는 가산이 없습니다.</p></details>
+            <details><summary>1인 가구도 신혼부부·신생아 특별공급을 넣을 수 있나요?</summary><p>혼인·자녀 요건상 단독 1인은 대부분 해당하지 않습니다. 다만 신혼부부 특공 순차공급에서 1인 가구는 추첨제에만 신청할 수 있고, 생애최초·일반공급은 1인 세대주도 신청할 수 있습니다.</p></details>
+            <details><summary>2025년 1인 가구 100% 기준 금액은 얼마인가요?</summary><p>월 3,813,363원입니다(2025년 적용, 2026년 2월까지). 여기에 항목별 소득기준 %에 +20%p를 더해 내 한도를 계산합니다.</p></details>
+        </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -199,10 +217,10 @@
       "description": "1인 가구는 청약 소득기준에 +20%p 가산이 적용됩니다. 2025년 도시근로자 월평균소득 1인 기준 금액, 가산 적용 방식, 신청 가능한 특별공급 트랙까지 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-22",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -231,7 +249,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "소득기준"
+          "name": "청약 소득 가이드",
+          "item": "https://homecut.kr/guide/"
         },
         {
           "@type": "ListItem",
@@ -246,12 +265,15 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "1인 가구 청약 소득기준 (+20%p 가산) 완전정리",
+          "name": "1인 가구는 청약 소득기준이 어떻게 다른가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "1인 가구는 소득기준에 +20%p가 가산됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 160%까지 인정돼요. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다."
+            "text": "1인 가구는 소득기준에 +20%p가 가산됩니다. 예를 들어 소득기준이 140%인 항목이면 1인 가구는 160%까지 인정됩니다. 표준 표의 소득이 1·2인 가구에 불리한 점을 보정하는 장치입니다."
           }
-        }
+        },
+        { "@type": "Question", "name": "2인 가구도 가산이 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 2인 가구는 +10%p가 가산되고, 3인 이상 가구는 가산이 없습니다." } },
+        { "@type": "Question", "name": "1인 가구도 신혼부부·신생아 특별공급을 넣을 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "혼인·자녀 요건상 단독 1인은 대부분 해당하지 않습니다. 신혼부부 특공 순차공급에서 1인 가구는 추첨제에만 신청할 수 있고, 생애최초·일반공급은 1인 세대주도 신청할 수 있습니다." } },
+        { "@type": "Question", "name": "2025년 1인 가구 100% 소득 기준 금액은 얼마인가요?", "acceptedAnswer": { "@type": "Answer", "text": "월 3,813,363원입니다(2025년 적용, 2026년 2월까지). 여기에 항목별 소득기준 퍼센트에 20%포인트를 더해 한도를 계산합니다." } }
       ]
     }
   ]
