@@ -85,7 +85,13 @@
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}</style>
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}hr.div{border:0;border-top:1px solid var(--line);margin:44px 0;}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{font-size:16px;font-weight:600;padding:18px 0;cursor:pointer;list-style:none;position:relative;padding-right:28px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';position:absolute;right:4px;top:16px;font-size:20px;color:var(--text-3);font-weight:400;}
+.faq details[open] summary::after{content:'\2212';}
+.faq p{font-size:15px;line-height:1.8;color:var(--text-2);padding:0 0 18px;margin:0;}</style>
 </head>
 <body>
 <div class="container">
@@ -102,7 +108,7 @@
             <span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
             <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.30</b></span>
         </div>
 
         <div class="answer-box">
@@ -137,6 +143,16 @@
         </div>
 
         <a href="/calculator.html" class="cta">계산기로 내 소득분위 확인하기 </a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>사업소득이 마이너스면 청약 소득 판정은 어떻게 되나요?</summary><p>소득이 없는 것으로 보아 외벌이 기준으로 판정합니다. 배우자만 소득이 있으면 외벌이 가구이며, 부부 모두 소득이 있어야만 맞벌이입니다.</p></details>
+            <details><summary>사업장이 여러 개인데 일부만 적자면?</summary><p>소득세는 인별로 합산되므로 소득금액증명원의 사업소득금액 한 줄이 기준입니다. 한 사업장이 적자여도 다른 사업장 흑자와 상계된 최종 금액으로 판정합니다.</p></details>
+            <details><summary>계산기에는 무엇을 입력하나요?</summary><p>마이너스·0원인 사람의 소득은 0으로 입력하고 구분을 "외벌이"로 설정한 뒤 배우자 소득만 넣으면 정확한 소득분위가 나옵니다.</p></details>
+            <details><summary>신규사업자라 소득금액증명원이 아직 없으면?</summary><p>부가가치세 신고자료로 추정하는 경우에는 사업장별로 계산하므로, 마이너스인 사업장은 0으로 처리합니다.</p></details>
+            </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -174,10 +190,10 @@
       "description": "전년도 사업소득이 마이너스(-) 또는 0원으로 신고된 경우 청약 소득 산정법. 배우자가 근로소득자라면 외벌이 기준으로 판정됩니다. 복수 사업장 마이너스 처리도 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-30",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -219,14 +235,10 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "사업소득이 마이너스면 청약 소득은 어떻게 되나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "전년도 사업소득이 마이너스(-) 또는 0원으로 신고됐다면 소득이 없는 것으로 보아, 배우자가 소득자인 경우 외벌이 기준으로 판정합니다. 부부 둘 다 소득이 있어야만 맞벌이입니다."
-          }
-        }
+        {"@type": "Question", "name": "사업소득이 마이너스면 청약 소득 판정은 어떻게 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "소득이 없는 것으로 보아 외벌이 기준으로 판정합니다. 배우자만 소득이 있으면 외벌이 가구이며, 부부 모두 소득이 있어야만 맞벌이입니다."}},
+        {"@type": "Question", "name": "사업장이 여러 개인데 일부만 적자면?", "acceptedAnswer": {"@type": "Answer", "text": "소득세는 인별로 합산되므로 소득금액증명원의 사업소득금액 한 줄이 기준입니다. 한 사업장이 적자여도 다른 사업장 흑자와 상계된 최종 금액으로 판정합니다."}},
+        {"@type": "Question", "name": "계산기에는 무엇을 입력하나요?", "acceptedAnswer": {"@type": "Answer", "text": "마이너스·0원인 사람의 소득은 0으로 입력하고 구분을 \"외벌이\"로 설정한 뒤 배우자 소득만 넣으면 정확한 소득분위가 나옵니다."}},
+        {"@type": "Question", "name": "신규사업자라 소득금액증명원이 아직 없으면?", "acceptedAnswer": {"@type": "Answer", "text": "부가가치세 신고자료로 추정하는 경우에는 사업장별로 계산하므로, 마이너스인 사업장은 0으로 처리합니다."}}
       ]
     }
   ]

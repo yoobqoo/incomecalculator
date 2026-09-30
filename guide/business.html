@@ -85,7 +85,13 @@
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}</style>
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}hr.div{border:0;border-top:1px solid var(--line);margin:44px 0;}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{font-size:16px;font-weight:600;padding:18px 0;cursor:pointer;list-style:none;position:relative;padding-right:28px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';position:absolute;right:4px;top:16px;font-size:20px;color:var(--text-3);font-weight:400;}
+.faq details[open] summary::after{content:'\2212';}
+.faq p{font-size:15px;line-height:1.8;color:var(--text-2);padding:0 0 18px;margin:0;}</style>
 </head>
 <body>
 <div class="container">
@@ -102,7 +108,7 @@
             <span class="sep">·</span>
             <span>근거 <b>국토교통부 주택청약 FAQ(2024.05)</b></span>
             <span class="sep">·</span>
-            <span>최종 확인 <b>2026.07.22</b></span>
+            <span>최종 확인 <b>2026.09.30</b></span>
         </div>
 
         <p>개인사업자·자영업자·법인대표자는 근로소득자와 달리 <b>소득금액증명원</b>이 핵심 서류입니다. 매년 5월 종합소득세 신고 결과가 반영되며, 신고 시기와 사업 형태에 따라 산정 방식이 달라집니다.</p>
@@ -229,7 +235,17 @@
             본 가이드는 국토교통부 2024 주택청약 FAQ를 기반으로 작성된 일반 안내입니다. 사업자의 소득 산정은 신고 시기·사업 형태·공동사업 여부 등 변수가 많아 개별 사례에 따라 다른 해석이 적용될 수 있습니다. 청약 신청 전 반드시 <a href="https://www.applyhome.co.kr" target="_blank" rel="noopener">청약홈</a> 또는 <a href="https://apply.lh.or.kr" target="_blank" rel="noopener">LH청약플러스</a>의 모집공고문 원문, 그리고 사업 주체(LH·SH·시행사 등)에 직접 확인하시기 바랍니다.
         </div>
 
-        <a href="/" class="cta">계산기로 자격 확인하기 </a>
+        <a href="/calculator.html" class="cta">계산기로 자격 확인하기 </a>
+
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>사업자는 청약 소득을 어느 서류로 증명하나요?</summary><p>소득금액증명원의 "사업소득금액" 칸입니다. 매출이 아니라 필요경비를 뺀 금액이며, 홈택스 민원증명이나 정부24에서 무료로 발급받을 수 있습니다.</p></details>
+            <details><summary>종합소득세 신고 전(상반기 공고)이라 증명원이 안 나옵니다.</summary><p>전년도 소득금액증명원이 아직 발급되지 않는 시기(보통 7월 전)라면 전전년도 소득금액증명원을 사용합니다(국토부 FAQ Q329).</p></details>
+            <details><summary>사업장이 여러 개면 소득을 어떻게 합산하나요?</summary><p>소득세는 사람 단위로 합산 과세되므로 소득금액증명원의 사업소득금액 한 줄이 기준입니다. 공동사업이라면 본인 지분에 해당하는 본인 명의 증명원만 사용합니다.</p></details>
+            <details><summary>법인 대표도 사업자로 분류되나요?</summary><p>아닙니다. 법인 대표는 법인의 근로소득자로 분류되어 근로소득 원천징수영수증(21번)에 본인 법인 배당소득을 더해 산정합니다(Q336).</p></details>
+            </div>
 
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
@@ -267,10 +283,10 @@
       "description": "개인사업자·자영업자·법인대표자의 청약 소득 산정 가이드. 소득금액증명원 발급, 사업소득금액 확인, 신규사업자·공동사업·미신고 케이스까지 국토부 FAQ 기반 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-09-30",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -311,6 +327,9 @@
     }
   ]
 }
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "사업자는 청약 소득을 어느 서류로 증명하나요?", "acceptedAnswer": {"@type": "Answer", "text": "소득금액증명원의 \"사업소득금액\" 칸입니다. 매출이 아니라 필요경비를 뺀 금액이며, 홈택스 민원증명이나 정부24에서 무료로 발급받을 수 있습니다."}}, {"@type": "Question", "name": "종합소득세 신고 전(상반기 공고)이라 증명원이 안 나옵니다.", "acceptedAnswer": {"@type": "Answer", "text": "전년도 소득금액증명원이 아직 발급되지 않는 시기(보통 7월 전)라면 전전년도 소득금액증명원을 사용합니다(국토부 FAQ Q329)."}}, {"@type": "Question", "name": "사업장이 여러 개면 소득을 어떻게 합산하나요?", "acceptedAnswer": {"@type": "Answer", "text": "소득세는 사람 단위로 합산 과세되므로 소득금액증명원의 사업소득금액 한 줄이 기준입니다. 공동사업이라면 본인 지분에 해당하는 본인 명의 증명원만 사용합니다."}}, {"@type": "Question", "name": "법인 대표도 사업자로 분류되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아닙니다. 법인 대표는 법인의 근로소득자로 분류되어 근로소득 원천징수영수증(21번)에 본인 법인 배당소득을 더해 산정합니다(Q336)."}}]}
 </script>
 </body>
 </html>

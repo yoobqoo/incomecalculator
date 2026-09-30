@@ -157,6 +157,18 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://homecut.kr/guide/cheongyak-gajeom.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://homecut.kr/guide/cheongyak-tongjang.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://homecut.kr/about.html</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
