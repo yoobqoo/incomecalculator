@@ -85,7 +85,12 @@
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}</style>
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}.faq details{border-bottom:1px solid var(--line);}
+.faq summary{font-size:16px;font-weight:600;padding:18px 0;cursor:pointer;list-style:none;position:relative;padding-right:28px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';position:absolute;right:4px;top:16px;font-size:20px;color:var(--text-3);font-weight:400;}
+.faq details[open] summary::after{content:'\2212';}
+.faq p{font-size:15px;line-height:1.8;color:var(--text-2);padding:0 0 18px;margin:0;}</style>
 </head>
 <body>
 <div class="container">
@@ -152,6 +157,16 @@
 
         <a href="/calculator.html" class="cta">계산기로 내 소득분위 확인하기 </a>
 
+        <hr class="div">
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+            <details><summary>이직했는데 청약 소득은 어느 회사 기준인가요?</summary><p>현재 다니는 회사의 소득, 즉 원천징수영수증 근무처별 소득명세의 "주(현)" 총급여를 현 직장 재직기간으로 나눠 월평균소득을 산정합니다. 이전 회사와 합산하지 않습니다.</p></details>
+            <details><summary>재직 1년 미만이면 어떻게 환산하나요?</summary><p>현 직장 재직 개월수로 나눈 뒤 12를 곱해 연 소득으로 환산합니다. 예를 들어 5개월간 주(현) 총급여가 3,000만 원이면 3,000만 ÷ 5 × 12 = 7,200만 원입니다.</p></details>
+            <details><summary>올해 이직해 아직 연말정산 전이면요?</summary><p>금년도 원천징수영수증 또는 소득자별 원천징수부와 재직증명서로 입사일부터 모집공고일까지의 총소득을 해당 기간으로 나눠 산정합니다(Q313). 급여가 아직 없으면 동일 직급 자료나 연봉·근로계약서로 대체할 수 있습니다.</p></details>
+            <details><summary>인수합병·계열사 발령으로 회사명만 바뀌어도 이직인가요?</summary><p>건강보험 자격상실일과 취득일이 같은 날이고, 분할·합병·인사발령 공문과 계속 근무를 확인하는 재직증명서를 모두 갖추면 "계속 근로자"로 인정됩니다. 이 경우 이직 계산이 아니라 21번 총급여를 전체 재직기간으로 나눠 더 유리할 수 있습니다(Q315·316).</p></details>
+            </div>
+
         <div class="sources">
             <h3>근거 자료 및 출처</h3>
             <ul>
@@ -188,10 +203,10 @@
       "description": "작년에 이직한 경우 청약 소득 산정법. 국토교통부 공식 기준 — 원천징수영수증의 '주(현)' 총급여를 재직기간으로 나눠 계산합니다. 인수합병·계열사 이동 예외도 정리.",
       "inLanguage": "ko",
       "datePublished": "2026-06-04",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-10-01",
       "author": {
-        "@type": "Person",
-        "name": "unspired"
+        "@type": "Organization",
+        "name": "내집컷 편집팀"
       },
       "publisher": {
         "@type": "Organization",
@@ -233,14 +248,10 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "작년에 이직했는데 청약 소득은 어느 회사 기준인가요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "이직한 경우 원천징수영수증의 '주(현)' 총급여(현재 다니는 회사 소득)를 현 직장 재직기간으로 나눠 월평균소득을 계산합니다. 이전 회사와 합산하지 않습니다."
-          }
-        }
+        {"@type": "Question", "name": "이직했는데 청약 소득은 어느 회사 기준인가요?", "acceptedAnswer": {"@type": "Answer", "text": "현재 다니는 회사의 소득, 즉 원천징수영수증 근무처별 소득명세의 \"주(현)\" 총급여를 현 직장 재직기간으로 나눠 월평균소득을 산정합니다. 이전 회사와 합산하지 않습니다."}},
+        {"@type": "Question", "name": "재직 1년 미만이면 어떻게 환산하나요?", "acceptedAnswer": {"@type": "Answer", "text": "현 직장 재직 개월수로 나눈 뒤 12를 곱해 연 소득으로 환산합니다. 예를 들어 5개월간 주(현) 총급여가 3,000만 원이면 3,000만 ÷ 5 × 12 = 7,200만 원입니다."}},
+        {"@type": "Question", "name": "올해 이직해 아직 연말정산 전이면요?", "acceptedAnswer": {"@type": "Answer", "text": "금년도 원천징수영수증 또는 소득자별 원천징수부와 재직증명서로 입사일부터 모집공고일까지의 총소득을 해당 기간으로 나눠 산정합니다(Q313). 급여가 아직 없으면 동일 직급 자료나 연봉·근로계약서로 대체할 수 있습니다."}},
+        {"@type": "Question", "name": "인수합병·계열사 발령으로 회사명만 바뀌어도 이직인가요?", "acceptedAnswer": {"@type": "Answer", "text": "건강보험 자격상실일과 취득일이 같은 날이고, 분할·합병·인사발령 공문과 계속 근무를 확인하는 재직증명서를 모두 갖추면 \"계속 근로자\"로 인정됩니다. 이 경우 이직 계산이 아니라 21번 총급여를 전체 재직기간으로 나눠 더 유리할 수 있습니다(Q315·316)."}}
       ]
     }
   ]
