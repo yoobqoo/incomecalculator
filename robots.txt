@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.homecut.kr/sitemap.xml
+Sitemap: https://homecut.kr/sitemap.xml
