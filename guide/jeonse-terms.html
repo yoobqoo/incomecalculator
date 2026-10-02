@@ -80,13 +80,9 @@
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
     
-.wrap,article{counter-reset:para;}
-.wrap>h2+p,article>h2+p{position:relative;padding-left:38px;counter-increment:para;}
-.wrap>h2+p::before,article>h2+p::before{content:counter(para);position:absolute;left:0;top:3px;min-width:24px;height:20px;padding:0 5px;box-sizing:border-box;font-size:12px;font-weight:700;color:var(--accent,#3182F6);background:var(--tint,#F9FAFB);border:1px solid var(--line,#F2F4F6);border-radius:6px;text-align:center;line-height:18px;letter-spacing:0;}
-.wrap>p.keyp,article>p.keyp{position:relative;background:#F4F8FF;border:1px solid #D6E4FF;border-left:3px solid var(--accent,#3182F6);border-radius:12px;padding:15px 20px 15px 56px;margin:16px 0;}
-.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";position:absolute;left:14px;top:15px;height:20px;padding:0 7px;box-sizing:border-box;font-size:11px;font-weight:700;line-height:18px;color:#fff;background:var(--accent,#3182F6);border:1px solid var(--accent,#3182F6);border-radius:6px;min-width:auto;}
-.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}
-@media (max-width:480px){.wrap>h2+p,article>h2+p{padding-left:32px;}.wrap>h2+p::before,article>h2+p::before{min-width:21px;font-size:11px;}}</style>
+.wrap>p.keyp,article>p.keyp{background:#FFF8E1;border:none;border-radius:10px;padding:16px 20px;margin:16px 0;}
+.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";display:inline-block;margin-right:9px;padding:2px 9px;font-size:11px;font-weight:700;line-height:1.5;color:#946A00;background:#FFE08A;border-radius:5px;vertical-align:2px;}
+.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}</style>
 </head>
 <body>
 <div class="container">
@@ -136,7 +132,7 @@
 
         <hr class="div">
 
-        <h2>놓치기 쉬운 점 — 구두 약속은 특약이 아닙니다</h2>
+        <h2>구두 약속은 특약이 아닙니다</h2>
         <p class="keyp">"집주인이 말로 약속했다"는 나중에 효력을 다투기 어렵습니다. 특약은 반드시 <b>계약서 특약란에 활자로</b> 적고 양쪽이 서명·날인해야 합니다. 공인중개사가 특정 특약을 <b>기재하기 꺼린다면</b> 그 자체가 위험 신호일 수 있습니다. 또 "말소하기로 한다" 같은 모호한 문구는 분쟁 시 무력하니, 숫자·날짜·대상을 구체적으로 적어야 합니다.</p>
 
         <h2>자주 묻는 질문</h2>
