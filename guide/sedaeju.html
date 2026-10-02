@@ -91,7 +91,14 @@
         .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    </style>
+    
+.wrap,article{counter-reset:para;}
+.wrap>h2+p,article>h2+p{position:relative;padding-left:38px;counter-increment:para;}
+.wrap>h2+p::before,article>h2+p::before{content:counter(para);position:absolute;left:0;top:3px;min-width:24px;height:20px;padding:0 5px;box-sizing:border-box;font-size:12px;font-weight:700;color:var(--accent,#3182F6);background:var(--tint,#F9FAFB);border:1px solid var(--line,#F2F4F6);border-radius:6px;text-align:center;line-height:18px;letter-spacing:0;}
+.wrap>p.keyp,article>p.keyp{position:relative;background:#F4F8FF;border:1px solid #D6E4FF;border-left:3px solid var(--accent,#3182F6);border-radius:12px;padding:15px 20px 15px 56px;margin:16px 0;}
+.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";position:absolute;left:14px;top:15px;height:20px;padding:0 7px;box-sizing:border-box;font-size:11px;font-weight:700;line-height:18px;color:#fff;background:var(--accent,#3182F6);border:1px solid var(--accent,#3182F6);border-radius:6px;min-width:auto;}
+.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}
+@media (max-width:480px){.wrap>h2+p,article>h2+p{padding-left:32px;}.wrap>h2+p::before,article>h2+p::before{min-width:21px;font-size:11px;}}</style>
 </head>
 <body>
 <div class="container">
@@ -177,7 +184,7 @@
         <hr class="div">
 
         <h2>놓치기 쉬운 점 — '신청 직전 세대주 변경'의 함정</h2>
-        <p>세대주 요건은 <b>청약 신청일 현재를 기준</b>으로 판단하므로, 이론상 신청 직전에 세대주를 바꿔 자격을 맞출 수 있습니다. 하지만 같은 세대의 다른 사람이 이미 신청했거나 같은 공고에 중복으로 넣으면 <b>'1세대 중복청약'으로 전원 부적격 처리</b>되므로, 세대주만 자격이 있는 공공분양에서는 세대 안에서 누가 넣을지 먼저 정리해야 합니다.</p>
+        <p class="keyp">세대주 요건은 <b>청약 신청일 현재를 기준</b>으로 판단하므로, 이론상 신청 직전에 세대주를 바꿔 자격을 맞출 수 있습니다. 하지만 같은 세대의 다른 사람이 이미 신청했거나 같은 공고에 중복으로 넣으면 <b>'1세대 중복청약'으로 전원 부적격 처리</b>되므로, 세대주만 자격이 있는 공공분양에서는 세대 안에서 누가 넣을지 먼저 정리해야 합니다.</p>
         <p>더 위험한 것은 <b>주소만 옮기는 위장 세대분리</b>입니다. 실제로 따로 살지 않으면서 서류상으로만 세대를 나누면, 적발 시 당첨 취소는 물론 주택법 위반으로 형사처벌(징역·벌금)과 수년간 청약 제한까지 따라옵니다. 세대 요건은 '실제 거주 실태'로 검증된다는 점을 전제로 접근해야 합니다.</p>
         <h2>자주 묻는 질문</h2>
         <div class="faq">

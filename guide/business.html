@@ -91,7 +91,14 @@
 .faq summary::-webkit-details-marker{display:none;}
 .faq summary::after{content:'+';position:absolute;right:4px;top:16px;font-size:20px;color:var(--text-3);font-weight:400;}
 .faq details[open] summary::after{content:'\2212';}
-.faq p{font-size:15px;line-height:1.8;color:var(--text-2);padding:0 0 18px;margin:0;}</style>
+.faq p{font-size:15px;line-height:1.8;color:var(--text-2);padding:0 0 18px;margin:0;}
+.wrap,article{counter-reset:para;}
+.wrap>h2+p,article>h2+p{position:relative;padding-left:38px;counter-increment:para;}
+.wrap>h2+p::before,article>h2+p::before{content:counter(para);position:absolute;left:0;top:3px;min-width:24px;height:20px;padding:0 5px;box-sizing:border-box;font-size:12px;font-weight:700;color:var(--accent,#3182F6);background:var(--tint,#F9FAFB);border:1px solid var(--line,#F2F4F6);border-radius:6px;text-align:center;line-height:18px;letter-spacing:0;}
+.wrap>p.keyp,article>p.keyp{position:relative;background:#F4F8FF;border:1px solid #D6E4FF;border-left:3px solid var(--accent,#3182F6);border-radius:12px;padding:15px 20px 15px 56px;margin:16px 0;}
+.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";position:absolute;left:14px;top:15px;height:20px;padding:0 7px;box-sizing:border-box;font-size:11px;font-weight:700;line-height:18px;color:#fff;background:var(--accent,#3182F6);border:1px solid var(--accent,#3182F6);border-radius:6px;min-width:auto;}
+.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}
+@media (max-width:480px){.wrap>h2+p,article>h2+p{padding-left:32px;}.wrap>h2+p::before,article>h2+p::before{min-width:21px;font-size:11px;}}</style>
 </head>
 <body>
 <div class="container">
@@ -240,7 +247,7 @@
         <hr class="div">
 
         <h2>놓치기 쉬운 점 — 소득을 낮추면 청약은 유리, 대출은 불리</h2>
-        <p>사업소득자의 청약 소득은 매출이 아니라 <b>필요경비를 뺀 종합소득세 신고상 소득금액</b>입니다. 장부에 경비를 넉넉히 잡아 신고소득을 낮추면 소득분위는 내려가 특별공급에 유리해집니다.</p>
+        <p class="keyp">사업소득자의 청약 소득은 매출이 아니라 <b>필요경비를 뺀 종합소득세 신고상 소득금액</b>입니다. 장부에 경비를 넉넉히 잡아 신고소득을 낮추면 소득분위는 내려가 특별공급에 유리해집니다.</p>
         <p>문제는 <b>같은 신고서가 중도금·잔금 대출의 소득 증빙으로 쓰인다</b>는 점입니다. 소득을 낮춰 청약 문턱은 넘었는데, 막상 당첨 후 대출 한도가 신고소득 기준으로 깎여 자금이 막히는 상충이 생깁니다. 청약 직전 2~3년의 신고 전략을 '당첨 이후 대출'까지 함께 보고 설계해야 합니다.</p>
         <h2>자주 묻는 질문</h2>
         <div class="faq">

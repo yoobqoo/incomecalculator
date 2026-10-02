@@ -89,7 +89,14 @@
         .faq p { font-size: 15px; line-height: 1.8; color: var(--text-2); padding: 0 0 18px; margin: 0; }
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    </style>
+    
+.wrap,article{counter-reset:para;}
+.wrap>h2+p,article>h2+p{position:relative;padding-left:38px;counter-increment:para;}
+.wrap>h2+p::before,article>h2+p::before{content:counter(para);position:absolute;left:0;top:3px;min-width:24px;height:20px;padding:0 5px;box-sizing:border-box;font-size:12px;font-weight:700;color:var(--accent,#3182F6);background:var(--tint,#F9FAFB);border:1px solid var(--line,#F2F4F6);border-radius:6px;text-align:center;line-height:18px;letter-spacing:0;}
+.wrap>p.keyp,article>p.keyp{position:relative;background:#F4F8FF;border:1px solid #D6E4FF;border-left:3px solid var(--accent,#3182F6);border-radius:12px;padding:15px 20px 15px 56px;margin:16px 0;}
+.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";position:absolute;left:14px;top:15px;height:20px;padding:0 7px;box-sizing:border-box;font-size:11px;font-weight:700;line-height:18px;color:#fff;background:var(--accent,#3182F6);border:1px solid var(--accent,#3182F6);border-radius:6px;min-width:auto;}
+.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}
+@media (max-width:480px){.wrap>h2+p,article>h2+p{padding-left:32px;}.wrap>h2+p::before,article>h2+p::before{min-width:21px;font-size:11px;}}</style>
 </head>
 <body>
 <div class="container">
@@ -132,7 +139,7 @@
 
         <h3>'유찰'이 많은 물건은 왜 쌀까</h3>
         <p>응찰자가 없으면(유찰) 최저가가 한 단계 내려갑니다. 저감률은 법원마다 달라, <b>서울은 20%</b>(1회 유찰 → 감정가의 80%, 2회 → 64%), <b>경기·인천 일부 법원은 30%</b>입니다. 그래서 서너 번 유찰된 물건은 가격이 반값 가까이 떨어져 보입니다.</p>
-        <p>하지만 핵심은 이겁니다 — <b>여러 번 유찰됐다는 건 그 가격에도 아무도 안 샀다는 뜻</b>입니다. 단순히 안 알려진 '숨은 보석'일 수도 있지만, 대개는 <b>대항력 임차인·유치권 같은 권리 하자, 입지나 물건 자체의 결함</b>처럼 시장이 외면한 이유가 있습니다. 유찰 횟수는 할인율인 <b>동시에 위험 신호</b>로 읽어야 합니다. 싸서 눈길이 간 물건일수록 "왜 이 가격까지 떨어졌나"를 먼저 캐야 합니다.</p>
+        <p class="keyp">하지만 핵심은 이겁니다 — <b>여러 번 유찰됐다는 건 그 가격에도 아무도 안 샀다는 뜻</b>입니다. 단순히 안 알려진 '숨은 보석'일 수도 있지만, 대개는 <b>대항력 임차인·유치권 같은 권리 하자, 입지나 물건 자체의 결함</b>처럼 시장이 외면한 이유가 있습니다. 유찰 횟수는 할인율인 <b>동시에 위험 신호</b>로 읽어야 합니다. 싸서 눈길이 간 물건일수록 "왜 이 가격까지 떨어졌나"를 먼저 캐야 합니다.</p>
 
         <h2>싸게 산 게 아니라, 빚을 떠안는 겁니다 — 권리분석</h2>
         <p>경매의 진짜 관문은 가격이 아니라 <b>권리분석</b>입니다. 낙찰로 말소되지 않고 <b>낙찰자에게 넘어오는(인수) 권리</b>가 있으면, 싸게 산 만큼이 고스란히 빚으로 돌아옵니다.</p>

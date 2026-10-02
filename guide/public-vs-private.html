@@ -97,7 +97,14 @@
         /* 푸터 */
         footer { margin-top: 48px; text-align: center; font-size: 13px; color: var(--text-3); }
         footer a { color: var(--text-3); margin: 0 6px; text-decoration: none; }
-    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}</style>
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}.hero-ico{width:55px;height:55px;flex-shrink:0;animation:hicobob 3.2s ease-in-out infinite;}@keyframes hicobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@media (prefers-reduced-motion:reduce){.hero-ico{animation:none}}p b,p strong,li b,li strong{background:linear-gradient(180deg,transparent 58%,rgba(255,213,79,.55) 58%);border-radius:2px;}.faq p b,.faq p strong,.note p b,.note p strong,.answer-box b,.tip b,.warn-box b,.official b,.pull b{background:none;}
+.wrap,article{counter-reset:para;}
+.wrap>h2+p,article>h2+p{position:relative;padding-left:38px;counter-increment:para;}
+.wrap>h2+p::before,article>h2+p::before{content:counter(para);position:absolute;left:0;top:3px;min-width:24px;height:20px;padding:0 5px;box-sizing:border-box;font-size:12px;font-weight:700;color:var(--accent,#3182F6);background:var(--tint,#F9FAFB);border:1px solid var(--line,#F2F4F6);border-radius:6px;text-align:center;line-height:18px;letter-spacing:0;}
+.wrap>p.keyp,article>p.keyp{position:relative;background:#F4F8FF;border:1px solid #D6E4FF;border-left:3px solid var(--accent,#3182F6);border-radius:12px;padding:15px 20px 15px 56px;margin:16px 0;}
+.wrap>p.keyp::before,article>p.keyp::before{content:"핵심";position:absolute;left:14px;top:15px;height:20px;padding:0 7px;box-sizing:border-box;font-size:11px;font-weight:700;line-height:18px;color:#fff;background:var(--accent,#3182F6);border:1px solid var(--accent,#3182F6);border-radius:6px;min-width:auto;}
+.wrap>p.keyp b,.wrap>p.keyp strong,article>p.keyp b,article>p.keyp strong{background:none;}
+@media (max-width:480px){.wrap>h2+p,article>h2+p{padding-left:32px;}.wrap>h2+p::before,article>h2+p::before{min-width:21px;font-size:11px;}}</style>
 </head>
 <body>
 <div class="container">
@@ -207,7 +214,7 @@
         <hr class="div">
 
         <h2>놓치기 쉬운 점 — 공공 '일반공급'도 사실상 순위 싸움입니다</h2>
-    <p>공공분양 일반공급은 소득·자산 기준만 넘으면 되는 게 아니라, <b>청약통장 납입 실적</b>으로 다시 줄을 세웁니다. 전용 <b>40㎡ 초과</b>는 '저축 총액'이 많은 순, <b>40㎡ 이하</b>는 '납입 횟수'가 많은 순입니다. 그래서 통장을 늦게 만들었거나 매월 소액만 넣었다면, 소득이 낮아도 공공 일반공급 당첨은 어렵습니다.</p>
+    <p class="keyp">공공분양 일반공급은 소득·자산 기준만 넘으면 되는 게 아니라, <b>청약통장 납입 실적</b>으로 다시 줄을 세웁니다. 전용 <b>40㎡ 초과</b>는 '저축 총액'이 많은 순, <b>40㎡ 이하</b>는 '납입 횟수'가 많은 순입니다. 그래서 통장을 늦게 만들었거나 매월 소액만 넣었다면, 소득이 낮아도 공공 일반공급 당첨은 어렵습니다.</p>
 
     <h2>자주 묻는 질문</h2>
         <div class="faq">
