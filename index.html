@@ -629,6 +629,30 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://homecut.kr/#org",
+      "name": "내집컷",
+      "url": "https://homecut.kr/",
+      "logo": { "@type": "ImageObject", "url": "https://homecut.kr/logo.svg" },
+      "description": "청약 소득분위 계산과 청약·전세 실전 가이드를 제공하는 정보 서비스"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://homecut.kr/#website",
+      "url": "https://homecut.kr/",
+      "name": "내집컷",
+      "description": "청약 소득분위 계산기와 청약·전세 가이드",
+      "publisher": { "@id": "https://homecut.kr/#org" },
+      "inLanguage": "ko"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
